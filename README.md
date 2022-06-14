@@ -1,8 +1,45 @@
-# Sample GitLab Project
+# HanSpoon
 
-This sample project shows how a project in GitLab looks for demonstration purposes. It contains issues, merge requests and Markdown files in many branches,
-named and filled with lorem ipsum.
+> 한솔 임직원을 위한 함께 식사할 멤버를 구하는 웹 서비스(익명/실명)
+> 
 
-You can look around to get an idea how to structure your project and, when done, you can safely delete this project.
+## 프로젝트 배경
 
-[Learn more about creating GitLab projects.](https://docs.gitlab.com/ee/gitlab-basics/create-project.html)
+- 2인 이상 메뉴 함께 식사
+- 사원 간의 친목 다지기
+
+## 구현 화면
+
+1. 로그인/회원가입 화면
+    1. 사원 정보
+    2. 선호하는 음식
+    3. 자기소개
+2. 기본 화면(전체 목록)
+3. 마이페이지(위시리스트, 참여/모집 중인 모임 목록, 신청자 명단 → 공개 정도 조정 가능)
+4. 상세 페이지
+    1. (지도 API - 위치 보기)
+5. 등록/수정 페이지
+
+## 구현 기능
+
+1. 게시판 CRUD
+2. 위시리스트
+    1. 게시글에 위시리스트 개수 표시
+    2. 위시리스트 순 게시글 정렬
+3. 추가 기능
+    - 방장 수락 기능
+    - 게시글 상태 (진행 중, 만료, 성사)
+    - 게시글 마감 일
+
+## 차별 점
+
+- 조직도를 통해 개인 정보 표시
+- 익명/실명
+    - 본인 소개 태그
+    - 공개 정도 선택 가능 (연령, 직급, 부서, 성별, 소속 회사)
+    - 실명 = 전체 공개
+- 작성자 숟가락
+    - 몇 번 먹었는지
+    - 주간 횟수 통계 차트 보기
+    - 적극도
+    - 제안 횟수
