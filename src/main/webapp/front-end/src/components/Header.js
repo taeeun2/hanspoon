@@ -11,11 +11,15 @@ import {
 import { ReactComponent as LogoWhite } from "assets/images/logos/xtremelogowhite.svg";
 
 const Header = () => {
+
+ 
+
   const [isOpen, setIsOpen] = React.useState(false);
 
   const Handletoggle = () => {
     setIsOpen(!isOpen);
   };
+
 
   return (
     <Navbar color="primary" dark expand="md">

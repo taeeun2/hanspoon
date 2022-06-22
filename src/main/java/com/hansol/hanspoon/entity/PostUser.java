@@ -1,7 +1,6 @@
 package com.hansol.hanspoon.entity;
 
 import com.hansol.hanspoon.type.StatePostUserType;
-import com.hansol.hanspoon.type.StateUserType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
