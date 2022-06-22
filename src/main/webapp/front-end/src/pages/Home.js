@@ -1,11 +1,15 @@
 import React from 'react';
 import Blogs from 'containers/Blogs'
+import Banner from 'containers/Banner';
+import HomeLNB from 'containers/HomeLNB';
+import 'pages/css/Home.css'
 
 const Home = () => {
 
     return (
         <>
-            <h1>메인페이지입니다.</h1>
+            <Banner />
+            <HomeLNB />
             <Blogs/>
         </>
     )
