@@ -1,0 +1,21 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://172.27.1.33:3306/hanspoon?serverTimezone=Asia/Seoul
+    username: root
+    password: hanspoon0728
+
+  jpa:
+    show_sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true

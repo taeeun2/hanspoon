@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 @SpringBootApplication
-@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})//DB 없이 테스트
+//@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})//DB 없이 테스트
 public class HanspoonApplication {
 
 	public static void main(String[] args) {
