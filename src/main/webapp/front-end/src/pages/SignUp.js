@@ -2,8 +2,6 @@ import { AuthButton, InputWithLabel, RightAlignedLink } from "components/Auth";
 import AuthWrapper from "components/Auth/AuthWrapper";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import DropBoxWithLabel from "components/Auth/DropBoxWithLabel";
-import MultiSelectDropdown from "components/Auth/MultiSelectDropdown";
-import { Button, ButtonGroup } from "reactstrap";
 import SelectButtonGroup from "components/Auth/SelectButtonGroup";
 
 

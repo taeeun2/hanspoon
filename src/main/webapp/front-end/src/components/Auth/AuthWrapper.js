@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { shadow } from 'lib/styleUtils';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 // 화면의 중앙에 위치시킨다
@@ -28,7 +28,16 @@ const LogoWrapper = styled.div`
     justify-content: center;
 `;
 
-const Logo =  styled.div`
+// const Logo =  styled.div`
+//     color: white;
+//     font-family: 'Rajdhani';
+//     font-size: 2.4rem;
+//     font-weight : 600;
+//     letter-spacing: 5px;
+//     text-decoration: none;
+// `;
+
+const Logo = styled(Link)`
     color: white;
     font-family: 'Rajdhani';
     font-size: 2.4rem;
@@ -36,14 +45,6 @@ const Logo =  styled.div`
     letter-spacing: 5px;
     text-decoration: none;
 `;
-
-// const Logo = styled(Link)`
-//     color: white;
-//     font-family: 'Rajdhani';
-//     font-size: 2.4rem;
-//     letter-spacing: 5px;
-//     text-decoration: none;
-// `;
 
 // children 이 들어가는 곳
 const Contents = styled.div`
@@ -58,8 +59,8 @@ const AuthWrapper = ({children, sign}) => {
         <Positioner>
         <ShadowedBox>
             <LogoWrapper>
-                <Logo>{sign}</Logo>
-                {/* <Logo to="/">HANSPOON</Logo> */}
+                {/* <Logo>{sign}</Logo> */}
+                <Logo to="/">HANSPOON</Logo>
             </LogoWrapper>
             <Contents>
                 {children}
