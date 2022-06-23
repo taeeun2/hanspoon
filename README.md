@@ -70,7 +70,13 @@
 - [한스푼 WBS 바로가기 - 스프레드시트](https://docs.google.com/spreadsheets/d/1X0EKgVEjBqoFMm54vrsC8frt5eyryRRWc9dAod6J7Fw/edit#gid=0)
 
 ### notion
-- [한스푼 notion 바로가기](https://www.notion.so/4d9088a8da414d4ab8f6225d3e55be18)
+- [한스푼 notion(메인) 바로가기](https://www.notion.so/4d9088a8da414d4ab8f6225d3e55be18)
+
+### 업무 일지
+- [한스푼 업무 일지 바로가기 - 노션](https://www.notion.so/2aec221978074d85bc03653127fa03aa)
+
+### Commit Message Convention
+- [한스푼 Git Commit Message Convention 바로가기 - 노션](https://www.notion.so/Git-Commit-Message-Convention-c77bb14faec64aae9b3d20d14868c651)
 
 ### ERD
 ![erd3](/uploads/17804c9ed7fcfb91aa367024ceb03a37/erd3.PNG)
