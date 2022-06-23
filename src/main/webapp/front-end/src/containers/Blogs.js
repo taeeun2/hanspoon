@@ -54,23 +54,6 @@ const Blogs = () => {
                  ))}
             </Row> 
         </div>           
-
-
-            // <FlatList
-            // data={BlogData}
-            // renderItem={({blg,index})=>(
-            //     <Col sm="6" lg="6" xl="3" key={index}>
-            //         <Blog
-            //             category={blg.category}
-            //             date={blg.date}
-            //             title={blg.title}
-            //             place={blg.place}
-            //             participantNum={blg.participantNum}
-            //             capacity={blg.capacity}
-            //             host={blg.host}
-            //             spoon={blg.spoon}
-            //         />
-            //     </Col>
     );
 }
 
