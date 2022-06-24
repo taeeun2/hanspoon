@@ -1,0 +1,23 @@
+package com.hansol.hanspoon.service;
+
+import com.hansol.hanspoon.entity.Category;
+import com.hansol.hanspoon.repository.CategoryRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+
+@RequiredArgsConstructor
+@Service
+public class CategoryServiceImpl implements CategoryService{
+
+    private final CategoryRepository categoryRepository;
+
+    @Override
+    @Transactional
+    public List<Category> getCategoryList() {
+
+        return categoryRepository.findAll();
+    }
+}

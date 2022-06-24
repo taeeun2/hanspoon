@@ -7,7 +7,7 @@ const HomeLNB = () => {
         <div id='hlnb' className='align-middle'>
             <Row>
                 <Col sm="12" lg="10" xl="10">
-                    <Category />
+                    {/* <Category /> */}
                 </Col>
                 <Col sm="2" lg="2" xl="2">
                     <Button className="btn" outline color="success">모임 생성</Button>

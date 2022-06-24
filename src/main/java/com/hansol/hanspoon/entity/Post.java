@@ -25,7 +25,7 @@ public class Post {
     private String content;
     private String restaurant_name;
 
-//    private DateTimeFormat meet_date; // 수정 필요
+   //private DateTimeFormat meet_date; // 수정 필요
 
     private long capacity;
     private long participant_num;
