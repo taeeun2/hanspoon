@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
@@ -20,6 +20,26 @@ const Header = () => {
     setIsOpen(!isOpen);
   };
 
+
+  // ============ 추가 ==============
+  const [isLogin, setIsLogin] = useState(false)
+
+	useEffect(()=>{
+		if(sessionStorage.getItem('user_id') === null){
+			console.log('isLogin ?? :: ',isLogin)
+		} else{
+			setIsLogin(true)
+			console.log('isLogin ?? :: ',isLogin)
+		}	
+	})
+
+    const onLogout = () => {
+        console.log(isLogin);
+        sessionStorage.removeItem('user_id')
+        setIsLogin(false)
+        // document.location.href = '/'
+    }
+  // ================================
 
   return (
     <Navbar color="primary" dark expand="md">
@@ -51,14 +71,18 @@ const Header = () => {
             </Link>
           </NavItem>
           <NavItem>
-            <Link to="/mypage" className="nav-link">
+            {isLogin && <Link to="/mypage" className="nav-link">
               마이페이지
-            </Link>
+            </Link>}
+            
           </NavItem>
           <NavItem>
-            <Link to="/signin" className="nav-link">
+           
+            {isLogin ?  < Button style={{
+             "border":"none"
+            }} onClick={onLogout}>로그아웃</Button>: <Link to="/signin" className="nav-link">
               로그인
-            </Link>
+            </Link>}  
           </NavItem>
         </Nav>
       </Collapse>

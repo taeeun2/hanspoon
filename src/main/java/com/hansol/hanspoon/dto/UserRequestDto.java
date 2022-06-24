@@ -13,7 +13,6 @@ public class UserRequestDto {
     private String user_name;
     private AgeGroup age;
     private Gender gender;
-
     private long department_id;
     private long position_type_id;
     private long company_id;
