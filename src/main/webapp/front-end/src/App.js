@@ -7,6 +7,7 @@ import Post from 'pages/Post';
 import SignIn from 'pages/LandingPages/SignIn';
 import SignUp from 'pages/SignUp';
 import NotFound from 'pages/NotFound';
+import SignInBasic from 'pages/example/SignInBasic';
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";

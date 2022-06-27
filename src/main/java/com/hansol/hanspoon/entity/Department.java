@@ -1,15 +1,22 @@
 package com.hansol.hanspoon.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+
+@Getter
+@NoArgsConstructor
+@Entity
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long department_id;
 
-    private String department_name;
-    private long company_id;
+    @Column(name = "department_name")
+    private String name;
+
+    @Column(name = "company_id")
+    private long companyId;
 }

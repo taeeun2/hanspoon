@@ -25,7 +25,7 @@ const Header = () => {
   const [isLogin, setIsLogin] = useState(false)
 
 	useEffect(()=>{
-		if(sessionStorage.getItem('user_id') === null){
+		if(sessionStorage.getItem('user') === null){
 			console.log('isLogin ?? :: ',isLogin)
 		} else{
 			setIsLogin(true)
@@ -35,7 +35,7 @@ const Header = () => {
 
     const onLogout = () => {
         console.log(isLogin);
-        sessionStorage.removeItem('user_id')
+        sessionStorage.removeItem('user')
         setIsLogin(false)
         // document.location.href = '/'
     }
