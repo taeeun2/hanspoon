@@ -5,9 +5,8 @@ import AboutUs from 'pages/LandingPages/AboutUs';
 import MyPage from 'pages/MyPage';
 import Post from 'pages/Post';
 import SignIn from 'pages/LandingPages/SignIn';
-import SignUp from 'pages/SignUp';
+import SignUp from 'pages/LandingPages/SignUp';
 import NotFound from 'pages/NotFound';
-import SignInBasic from 'pages/example/SignInBasic';
 
 // @mui material components
 import { ThemeProvider } from "@mui/material/styles";

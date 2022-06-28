@@ -24,11 +24,6 @@ import Switch from "@mui/material/Switch";
 import Grid from "@mui/material/Grid";
 import MuiLink from "@mui/material/Link";
 
-// @mui icons
-import FacebookIcon from "@mui/icons-material/Facebook";
-import GitHubIcon from "@mui/icons-material/GitHub";
-import GoogleIcon from "@mui/icons-material/Google";
-
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
@@ -44,15 +39,71 @@ import routes from "routes";
 
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import MKAlert from "components/MKAlert";
 
 function SignInBasic() {
-  const [rememberMe, setRememberMe] = useState(false);
 
-  const handleSetRememberMe = () => setRememberMe(!rememberMe);
+  const [inputId, setInputId] = useState('')
+  const [inputPw, setInputPw] = useState('')
+  const [message, setMessage] = useState('')
+
+  const [isId, setIsId] = useState(false)
+  const [isPw, setIsPw] = useState(false)
+
+  const handleInputId = (e) => {
+      setInputId(e.target.value)
+      setMessage('')
+      if(e.target.value.length >= 1){
+        setIsId(true)
+      }else{
+        setIsId(false)
+      }
+  }
+
+  const handleInputPw = (e) => {
+      setInputPw(e.target.value)
+      setMessage('')
+      if(e.target.value.length >= 1){
+        setIsPw(true)
+      }else{
+        setIsPw(false)
+      }
+  }
+
+  const onClickLogin = () => {
+
+    fetch('http://localhost:8080/login',{
+        method : 'POST',
+        headers : {
+            'Content-Type' : 'application/json'
+         },
+        body : JSON.stringify({
+            email : inputId,
+            password : inputPw
+        })
+    }).then(res => {
+        return res.json();
+    })
+    .then(data =>{
+
+        if(isId === false){
+          setMessage('아이디를 입력해주세요.')
+        }else if(isPw === false){
+          setMessage('비밀번호를 입력해주세요.')
+        }else if(data.email !== undefined){
+            sessionStorage.setItem('user',data)
+            document.location.href='/'
+        }else{
+            setMessage(data.errorMessage)
+        }
+
+    
+    })
+  }
 
   return (
     <>
-      <DefaultNavbar
+      {/* <DefaultNavbar
         routes={routes}
         action={{
           type: "external",
@@ -62,7 +113,7 @@ function SignInBasic() {
         }}
         transparent
         light
-      />
+      /> */}
       <MKBox
         position="absolute"
         top={0}
@@ -99,33 +150,20 @@ function SignInBasic() {
                 <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
                   Sign in
                 </MKTypography>
-                <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <FacebookIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GitHubIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                  <Grid item xs={2}>
-                    <MKTypography component={MuiLink} href="#" variant="body1" color="white">
-                      <GoogleIcon color="inherit" />
-                    </MKTypography>
-                  </Grid>
-                </Grid>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
                 <MKBox component="form" role="form">
                   <MKBox mb={2}>
-                    <MKInput type="email" label="Email" fullWidth />
+                    <MKInput type="id" label="Id" fullWidth value={inputId} onChange={handleInputId} />
                   </MKBox>
                   <MKBox mb={2}>
-                    <MKInput type="password" label="Password" fullWidth />
+                    <MKInput type="password" label="Password" fullWidth  value = {inputPw} onChange={handleInputPw}/>
                   </MKBox>
-                  <MKBox display="flex" alignItems="center" ml={-1}>
+                  <MKTypography variant="overline" style={{"color" : "red" }}>{message}</MKTypography>
+          
+
+                  
+                  {/* <MKBox display="flex" alignItems="center" ml={-1}>
                     <Switch checked={rememberMe} onChange={handleSetRememberMe} />
                     <MKTypography
                       variant="button"
@@ -136,9 +174,10 @@ function SignInBasic() {
                     >
                       &nbsp;&nbsp;Remember me
                     </MKTypography>
-                  </MKBox>
+                  </MKBox> */}
+
                   <MKBox mt={4} mb={1}>
-                    <MKButton variant="gradient" color="info" fullWidth>
+                    <MKButton variant="gradient" color="info" fullWidth onClick={onClickLogin} >
                       sign in
                     </MKButton>
                   </MKBox>
@@ -147,7 +186,7 @@ function SignInBasic() {
                       Don&apos;t have an account?{" "}
                       <MKTypography
                         component={Link}
-                        to="/authentication/sign-up/cover"
+                        to="/signup"
                         variant="button"
                         color="info"
                         fontWeight="medium"

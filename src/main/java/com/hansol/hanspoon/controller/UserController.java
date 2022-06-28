@@ -2,12 +2,15 @@ package com.hansol.hanspoon.controller;
 
 import com.hansol.hanspoon.dto.EmailResponseDto;
 import com.hansol.hanspoon.dto.LoginRequestDto;
+import com.hansol.hanspoon.dto.UserRequestDto;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.service.EmailService;
 import com.hansol.hanspoon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,8 +43,15 @@ public class UserController {
 
 
     @GetMapping("/select/department/{company_id}")
-    public List<Department> selectDepartmentByCompany(@PathVariable int company_id ){
+    public List<Department> selectDepartmentByCompany(@PathVariable long company_id ){
         return userService.selectDepartmentByCompany(company_id);
+    }
+
+    @PostMapping("/signUp") //ResponseEntity -> ResponseSignUp 으로 바꾸기
+    public ResponseEntity signUp(@RequestBody UserRequestDto userRequestDto){
+
+        userService.signUp(userRequestDto);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
    }

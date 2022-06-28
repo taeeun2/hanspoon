@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
 import { Form } from 'react-bootstrap';
+import MKTypography from 'components/MKTypography';
 
 const Wrapper = styled.div`
     {
@@ -18,7 +19,7 @@ const Label = styled.div`
 
 const DropBoxWithLabel = ({label, menus, ...rest}) => (
     <Wrapper>
-        <Label>{label}</Label>
+        <MKTypography variant="button">{label}</MKTypography>
         <Form.Select {...rest}>
             {menus.map(menu =>(<option key={menu.value} value={menu.value}>{menu.name}</option>))}
         </Form.Select>
