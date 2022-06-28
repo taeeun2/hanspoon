@@ -16,17 +16,19 @@ import java.util.Random;
 @Service
 public class EmailServiceImpl implements EmailService{
 
-    @Value("${email.username}")
-    private String username;
-
-    @Value("${email.password}")
-    private String password;
+//    @Value("${email.username}")
+//    private String username;
+//
+//    @Value("${email.password}")
+//    private String password;
 
     public static final String ePw = createKey();
     @Override
     public EmailResponseDto sendEmail(String email){
 
         //메일 관련 정보
+        String username = "kte2461";
+        String password = "eun!4132";
         String host = "smtp.naver.com";
         int port=465;
 
