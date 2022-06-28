@@ -39,12 +39,12 @@
 
 /* 추가 */
 
-.btn {
+/* .btn {
   background-color: #fff;
   border: 1px solid #dbdee2;
   color: #404a5c;
  
-}
+} */
 
 .selectBtn{
   background-color: #fff;
@@ -68,8 +68,6 @@
   font-weight: 700;
   text-align: center;
   padding:  14px 18px;
-  
-
 
 }
 

@@ -33,7 +33,7 @@ const Home = () => {
     const [isLogin, setIsLogin] = useState(false)
 
 	useEffect(()=>{
-		if(sessionStorage.getItem('user_id') === null){
+		if(sessionStorage.getItem('user') === null){
 			console.log('isLogin ?? :: ',isLogin)
 		} else{
 			setIsLogin(true)

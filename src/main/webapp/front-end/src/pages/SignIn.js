@@ -7,13 +7,14 @@ import { useState } from "react";
 const SignIn = () => {
     const [inputId, setInputId] = useState('')
     const [inputPw, setInputPw] = useState('')
-
+    const [message, setMessage] = useState('')
     const handleInputId = (e) => {
         setInputId(e.target.value)
     }
 
     const handleInputPw = (e) => {
         setInputPw(e.target.value)
+        setMessage('')
     }
 
 
@@ -32,10 +33,15 @@ const SignIn = () => {
             return res.json();
         })
         .then(data =>{
-            console.log(data)
+
+            if(data.email !== undefined){
+                sessionStorage.setItem('user',data)
+                document.location.href='/'
+            }else{
+                setMessage(data.errorMessage)
+            }
+
         
-            sessionStorage.setItem('user_id',inputId)
-            document.location.href='/'
         })
 
     }
@@ -46,6 +52,7 @@ const SignIn = () => {
         <AuthWrapper sign='로그인'>  
             <InputWithLabel label="아이디" name="id" value = {inputId} placeholder="아이디" onChange={handleInputId} />
             <InputWithLabel label="비밀번호" name="password" placeholder="비밀번호" value = {inputPw} type="password" onChange={handleInputPw} />
+            <p style={{"color" : "red"}}className="errorMessage">{message}</p>
             <AuthButton onClick={onClickLogin}>로그인</AuthButton>
             <RightAlignedLink to="/signup">회원가입</RightAlignedLink>
         </AuthWrapper>

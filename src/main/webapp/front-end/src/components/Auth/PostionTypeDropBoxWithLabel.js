@@ -16,13 +16,14 @@ const Label = styled.div`
     margin-bottom: 0.25rem;
 `;
 
-const DropBoxWithLabel = ({label, menus, ...rest}) => (
+const PositionTypeDropBoxWithLabel = ({label, menus, ...rest}) => (
     <Wrapper>
         <Label>{label}</Label>
         <Form.Select {...rest}>
-            {menus.map(menu =>(<option key={menu.value} value={menu.value}>{menu.name}</option>))}
+            {menus.map(menu =>(<option key={menu.position_type_id} value={menu.position_type_name}>{menu.position_type_name}</option>))}
         </Form.Select>
+        
     </Wrapper>
 );
 
-export default DropBoxWithLabel;
+export default PositionTypeDropBoxWithLabel;

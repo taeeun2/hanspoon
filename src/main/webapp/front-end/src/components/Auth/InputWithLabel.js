@@ -1,14 +1,6 @@
-import React from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 import oc from 'open-color';
-import { Button } from 'reactstrap';
-
-// 두개가 함께 있을땐 상단 (그 사이) 에 여백을 준다
-const Wrapper = styled.div`
-    & + & {
-        margin-top: 1rem;
-    }
-`;
 
 const Label = styled.div`
     font-size: 1rem;
@@ -30,19 +22,16 @@ const Input = styled.input`
     }
 `;
 // rest 쪽에는 onChange, type, name, value, placeholder 등의 input 에서 사용 하는 값들을 넣어줄수 있다.
-const InputWithLabel = ({label, ...rest}) => (
-    <Wrapper>
-        <Label>{label}</Label>
-        <Input {...rest}/>
-       {label==='이메일' && '@hansol.com'}
-       {label==='이메일' && <Button style={{
-            "marginLeft":10
-       }}>인증번호 발송</Button>}
-        {label==='인증번호' && <Button style={{
-            "marginLeft":10
-       }}>확인</Button>}
+const InputWithLabel = ({label, ...rest}) => {
 
-    </Wrapper>
-);
+
+    return (
+            <>
+            <Label>{label}</Label>
+            <Input {...rest}/>
+
+            </>
+    )
+};
 
 export default InputWithLabel;
