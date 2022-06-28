@@ -5,7 +5,7 @@ import AboutUs from 'pages/LandingPages/AboutUs';
 import MyPage from 'pages/MyPage';
 import Post from 'pages/Post';
 import SignIn from 'pages/LandingPages/SignIn';
-import SignUp from 'pages/SignUp';
+import SignUp from 'pages/LandingPages/SignUp';
 import NotFound from 'pages/NotFound';
 //import SignInBasic from 'pages/example/SignInBasic';
 // @mui material components
@@ -55,7 +55,6 @@ const App = () => {
               <Route path="/post/*" element={<Post/>} />
               <Route path="/signin/*" element={<SignIn />} />
               <Route path="/signup/*" element={<SignUp />} />
-              <Route path="/a" element={<Author />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ThemeProvider>
