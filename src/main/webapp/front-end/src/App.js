@@ -18,6 +18,7 @@ import Presentation from "layouts/pages/presentation";
 
 // Material Kit 2 React routes
 import routes from "routes";
+import Author from 'pages/LandingPages/Author';
 
 
 const App = () => {
@@ -64,6 +65,7 @@ const App = () => {
 			  <Route path="/post/*" element={<Post/>} />
 			  <Route path="/signin/*" element={<SignIn />} />
 			  <Route path="/signup/*" element={<SignUp />} />
+			  <Route path="/a" element={<Author />} />
 			  <Route path="*" element={<Navigate to="/" />} />
 			</Routes>
 		  </ThemeProvider>
