@@ -1,3 +1,5 @@
+import { useState } from "react";
+import styled from 'styled-components';
 import Link from "assets/theme/components/link";
 import CenteredBlogCard from "examples/Cards/BlogCards/CenteredBlogCard";
 import Button from '@mui/material/Button';
@@ -10,10 +12,15 @@ import {
   } from "reactstrap";
 import ButtonBase from "assets/theme/components/buttonBase";
   
-  const Blog = (props,index) => {
+  const Blog = (props) => {
+
+    const [isHovering, setIsHovering] = useState(0);
+
     return (
-      <>
-        <Card>
+      <div onMouseOver={() => setIsHovering(1)}
+            onMouseOut={() => setIsHovering(0)}
+            className={`hoverBlog ${isHovering ? 'active' : ''}`}>
+        <Card className="blog">
           <CardBody className="p-4">
             <CardText className="mt-3">{props.category} | {props.date}</CardText>
             <CardTitle tag="h5">{props.title}</CardTitle>
@@ -21,11 +28,8 @@ import ButtonBase from "assets/theme/components/buttonBase";
             <CardText className="mt-3">🙋‍♂️{props.participantNum}/{props.capacity}</CardText>
             <CardText className="mt-3">{props.host}🥄{props.spoon}</CardText>
           </CardBody>
-          <Button>
-              상세보기
-          </Button>
         </Card>
-      </>
+      </div>
     );
   };
   

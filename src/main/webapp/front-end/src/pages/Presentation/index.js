@@ -46,23 +46,24 @@ import Contact from "pages/LandingPages/Author/sections/Contact";
 import Footer from "pages/LandingPages/Author/sections/Footer";
 import Blogs from 'containers/Blogs';
 import Category from 'components/Category';
+import HostFilter from 'components/HostFilter';
 
 function Presentation() {
 
       const CategoryType = [{
-            Id: 1,
+            Id: 0,
             Name: "전체"
         }, {
-            Id: 2,
+            Id: 1,
             Name: "한식"
         }, {
-            Id: 3,
+            Id: 2,
             Name: "중식"
         }, {
-            Id: 4,
+            Id: 3,
             Name: "양식"
         }, {
-            Id: 5,
+            Id: 4,
             Name: "기타"
         }
     ];
@@ -111,6 +112,16 @@ function Presentation() {
         })        
     }
 
+    //활성화된 Category 정보 받아오기
+    const categoryCallback = (c) => {
+      console.log(c);
+    };
+
+    //활성화된 HostFilter 정보 받아오기
+    const hostFilteryCallback = (h) => {
+      console.log(h);
+    };
+
   return (
     <>
       <AppBar />
@@ -139,13 +150,22 @@ function Presentation() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-        <Category categoryList={CategoryType} />
-        <MKBox bgColor="white">
+        <Category 
+          categoryList={CategoryType} 
+          page="Main" 
+          callback={categoryCallback} 
+        />
+
+        <HostFilter 
+          callback={categoryCallback}
+        />
+
+        <MKBox bgColor="white" mt={2}>
           <Card
             sx={{
               p: 2,
               mx: { xs: 2, lg: 3 },
-              mt: -8,
+              mt: 1,
               mb: 4,
               backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
               backdropFilter: "saturate(200%) blur(30px)",

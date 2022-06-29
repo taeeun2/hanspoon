@@ -60,6 +60,11 @@ function AboutUs() {
     },
   ];
 
+  //활성화된 Category 정보 받아오기
+  const categoryCallback = (c) => {
+    console.log(c);
+  };
+
   return (
     <>
       <AppBar />
@@ -115,13 +120,19 @@ function AboutUs() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-        <Category categoryList={CategoryType}/>
+
+
+        <Category 
+          categoryList={CategoryType}
+          page="MyPage" 
+          callback={categoryCallback} />
+
         <MKBox bgColor="white">
           <Card
             sx={{
               p: 2,
               mx: { xs: 2, lg: 3 },
-              mt: -8,
+              mt: 1,
               mb: 4,
               backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
               backdropFilter: "saturate(200%) blur(30px)",
