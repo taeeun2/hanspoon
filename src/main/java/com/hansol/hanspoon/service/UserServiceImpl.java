@@ -1,6 +1,7 @@
 package com.hansol.hanspoon.service;
 
 import com.hansol.hanspoon.dto.UserRequestDto;
+import com.hansol.hanspoon.dto.UserResponseDto;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
@@ -63,11 +64,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     @Transactional
-    public void signUp(UserRequestDto userRequestDto) {
+    public UserResponseDto signUp(UserRequestDto userRequestDto) {
 
         userRepository.findByEmail(userRequestDto.getEmail())
                 .ifPresent((user->{throw new HanspoonException(DUPLICATED_EMAIL);}));
         userRepository.save(createUserFromRequest(userRequestDto));
+        UserResponseDto userResponseDto = new UserResponseDto(userRequestDto.getEmail());
+        return userResponseDto;
     }
 
     public static User createUserFromRequest(UserRequestDto request){

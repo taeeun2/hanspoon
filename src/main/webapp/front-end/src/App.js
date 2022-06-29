@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Header from 'components/Header';
 import AboutUs from 'pages/LandingPages/AboutUs';
 import MyPage from 'pages/MyPage';
-import Post from 'pages/Post';
+import Post from 'pages/LandingPages/Post';
 import SignIn from 'pages/LandingPages/SignIn';
 import SignUp from 'pages/LandingPages/SignUp';
 import NotFound from 'pages/NotFound';

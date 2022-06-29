@@ -19,7 +19,7 @@ public class PostUser {
     private StatePostUserType state;
 
     private boolean scope_name;
-    private boolean scope_sex;
+    private boolean scope_gender;
     private boolean scope_age;
     private boolean scope_company;
     private boolean scope_position_type;

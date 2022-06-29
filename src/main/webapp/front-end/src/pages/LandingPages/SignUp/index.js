@@ -39,7 +39,7 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/bg-sign-image.jpg";
 import { DropBoxWithLabel } from "components/Auth";
 import { Form } from "react-bootstrap";
 import { Button } from "reactstrap";
@@ -309,12 +309,22 @@ function SignUpBasic() {
 
             })
           }).then(res=>{
-            if(res.ok){
+           return res.json();
+            // if(res.ok){
+            //   alert('회원가입이 완료되었습니다.')
+            //   document.location.href='/signin'
+            // }else{
+            //   // setEmailMessage(res.json().errorMessage)
+            //   // console.log(res.json())
+            // }
+          })
+          .then(data=>{
+            if(data.email!== undefined){
               alert('회원가입이 완료되었습니다.')
               document.location.href='/signin'
             }else{
-              // setEmailMessage(res.json().errorMessage)
-              // console.log(res.json())
+              setEmailMessage(data.errorMessage)
+              setEmailColor('red')
             }
           })
         }
@@ -354,6 +364,7 @@ function SignUpBasic() {
       />
       <MKBox px={1} width="100%" height="100vh" mx="auto" position="relative" zIndex={2}>
         <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
+          {/* <Grid item xs={11} sm={9} md={5} lg={4} xl={3}> */}
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             <Card>
               <MKBox
@@ -361,63 +372,69 @@ function SignUpBasic() {
                 bgColor="info"
                 borderRadius="lg"
                 coloredShadow="info"
-                mx={2}
-                mt={-3}
+                mx={1}
+                mt={-4}
                 p={2}
-                mb={1}
+               
                 textAlign="center"
               >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign up
+                <MKTypography component={Link}
+                        to="/" variant="h4" fontWeight="medium" color="white" mt={1}>
+                  Hanspoon
                 </MKTypography>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
-                <MKBox component="form" role="form">
+                <MKBox component="form" role="form" >
 
                  {/* 이메일 */}
-                  <MKBox mb={2}>
-                    <MKInput type="text" label="Email" width="100" value={email} onChange={handleInputEmail}/> 
+                  <MKBox mb={1}>
+                    <MKInput type="text" label="Email" style={{
+                      "width" : "30%"
+                    }} value={email} onChange={handleInputEmail}/> 
                     <MKTypography variant="button" style={{"color" : "black", "marginLeft" : 10, "marginRight" : 10}} 
                     >@hansol.com</MKTypography>
-                    <MKButton  variant="gradient" color = "secondary" onClick={sendEmail}>인증번호 발송</MKButton>
+                    <MKButton  variant="gradient" color = "secondary" onClick={sendEmail}>인증번호 발송</MKButton><br/>
                     <MKTypography variant="button" style={{"color" :emailColor}} >{emailMessage}</MKTypography>
                   </MKBox>
                 {/* 인증번호 */}
-                  <MKBox mb={2}>
-                     <MKInput label="AuthCode" style={{"width" : 280, "marginRight" : 7}} value={inputAuthCode} onChange={handleInputAuthCode}/> 
+                  <MKBox mb={1}>
+                     <MKInput label="AuthCode" style={{"width" : "56%", "marginRight" : 7}} value={inputAuthCode} onChange={handleInputAuthCode}/> 
                      <MKButton  onClick = {confirmAuthCode} variant="gradient" color="secondary">확인</MKButton><br/>
                      <MKTypography variant="button" style={{"color" :authCodeColor}} >{authCodeMessage}</MKTypography>
                   </MKBox>
                 {/* 비밀번호 */}
-                  <MKBox mb={2}>
+                  <MKBox mb={1}>
                     <MKInput type="password" label="Password" fullWidth value = {password} onChange={handlePassword}/>
                     <MKTypography variant="button" style={{"color" :passwordColor}} >{passwordMessage}</MKTypography>
                   </MKBox>
                 {/* 비밀번호 확인 */}
-                  <MKBox mb={2}>
+                  <MKBox mb={1}>
                     <MKInput type="password" label="Password Confirm" fullWidth value = {passwordConfirm} onChange = {handlePasswordConfirm}/>
                     <MKTypography variant="button" style={{"color" :passwordConfirmColor}} >{passwordConfirmMessage}</MKTypography>
                   </MKBox>
                 {/* 이름 */}
-                  <MKBox mb={2}>
+                  <MKBox mb={1}>
                     <MKInput label="Name" fullWidth  value = {userName} onChange = {handleUserName}/>
                     <MKTypography variant="button" style={{"color" :"red"}} >{userNameMessage}</MKTypography>
                   </MKBox>
                 {/* 성별 */}
-                  <MKBox mb={2}>
-                    <MKTypography variant="caption">gender</MKTypography><br/>
-                    <Button
-                        className={`selectBtn ${tab === 'curr' ? 'active' : ''}`}  // tab 값이 'curr' 이면 active 클래스를 추가
-                        onClick={() => setDealTab('curr')} 			// 클릭했을 때 tab 값이 'curr'로 변경된다. 
-                        > MALE </Button>
-                        <Button
-                        className={`selectBtn ${tab === 'prev' ? 'active' : ''}`}  // tab 값이 'prev' 이면 active 클래스를 추가
-                        onClick={() => setDealTab('prev')}			 // 클릭했을 때 tab 값이 'prev'로 변경된다. 
-                        > FEMALE
-                    </Button>
-                 </MKBox>
+                <MKTypography variant="caption">gender</MKTypography><br/>
+                <Grid textAlign="center">
+                    <MKBox mb={1}>
+                      
+                      <Button
+                          className={`selectBtn ${tab === 'curr' ? 'active' : ''}`}  // tab 값이 'curr' 이면 active 클래스를 추가
+                          onClick={() => setDealTab('curr')} 			// 클릭했을 때 tab 값이 'curr'로 변경된다. 
+                          > MALE </Button>
+                          <Button
+                          className={`selectBtn ${tab === 'prev' ? 'active' : ''}`}  // tab 값이 'prev' 이면 active 클래스를 추가
+                          onClick={() => setDealTab('prev')}			 // 클릭했을 때 tab 값이 'prev'로 변경된다. 
+                          > FEMALE
+                      </Button>
+                  </MKBox>
+                 </Grid>
                  {/* 선택 */}
-                  <MKBox mb={2}>
+                  <MKBox mb={1}>
                         <MKTypography variant="caption">Age</MKTypography>
                         <Form.Select value = {age} onChange = {handleAge}>
                             {ageMenu.map(menu =>(<option key={menu.value} value={menu.value} >{menu.name}</option>))}
@@ -440,12 +457,12 @@ function SignUpBasic() {
                   
 
 
-                  <MKBox mt={4} mb={1}>
+                  <MKBox mt={2} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={onClickSignUp} >
                       sign up
                     </MKButton>
                   </MKBox>
-                  <MKBox mt={3} mb={1} textAlign="center">
+                  <MKBox mt={1} textAlign="center">
                     <MKTypography variant="button" color="text">
                         Do you have an ID?{" "}
                       <MKTypography
@@ -466,9 +483,7 @@ function SignUpBasic() {
           </Grid>
         </Grid>
       </MKBox>
-      <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
-        <SimpleFooter light />
-      </MKBox>
+      
     </>
   );
 }

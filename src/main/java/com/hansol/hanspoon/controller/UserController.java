@@ -3,6 +3,7 @@ package com.hansol.hanspoon.controller;
 import com.hansol.hanspoon.dto.EmailResponseDto;
 import com.hansol.hanspoon.dto.LoginRequestDto;
 import com.hansol.hanspoon.dto.UserRequestDto;
+import com.hansol.hanspoon.dto.UserResponseDto;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
@@ -48,10 +49,10 @@ public class UserController {
     }
 
     @PostMapping("/signUp") //ResponseEntity -> ResponseSignUp 으로 바꾸기
-    public ResponseEntity signUp(@RequestBody UserRequestDto userRequestDto){
+    public UserResponseDto signUp(@RequestBody UserRequestDto userRequestDto){
 
-        userService.signUp(userRequestDto);
-        return new ResponseEntity(HttpStatus.OK);
+
+        return userService.signUp(userRequestDto);
     }
 
    }

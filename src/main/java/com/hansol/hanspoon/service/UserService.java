@@ -1,6 +1,7 @@
 package com.hansol.hanspoon.service;
 
 import com.hansol.hanspoon.dto.UserRequestDto;
+import com.hansol.hanspoon.dto.UserResponseDto;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
@@ -16,6 +17,6 @@ public interface UserService {
 
     List<Department> selectDepartmentByCompany(long company_id);
 
-    void signUp(UserRequestDto userRequestDto);
+    UserResponseDto signUp(UserRequestDto userRequestDto);
 
 }

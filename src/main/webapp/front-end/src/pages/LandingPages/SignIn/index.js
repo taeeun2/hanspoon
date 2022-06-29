@@ -38,7 +38,7 @@ import SimpleFooter from "examples/Footers/SimpleFooter";
 import routes from "routes";
 
 // Images
-import bgImage from "assets/images/bg-sign-in-basic.jpeg";
+import bgImage from "assets/images/bg-sign-image.jpg";
 import MKAlert from "components/MKAlert";
 
 function SignInBasic() {
@@ -103,17 +103,7 @@ function SignInBasic() {
 
   return (
     <>
-      {/* <DefaultNavbar
-        routes={routes}
-        action={{
-          type: "external",
-          route: "https://www.creative-tim.com/product/material-kit-react",
-          label: "free download",
-          color: "info",
-        }}
-        transparent
-        light
-      /> */}
+
       <MKBox
         position="absolute"
         top={0}
@@ -147,8 +137,9 @@ function SignInBasic() {
                 mb={1}
                 textAlign="center"
               >
-                <MKTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-                  Sign in
+                <MKTypography component={Link}
+                        to="/" variant="h4" fontWeight="medium" color="white" mt={1}>
+                  Hanspoon
                 </MKTypography>
               </MKBox>
               <MKBox pt={4} pb={3} px={3}>
@@ -160,21 +151,7 @@ function SignInBasic() {
                     <MKInput type="password" label="Password" fullWidth  value = {inputPw} onChange={handleInputPw}/>
                   </MKBox>
                   <MKTypography variant="overline" style={{"color" : "red" }}>{message}</MKTypography>
-          
-
-                  
-                  {/* <MKBox display="flex" alignItems="center" ml={-1}>
-                    <Switch checked={rememberMe} onChange={handleSetRememberMe} />
-                    <MKTypography
-                      variant="button"
-                      fontWeight="regular"
-                      color="text"
-                      onClick={handleSetRememberMe}
-                      sx={{ cursor: "pointer", userSelect: "none", ml: -1 }}
-                    >
-                      &nbsp;&nbsp;Remember me
-                    </MKTypography>
-                  </MKBox> */}
+    
 
                   <MKBox mt={4} mb={1}>
                     <MKButton variant="gradient" color="info" fullWidth onClick={onClickLogin} >
@@ -201,9 +178,6 @@ function SignInBasic() {
             </Card>
           </Grid>
         </Grid>
-      </MKBox>
-      <MKBox width="100%" position="absolute" zIndex={2} bottom="1.625rem">
-        <SimpleFooter light />
       </MKBox>
     </>
   );
