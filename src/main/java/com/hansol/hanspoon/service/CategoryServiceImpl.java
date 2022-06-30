@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -17,7 +18,8 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public List<Category> getCategoryList() {
-
-        return categoryRepository.findAll();
+        List<Category> resVal = categoryRepository.findAll();
+        resVal.add(0, new Category(0,"전체"));
+        return resVal;
     }
 }

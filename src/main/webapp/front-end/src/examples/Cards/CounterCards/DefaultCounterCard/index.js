@@ -17,7 +17,7 @@ Coded by www.creative-tim.com
 import PropTypes from "prop-types";
 
 // react-countup component
-//import CountUp from "react-countup";
+import CountUp from "react-countup";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
@@ -27,7 +27,7 @@ function DefaultCounterCard({ color, count, title, description, ...rest }) {
   return (
     <MKBox p={2} textAlign="center" lineHeight={1}>
       <MKTypography variant="h1" color={color} textGradient>
-        {/* <CountUp end={count} duration={1} {...rest} /> */}
+        <CountUp end={count} duration={1} {...rest} />
       </MKTypography>
       {title && (
         <MKTypography variant="h5" mt={2} mb={1}>

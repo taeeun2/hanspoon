@@ -24,10 +24,6 @@ import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 import MKButton from "components/MKButton";
 
-// Material Kit 2 React examples
-import DefaultNavbar from "examples/Navbars/DefaultNavbar";
-import DefaultFooter from "examples/Footers/DefaultFooter";
-
 // About Us page sections
 import Information from "pages/LandingPages/AboutUs/sections/Information";
 import Team from "pages/LandingPages/AboutUs/sections/Team";
@@ -35,28 +31,25 @@ import Featuring from "pages/LandingPages/AboutUs/sections/Featuring";
 import Newsletter from "pages/LandingPages/AboutUs/sections/Newsletter";
 import Footer from "pages/LandingPages/Author/sections/Footer";
 
-// Routes
-import routes from "routes";
-import footerRoutes from "footer.routes";
-
 // Images
 import bgImage from "assets/images/hanspoon/spoon-5.jpg";
 
 import AppBar from 'components/AppBar';
 import Blogs from 'containers/Blogs';
 import Category from 'components/Category';
+import Counters from "pages/Presentation/sections/Counters";
 
 function AboutUs() {
 
   const CategoryType = [{
-        Id: 1,
-        Name: "신청내역"
+        category_id: 0,
+        category_name: "신청내역"
     }, {
-        Id: 2,
-        Name: "지난모임"
+        category_id: 1,
+        category_name: "지난모임"
     }, {
-        Id: 3,
-        Name: "작성이력"
+        category_id: 2,
+        category_name: "작성이력"
     },
   ];
 
@@ -69,7 +62,7 @@ function AboutUs() {
     <>
       <AppBar />
       <MKBox
-        minHeight="50vh"
+        minHeight="35vh"
         width="100%"
         sx={{
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
@@ -112,7 +105,8 @@ function AboutUs() {
       <Card
         sx={{
           p: 2,
-          mx: { xs: 2, lg: 3 },
+          px: 7,
+          mx: { xs: 2, lg: 5 },
           mt: -8,
           mb: 4,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
@@ -120,8 +114,7 @@ function AboutUs() {
           boxShadow: ({ boxShadows: { xxl } }) => xxl,
         }}
       >
-
-
+        <Counters />
         <Category 
           categoryList={CategoryType}
           page="MyPage" 
@@ -131,6 +124,7 @@ function AboutUs() {
           <Card
             sx={{
               p: 2,
+              px: 5,
               mx: { xs: 2, lg: 3 },
               mt: 1,
               mb: 4,
@@ -139,6 +133,7 @@ function AboutUs() {
               boxShadow: ({ boxShadows: { xxl } }) => xxl,
             }}
           >
+            
             <Blogs />
           </Card>
           <Footer />

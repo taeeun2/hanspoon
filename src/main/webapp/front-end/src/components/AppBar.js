@@ -44,8 +44,12 @@ const ResponsiveAppBar = () => {
     setAnchorElUser(null);
   };
 
+  const toolbarStyle = {
+    minHeight: '80px',
+  };
+
   return (
-    <AppBar position="static">
+    <AppBar style={toolbarStyle} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
