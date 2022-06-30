@@ -68,7 +68,7 @@ function SignUpBasic() {
     const [departmentMenu, setDepartmentMenu] = useState([]);
 
     useEffect(()=>{
-        fetch('http://localhost:8080/select-all/position_type')
+        fetch('http://172.27.1.33:8080/select-all/position_type')
         .then(res=>{
             return res.json()
             
@@ -79,7 +79,7 @@ function SignUpBasic() {
     },[])
 
     useEffect(()=>{
-        fetch(`http://localhost:8080/select/department/1`)
+        fetch(`http://172.27.1.33:8080/select/department/1`)
         .then(res=>{
             return res.json()
         })
@@ -205,7 +205,7 @@ function SignUpBasic() {
     const handleCompany = (e) => {
         setCompany(e.target.value)
         
-        fetch(`http://localhost:8080/select/department/${e.target.value}`)
+        fetch(`http://172.27.1.33:8080/select/department/${e.target.value}`)
         .then(res=>{
             return res.json()
         })
@@ -231,7 +231,7 @@ function SignUpBasic() {
 
     const sendEmail = () => {
         if(isEmail){
-            fetch(`http://localhost:8080/sendEmail?email=${email}`)
+            fetch(`http://172.27.1.33:8080/sendEmail?email=${email}`)
             .then(res => {
                 return res.json()
             })
@@ -292,7 +292,7 @@ function SignUpBasic() {
           // console.log(position_type)
           // console.log(company)
       
-          fetch('http://localhost:8080/signUp',{
+          fetch('http://172.27.1.33:8080/signUp',{
             method : 'POST',
             headers : {
               'Content-Type' : 'application/json'
