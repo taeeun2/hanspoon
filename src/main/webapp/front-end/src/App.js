@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-route
 import Header from 'components/Header';
 import AboutUs from 'pages/LandingPages/AboutUs';
 import MyPage from 'pages/MyPage';
-import Post from 'pages/LandingPages/Post';
 import SignIn from 'pages/LandingPages/SignIn';
 import SignUp from 'pages/LandingPages/SignUp';
 import NotFound from 'pages/NotFound';
@@ -17,6 +16,8 @@ import Presentation from "layouts/pages/presentation";
 // Material Kit 2 React routes
 import routes from "routes";
 import Author from 'pages/LandingPages/Author';
+import Post from 'pages/LandingPages/Post';
+import DetailPost from 'pages/LandingPages/DetailPost';
 const App = () => {
     const { pathname } = useLocation();
     // Setting page scroll to 0 when changing the route
@@ -55,6 +56,7 @@ const App = () => {
               <Route path="/post/*" element={<Post/>} />
               <Route path="/signin/*" element={<SignIn />} />
               <Route path="/signup/*" element={<SignUp />} />
+              <Route path="/detailPost/:clickedId" element={<DetailPost />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ThemeProvider>

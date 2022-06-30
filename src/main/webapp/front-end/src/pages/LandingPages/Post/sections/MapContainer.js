@@ -1,14 +1,22 @@
 import { Grid } from '@mui/material'
+import select from 'assets/theme/components/form/select'
 import MKButton from 'components/MKButton'
 import MKTypography from 'components/MKTypography'
 import React, { useEffect, useState } from 'react'
+import PlaceList from './PlaceList'
 
 const { kakao } = window
 
-const MapContainer = ({ searchPlace }) => {
+const MapContainer = ({ searchPlace, searchRestaurant}) => {
 
   // 검색결과 배열에 담아줌
   const [Places, setPlaces] = useState([])
+
+
+  // 선택된 식당 이름 가져오기
+  const setPlaceName = (name) => {
+    console.log(name)
+  }
   
   useEffect(() => {
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
@@ -38,6 +46,8 @@ const MapContainer = ({ searchPlace }) => {
         setPlaces(data)
       }
     }
+
+    
 
     // 검색결과 목록 하단에 페이지 번호 표시
 
@@ -79,36 +89,39 @@ const MapContainer = ({ searchPlace }) => {
       ></div>
       <div id="result-list">
         {Places.map((item, i) => (
-          <div key={i} style={{ marginTop: '20px' }}>
-            <Grid container alignItems="center" py={2}>
-                <Grid item xs={12} sm={2} textAlign = "center">
-                    <MKTypography variant="button" color="text" fontWeight="bold" textTransform="uppercase">
-                    {i + 1}
-                    </MKTypography>
-                </Grid>
-                <Grid item xs={12} sm={7}>
-                    <a href={`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${item.place_name}`}><MKTypography variant="h6">{item.place_name}</MKTypography></a>
-                </Grid>
-                <Grid item xs={12} sm={3}>
-                    <MKButton variant="gradient" color="dark"> 선택</MKButton>
-                </Grid>
-                
-            </Grid>
-            <hr/>
-            {/* <span>{i + 1}</span>
-            <div>
-              <h5>{item.place_name}</h5>
-              {item.road_address_name ? (
-                <div>
-                  <span>{item.road_address_name}</span>
-                  <span>{item.address_name}</span>
-                </div>
-              ) : (
-                <span>{item.address_name}</span>
-              )}
-              <span>{item.phone}</span>
-            </div> */}
-          </div>
+           <div key={i} style={{ marginTop: '20px' }}>
+              <PlaceList 
+                key={i}
+                index = {i}
+                place_name = {item.place_name}
+                road_address_name = {item.road_address_name}
+                phone = {item.phone}
+                searchRestaurant = {searchRestaurant}
+
+                setPlaceName = {setPlaceName}
+                />
+            </div>
+          // <div key={i} style={{ marginTop: '20px' }}>
+          //   <Grid container alignItems="center" py={2}>
+          //       <Grid item xs={12} sm={2} textAlign = "center">
+          //           <MKTypography variant="button" color="text" fontWeight="bold" textTransform="uppercase">
+          //           {i + 1}
+          //           </MKTypography>
+          //       </Grid>
+          //       <Grid item xs={12} sm={7}>
+          //           {/* <a href={`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${item.place_name}`}><MKTypography variant="h6">{item.place_name}</MKTypography></a> */}
+          //           <MKTypography variant="h6" >{item.place_name}</MKTypography>
+          //           <MKTypography variant="button" style={{"fontSize" : "12px"}} >{item.road_address_name}</MKTypography><br/>
+          //           <MKTypography variant="overline" style={{"marginLeft" : "3px"}}> 📞 {item.phone}</MKTypography><br/>
+          //           <button style={{"border" : 0, "outline" : 0, "color" : "#3C5A91", "fontSize" : "12px", "backgroundColor" : "white", "textDecoration": "underline", "textUnderlinePosition":"under"}} onClick={() => window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${item.place_name}`, '_blank')}>[네이버 검색 링크]</button>
+          //       </Grid>
+          //       <Grid item xs={12} sm={3}>
+          //           {/* <MKButton variant="gradient" color="dark" onClick={selectRestaurant(item.place_name)}> 선택</MKButton> */}
+          //           <MKButton variant="gradient" color="dark" onClick={searchRestaurant}> 선택</MKButton>
+          //       </Grid>
+          //   </Grid>
+          //   <hr/>
+          // </div>
         ))}
         
       </div>

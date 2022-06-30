@@ -9,6 +9,8 @@ import Grid from "@mui/material/Grid";
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
+import DetailPost from 'pages/LandingPages/DetailPost';
+import { useNavigate } from 'react-router-dom';
   
 const LIMIT = 10;
 
@@ -44,10 +46,13 @@ const Blogs = () => {
     }
  
     const [isClicked, setIsClicked] = useState();
+    const navigate = useNavigate();
+
 
     //게시글 클릭시 이벤트
     const handleClick = (clickedId) => {
       setIsClicked(clickedId);
+      navigate(`/detailPost/${clickedId}`)
       console.log(clickedId);
     }
 
@@ -78,7 +83,9 @@ const Blogs = () => {
                   </div>
                 </Grid>
             ))}
+
           </Grid>
+         
         </Container>
       </MKBox>       
     );

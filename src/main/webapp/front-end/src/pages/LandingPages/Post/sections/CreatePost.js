@@ -19,6 +19,7 @@ import Divider from "@mui/material/Divider";
 import Slide from "@mui/material/Slide";
 import CloseIcon from "@mui/icons-material/Close";
 import MapContainer from './MapContainer';
+import SearchAPI from './SearchAPI';
 
 
 const category = [
@@ -32,7 +33,6 @@ const CreatePost = () => {
     const [number, setNumber] = useState(1);
     const [show, setShow] = useState(false);
 
-
     const [scope_name, setScope_name] = useState(false);
     const [scope_age, setScope_age] = useState(false);
     const [scope_company, setScope_company] = useState(false);
@@ -40,21 +40,14 @@ const CreatePost = () => {
     const [scope_gender, setScope_gender] = useState(false);
     const [scope_department, setScope_department] = useState(false);
 
-    const searchRestaurant = () => setShow(!show);
+    const searchRestaurant = () => {
+        setShow(!show);
+    };
 
-
-    const [InputText, setInputText] = useState('')
-    const [Place, setPlace] = useState('')
+ 
+    const [restaurantName, setRestaurantName] = useState('')
   
-    const onChange = (e) => {
-      setInputText(e.target.value)
-    }
-  
-    const handleSubmit = (e) => {
-      e.preventDefault()
-      setPlace(InputText)
-      setInputText('')
-    }
+   
     
     function decreaseNumber(){
         if(parseInt(number)-1 >= 1){
@@ -76,6 +69,10 @@ const CreatePost = () => {
         else{
             setNumber(e.target.value)
         }
+    }
+
+    const handleRestaurantName = (name) => {
+        setRestaurantName(name)
     }
     return (
         <div>
@@ -110,7 +107,7 @@ const CreatePost = () => {
                             </Grid>
 
                             <Grid item xs={12} md={7}>
-                                <MKInput label="Select a restaurant" fullWidth />
+                                <MKInput label="Select a restaurant" fullWidth value = {restaurantName} disabled/>
                             </Grid>
 
                             <Grid item xs={12} md={2.5}>
@@ -119,51 +116,8 @@ const CreatePost = () => {
                                 </MKButton>
                             </Grid>
 
-                            {/* 모달 start */}
-                            <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }}  style={{"overflow" : "scroll"}}>
-                                <Slide direction="down" in={show} timeout={500}>
-                                    <MKBox
-                                    position="relative"
-                                    width="500px"
-                                    display="flex"
-                                    flexDirection="column"
-                                    borderRadius="xl"
-                                    bgColor="white"
-                                    shadow="xl"
-                                    >
-                                    <MKBox display="flex" alginItems="center" justifyContent="space-between" p={2}>
-                                        <MKTypography variant="h5">식당 검색</MKTypography>
-                                        <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={searchRestaurant} />
-                                    </MKBox>
-                                    <Divider sx={{ my: 0 }} />
-                                    <MKBox p={2}>
-                                        <form className="inputForm" onSubmit={handleSubmit}>
-                                            <MKInput label="Select a restaurant" style ={{"width" : "300px", "marginRight" : 5}} onChange={onChange} value={InputText} />
-                                            <MKButton variant="gradient" color="dark" type="submit" style ={{"width" : "100px"}}>
-                                                검색
-                                            </MKButton>
-                                        </form><br/>
-                                        <MapContainer searchPlace={Place} />
-                                    </MKBox>
-                                    <Divider sx={{ my: 0 }} />
-                                    <MKBox display="flex" justifyContent="space-between" p={1.5}>
-                                        {/* <MKButton variant="gradient" color="dark" onClick={searchRestaurant}>
-                                        close
-                                        </MKButton>
-                                        <MKButton variant="gradient" color="info">
-                                        save changes
-                                        </MKButton> */}
-                                    </MKBox>
-                                    </MKBox>
-                                </Slide>
-                            </Modal>
-                            {/* 모달 end */}
-
-
-
-
-
-
+                            {/* 모달 */}
+                            <SearchAPI  show = {show} searchRestaurant={searchRestaurant} handleRestaurantName = {handleRestaurantName} />
 
 
 
