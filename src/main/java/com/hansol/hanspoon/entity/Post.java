@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 import javax.persistence.*;
@@ -25,7 +24,7 @@ public class Post {
     private String content;
     private String restaurant_name;
 
-   //private DateTimeFormat meet_date; // 수정 필요
+   private Timestamp meet_date;
 
     private long capacity;
     private long participant_num;

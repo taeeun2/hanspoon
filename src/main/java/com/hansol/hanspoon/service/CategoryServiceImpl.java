@@ -18,8 +18,8 @@ public class CategoryServiceImpl implements CategoryService{
     @Override
     @Transactional
     public List<Category> getCategoryList() {
-        List<Category> resVal = categoryRepository.findAll();
-        resVal.add(0, new Category(0,"전체"));
-        return resVal;
+        List<Category> retVal = categoryRepository.findAll();
+        retVal.add(0, new Category(0,"전체"));
+        return retVal;
     }
 }
