@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/main")
+@CrossOrigin
 public class MainController {
 
     @Autowired
@@ -29,7 +30,7 @@ public class MainController {
 //    public ResponseEntity<List<Category>> main(){
 //        return new ResponseEntity<>(categoryService.getCategoryList(), HttpStatus.OK);
 //    }
-    @CrossOrigin("*")
+
     @GetMapping("/category")
     public ResponseEntity<List<Category>> getCategoryList(){
         return new ResponseEntity<>(categoryService.getCategoryList(), HttpStatus.OK);

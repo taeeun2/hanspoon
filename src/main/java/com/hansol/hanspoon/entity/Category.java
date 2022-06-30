@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Getter
+@AllArgsConstructor
 @NoArgsConstructor
 @Entity
 public class Category {
