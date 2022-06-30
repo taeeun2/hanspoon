@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Col, Row } from "reactstrap";
 import Blog from "components/Blog";
 
@@ -12,7 +12,7 @@ import MKTypography from "components/MKTypography";
   
 const LIMIT = 10;
 
-const Blogs = () => {
+const Blogs = (props) => {
 
     const BlogData = [
         {
@@ -51,10 +51,13 @@ const Blogs = () => {
       console.log(clickedId);
     }
 
+    // useEffect(() => {
+    //   console.log(props.category);
+    // }, []);
+
 
     return (
       <MKBox component="section" >
-        <Container>
           {/* <Grid container item xs={12} lg={6}>
             <MKTypography variant="h3" mb={6}>
               Check my latest blogposts
@@ -79,7 +82,6 @@ const Blogs = () => {
                 </Grid>
             ))}
           </Grid>
-        </Container>
       </MKBox>       
     );
 }

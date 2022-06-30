@@ -34,8 +34,9 @@ import FilledInfoCard from "examples/Cards/InfoCards/FilledInfoCard";
 import routes from "routes";
 import footerRoutes from "footer.routes";
 
-// Images
-import bgImage from "assets/images/hanspoon/hanspoon-main-bg-2.jpg";
+// 메인화면 배너 이미지
+import bgImage1 from "assets/images/hanspoon/banner-1.jpg";
+import bgImage2 from "assets/images/hanspoon/banner-2.jpg";
 
 import AppBar from 'components/AppBar';
 
@@ -48,42 +49,44 @@ import Blogs from 'containers/Blogs';
 import Category from 'components/Category';
 import HostFilter from 'components/HostFilter';
 
+//carousel css
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 function Presentation() {
 
-      const CategoryType = [{
-            Id: 0,
-            Name: "전체"
-        }, {
-            Id: 1,
-            Name: "한식"
-        }, {
-            Id: 2,
-            Name: "중식"
-        }, {
-            Id: 3,
-            Name: "양식"
-        }, {
-            Id: 4,
-            Name: "기타"
-        }
-    ];
+    //캐러셀 설정값
+    const settings = {
+      slide: 'div',
+      arrows : true, 
+      infinite: true,
+      speed: 600,
+      autoplay : true,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
 
       /* 카테고리 리스트 조회 API */
-      // const [category, setCategory] = useState(all);
+      const [categoryList, setCategoryList] = useState([]);
+      const [activeCategory, setActiveCategory] = useState({});
 
-      // const getCategory = () => {
-      //   fetch('http://localhost:8080/main/category')
-      //       .then(res => {
-      //           return res.json()
-      //       })
-      //       .then(data => {
-      //           setCategory([...category, {data}])
-      //       })
-      //   }
 
-      //   useEffect(() => {
-      //     getCategory();
-      //   }, []);
+      const getCategoryList = () => {
+        fetch('http://localhost:8080/main/category')
+            .then(res => {
+                return res.json()
+            })
+            .then(data => {
+                setCategoryList(data); 
+                // console.log(categoryList[0]);  
+                // setActiveCategory(categoryList[0]);
+            })
+        }
+
+        useEffect(() => {
+          getCategoryList();
+        }, []);
 
     //테스트 데이터
     const BlogData = [
@@ -112,38 +115,69 @@ function Presentation() {
         })        
     }
 
-    //활성화된 Category 정보 받아오기
+    //활성화된 Category ID 받아오기
     const categoryCallback = (c) => {
-      console.log(c);
+      if(c != undefined) {
+        setActiveCategory(categoryList[c]);
+      } 
+      console.log(activeCategory);
     };
 
-    //활성화된 HostFilter 정보 받아오기
+    //활성화된 HostFilter ID 받아오기
     const hostFilteryCallback = (h) => {
-      console.log(h);
+      // console.log(h);
     };
 
   return (
     <>
       <AppBar />
       <MKBox
-        minHeight="50vh"
+        minHeight="35vh"
         width="100%"
-        sx={{
-          backgroundImage: `url(${bgImage})`,
-          backgroundSize: "cover",
-          backgroundPosition: "top",
-          display: "grid",
-          placeItems: "center",
-        }}
+        // sx={{
+        //   backgroundImage: `url(${bgImage})`,
+        //   backgroundSize: "cover",
+        //   backgroundPosition: "top",
+        //   display: "grid",
+        //   placeItems: "center",
+        // }}
       >
+        {/* 캐러셀 */}
+        <Slider {...settings}>
+          <MKBox
+            minHeight="35vh"
+            width="100%"
+            sx={{
+            backgroundImage: `url(${bgImage1})`,
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+            display: "grid",
+            placeItems: "center",
+           }} />
+          <MKBox
+            minHeight="35vh"
+            width="100%"
+            sx={{
+            backgroundImage: `url(${bgImage2})`,
+            backgroundSize: "cover",
+            backgroundPosition: "top",
+            backgroundRepeat: "no-repeat",
+            display: "grid",
+            placeItems: "center",
+           }} />
+          {/* <div>
+            <img src={bgImage}  />
+          </div> */}
+        </Slider>
       </MKBox>
 
      {/* ==== 게시글(카드) 영역 ==== */}
       <Card
         sx={{
           p: 2,
-          mx: { xs: 2, lg: 3 },
-          mt: -8,
+          px: 5,
+          mx: { xs: 2, lg: 5 },
+          mt: -6,
           mb: 4,
           backgroundColor: ({ palette: { white }, functions: { rgba } }) => rgba(white.main, 0.8),
           backdropFilter: "saturate(200%) blur(30px)",
@@ -151,7 +185,7 @@ function Presentation() {
         }}
       >
         <Category 
-          categoryList={CategoryType} 
+          categoryList={categoryList} 
           page="Main" 
           callback={categoryCallback} 
         />
@@ -164,6 +198,7 @@ function Presentation() {
           <Card
             sx={{
               p: 2,
+              px: 3,
               mx: { xs: 2, lg: 3 },
               mt: 1,
               mb: 4,
@@ -172,7 +207,7 @@ function Presentation() {
               boxShadow: ({ boxShadows: { xxl } }) => xxl,
             }}
           >
-            <Blogs />
+            <Blogs category={activeCategory}/>
           </Card>
           <Footer />
         </MKBox>

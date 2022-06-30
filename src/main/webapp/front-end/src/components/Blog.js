@@ -11,6 +11,7 @@ import {
     CardTitle,
   } from "reactstrap";
 import ButtonBase from "assets/theme/components/buttonBase";
+import MKTypography from "./MKTypography";
   
   const Blog = (props) => {
 
@@ -20,13 +21,23 @@ import ButtonBase from "assets/theme/components/buttonBase";
       <div onMouseOver={() => setIsHovering(1)}
             onMouseOut={() => setIsHovering(0)}
             className={`hoverBlog ${isHovering ? 'active' : ''}`}>
-        <Card className="blog">
-          <CardBody className="p-4">
-            <CardText className="mt-3">{props.category} | {props.date}</CardText>
-            <CardTitle tag="h5">{props.title}</CardTitle>
-            <CardText className="mt-3">{props.place}</CardText>
-            <CardText className="mt-3">🙋‍♂️{props.participantNum}/{props.capacity}</CardText>
-            <CardText className="mt-3">{props.host}🥄{props.spoon}</CardText>
+        <Card className="blog text-center">
+          <CardBody className="p-3">
+            <MKTypography variant="subtitle1" color="secondary" mt={3} mb={2}>
+              {props.category} | {props.date}
+            </MKTypography>
+            <MKTypography variant="h4" mb={2}>
+              {props.title}
+            </MKTypography>
+            <MKTypography variant="body1" mb={2}>
+              {props.place}
+            </MKTypography>
+            <MKTypography variant="body2" mb={2}>
+              🙋‍♂️ {props.participantNum} / {props.capacity}  
+            </MKTypography>
+            <MKTypography variant="body2" mb={2}>
+              {props.host}  🥄{props.spoon}
+            </MKTypography>
           </CardBody>
         </Card>
       </div>
