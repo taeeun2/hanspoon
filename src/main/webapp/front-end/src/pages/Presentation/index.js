@@ -73,7 +73,7 @@ function Presentation() {
 
 
       const getCategoryList = () => {
-        fetch('http://172.27.1.33:8080//main/category')
+        fetch('http://172.27.1.33:8080/main/category')
             .then(res => {
                 return res.json()
             })
