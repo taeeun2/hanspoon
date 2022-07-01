@@ -45,7 +45,7 @@ const CreatePost = () => {
     const [contentMessage, setContentMessage] = useState('')
 
     useEffect(()=>{
-        fetch('http://localhost:8080/post/getCurrentTime')
+        fetch('http://localhost:8080/getCurrentTime')
         .then(res=>{
             return res.json()
             

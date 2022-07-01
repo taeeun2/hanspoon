@@ -9,7 +9,6 @@ import java.time.LocalDateTime;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/post")
 public class PostController {
 
     @GetMapping("/getCurrentTime")
