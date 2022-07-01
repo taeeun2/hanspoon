@@ -37,8 +37,9 @@ const HostFilter = ({ callback }) => {
                     </MKTypography> 
                 </Grid>
                 <Grid item xs={12} lg={12}>
-                    {filterBtn.map((btn) => (
+                    {filterBtn.map((btn, index) => (
                             <Button 
+                                key={index}
                                 className={`selectBtn ${activeBtn === btn.id ? 'active' : ''}`}
                                 onClick={() => activeBtn === btn.id ? setActiveBtn() : setActiveBtn(btn.id)}>
                                 {btn.name}      

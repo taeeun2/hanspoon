@@ -18,9 +18,14 @@ const Category = ({ categoryList, page, callback }) => {
 
   const [activeTab, setActiveTab] = React.useState(0);
 
-  const handleTabType = (event, newValue) => {
+  const handleChange = (event, newValue) => {
       setActiveTab(newValue);
       callback(newValue);
+  }
+
+  const handleTabClick = (category_id) => {
+      setActiveTab(category_id);
+      callback(category_id);
   }
 
   //mount시 activeTab Id 전달
@@ -43,12 +48,13 @@ const Category = ({ categoryList, page, callback }) => {
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <AppBar position="static">
-                  <Tabs value={activeTab} onChange={handleTabType}>
+                  <Tabs value={activeTab}>
                     {categoryList.map((list) => (
                       <Tab 
+                        key={list.category_id}
                         label={list.category_name}
                         className={activeTab == list.category_id ? 'active' : ''} 
-                        onClick={() => setActiveTab(list.category_id)} 
+                        onClick={() => handleTabClick(list.category_id)}
                       />
                     ))}
                   </Tabs>

@@ -14,36 +14,7 @@ import { useNavigate } from 'react-router-dom';
   
 const LIMIT = 10;
 
-const Blogs = (props) => {
-
-    const BlogData = [
-        {
-            post_id: 1,
-            category: "한식",
-            date: "2022.06.15",
-            title: "나랑 밥 먹을 사람?",
-            place: "고씨네 카레",
-            participantNum: "2",
-            capacity: "4",
-            host: "익명",
-            spoon: "3"
-        },
-    ];
-
-    //테스트 데이터
-    for (let index = 0; index < 20; index++) {
-        BlogData.push({
-            post_id: 2 + index,
-            category: "한식",
-            date: "2022.06.15",
-            title: "나랑 밥 먹을 사람?"+index,
-            place: "고씨네 카레",
-            participantNum: "2",
-            capacity: "4",
-            host: "익명",
-            spoon: "3"
-        })        
-    }
+const Blogs = ({ category, post }) => {
  
     const [isClicked, setIsClicked] = useState();
     const navigate = useNavigate();
@@ -53,7 +24,6 @@ const Blogs = (props) => {
     const handleClick = (clickedId) => {
       setIsClicked(clickedId);
       navigate(`/detailPost/${clickedId}`)
-      console.log(clickedId);
     }
 
     // useEffect(() => {
@@ -69,19 +39,18 @@ const Blogs = (props) => {
             </MKTypography>
           </Grid> */}
           <Grid container spacing={3}>
-            {BlogData.map((blog, index) => (
-                <Grid item xs={12} sm={6} lg={3}>
-                  <div onClick={() => {handleClick(blog.post_id)}}>
+            {post.map((post, index) => (
+                <Grid item xs={12} sm={6} lg={3} key={index}>
+                  <div onClick={() => {handleClick(post.post_id)}}>
                     <Blog 
-                      key={index}
-                      category={blog.category}
-                      date={blog.date}
-                      title={blog.title}
-                      place={blog.place}
-                      participantNum={blog.participantNum}
-                      capacity={blog.capacity}
-                      host={blog.host}
-                      spoon={blog.spoon}
+                      category={post.category.category_name}
+                      date={post.meet_date}
+                      title={post.title}
+                      place={post.restaurant_name}
+                      participantNum={post.participantNum}
+                      capacity={post.capacity}
+                      host={post.hostInfo.name}
+                      spoon={post.spoon_num}
                       />
                   </div>
                 </Grid>

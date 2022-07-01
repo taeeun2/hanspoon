@@ -22,7 +22,7 @@ public class PostUser {
     private boolean scope_gender;
     private boolean scope_age;
     private boolean scope_company;
-    private boolean scope_position_type;
+    private boolean scope_position;
     private boolean scope_department;
 
     private long user_id;

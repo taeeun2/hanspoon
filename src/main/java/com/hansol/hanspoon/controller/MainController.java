@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.controller;
 
+import com.hansol.hanspoon.dto.PostResponseDto;
 import com.hansol.hanspoon.entity.Category;
 import com.hansol.hanspoon.entity.Post;
 import com.hansol.hanspoon.service.CategoryService;
@@ -16,8 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping("/main")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class MainController {
 
     @Autowired
@@ -36,9 +36,14 @@ public class MainController {
         return new ResponseEntity<>(categoryService.getCategoryList(), HttpStatus.OK);
     }
 
-//    @CrossOrigin("*")
-//    @GetMapping("/post/list")
-//    public ResponseEntity<List<Post>> getAllPostList() {
-//        return new ResponseEntity<>(postService.getPostList(),HttpStatus.OK);
-//    }
+    @GetMapping("/post/all")
+    public ResponseEntity<List<PostResponseDto>> getAllPostList() {
+        return new ResponseEntity<>(postService.getAllPostList(),HttpStatus.OK);
+    }
+
+    @GetMapping("/post/valid")
+    public ResponseEntity<List<PostResponseDto>> getValidPostList() {
+        return new ResponseEntity<>(postService.getValidPostList(),HttpStatus.OK);
+    }
+
 }
