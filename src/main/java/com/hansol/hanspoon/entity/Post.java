@@ -2,6 +2,8 @@ package com.hansol.hanspoon.entity;
 
 import com.hansol.hanspoon.type.StatePostType;
 import com.hansol.hanspoon.type.StateUserType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -9,12 +11,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 
 import javax.persistence.*;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Getter
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 public class Post {
 
     @Id
@@ -25,8 +28,7 @@ public class Post {
     private String content;
     private String restaurant_name;
 
-
-   private Timestamp meet_date;
+    private Timestamp meet_date;
 
     private long capacity;
     private long participant_num;
@@ -34,12 +36,21 @@ public class Post {
     @Enumerated(EnumType.STRING)
     private StatePostType state;
 
-
     @CreatedDate
     private Timestamp create_date;
     @LastModifiedDate
     private Timestamp update_date;
 
     private long category_id;
+
+    @Builder
+    public Post(String title, String content, String restaurant_name, Timestamp meet_date, long capacity, long category_id){
+        this.title = title;
+        this.content = content;
+        this.restaurant_name = restaurant_name;
+        this.meet_date = meet_date;
+        this.capacity = capacity;
+        this.category_id = category_id;
+    }
 
 }

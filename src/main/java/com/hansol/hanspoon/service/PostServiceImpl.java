@@ -1,10 +1,12 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.PostRequestDto;
 import com.hansol.hanspoon.dto.PostResponseDto;
 import com.hansol.hanspoon.entity.Post;
 import com.hansol.hanspoon.entity.PostUser;
 import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.repository.*;
+import com.hansol.hanspoon.type.StatePostUserType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -86,5 +88,35 @@ public class PostServiceImpl implements PostService {
         res.put("spoon_num", user.getSpoon_num());
 
         return res;
+    }
+
+    @Override
+    public void createPost(PostRequestDto postRequestDto) {
+       postUserRepository.save(createPostUserFromRequest(postRequestDto));
+    }
+
+    private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {
+        return PostUser.builder()
+                .state(StatePostUserType.HOST)
+                .scope_name(postRequestDto.isScope_name())
+                .scope_gender(postRequestDto.isScope_gender())
+                .scope_age(postRequestDto.isScope_age())
+                .scope_company(postRequestDto.isScope_company())
+                .scope_position(postRequestDto.isScope_position())
+                .scope_department(postRequestDto.isScope_department())
+                .user_id(postRequestDto.getUser_id())
+                .post_id( postRepository.save(createPostFromRequest(postRequestDto)).getPost_id())
+                .build();
+    }
+
+    private Post createPostFromRequest(PostRequestDto postRequestDto) {
+        return Post.builder()
+                .title(postRequestDto.getTitle())
+                .content(postRequestDto.getContent())
+                .restaurant_name(postRequestDto.getRestaurant_name())
+                .meet_date(postRequestDto.getMeet_date())
+                .capacity(postRequestDto.getCapacity())
+                .category_id(postRequestDto.getCategory_id())
+                .build();
     }
 }

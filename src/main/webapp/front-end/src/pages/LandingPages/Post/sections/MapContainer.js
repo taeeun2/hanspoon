@@ -16,14 +16,10 @@ const MapContainer = ({ searchPlace, searchRestaurant, setOnText}) => {
 
   // 선택된 식당 이름 가져오기
   const setPlaceName = (name) => {
-    console.log(name)
     setOnText(name)
     searchRestaurant(name)
   }
 
-  useEffect(()=>{
-    console.log(Places)
-  },[])
   
   useEffect(() => {
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })

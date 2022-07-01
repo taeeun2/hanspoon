@@ -21,9 +21,12 @@ const SearchAPI = ({show, searchRestaurant, setOnText}) => {
     
       const handleSubmit = (e) => {
         e.preventDefault()
-        
-        setPlace("상암동"+InputText) // 지역 상암동으로 제한
-        setInputText('')
+        if(InputText.length < 1){
+            alert('검색어를 입력하세요.')
+        }else{
+            setPlace("상암동"+InputText) // 지역 상암동으로 제한
+            setInputText('')
+        }
       }
     return (
         <div>

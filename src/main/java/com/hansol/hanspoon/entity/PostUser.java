@@ -1,14 +1,16 @@
 package com.hansol.hanspoon.entity;
 
 import com.hansol.hanspoon.type.StatePostUserType;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Getter
-@NoArgsConstructor
 @Entity
+@Builder
 public class PostUser {
 
     @Id

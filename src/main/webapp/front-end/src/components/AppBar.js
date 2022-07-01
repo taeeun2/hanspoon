@@ -13,6 +13,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
+import MKButton from './MKButton';
 
 const pages = [
     {
@@ -28,6 +29,26 @@ const pages = [
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  // 로그인 여부로 헤더 다르게 보여주기
+  const [isLogin, setIsLogin] = React.useState('')
+
+  React.useEffect(()=>{
+    console.log(sessionStorage.getItem('user'))
+    if(sessionStorage.getItem('user') !== null){
+      setIsLogin(true)
+    }else{
+      setIsLogin(false)
+    }
+  },[])
+  const onLogout = () => {
+        console.log(isLogin);
+        sessionStorage.removeItem('user')
+        setIsLogin(false)
+        document.location.href = '/'
+    }
+
+  //==================================
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -106,6 +127,7 @@ const ResponsiveAppBar = () => {
                     <Link to={page.route}>
                         {page.name}
                     </Link>
+                    
                  </Typography>
                 </MenuItem>
               ))}
@@ -130,26 +152,31 @@ const ResponsiveAppBar = () => {
           >
             Hanspoon
           </Typography>
+          {/* <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}> */}
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-            {pages.map((page) => (
-              <Button
-                key={page.name}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                <Link to={page.route}>
-                    {page.name}
-                </Link>
-              </Button>
-            ))}
+
+          </Box>
+          <Box sx={{ flexGrow: 0 }}>
+             {isLogin ? <Button onClick={onLogout}sx={{ color: 'white', display: 'block' }}>
+                  로그아웃</Button> : <Button sx={{  color: 'white', display: 'block' }}>
+                    <Link to = "/signin"> 로그인 </Link></Button>}
           </Box>
 
           <Box sx={{ flexGrow: 0 }}>
+            {isLogin ? <Button sx={{  color: 'white', display: 'block' }}
+              ><Link to = "/mypage"> 마이페이지 </Link></Button>: <Button sx={{  color: 'white', display: 'block' }}>
+              <Link to = "/signin"> 마이페이지 </Link></Button>}
+          </Box>
+          
+
+          <Box sx={{ flexGrow: 0 }}>
+          {isLogin ? 
             <Button>
                 <Link to="/post">
                     모임생성
                 </Link>
-            </Button>
+            </Button>: <Button sx={{  color: 'white', display: 'block' }}>
+                    <Link to = "/signin"> 모임생성 </Link></Button>}
           </Box>
         </Toolbar>
       </Container>

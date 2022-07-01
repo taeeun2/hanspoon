@@ -120,7 +120,22 @@ const CreatePost = () => {
             setScopeMessage('')
             setContentMessage('최소 10자 이상 입력해주세요.')
         }else{
-            
+            // fetch('http://localhost:8080/createPost'),{
+            //     method : 'POST',
+            //     headers : {
+            //         'Content-Type' : 'application/json'
+            //     },
+            //     body : JSON.stringify({
+            //         title : title,
+            //         content : content,
+            //         restaurant_name : restaurantName,
+            //         user_id : sessionStorage.getItem('user').user_id
+                        
+
+            //     })
+                  
+
+            // }
 
         }
         
