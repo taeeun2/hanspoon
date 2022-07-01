@@ -56,6 +56,20 @@ import "slick-carousel/slick/slick-theme.css";
 
 function Presentation() {
 
+  const [categoryList, setCategoryList] = useState([]);
+  const [postList, setPostList] = useState([]);
+  const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "전체"});
+  
+    //활성화된 Category ID 받아오기
+    const categoryCallback = (c) => {
+      setActiveCategory(categoryList[c]);
+    };
+
+    //활성화된 HostFilter ID 받아오기
+    const hostFilteryCallback = (h) => {
+      // console.log(h);
+    };
+
     //캐러셀 설정값
     const settings = {
       slide: 'div',
@@ -67,61 +81,60 @@ function Presentation() {
       slidesToScroll: 1
     };
 
-      const [categoryList, setCategoryList] = useState([]);
-      const [postList, setPostList] = useState([]);
-      const [activeCategory, setActiveCategory] = useState({});
+    /* ================= fetch ================= */
 
-      /* 카테고리 리스트 조회 API */
-      const getCategoryList = () => {
-        fetch('http://localhost:8080/category')
-            .then(res => {
-                return res.json()
-            })
-            .then(data => {
-                setCategoryList(data); 
-            })
-        }
+    // 카테고리 리스트 조회 API
+    const getCategoryList = () => {
+      fetch('http://localhost:8080/category')
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+          setCategoryList(data); 
+        })
+    }
 
-        /* 전체 게시글 리스트 조회 API */
-        const getAllPostList = () => {
-          fetch('http://localhost:8080/post/all')
-            .then(res => {
-              return res.json()
-            })
-            .then(data => {
-              setPostList(data);
-            })
-        }
+    // 전체 게시글 리스트 조회 API
+     const getAllPostList = () => {
+     fetch('http://localhost:8080/post/all')
+       .then(res => {
+         return res.json()
+       })
+       .then(data => {
+         setPostList(data);
+       })
+      }
 
-        /* 모집중인 게시글 리스트 조회 API */
-        const getValidPostList = () => {
-          fetch('http://localhost:8080/post/valid')
-          .then(res => {
+     // 모집중인 게시글 리스트 조회 API 
+     const getValidPostList = () => {
+      fetch('http://localhost:8080/post/valid')
+        .then(res => {
             return res.json()
           })
-          .then(data => {
-            setPostList(data);
-          })
-        }
+        .then(data => {
+          setPostList(data);
+        })
+      }
 
-        useEffect(() => {
-          getCategoryList();
-          getAllPostList();
-        }, []);
 
-    //활성화된 Category ID 받아오기
-    const categoryCallback = (c) => {
-      if(c != undefined) {
-        setActiveCategory(categoryList[c]);
+    /* ================= useEffect ================= */
+
+    // Mount 이벤트
+    useEffect(() => {
+      getCategoryList();
+      getAllPostList();
+      setActiveCategory(categoryList[0]);
+    }, []);
+
+    // 카테고리 탭 변경시 이벤트
+    useEffect(() => {
+      if(activeCategory != undefined){
+        console.log(activeCategory);
       } 
-      // console.log(activeCategory);
-    };
+      }, [activeCategory]);
 
-    //활성화된 HostFilter ID 받아오기
-    const hostFilteryCallback = (h) => {
-      // console.log(h);
-    };
 
+  /* ================= RENDER ================= */
   return (
     <>
       <AppBar />
@@ -165,7 +178,7 @@ function Presentation() {
         </Slider>
       </MKBox>
 
-     {/* ==== 게시글(카드) 영역 ==== */}
+     {/* 게시글(카드) 영역 */}
       <Card
         sx={{
           p: 2,
@@ -184,9 +197,9 @@ function Presentation() {
           callback={categoryCallback} 
         />
 
-        <HostFilter 
+        {/* <HostFilter 
           callback={categoryCallback}
-        />
+        /> */}
 
         <MKBox bgColor="white" mt={2}>
           <Card
