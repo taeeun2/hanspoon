@@ -67,60 +67,54 @@ function Presentation() {
       slidesToScroll: 1
     };
 
-      /* 카테고리 리스트 조회 API */
       const [categoryList, setCategoryList] = useState([]);
+      const [postList, setPostList] = useState([]);
       const [activeCategory, setActiveCategory] = useState({});
 
-
+      /* 카테고리 리스트 조회 API */
       const getCategoryList = () => {
-        fetch('http://172.27.1.33:8080/main/category')
+        fetch('http://localhost:8080/category')
             .then(res => {
                 return res.json()
             })
             .then(data => {
                 setCategoryList(data); 
-                // console.log(categoryList[0]);  
-                // setActiveCategory(categoryList[0]);
             })
+        }
+
+        /* 전체 게시글 리스트 조회 API */
+        const getAllPostList = () => {
+          fetch('http://localhost:8080/post/all')
+            .then(res => {
+              return res.json()
+            })
+            .then(data => {
+              setPostList(data);
+            })
+        }
+
+        /* 모집중인 게시글 리스트 조회 API */
+        const getValidPostList = () => {
+          fetch('http://localhost:8080/post/valid')
+          .then(res => {
+            return res.json()
+          })
+          .then(data => {
+            setPostList(data);
+          })
         }
 
         useEffect(() => {
           getCategoryList();
+          getAllPostList();
         }, []);
-
-    //테스트 데이터
-    const BlogData = [
-        {
-            category: "한식",
-            date: "2022.06.15",
-            title: "나랑 밥 먹을 사람?",
-            place: "고씨네 카레",
-            participantNum: "2",
-            capacity: "4",
-            host: "익명",
-            spoon: "3"
-        },
-    ];
-
-    for (let index = 0; index < 100; index++) {
-        BlogData.push({
-            category: "한식",
-            date: "2022.06.15",
-            title: "나랑 밥 먹을 사람?"+index,
-            place: "고씨네 카레",
-            participantNum: "2",
-            capacity: "4",
-            host: "익명",
-            spoon: "3"
-        })        
-    }
 
     //활성화된 Category ID 받아오기
     const categoryCallback = (c) => {
       if(c != undefined) {
         setActiveCategory(categoryList[c]);
       } 
-      console.log(activeCategory);
+      // console.log(activeCategory);
     };
 
     //활성화된 HostFilter ID 받아오기
@@ -207,7 +201,7 @@ function Presentation() {
               boxShadow: ({ boxShadows: { xxl } }) => xxl,
             }}
           >
-            <Blogs category={activeCategory}/>
+            <Blogs category={activeCategory} post={postList}/>
           </Card>
           <Footer />
         </MKBox>
