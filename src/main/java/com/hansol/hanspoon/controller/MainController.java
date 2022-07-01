@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class MainController {
 
     @Autowired
@@ -45,4 +45,5 @@ public class MainController {
     public ResponseEntity<List<PostResponseDto>> getValidPostList() {
         return new ResponseEntity<>(postService.getValidPostList(),HttpStatus.OK);
     }
+
 }

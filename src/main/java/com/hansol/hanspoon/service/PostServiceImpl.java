@@ -34,7 +34,7 @@ public class PostServiceImpl implements PostService {
         List<PostResponseDto> retVal = postRepository.findAll().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
-                        .category_name(categoryRepository.findById(post.getCategory_id()).get().getCategory_name())
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
                         .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
                         .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
@@ -50,7 +50,7 @@ public class PostServiceImpl implements PostService {
         List<PostResponseDto> retVal = postRepository.findAllValidPost().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
-                        .category_name(categoryRepository.findById(post.getCategory_id()).get().getCategory_name())
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
                         .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
                         .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
@@ -60,11 +60,13 @@ public class PostServiceImpl implements PostService {
 
 
     // 사용자가 공개한 정보만 추출하기
-    private HashMap<String,String> getUserOpenInfo(PostUser postUser){
-        HashMap<String,String> res = new HashMap<>();
+    private HashMap<String,Object> getUserOpenInfo(PostUser postUser){
+        HashMap<String,Object> res = new HashMap<>();
         User user = userRepository.getById(postUser.getUser_id());
         if (postUser.isScope_name()){
             res.put("name", user.getUser_name());
+        } else {
+            res.put("name", "익명");
         }
         if (postUser.isScope_gender()){
             res.put("gender", user.getGender().getDescription());
@@ -81,6 +83,7 @@ public class PostServiceImpl implements PostService {
         if(postUser.isScope_department()){
             res.put("department", departmentRepository.getById(user.getDepartment_id()).getName());
         }
+        res.put("spoon_num", user.getSpoon_num());
 
         return res;
     }
