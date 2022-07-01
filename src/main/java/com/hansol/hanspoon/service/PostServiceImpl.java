@@ -43,11 +43,40 @@ public class PostServiceImpl implements PostService {
         return retVal;
     }
 
-    //유효한 게시글 리스트 가져오기
+    //카테고리별 전체 게시글 리스트 가져오기
+    @Override
+    @Transactional
+    public List<PostResponseDto> getAllPostListByCategory(long category_id) {
+        List<PostResponseDto> retVal = postRepository.findAllPostByCategoryId(category_id).get().stream()
+                .map(post -> PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
+                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build()).collect(Collectors.toList());
+
+        return retVal;
+    }
+
+    //카테고리별 유효한 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getValidPostList() {
-        List<PostResponseDto> retVal = postRepository.findAllValidPost().stream()
+        List<PostResponseDto> retVal = postRepository.findValidPost().get().stream()
+                .map(post -> PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
+                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build()).collect(Collectors.toList());
+        return retVal;
+    }
+
+    @Override
+    public List<PostResponseDto> getValidPostListByCategory(long category_id) {
+        List<PostResponseDto> retVal = postRepository.findValidPostByCategoryId(category_id).get().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())

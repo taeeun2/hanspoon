@@ -4,17 +4,21 @@ import { useState } from "react";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Switch from "@mui/material/Switch";
+import Box from '@mui/material/Box';
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 import MKTypography from "components/MKTypography";
 
-function Toggle() {
-  const [checked, setChecked] = useState(true);
+function Toggle({ checked, setChecked }) {
+  
+  // const [checked, setChecked] = useState(isOn);
 
   const toggleSwitch = () => setChecked(!checked);
 
   return (
+    <Grid item xs={12} lg={5}>
+      <Box sx={{ width: '100%', justifyContent: 'flex-end' }} >
         <Grid item xs={12} lg={4} sx={{ ml: "auto", mt: { xs: 3, lg: 0 } }}>
           <MKBox display="flex" justifyContent="flex-end" alignItems="center" >
             <Switch checked={checked} onChange={toggleSwitch} />
@@ -30,6 +34,8 @@ function Toggle() {
             </MKTypography>
           </MKBox>
         </Grid>
+    </Box>
+  </Grid>
   );
 }
 
