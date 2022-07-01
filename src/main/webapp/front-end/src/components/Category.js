@@ -12,9 +12,7 @@ import Box from '@mui/material/Box';
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
 
-import BlogToggle from 'components/BlogToggle';
-
-const Category = ({ categoryList, page, callback }) => {
+const Category = ({ categoryList, callback }) => {
 
   const [activeTab, setActiveTab] = React.useState(0);
 
@@ -32,14 +30,6 @@ const Category = ({ categoryList, page, callback }) => {
   // useEffect(()=>{
   //   callback(activeTab); }
   //   , []);
-
-  //메인 화면에서만 토글(모집 중만 보기) 활성화
-  let toggle;
-  if(page == "Main"){
-    toggle = <BlogToggle />;
-  } else {
-    toggle = null;
-  }
 
   return (      
     <MKBox component="section" py={3} px={3}>
@@ -60,11 +50,6 @@ const Category = ({ categoryList, page, callback }) => {
                   </Tabs>
                 </AppBar>
               </Box>
-            </Box>
-          </Grid>
-          <Grid item xs={12} lg={5}>
-            <Box sx={{ width: '100%', justifyContent: 'flex-end' }} >
-              {toggle}
             </Box>
           </Grid>
         </Grid>

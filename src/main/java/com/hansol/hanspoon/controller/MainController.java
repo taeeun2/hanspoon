@@ -8,16 +8,13 @@ import com.hansol.hanspoon.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class MainController {
 
     @Autowired
@@ -36,14 +33,24 @@ public class MainController {
         return new ResponseEntity<>(categoryService.getCategoryList(), HttpStatus.OK);
     }
 
-    @GetMapping("/post/all")
-    public ResponseEntity<List<PostResponseDto>> getAllPostList() {
-        return new ResponseEntity<>(postService.getAllPostList(),HttpStatus.OK);
+    @GetMapping("/post/all/{category_id}")
+    public ResponseEntity<List<PostResponseDto>> getAllPostList(@PathVariable long category_id) {
+        if(category_id == 0){
+            return new ResponseEntity<>(postService.getAllPostList(),HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(postService.getAllPostListByCategory(category_id),HttpStatus.OK);
+        }
     }
 
-    @GetMapping("/post/valid")
-    public ResponseEntity<List<PostResponseDto>> getValidPostList() {
-        return new ResponseEntity<>(postService.getValidPostList(),HttpStatus.OK);
+    @GetMapping("/post/valid/{category_id}")
+    public ResponseEntity<List<PostResponseDto>> getValidPostList(@PathVariable long category_id) {
+        if(category_id == 0) {
+            return new ResponseEntity<>(postService.getValidPostList(), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(postService.getValidPostListByCategory(category_id), HttpStatus.OK);
+        }
     }
 
 }

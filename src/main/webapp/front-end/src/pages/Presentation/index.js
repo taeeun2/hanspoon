@@ -39,6 +39,7 @@ import bgImage1 from "assets/images/hanspoon/banner-1.jpg";
 import bgImage2 from "assets/images/hanspoon/banner-2.jpg";
 
 import AppBar from 'components/AppBar';
+import Toggle from 'components/BlogToggle';
 
 // Author page sections
 import Profile from "pages/LandingPages/Author/sections/Profile";
@@ -59,16 +60,23 @@ function Presentation() {
   const [categoryList, setCategoryList] = useState([]);
   const [postList, setPostList] = useState([]);
   const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "전체"});
-  
+  const [toggleChecked, setToggleChecked] = useState(true);
+
     //활성화된 Category ID 받아오기
     const categoryCallback = (c) => {
       setActiveCategory(categoryList[c]);
     };
 
-    //활성화된 HostFilter ID 받아오기
-    const hostFilteryCallback = (h) => {
-      // console.log(h);
-    };
+    //토글 상태(전체보기/모집 중만 보기)에 따른 API 호출하기
+    const handlePostApi = () => {
+      if(toggleChecked){ //모집 중만 보기
+        getValidPostList(activeCategory.category_id);
+      }
+      else {
+        console.log(activeCategory);
+        getAllPostList(activeCategory.category_id); //전체 보기
+      }
+    }
 
     //캐러셀 설정값
     const settings = {
@@ -94,9 +102,9 @@ function Presentation() {
         })
     }
 
-    // 전체 게시글 리스트 조회 API
-     const getAllPostList = () => {
-     fetch('http://localhost:8080/post/all')
+    // 카테고리별 전체 게시글 리스트 조회 API
+     const getAllPostList = (category_id) => {
+     fetch(`http://localhost:8080/post/all/${category_id}`)
        .then(res => {
          return res.json()
        })
@@ -105,9 +113,9 @@ function Presentation() {
        })
       }
 
-     // 모집중인 게시글 리스트 조회 API 
-     const getValidPostList = () => {
-      fetch('http://localhost:8080/post/valid')
+     // 카테고리별 모집중인 게시글 리스트 조회 API 
+     const getValidPostList = (category_id) => {
+      fetch(`http://localhost:8080/post/valid/${category_id}`)
         .then(res => {
             return res.json()
           })
@@ -116,23 +124,25 @@ function Presentation() {
         })
       }
 
-
     /* ================= useEffect ================= */
 
-    // Mount 이벤트
+    // Mount 이벤트(카테고리 리스트 및 모집중인 전체 게시글 리스트 가져오기)
     useEffect(() => {
       getCategoryList();
-      getAllPostList();
-      setActiveCategory(categoryList[0]);
+      getValidPostList(0);
     }, []);
 
     // 카테고리 탭 변경시 이벤트
     useEffect(() => {
       if(activeCategory != undefined){
-        console.log(activeCategory);
+        handlePostApi();
       } 
       }, [activeCategory]);
-
+    
+    //토글 변경시 이벤트
+      useEffect(() => {
+        handlePostApi();
+      },[toggleChecked]);
 
   /* ================= RENDER ================= */
   return (
@@ -193,8 +203,11 @@ function Presentation() {
       >
         <Category 
           categoryList={categoryList} 
-          page="Main" 
           callback={categoryCallback} 
+        />
+        <Toggle 
+          checked = {toggleChecked}
+          setChecked={setToggleChecked}
         />
 
         {/* <HostFilter 

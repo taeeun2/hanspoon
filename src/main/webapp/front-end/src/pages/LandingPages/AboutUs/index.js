@@ -14,6 +14,8 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
+import React, { useEffect, useState } from 'react';
+
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -41,6 +43,8 @@ import Counters from "pages/Presentation/sections/Counters";
 
 function AboutUs() {
 
+  const [postList, setPostList] = useState([]);
+
   const CategoryType = [{
         category_id: 0,
         category_name: "신청내역"
@@ -52,6 +56,22 @@ function AboutUs() {
         category_name: "작성이력"
     },
   ];
+
+  /* ============임시 API============ */
+  const getAllPostList = (category_id) => {
+    fetch(`http://localhost:8080/post/all/${category_id}`)
+      .then(res => {
+        return res.json()
+      })
+      .then(data => {
+        setPostList(data);
+      })
+     }
+
+     useEffect(() => {
+      getAllPostList(0);
+    }, []);
+    /* =============================== */
 
   //활성화된 Category 정보 받아오기
   const categoryCallback = (c) => {
@@ -117,7 +137,6 @@ function AboutUs() {
         <Counters />
         <Category 
           categoryList={CategoryType}
-          page="MyPage" 
           callback={categoryCallback} />
 
         <MKBox bgColor="white">
@@ -134,7 +153,7 @@ function AboutUs() {
             }}
           >
             
-            <Blogs />
+            <Blogs post={postList}/>
           </Card>
           <Footer />
         </MKBox>
