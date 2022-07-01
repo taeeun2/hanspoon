@@ -40,10 +40,9 @@ const Blogs = ({ category, post }) => {
           </Grid> */}
           <Grid container spacing={3}>
             {post.map((post, index) => (
-                <Grid item xs={12} sm={6} lg={3}>
+                <Grid item xs={12} sm={6} lg={3} key={index}>
                   <div onClick={() => {handleClick(post.post_id)}}>
                     <Blog 
-                      key={index}
                       category={post.category.category_name}
                       date={post.meet_date}
                       title={post.title}
