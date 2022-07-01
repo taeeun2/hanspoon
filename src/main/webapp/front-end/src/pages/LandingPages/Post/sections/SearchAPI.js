@@ -8,7 +8,7 @@ import MapContainer from './MapContainer';
 import CloseIcon from "@mui/icons-material/Close";
 
 
-const SearchAPI = ({show, searchRestaurant, handleRestaurantName}) => {
+const SearchAPI = ({show, searchRestaurant, setOnText}) => {
     const [InputText, setInputText] = useState('')
 
     const [Place, setPlace] = useState('')
@@ -21,12 +21,15 @@ const SearchAPI = ({show, searchRestaurant, handleRestaurantName}) => {
     
       const handleSubmit = (e) => {
         e.preventDefault()
-        setPlace(InputText)
+        
+        setPlace("상암동"+InputText) // 지역 상암동으로 제한
         setInputText('')
       }
     return (
         <div>
-            <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }}  style={{"overflow" : "scroll"}}>
+            {/* <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }}  style={{"overflow" : "scroll"}}> */}
+            <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }} >
+
                 <Slide direction="down" in={show} timeout={500}>
                     <MKBox
                     position="relative"
@@ -38,7 +41,7 @@ const SearchAPI = ({show, searchRestaurant, handleRestaurantName}) => {
                     shadow="xl"
                     >
                     <MKBox display="flex" alginItems="center" justifyContent="space-between" p={2}>
-                        <MKTypography variant="h5">식당 검색</MKTypography>
+                        <MKTypography variant="h5">상암동 식당 검색</MKTypography>
                         <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={searchRestaurant} />
                     </MKBox>
                     <Divider sx={{ my: 0 }} />
@@ -49,7 +52,7 @@ const SearchAPI = ({show, searchRestaurant, handleRestaurantName}) => {
                                 검색
                             </MKButton>
                         </form><br/>
-                        <MapContainer searchPlace={Place} searchRestaurant={searchRestaurant} />
+                        <MapContainer searchPlace={Place} searchRestaurant={searchRestaurant} setOnText={setOnText}/>
                     </MKBox>
                     <Divider sx={{ my: 0 }} />
                     <MKBox display="flex" justifyContent="space-between" p={1.5}>

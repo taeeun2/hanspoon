@@ -7,26 +7,34 @@ import PlaceList from './PlaceList'
 
 const { kakao } = window
 
-const MapContainer = ({ searchPlace, searchRestaurant}) => {
+const MapContainer = ({ searchPlace, searchRestaurant, setOnText}) => {
 
   // 검색결과 배열에 담아줌
   const [Places, setPlaces] = useState([])
-
+  const [lat, setLat] = useState(37.5794251)
+  const [lng, setLng] = useState(126.889747)
 
   // 선택된 식당 이름 가져오기
   const setPlaceName = (name) => {
     console.log(name)
+    setOnText(name)
+    searchRestaurant(name)
   }
+
+  useEffect(()=>{
+    console.log(Places)
+  },[])
   
   useEffect(() => {
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
-    var markers = []
     const container = document.getElementById('myMap')
     const options = {
-      center: new kakao.maps.LatLng(33.450701, 126.570667),
+      center: new kakao.maps.LatLng(lat, lng),
       level: 3,
+      // draggable: false
     }
     const map = new kakao.maps.Map(container, options)
+    console.log(map.getCenter())
 
     const ps = new kakao.maps.services.Places()
 
@@ -34,10 +42,11 @@ const MapContainer = ({ searchPlace, searchRestaurant}) => {
 
     function placesSearchCB(data, status, pagination) {
       if (status === kakao.maps.services.Status.OK) {
-        let bounds = new kakao.maps.LatLngBounds()
+        var bounds = new kakao.maps.LatLngBounds()
 
-        for (let i = 0; i < data.length; i++) {
-        displayMarker(data[i],i)
+
+        for (var i = 0; i < data.length; i++) {
+          displayMarker(data[i],i)
           bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x))
         }
 
@@ -84,10 +93,15 @@ const MapContainer = ({ searchPlace, searchRestaurant}) => {
         id="myMap"
         style={{
           width: '450px',
-          height: '500px',
+          height: '400px',
         }}
       ></div>
-      <div id="result-list">
+{ Places.length >= 1 &&
+
+      <div id="result-list" style={{
+        "width": "100%",
+        "height": "250px",
+        "overflow": "auto"}}>
         {Places.map((item, i) => (
            <div key={i} style={{ marginTop: '20px' }}>
               <PlaceList 
@@ -96,35 +110,21 @@ const MapContainer = ({ searchPlace, searchRestaurant}) => {
                 place_name = {item.place_name}
                 road_address_name = {item.road_address_name}
                 phone = {item.phone}
-                searchRestaurant = {searchRestaurant}
-
-                setPlaceName = {setPlaceName}
                 />
+                
+                 <Grid item textAlign = "center" style={{"marginTop" : "10px"}}>
+                <MKButton variant="gradient" color="dark" onClick = {() =>setPlaceName(item.place_name)}> 선택</MKButton>
+                </Grid>
+             
+                <hr/>
+          
             </div>
-          // <div key={i} style={{ marginTop: '20px' }}>
-          //   <Grid container alignItems="center" py={2}>
-          //       <Grid item xs={12} sm={2} textAlign = "center">
-          //           <MKTypography variant="button" color="text" fontWeight="bold" textTransform="uppercase">
-          //           {i + 1}
-          //           </MKTypography>
-          //       </Grid>
-          //       <Grid item xs={12} sm={7}>
-          //           {/* <a href={`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${item.place_name}`}><MKTypography variant="h6">{item.place_name}</MKTypography></a> */}
-          //           <MKTypography variant="h6" >{item.place_name}</MKTypography>
-          //           <MKTypography variant="button" style={{"fontSize" : "12px"}} >{item.road_address_name}</MKTypography><br/>
-          //           <MKTypography variant="overline" style={{"marginLeft" : "3px"}}> 📞 {item.phone}</MKTypography><br/>
-          //           <button style={{"border" : 0, "outline" : 0, "color" : "#3C5A91", "fontSize" : "12px", "backgroundColor" : "white", "textDecoration": "underline", "textUnderlinePosition":"under"}} onClick={() => window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${item.place_name}`, '_blank')}>[네이버 검색 링크]</button>
-          //       </Grid>
-          //       <Grid item xs={12} sm={3}>
-          //           {/* <MKButton variant="gradient" color="dark" onClick={selectRestaurant(item.place_name)}> 선택</MKButton> */}
-          //           <MKButton variant="gradient" color="dark" onClick={searchRestaurant}> 선택</MKButton>
-          //       </Grid>
-          //   </Grid>
-          //   <hr/>
-          // </div>
+            
         ))}
         
       </div>
+}
+
     </div>
   )
 }

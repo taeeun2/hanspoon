@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MKBox from "components/MKBox";
 import MKTypography from 'components/MKTypography';
 import Grid from "@mui/material/Grid";
@@ -6,19 +6,12 @@ import { useState } from "react";
 
 // @mui material components
 import Container from "@mui/material/Container";
-import Switch from "@mui/material/Switch";
 
 // Material Kit 2 React components
 import MKInput from "components/MKInput";
 import MKButton from "components/MKButton";
 
 import { Form } from "react-bootstrap";
-
-import Modal from "@mui/material/Modal";
-import Divider from "@mui/material/Divider";
-import Slide from "@mui/material/Slide";
-import CloseIcon from "@mui/icons-material/Close";
-import MapContainer from './MapContainer';
 import SearchAPI from './SearchAPI';
 
 
@@ -33,12 +26,37 @@ const CreatePost = () => {
     const [number, setNumber] = useState(1);
     const [show, setShow] = useState(false);
 
+    const [title, setTitle] = useState('');
+    const [titleMessage, setTitleMessage] = useState('')
+
     const [scope_name, setScope_name] = useState(false);
     const [scope_age, setScope_age] = useState(false);
     const [scope_company, setScope_company] = useState(false);
     const [scope_position_type, setScope_position_type] = useState(false);
     const [scope_gender, setScope_gender] = useState(false);
     const [scope_department, setScope_department] = useState(false);
+    
+    const [num, setNum] = useState(0)
+    const [scopeMessage, setScopeMessage] = useState('')
+
+    const [currentTime, setCurrentTime] = useState('')
+
+    const [content, setContent] = useState('')
+    const [contentMessage, setContentMessage] = useState('')
+
+    useEffect(()=>{
+        fetch('http://localhost:8080/post/getCurrentTime')
+        .then(res=>{
+            return res.json()
+            
+        })
+        .then(data =>{
+            var str = data.split('.')
+            var dateTimeSecond = str[0].split(':')
+            var dateTime = dateTimeSecond[0] + ':'+ dateTimeSecond[1]
+            setCurrentTime(dateTime)
+        })
+    },[])
 
     const searchRestaurant = () => {
         setShow(!show);
@@ -46,9 +64,13 @@ const CreatePost = () => {
 
  
     const [restaurantName, setRestaurantName] = useState('')
-  
+
+    function setOnText(name){
+        setRestaurantName(name)
+    }
    
-    
+   
+
     function decreaseNumber(){
         if(parseInt(number)-1 >= 1){
             setNumber(parseInt(number)-1)
@@ -59,6 +81,10 @@ const CreatePost = () => {
 
     function increaseNumber(){
         setNumber(parseInt(number)+1)
+    }
+    const handleTitle = (e) => {
+        setTitleMessage('')
+        setTitle(e.target.value)
     }
 
     const handleNumber = (e) => {
@@ -71,9 +97,35 @@ const CreatePost = () => {
         }
     }
 
-    const handleRestaurantName = (name) => {
-        setRestaurantName(name)
+    const handleCurrentTime = (e) => {
+        setCurrentTime(e.target.value)
     }
+
+    const handleContent = (e) => {
+        if(e.target.value.length < 10){
+            setContentMessage('최소 10자 이상 입력해주세요.')
+        }else{
+            setContentMessage('')
+        }
+        setContent(e.target.value)
+    }
+
+    function onClickCreate(){
+        
+        if(title.length <= 1){
+            setTitleMessage('제목을 입력해주세요.')
+        }else if(num < 2){
+            setScopeMessage('공개 범위를 2개 이상 선택해주세요.')
+        }else if(content.length < 10){
+            setScopeMessage('')
+            setContentMessage('최소 10자 이상 입력해주세요.')
+        }else{
+            
+
+        }
+        
+    }
+   
     return (
         <div>
             <MKBox component="section" py={2}>
@@ -92,11 +144,13 @@ const CreatePost = () => {
                             <Grid item xs={12} md={2.5} mt={1} textAlign="center">
                                 <MKTypography variant="h6"
                                     fontWeight="regular"
-                                    color="dark">제목</MKTypography>
+                                    color="dark" value = {title} >제목</MKTypography>
+                                
                             </Grid>
 
                             <Grid item xs={12} md={9.5}>
-                                <MKInput label="Title" fullWidth />
+                                <MKInput label="Title" fullWidth onChange={handleTitle}/>
+                                <MKTypography variant="button" style={{"color" :"red"}} >{titleMessage}</MKTypography>
                             </Grid>
                             
                             <Grid item xs={12} md={2.5} mt={1} textAlign="center">
@@ -117,7 +171,7 @@ const CreatePost = () => {
                             </Grid>
 
                             {/* 모달 */}
-                            <SearchAPI  show = {show} searchRestaurant={searchRestaurant} handleRestaurantName = {handleRestaurantName} />
+                            <SearchAPI  show = {show} searchRestaurant={searchRestaurant} setOnText = {setOnText} />
 
 
 
@@ -130,7 +184,7 @@ const CreatePost = () => {
 
                             <Grid item xs={12} md={9.5}>
                                 <input type="datetime-local" id="meeting-time"
-                                        name="meeting-time" value="2022-06-30T19:30"
+                                        name="meeting-time" value={currentTime} onChange={handleCurrentTime}
                                         min="2022-06-30T00:00" style={{"fontSize" : "15px", "width" : "100%", "height" : "40px", "textAlign" : "center"}}></input>
                             </Grid>
 
@@ -150,7 +204,7 @@ const CreatePost = () => {
                             <Grid item xs={12} md={2.5} mt={1}textAlign="center" >   
                                 <MKTypography variant="h6"
                                     fontWeight="regular"
-                                    color="dark">참여자 수</MKTypography>
+                                    color="dark">모집 인원</MKTypography>
                             </Grid>
 
                             <Grid item xs={12} md={9.5}>
@@ -159,47 +213,58 @@ const CreatePost = () => {
                                 <MKButton style={{"width" : "1px"}} color="secondary" onClick = {increaseNumber}>+</MKButton>
                             </Grid>
 
-
+                            
                             <Grid item xs={12} md={2.5} mt={1} textAlign="center">
                                 <MKTypography variant="h6"
                                     fontWeight="regular"
                                     color="dark">공개 범위</MKTypography>
+                                <MKTypography variant="caption"
+                                    color="info">최소 2개 <br/> 이상 선택</MKTypography>
                             </Grid>
                             <Grid item xs={12} md={3}>
-                                <MKButton  onClick={() => setScope_name(!scope_name)} variant="gradient" color={scope_name?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                                <MKButton  onClick={() => {setScope_name(!scope_name); if(!scope_name){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_name?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                     이름
                                 </MKButton>
-                                <MKButton onClick={() => setScope_position_type(!scope_position_type)} variant="gradient" color={scope_position_type?'light':'dark'} fullWidth>
+                                <MKButton onClick={() => {setScope_position_type(!scope_position_type);if(!scope_position_type){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_position_type?'light':'dark'} fullWidth>
                                     직급
                                 </MKButton>
 
                             </Grid>
                             <Grid item xs={12} md={3}>
-                                <MKButton onClick={() => setScope_age(!scope_age)} variant="gradient" color={scope_age?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                                <MKButton onClick={() => {setScope_age(!scope_age); if(!scope_age){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_age?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                     연령대
                                 </MKButton>
-                                <MKButton onClick={() => setScope_gender(!scope_gender)} variant="gradient" color={scope_gender?'light':'dark'} fullWidth>
+                                <MKButton onClick={() => {setScope_gender(!scope_gender);if(!scope_gender){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_gender?'light':'dark'} fullWidth>
                                     성별
                                 </MKButton>
                             </Grid>
                             <Grid item xs={12} md={3}>
-                                <MKButton onClick={() => setScope_company(!scope_company)} variant="gradient" color={scope_company?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                                <MKButton onClick={() =>{setScope_company(!scope_company);if(!scope_company){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_company?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                     소속회사
                                 </MKButton>
-                                <MKButton onClick={() => setScope_department(!scope_department)} variant="gradient" color={scope_department?'light':'dark'} fullWidth>
+                                <MKButton onClick={() => {setScope_department(!scope_department); if(!scope_department){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_department?'light':'dark'} fullWidth>
                                     부서명
                                 </MKButton>
+                            </Grid>
+
+
+
+                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
+                                
+                            </Grid>
+                            <Grid item xs={12} md={9.5} textAlign="center">
+                                <MKTypography variant="button" style={{"color" :"red"}} >{scopeMessage}</MKTypography>
                             </Grid>
 
                             <Grid item xs={12} md={2.5} mt={1} textAlign="center">
 
                             <MKTypography variant="h6"
                                 fontWeight="regular"
-                                color="dark">한마디</MKTypography>
+                                color="dark" >한마디</MKTypography>
                             </Grid>
                             <Grid item xs={12} md={9.5} >
-
-                                <MKInput variant="standard" label="Your Message" multiline fullWidth rows={4} />
+                                <MKInput variant="standard" label="Your Message" value ={content} onChange = {handleContent}  multiline fullWidth rows={4} />
+                                <MKTypography variant="button" style={{"color" :"red"}} >{contentMessage}</MKTypography>
                             </Grid>
 
 
@@ -210,7 +275,7 @@ const CreatePost = () => {
 
 
                             <Grid container item justifyContent="center" xs={12} my={2}>
-                                <MKButton type="submit" variant="gradient" color="dark" fullWidth>
+                                <MKButton  variant="gradient" color="dark" fullWidth onClick={onClickCreate}>
                                 Create
                                 </MKButton>
                             </Grid>

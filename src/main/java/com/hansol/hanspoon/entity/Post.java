@@ -11,6 +11,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
@@ -25,7 +26,7 @@ public class Post {
     private String content;
     private String restaurant_name;
 
-   //private DateTimeFormat meet_date; // 수정 필요
+    private LocalDateTime meet_date;
 
     private long capacity;
     private long participant_num;
