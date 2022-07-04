@@ -9,10 +9,12 @@
 	color: #000;
 	font-size: 35px;
 	font-weight: 1000;
+	font-family: 'NanumSquareRound';
 }
 
 .rank .main_title {
 	color: #fff;
+	font-family: 'NanumSquareRound';
 }
 
 /* ================ 배너 ================ */

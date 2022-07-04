@@ -102,7 +102,7 @@ const Header = () => {
                 <a href="#introduce">
                   <li className="gnb_item">
                     <span style={{
-                      "fontFamily": 'NanumSquare',
+                      "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold'}}>한스푼이란?
                     </span>
                   </li>
@@ -110,7 +110,7 @@ const Header = () => {
                 <a  href="#step">
                   <li className="gnb_item">
                     <span style={{
-                      "fontFamily": 'NanumSquare',
+                      "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold'}}>참여방법
                     </span>
                   </li>
@@ -118,7 +118,7 @@ const Header = () => {
                 <a href="#blogs">
                   <li className="gnb_item">
                     <span style={{
-                      "fontFamily": 'NanumSquare',
+                      "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold'}}>함께하는 한스푼
                     </span>
                   </li>
@@ -126,7 +126,7 @@ const Header = () => {
                 <a href="#rank">
                   <li className="gnb_item">
                     <span style={{
-                      "fontFamily": 'NanumSquare',
+                      "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold'}}>인기순위
                     </span>
                   </li>
@@ -139,13 +139,13 @@ const Header = () => {
               <ul className="gnb_list">
                 <li className="gnb_item">
                   <span style={{
-                    "fontFamily": 'NanumSquare',
+                    "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}}>회원가입
                   </span>
                 </li>
                 <li className="gnb_item">
                   <span style={{
-                    "fontFamily": 'NanumSquare',
+                    "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}}>로그인
                   </span>
                 </li>
