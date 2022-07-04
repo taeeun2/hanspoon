@@ -43,7 +43,9 @@ import Counters from "pages/Presentation/sections/Counters";
 
 function AboutUs() {
 
+  const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "신청내역"});
   const [postList, setPostList] = useState([]);
+  const [userId, setUserId] = useState();
 
   const CategoryType = [{
         category_id: 0,
@@ -56,6 +58,46 @@ function AboutUs() {
         category_name: "작성이력"
     },
   ];
+  
+  //활성화된 Category 정보 받아오기
+  const categoryCallback = (c) => {
+    setActiveCategory(CategoryType[c]);
+  };
+
+  /* ================= useEffect ================= */
+
+  // 카테고리 탭 변경시 이벤트
+  useEffect(() => {
+    if(activeCategory != undefined){
+      getAllPostList(activeCategory.category_id);
+    } 
+    }, [activeCategory]);
+
+  /* ================= fetch ================= */
+
+  const getUserId = () => {
+    let userEmail = sessionStorage.getItem('user');
+    console.log(userEmail);
+    fetch(`http://localhost:8080/mypage/user?email=${userEmail}`)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setUserId(data);
+    })
+  }
+
+  const getMyPostList = (category_id) => {
+    let userEmail = sessionStorage.getItem('user');
+    fetch(`http://localhost:8080/mypost/${category_id}?user=${userId}`)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setPostList(data);
+    })
+  }
+
 
   /* ============임시 API============ */
   const getAllPostList = (category_id) => {
@@ -69,14 +111,11 @@ function AboutUs() {
      }
 
      useEffect(() => {
-      getAllPostList(0);
+      getUserId();
+      console.log(userId);
     }, []);
     /* =============================== */
 
-  //활성화된 Category 정보 받아오기
-  const categoryCallback = (c) => {
-    console.log(c);
-  };
 
   return (
     <>

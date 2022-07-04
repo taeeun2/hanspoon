@@ -15,6 +15,7 @@ Coded by www.creative-tim.com
 */
 import Header from 'components/Header';
 import React, { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
 // @mui material components
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -50,10 +51,14 @@ import Blogs from 'containers/Blogs';
 import Category from 'components/Category';
 import HostFilter from 'components/HostFilter';
 
-//carousel css
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Spot from 'containers/Spot';
+import Introduce from 'containers/Introduce';
+import Banner from 'containers/Banner';
+import Rank from 'containers/Rank';
+
+//css
+import "assets/css/main.css"
+import Step from 'containers/Step';
 
 function Presentation() {
 
@@ -77,18 +82,6 @@ function Presentation() {
         getAllPostList(activeCategory.category_id); //전체 보기
       }
     }
-
-    //캐러셀 설정값
-    const settings = {
-      slide: 'div',
-      arrows : true, 
-      infinite: true,
-      speed: 600,
-      autoplay : true,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
-
     /* ================= fetch ================= */
 
     // 카테고리 리스트 조회 API
@@ -147,49 +140,43 @@ function Presentation() {
   /* ================= RENDER ================= */
   return (
     <>
-      <AppBar />
-      <MKBox
-        minHeight="35vh"
-        width="100%"
-        // sx={{
-        //   backgroundImage: `url(${bgImage})`,
-        //   backgroundSize: "cover",
-        //   backgroundPosition: "top",
-        //   display: "grid",
-        //   placeItems: "center",
-        // }}
-      >
-        {/* 캐러셀 */}
-        <Slider {...settings}>
-          <MKBox
-            minHeight="35vh"
-            width="100%"
-            sx={{
-            backgroundImage: `url(${bgImage1})`,
-            backgroundSize: "cover",
-            backgroundPosition: "top",
-            display: "grid",
-            placeItems: "center",
-           }} />
-          <MKBox
-            minHeight="35vh"
-            width="100%"
-            sx={{
-            backgroundImage: `url(${bgImage2})`,
-            backgroundSize: "cover",
-            backgroundPosition: "top",
-            backgroundRepeat: "no-repeat",
-            display: "grid",
-            placeItems: "center",
-           }} />
-          {/* <div>
-            <img src={bgImage}  />
-          </div> */}
-        </Slider>
+      <Header />
+      <MKBox 
+        height="960px"
+        width="100%">
+          <Banner />
       </MKBox>
-
-     {/* 게시글(카드) 영역 */}
-      <Card
+      <MKBox
+        bgColor="light"
+        minHeight="400px"
+        width="100%">
+          <Introduce />
+      </MKBox>
+      <MKBox
+        minHeight="600px"
+        width="100%">
+          <Step />
+      </MKBox>
+      <MKBox
+        minHeight="1140px"
+        width="100%">
+          {/* <Category 
+            categoryList={categoryList} 
+            callback={categoryCallback} 
+          />
+          <Toggle 
+            checked = {toggleChecked}
+            setChecked={setToggleChecked}
+          /> */}
+          <Blogs category={activeCategory} post={postList}/>
+      </MKBox>
+      <MKBox
+        minHeight="650px"
+        width="100%">
+          <Rank />
+      </MKBox>
+      
+      {/* <Card
         sx={{
           p: 2,
           px: 5,
@@ -210,10 +197,6 @@ function Presentation() {
           setChecked={setToggleChecked}
         />
 
-        {/* <HostFilter 
-          callback={categoryCallback}
-        /> */}
-
         <MKBox bgColor="white" mt={2}>
           <Card
             sx={{
@@ -231,10 +214,7 @@ function Presentation() {
           </Card>
           <Footer />
         </MKBox>
-      </Card>
-      {/* <MKBox pt={6} px={1} mt={6}>
-        <DefaultFooter content={footerRoutes} />
-      </MKBox> */}
+      </Card> */}
     </>
   );
 }

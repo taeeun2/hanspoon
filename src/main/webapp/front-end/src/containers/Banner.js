@@ -1,48 +1,42 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Col, Row } from "reactstrap";
-import Rank from 'components/Rank';
-import restaurant from 'assets/images/Icons/restaurant.png'
-import spoon from 'assets/images/Icons/spoon.png'
+import Grid from "@mui/material/Grid";
+import Box from '@mui/material/Box';
+
+import AOS from "aos";
+import "aos/dist/aos.css";
+
+// Material Kit 2 React components
+import MKBox from "components/MKBox";
+
 
 const Banner = () => {
 
-    const RankData = [
-        {
-            icon: restaurant,
-            dataName: "금주의 숟가락 랭킹",
-            first: "홍길동",
-            second: "김민수",
-            third: "이수지"
-        },
-        {
-            icon: spoon,
-            dataName: "금주의 맛집",
-            first: "고씨네 카레",
-            second: "하노이의 아침",
-            third: "김영섭 초밥"
-        },
-    ];
+    useEffect(() => {
+        AOS.init({
+            duration : 2000
+        });
+    });
 
     return (
-        <div id='banner' className='row align-items-start'>
-            {RankData.map((rank,index) => (
-                <div key={index} className='col-lg-6 align-self-center'>
-                    <div className='row align-items-start d-flex justify-content-center'>
-                        <div className='col-lg-2'>
-                             <img src={rank.icon} width="100" height="100" />
-                        </div>
-                        <div  className='col-lg-4'>
-                            <Rank
-                                dataName={rank.dataName}
-                                first={rank.first}
-                                second={rank.second}
-                                third={rank.third}
-                            />
-                        </div>
-                    </div>
-                </div>
-            ))}
-        </div>
+        <Grid className='banner'  name='banner'
+                sx={{ py: 20, }}>
+            {/* <Grid container className='inner'> */}
+                <Box className='content_box' sx={{ justifyContent: 'center', height: '100%' }}>
+                    <Grid item className='title_box'>
+                        <h1 className='main_title'  data-aos="fade-up">#Hanspoon</h1>
+                    </Grid>
+                    <Grid className='btn_box'>
+                        <button type="button" className='btn_join'  data-aos="fade-up">
+                            한스푼 참여하기
+                        </button>
+                        <button type="button" className='btn_join'  data-aos="fade-up">
+                            내 한스푼 현황
+                        </button>
+                    </Grid>
+                </Box>
+            {/* </Grid> */}
+        </Grid>
     );
 };
 

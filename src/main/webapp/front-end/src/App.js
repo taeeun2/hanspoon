@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import Header from 'components/Header';
+import Home from 'pages/Home';
 import AboutUs from 'pages/LandingPages/AboutUs';
 import MyPage from 'pages/MyPage';
 import SignIn from 'pages/LandingPages/SignIn';
@@ -12,7 +13,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 // Material Kit 2 React themes
 import theme from "assets/theme";
-import Presentation from "layouts/pages/presentation";
+import Presentation from "pages/Presentation/index";
 // Material Kit 2 React routes
 import routes from "routes";
 import Author from 'pages/LandingPages/Author';
@@ -47,6 +48,7 @@ const App = () => {
             //      <Route path="*" element={<NotFound />}></Route>
             //  </Routes>
             // </BrowserRouter>
+            
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Routes>

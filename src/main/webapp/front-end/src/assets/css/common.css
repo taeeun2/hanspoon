@@ -1,0 +1,1539 @@
+@charset "UTF-8";
+body,
+html {
+	width: 100%;
+	height: 100%;
+	-webkit-text-size-adjust: none;
+	text-size-adjust: none;
+	-webkit-overflow-scrolling: touch;
+}
+
+body,
+button,
+dd,
+dl,
+dt,
+fieldset,
+form,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+input,
+legend,
+li,
+ol,
+p,
+select,
+table,
+td,
+textarea,
+th,
+ul,
+figure,
+figcaption {
+	margin: 0;
+	padding: 0;
+}
+
+fieldset {
+	border: 0;
+}
+
+img,
+video {
+	border: 0;
+	vertical-align: top;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+li {
+	vertical-align: top;
+	list-style: none;
+}
+
+textarea {
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	-webkit-appearance: none;
+	resize: none;
+}
+
+address,
+em {
+	font-style: normal;
+}
+
+input,
+select {
+	vertical-align: middle;
+}
+
+input[type=text]::-ms-clear {
+	display: none;
+}
+
+button,
+input {
+	padding: 0;
+	border: none;
+	border: 0;
+	outline: none;
+	outline: 0;
+	background: none;
+	font: inherit;
+	background-color: transparent;
+	-webkit-appearance: none;
+	appearance: none;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+	cursor: pointer;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+a:active,
+a:focus,
+a:hover {
+	text-decoration: none;
+	outline: none;
+}
+
+.blind {
+	overflow: hidden;
+	position: absolute;
+	clip: rect(0, 0, 0, 0);
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+	display: block;
+}
+
+table {
+	width: 100%;
+	table-layout: fixed;
+	padding: 0;
+	border-spacing: 0;
+	border: 0;
+	border-collapse: collapse;
+}
+
+table caption {
+	visibility: hidden;
+}
+
+#header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1000;
+	text-align: center;
+	/* 스크롤 시 헤더 */
+	/* //스크롤 시 헤더 */
+	/* gnb */
+	/* //gnb */
+	/* nav, 전체보기 */
+	/* //nav, 전체보기 */
+}
+
+@media (max-width: 767px) {
+	#header {
+		height: 56px;
+	}
+}
+
+#header .inner {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	max-width: none;
+	height: 80px;
+	padding: 27px 50px;
+}
+
+#header .inner:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+@media (max-width: 767px) {
+	#header .inner {
+		height: 56px;
+		padding: 17px 20px 16px;
+	}
+}
+
+#header h1 {
+	float: left;
+}
+
+#header h1 .logo {
+	display: block;
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -132px -599px;
+	width: 120px;
+	height: 26px;
+}
+
+@media (max-width: 767px) {
+	#header h1 .logo {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -93px;
+		width: 105px;
+		height: 24px;
+	}
+}
+
+#header.scroll {
+	position: fixed;
+	background-color: #fff;
+	border-bottom: 1px solid #dedede;
+}
+
+#header.scroll h1 .logo {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -257px -599px;
+	width: 120px;
+	height: 26px;
+}
+
+@media (max-width: 767px) {
+	#header.scroll h1 .logo {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -64px;
+		width: 105px;
+		height: 24px;
+	}
+}
+
+#header.scroll .gnb_item a {
+	color: #000;
+}
+
+#header.scroll .gnb_item a.on {
+	border: 2px solid #000;
+}
+
+#header.scroll .gnb_item:nth-child(1) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -493px;
+	width: 65px;
+	height: 15px;
+}
+
+#header.scroll .gnb_item:nth-child(2) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -590px;
+	width: 58px;
+	height: 15px;
+}
+
+#header.scroll .gnb_item:nth-child(3) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -410px;
+	width: 75px;
+	height: 15px;
+}
+
+/* 추가 - 헤더 간격 조절 */
+#header .gnb_item:nth-child(3) {
+	margin-right: 28px;
+}
+
+/* 추가 */
+#header.scroll .gnb_item:nth-child(4) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -410px;
+	width: 75px;
+	height: 15px;
+}
+
+#header.scroll .allview_btn {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -684px -151px;
+	width: 44px;
+	height: 44px;
+}
+
+@media (max-width: 767px) {
+	#header.scroll .allview_btn {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -349px;
+		width: 36px;
+		height: 36px;
+	}
+}
+
+#header .gnb_box {
+	display: inline-block;
+	margin-top: -5px;
+	margin-right: 38px;
+}
+
+@media (max-width: 1249px) {
+	#header .gnb_box {
+		margin-right: 75px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .gnb_box {
+		display: none;
+	}
+}
+
+#header .gnb_list {
+	overflow: hidden;
+}
+
+#header .gnb_item {
+	float: left;
+}
+
+#header .gnb_item a {
+	display: block;
+	padding: 10px;
+}
+
+#header .gnb_item a:after {
+	content: '';
+	display: block;
+}
+
+@media screen and (max-width: 360px) {
+	#header .gnb_item a {
+		min-width: 52px;
+		padding: 0;
+	}
+}
+
+#header .gnb_item.on {
+	position: relative;
+}
+
+#header .gnb_item.on:after {
+	content: '';
+	position: absolute;
+	left: 10px;
+	right: 10px;
+	bottom: 9px;
+	height: 4px;
+	background-color: #00ff49;
+	z-index: -1;
+}
+
+@media (max-width: 767px) {
+	#header .gnb_item.on {
+		line-height: 24px;
+	}
+}
+
+#header .gnb_item:nth-child(1) {
+	margin-right: 22px;
+}
+
+#header .gnb_item:nth-child(1) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -676px -370px;
+	width: 65px;
+	height: 15px;
+}
+
+#header .gnb_item:nth-child(2) {
+	margin-right: 28px;
+}
+
+#header .gnb_item:nth-child(2) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -672px -513px;
+	width: 61px;
+	height: 15px;
+}
+
+#header .gnb_item:nth-child(3) a:after {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -390px;
+	width: 75px;
+	height: 15px;
+}
+
+#header .nav_box {
+	float: right;
+	margin-top: -10px;
+}
+
+@media (max-width: 767px) {
+	#header .nav_box {
+		margin-top: -6px;
+	}
+}
+
+#header .allview_btn {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -151px;
+	width: 44px;
+	height: 44px;
+	display: block;
+}
+
+@media (max-width: 767px) {
+	#header .allview_btn {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -680px -304px;
+		width: 36px;
+		height: 36px;
+	}
+}
+
+#header .view_box {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 15%;
+	background: #000;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box {
+		padding: 0 10%;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box {
+		padding: 0 20px;
+	}
+}
+
+#header .view_box .view_header {
+	position: absolute;
+	top: 0;
+	left: 0;
+	padding: 19px 40px 11px 50px;
+	right: 0;
+}
+
+#header .view_box .view_header:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .view_header {
+		padding: 11px 13px 12px 20px;
+	}
+}
+
+#header .view_box .log_box {
+	float: left;
+}
+
+#header .view_box .log_box .profile_box {
+	display: none;
+}
+
+#header .view_box .log_box.on .profile_box {
+	display: block;
+}
+
+#header .view_box .log_box.on .default_box {
+	display: none;
+}
+
+#header .view_box .log_box .user_profile {
+	position: relative;
+	float: left;
+	margin-right: 12px;
+	width: 42px;
+	height: 42px;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .log_box .user_profile {
+		width: 32px;
+		height: 32px;
+		margin-right: 8px;
+	}
+}
+
+#header .view_box .log_box .user_profile img {
+	border-radius: 50%;
+	width: 100%;
+}
+
+#header .view_box .log_box .user_profile:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	border-radius: 50%;
+	border: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+#header .view_box .log_box .info {
+	display: block;
+	overflow: hidden;
+	line-height: 42px;
+	font-size: 18px;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .log_box .info {
+		font-size: 14px;
+		line-height: 28px;
+	}
+}
+
+#header .view_box .log_box .default_box a {
+	position: relative;
+	display: block;
+	z-index: 10;
+}
+
+#header .view_box .log_box .info {
+	color: #fff;
+}
+
+#header .view_box .close_btn {
+	position: relative;
+	float: right;
+	padding: 10px;
+	margin-top: -10px;
+	z-index: 1;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .close_btn {
+		margin-top: -7px;
+		padding: 7px;
+	}
+}
+
+#header .view_box .close_btn:after {
+	content: '';
+	display: block;
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -304px;
+	width: 40px;
+	height: 40px;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .close_btn:after {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -513px;
+		width: 32px;
+		height: 32px;
+	}
+}
+
+#header .view_box .select_box {
+	position: relative;
+	max-width: 1100px;
+	height: 100%;
+	margin: 0 auto;
+}
+
+#header .view_box .select_box:after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+#header .view_box .menu_box {
+	position: absolute;
+	top: 50%;
+	left: 0;
+	transform: translateY(-50%);
+}
+
+#header .view_box .menu_item {
+	transition: transform .2s ease;
+}
+
+#header .view_box .menu_item a {
+	display: block;
+	height: 100%;
+}
+
+#header .view_box .menu_item:nth-child(1) {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -255px -414px;
+	width: 214px;
+	height: 50px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .menu_item:nth-child(1) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -395px -469px;
+		width: 165px;
+		height: 40px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .menu_item:nth-child(1) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px 0px;
+		width: 109px;
+		height: 27px;
+	}
+}
+
+#header .view_box .menu_item:nth-child(2) {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -469px;
+	width: 193px;
+	height: 48px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .menu_item:nth-child(2) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -414px -522px;
+		width: 147px;
+		height: 37px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .menu_item:nth-child(2) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -122px;
+		width: 97px;
+		height: 24px;
+	}
+}
+
+#header .view_box .menu_item:nth-child(2).on:after {
+	bottom: 0;
+}
+
+#header .view_box .menu_item:nth-child(3) {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -414px;
+	width: 250px;
+	height: 50px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .menu_item:nth-child(3) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -198px -469px;
+		width: 192px;
+		height: 40px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .menu_item:nth-child(3) {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: 0px -599px;
+		width: 127px;
+		height: 27px;
+	}
+}
+
+#header .view_box .menu_item.on {
+	position: relative;
+}
+
+#header .view_box .menu_item.on:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 2px;
+	height: 4px;
+	background-color: #00ff49;
+	z-index: -1;
+}
+
+#header .view_box .menu_item + .menu_item {
+	margin-top: 50px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .menu_item + .menu_item {
+		margin-top: 45px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .menu_item + .menu_item {
+		margin-top: 32px;
+	}
+}
+
+#header .view_box .content_list_box {
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	padding: 80px 0 0;
+	overflow-y: auto;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box {
+		padding: 56px 0 0;
+	}
+}
+
+#header .view_box .content_list_box.on {
+	display: block;
+}
+
+#header .view_box .content_list_box::-webkit-scrollbar {
+	display: none;
+}
+
+#header .view_box .content_item {
+	-o-border-radius: 6px;
+	-ms-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	overflow: hidden;
+	position: relative;
+	width: 330px;
+	height: 450px;
+	margin-bottom: 30px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_item {
+		width: 270px;
+		height: 368px;
+		margin-bottom: 25px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_item {
+		width: 176px;
+		height: 240px;
+		margin-bottom: 16px;
+	}
+}
+
+#header .view_box .content_item:last-child {
+	margin-bottom: 80px;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_item:last-child {
+		margin-bottom: 56px;
+	}
+}
+
+#header .view_box .content_item a {
+	display: block;
+	height: 100%;
+}
+
+#header .view_box .content_item img {
+	width: 100%;
+}
+
+#header .view_box .content_list_box.home .content_item {
+	position: relative;
+}
+
+#header .view_box .content_list_box.home .info_box {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 0 25px 34px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .info_box {
+		padding: 0 25px 28px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .info_box {
+		padding: 0 16px 20px;
+	}
+}
+
+#header .view_box .content_list_box.home .item_title {
+	margin-top: 12px;
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .item_title {
+		margin-top: 9px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep1 {
+	background: #1c24f1 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_allview_home_1.png) no-repeat 50%;
+	-webkit-background-size: 290px 410px;
+	background-size: 290px 410px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep1 {
+		background: #1c24f1 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_allview_home_1.png) no-repeat 50%;
+		-webkit-background-size: 230px 328px;
+		background-size: 230px 328px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep1 {
+		background: #1c24f1 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_allview_home_1.png) no-repeat 50%;
+		-webkit-background-size: 156px 220px;
+		background-size: 156px 220px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep1 .list_ep {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -278px;
+	width: 77px;
+	height: 21px;
+	display: block;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep1 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -472px;
+		width: 63px;
+		height: 16px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep1 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -339px -367px;
+		width: 54px;
+		height: 14px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep1 .item_title {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -74px;
+	width: 254px;
+	height: 80px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep1 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -425px -71px;
+		width: 205px;
+		height: 66px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep1 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -259px -159px;
+		width: 104px;
+		height: 72px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep2 {
+	background: #7d01ff url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_allview_home_2.png) no-repeat 50%;
+	-webkit-background-size: 290px 410px;
+	background-size: 290px 410px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep2 {
+		background: #7d01ff url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_allview_home_2.png) no-repeat 50%;
+		-webkit-background-size: 230px 328px;
+		background-size: 230px 328px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep2 {
+		background: #7d01ff url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_allview_home_2.png) no-repeat 50%;
+		-webkit-background-size: 156px 220px;
+		background-size: 156px 220px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep2 .list_ep {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -226px;
+	width: 79px;
+	height: 21px;
+	display: block;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep2 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -451px;
+		width: 65px;
+		height: 16px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep2 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -610px;
+		width: 56px;
+		height: 14px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep2 .item_title {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -159px;
+	width: 254px;
+	height: 80px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep2 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -425px 0px;
+		width: 205px;
+		height: 66px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep2 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -259px -74px;
+		width: 104px;
+		height: 72px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep3 {
+	background: #00cfcb url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_allview_home_3.png) no-repeat 50%;
+	-webkit-background-size: 290px 410px;
+	background-size: 290px 410px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep3 {
+		background: #00cfcb url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_allview_home_3.png) no-repeat 50%;
+		-webkit-background-size: 230px 328px;
+		background-size: 230px 328px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep3 {
+		background: #00cfcb url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_allview_home_3.png) no-repeat 50%;
+		-webkit-background-size: 156px 220px;
+		background-size: 156px 220px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep3 .list_ep {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -252px;
+	width: 79px;
+	height: 21px;
+	display: block;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep3 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -635px -430px;
+		width: 65px;
+		height: 16px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep3 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -339px -329px;
+		width: 56px;
+		height: 14px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep3 .item_title {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -329px;
+	width: 228px;
+	height: 80px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep3 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -425px -286px;
+		width: 184px;
+		height: 66px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep3 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: 0px -522px;
+		width: 101px;
+		height: 72px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep4 {
+	background: #ff00b5 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_allview_home_4.png) no-repeat 50%;
+	-webkit-background-size: 290px 410px;
+	background-size: 290px 410px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep4 {
+		background: #ff00b5 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_allview_home_4.png) no-repeat 50%;
+		-webkit-background-size: 230px 328px;
+		background-size: 230px 328px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep4 {
+		background: #ff00b5 url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_allview_home_4.png) no-repeat 50%;
+		-webkit-background-size: 156px 220px;
+		background-size: 156px 220px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep4 .list_ep {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: -635px -200px;
+	width: 80px;
+	height: 21px;
+	display: block;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep4 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -676px -349px;
+		width: 66px;
+		height: 16px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep4 .list_ep {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -339px -348px;
+		width: 56px;
+		height: 14px;
+	}
+}
+
+#header .view_box .content_list_box.home .ep4 .item_title {
+	background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+	-webkit-background-size: 744px 626px;
+	background-size: 744px 626px;
+	background-position: 0px -244px;
+	width: 228px;
+	height: 80px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.home .ep4 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -233px -244px;
+		width: 184px;
+		height: 66px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.home .ep4 .item_title {
+		background-image: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/sp_common.png);
+		-webkit-background-size: 744px 626px;
+		background-size: 744px 626px;
+		background-position: -233px -329px;
+		width: 101px;
+		height: 72px;
+	}
+}
+
+#header .view_box .content_list_box.people .content_item {
+	text-align: left;
+}
+
+#header .view_box .content_list_box.people .content_item.kkwool .info_box {
+	background-color: #ff39a2;
+}
+
+#header .view_box .content_list_box.people .content_item.doenda .info_box {
+	background-color: #ff4300;
+}
+
+#header .view_box .content_list_box.people .content_item.gooksu .info_box {
+	background-color: #28d620;
+}
+
+#header .view_box .content_list_box.people .content_item.namgungin .info_box {
+	background-color: #6f00ff;
+}
+
+#header .view_box .content_list_box.people .content_item .cover_img {
+	height: 290px;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.people .content_item .cover_img {
+		height: 228px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.people .content_item .cover_img {
+		height: 140px;
+	}
+}
+
+#header .view_box .content_list_box.people .content_item .info_box {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	-o-border-radius: 0 0 6px 6px;
+	-ms-border-radius: 0 0 6px 6px;
+	-moz-border-radius: 0 0 6px 6px;
+	-webkit-border-radius: 0 0 6px 6px;
+	border-radius: 0 0 6px 6px;
+	padding: 22px 25px 34px;
+	color: #fff;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.people .content_item .info_box {
+		padding: 20px 20px 23px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.people .content_item .info_box {
+		padding: 16px 16px 32px;
+	}
+}
+
+#header .view_box .content_list_box.people .content_item .name {
+	line-height: 1;
+	font-size: 16px;
+	letter-spacing: -0.3px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.people .content_item .name {
+		font-size: 13px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.people .content_item .name {
+		font-size: 11px;
+	}
+}
+
+#header .view_box .content_list_box.people .content_item .item_title {
+	display: block;
+	display: -webkit-box;
+	overflow: hidden;
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	height: 72px;
+	margin-top: 15px;
+	font-weight: 800;
+	font-size: 26px;
+	line-height: 36px;
+	letter-spacing: -0.3px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.people .content_item .item_title {
+		height: 64px;
+		margin-top: 10px;
+		font-size: 22px;
+		line-height: 32px;
+		letter-spacing: -0.24px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.people .content_item .item_title {
+		height: 46px;
+		margin-top: 8px;
+		font-size: 16px;
+		line-height: 23px;
+		letter-spacing: -0.3px;
+	}
+}
+
+#header .view_box .content_list_box.pick .content_item img {
+	width: 330px;
+	height: 100%;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .content_item img {
+		width: 270px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .content_item img {
+		width: 176px;
+	}
+}
+
+#header .view_box .content_list_box.pick .info_box {
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	color: #fff;
+	padding: 27px 25px 30px;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .info_box {
+		padding: 18px 20px 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .info_box {
+		padding: 15px 16px 16px;
+	}
+}
+
+#header .view_box .content_list_box.pick .content_title {
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: 4;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 168px;
+	font-weight: 700;
+	font-size: 30px;
+	line-height: 42px;
+	text-align: left;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .content_title {
+		-webkit-line-clamp: 5;
+		height: 210px;
+		font-size: 24px;
+		line-height: 34px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .content_title {
+		height: 125px;
+		font-size: 17px;
+		line-height: 25px;
+	}
+}
+
+#header .view_box .content_list_box.pick .content_info {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	left: 25px;
+	right: 25px;
+	bottom: 25px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .content_info {
+		left: 20px;
+		bottom: 21px;
+		right: 20px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .content_info {
+		right: 16px;
+		bottom: 16px;
+		left: 16px;
+	}
+}
+
+#header .view_box .content_list_box.pick .content_info .info_vol, #header .view_box .content_list_box.pick .content_info .info_date {
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 21px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .content_info .info_vol, #header .view_box .content_list_box.pick .content_info .info_date {
+		font-size: 16px;
+		line-height: 19px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .content_info .info_vol, #header .view_box .content_list_box.pick .content_info .info_date {
+		font-size: 12px;
+		line-height: 14px;
+	}
+}
+
+#header .view_box .content_list_box.pick .content_info .line {
+	display: block;
+	flex: 1;
+	-ms-flex: 1;
+	width: 100%;
+	height: 1px;
+	margin: 0 11px;
+	background-color: #fff;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.pick .content_info .line {
+		margin: 0 8px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.pick .content_info .line {
+		margin: 0 4px;
+	}
+}
+
+#header .view_box .content_list_box.diary .content_item.report {
+	background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_diary_list_01.png) no-repeat 50%;
+	-webkit-background-size: 330px 450px;
+	background-size: 330px 450px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.diary .content_item.report {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_diary_list_01.png) no-repeat 50%;
+		-webkit-background-size: 270px 368px;
+		background-size: 270px 368px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.diary .content_item.report {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_diary_list_01.png) no-repeat 50%;
+		-webkit-background-size: 176px 240px;
+		background-size: 176px 240px;
+	}
+}
+
+#header .view_box .content_list_box.diary .content_item.schedule {
+	background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_diary_list_02.png) no-repeat 50%;
+	-webkit-background-size: 330px 450px;
+	background-size: 330px 450px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.diary .content_item.schedule {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_diary_list_02.png) no-repeat 50%;
+		-webkit-background-size: 270px 368px;
+		background-size: 270px 368px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.diary .content_item.schedule {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_diary_list_02.png) no-repeat 50%;
+		-webkit-background-size: 176px 240px;
+		background-size: 176px 240px;
+	}
+}
+
+#header .view_box .content_list_box.diary .content_item.benefit {
+	background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_diary_list_03.png) no-repeat 50%;
+	-webkit-background-size: 330px 450px;
+	background-size: 330px 450px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.diary .content_item.benefit {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_diary_list_03.png) no-repeat 50%;
+		-webkit-background-size: 270px 368px;
+		background-size: 270px 368px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.diary .content_item.benefit {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_diary_list_03.png) no-repeat 50%;
+		-webkit-background-size: 176px 240px;
+		background-size: 176px 240px;
+	}
+}
+
+#header .view_box .content_list_box.diary .content_item.way {
+	background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/pc_diary_list_04.png) no-repeat 50%;
+	-webkit-background-size: 330px 450px;
+	background-size: 330px 450px;
+}
+
+@media (max-width: 1249px) {
+	#header .view_box .content_list_box.diary .content_item.way {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/t_diary_list_04.png) no-repeat 50%;
+		-webkit-background-size: 270px 368px;
+		background-size: 270px 368px;
+	}
+}
+
+@media (max-width: 767px) {
+	#header .view_box .content_list_box.diary .content_item.way {
+		background: url(https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/img/common/m_diary_list_04.png) no-repeat 50%;
+		-webkit-background-size: 176px 240px;
+		background-size: 176px 240px;
+	}
+}

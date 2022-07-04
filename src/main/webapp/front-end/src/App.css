@@ -1,3 +1,40 @@
+@charset "UTF-8";
+/* 웹폰트 */
+@font-face {
+	font-family: 'NanumSquare';
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.eot");
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.ttf") format("truetype");
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'NanumSquare';
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareB.eot");
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareB.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareB.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareB.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareB.ttf") format("truetype");
+	font-weight: bold;
+}
+
+@font-face {
+	font-family: 'NanumSquare';
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareLight.eot");
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareLight.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareLight.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareLight.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareLight.ttf") format("truetype");
+	font-weight: 300;
+}
+
+@font-face {
+	font-family: 'NanumSquare';
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.eot");
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.ttf") format("truetype");
+	font-weight: 900;
+}
+
+/* 웹폰트 */
+@font-face {
+	font-family: 'NanumMyeongjo';
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumMyeongjo/NanumMyeongjo.eot");
+	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumMyeongjo/NanumMyeongjo.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumMyeongjo/NanumMyeongjo.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumMyeongjo/NanumMyeongjo.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumMyeongjo/NanumMyeongjo.ttf") format("truetype");
+}
+
 .App {
   text-align: center;
 }
@@ -84,9 +121,10 @@
   /* transform: perspective(999px) rotateX(7deg) translate3d(0px, -4px, 5px) */
 }
 .blog {
-  border-radius: 50px;
-  border-color: #B3B4BD;
+  border-radius: 20px;
+  border: 4px solid #000;
   border-width: 2px;
+  /* min-height: 480px; */
 }
 
 .slick-prev {
