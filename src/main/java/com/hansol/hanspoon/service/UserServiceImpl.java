@@ -73,6 +73,12 @@ public class UserServiceImpl implements UserService{
         return userResponseDto;
     }
 
+    //마이페이지
+    @Override
+    public Long getUserIdByName(String email) {
+        return userRepository.findByEmail(email).get().getUser_id();
+    }
+
     public static User createUserFromRequest(UserRequestDto request){
         return User.builder()
                 .email(request.getEmail())

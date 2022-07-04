@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,7 @@ public class PostServiceImpl implements PostService {
 
 
 
-    //전체 게시글 리스트 가져오기
+    //(메인화면)전체 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostList() {
@@ -45,7 +46,7 @@ public class PostServiceImpl implements PostService {
         return retVal;
     }
 
-    //카테고리별 전체 게시글 리스트 가져오기
+    //(메인화면)카테고리별 전체 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostListByCategory(long category_id) {
@@ -61,7 +62,7 @@ public class PostServiceImpl implements PostService {
         return retVal;
     }
 
-    //카테고리별 유효한 게시글 리스트 가져오기
+    //(메인화면)카테고리별 유효한 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getValidPostList() {
@@ -87,6 +88,38 @@ public class PostServiceImpl implements PostService {
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
         return retVal;
+    }
+
+    //(마이페이지)신청 내역 게시글 리스트 가져오기 -> 데이터 없을 시, 예외 처리 필요
+    @Override
+    public List<PostResponseDto> getMyApplyPostList(long userId) {
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<PostUser> postUserList = postUserRepository.findPostUserByUserId(userId).get();
+        for(PostUser postUser: postUserList){
+            long postId = postUser.getPost_id();
+            Post post = postRepository.findValidPostByPostId(postId).get();
+            retVal.add( PostResponseDto.builder()
+                                        .post(post)
+                                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
+                                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                                            .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                                        .build());
+        }
+        return retVal;
+    }
+
+    //(마이페이지)지난 내역 게시글 리스트 가져오기
+    @Override
+    public List<PostResponseDto> getMyLastPostList(long userId) {
+
+        return null;
+    }
+
+    //(마이페이지)작성 이력 게시글 리스트 가져오기
+    @Override
+    public List<PostResponseDto> getMyRecruitPostList(long userId) {
+        return null;
     }
 
 

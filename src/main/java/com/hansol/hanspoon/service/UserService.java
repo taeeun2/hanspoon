@@ -19,4 +19,7 @@ public interface UserService {
 
     UserResponseDto signUp(UserRequestDto userRequestDto);
 
+    //마이페이지
+    Long getUserIdByName(String email);
+
 }
