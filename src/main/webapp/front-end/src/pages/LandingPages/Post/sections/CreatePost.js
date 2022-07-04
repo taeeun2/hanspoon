@@ -15,14 +15,20 @@ import { Form } from "react-bootstrap";
 import SearchAPI from './SearchAPI';
 
 
-const category = [
-    { value: "1", name: "한식" },
-    { value: "2", name: "중식" },
-    { value: "3", name: "양식" },
-    { value: "4", name: "기타" },
-];
-
 const CreatePost = () => {
+
+    const [categorylist, setCategroyList] = useState([])
+    // 카테고리 리스트 가져오기
+    useEffect(() => {
+        fetch('http://localhost:8080/category')
+        .then(res => {
+          return res.json()
+        })
+        .then(data => {
+            setCategroyList(data)
+        })
+      }, []);
+    const [category, setCategroy] = useState(1)
     const [number, setNumber] = useState(1);
     const [show, setShow] = useState(false);
 
@@ -39,7 +45,7 @@ const CreatePost = () => {
     const [num, setNum] = useState(0)
     const [scopeMessage, setScopeMessage] = useState('')
 
-    const [currentTime, setCurrentTime] = useState('')
+    const [meet_date, setMeetDate] = useState('')
 
     const [content, setContent] = useState('')
     const [contentMessage, setContentMessage] = useState('')
@@ -54,7 +60,7 @@ const CreatePost = () => {
             var str = data.split('.')
             var dateTimeSecond = str[0].split(':')
             var dateTime = dateTimeSecond[0] + ':'+ dateTimeSecond[1]
-            setCurrentTime(dateTime)
+            setMeetDate(dateTime)
         })
     },[])
 
@@ -97,8 +103,8 @@ const CreatePost = () => {
         }
     }
 
-    const handleCurrentTime = (e) => {
-        setCurrentTime(e.target.value)
+    const handleMeetDate = (e) => {
+        setMeetDate(e.target.value)
     }
 
     const handleContent = (e) => {
@@ -108,6 +114,10 @@ const CreatePost = () => {
             setContentMessage('')
         }
         setContent(e.target.value)
+    }
+
+    const handleCategory = (e) => {
+        setCategroy(e.target.value)
     }
 
     function onClickCreate(){
@@ -120,22 +130,32 @@ const CreatePost = () => {
             setScopeMessage('')
             setContentMessage('최소 10자 이상 입력해주세요.')
         }else{
-            // fetch('http://localhost:8080/createPost'),{
-            //     method : 'POST',
-            //     headers : {
-            //         'Content-Type' : 'application/json'
-            //     },
-            //     body : JSON.stringify({
-            //         title : title,
-            //         content : content,
-            //         restaurant_name : restaurantName,
-            //         user_id : sessionStorage.getItem('user').user_id
-                        
 
-            //     })
-                  
-
-            // }
+           console.log(meet_date)
+            fetch('http://localhost:8080/createPost',{
+                method : 'POST',
+                headers : {
+                    'Content-Type' : 'application/json'
+                },
+                body : JSON.stringify({
+                    title : title,
+                    content : content,
+                    restaurant_name : restaurantName,
+                    meet_date : meet_date,
+                    user_id : sessionStorage.getItem('user'),
+                    scope_name : scope_name,
+                    scope_gender :scope_gender,
+                    scope_company : scope_company,
+                    scope_position : scope_position_type,
+                    scope_department :scope_department,
+                    capacity : num+1,
+                    category_id : category
+                })
+            }).then(res=>{
+                console.log(res)
+                alert('모임이 생성되었습니다.')
+                document.location.href='/'
+            })
 
         }
         
@@ -199,8 +219,8 @@ const CreatePost = () => {
 
                             <Grid item xs={12} md={9.5}>
                                 <input type="datetime-local" id="meeting-time"
-                                        name="meeting-time" value={currentTime} onChange={handleCurrentTime}
-                                        min="2022-06-30T00:00" style={{"fontSize" : "15px", "width" : "100%", "height" : "40px", "textAlign" : "center"}}></input>
+                                        name="meeting-time" value={meet_date} onChange={handleMeetDate}
+                                        min={meet_date} style={{"fontSize" : "15px", "width" : "100%", "height" : "40px", "textAlign" : "center"}}></input>
                             </Grid>
 
                             
@@ -211,8 +231,8 @@ const CreatePost = () => {
                             </Grid>
                             
                             <Grid item xs={12} md={9.5}>
-                                <Form.Select>
-                                    {category.map(menu =>(<option key={menu.value} value={menu.value} >{menu.name}</option>))}
+                                <Form.Select value = {category} onChange = {handleCategory}>
+                                    {categorylist.map(menu =>(menu.category_id!== 0 && <option key={menu.category_id} value={menu.category_id} >{menu.category_name}</option>))}
                                 </Form.Select>
                             </Grid>
 

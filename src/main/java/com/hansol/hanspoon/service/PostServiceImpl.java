@@ -6,12 +6,17 @@ import com.hansol.hanspoon.entity.Post;
 import com.hansol.hanspoon.entity.PostUser;
 import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.repository.*;
+import com.hansol.hanspoon.type.StatePostType;
 import com.hansol.hanspoon.type.StatePostUserType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.ArrayList;
+
+import java.sql.Timestamp;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -153,6 +158,7 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
+    @Transactional
     public void createPost(PostRequestDto postRequestDto) {
        postUserRepository.save(createPostUserFromRequest(postRequestDto));
     }
@@ -164,7 +170,7 @@ public class PostServiceImpl implements PostService {
                 .scope_gender(postRequestDto.isScope_gender())
                 .scope_age(postRequestDto.isScope_age())
                 .scope_company(postRequestDto.isScope_company())
-                .scope_position(postRequestDto.isScope_position())
+                .scope_position(postRequestDto.isScope_position_type())
                 .scope_department(postRequestDto.isScope_department())
                 .user_id(postRequestDto.getUser_id())
                 .post_id( postRepository.save(createPostFromRequest(postRequestDto)).getPost_id())
@@ -176,9 +182,11 @@ public class PostServiceImpl implements PostService {
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
                 .restaurant_name(postRequestDto.getRestaurant_name())
-                .meet_date(postRequestDto.getMeet_date())
+                .meet_date( Timestamp.valueOf(postRequestDto.getMeet_date()))
                 .capacity(postRequestDto.getCapacity())
                 .category_id(postRequestDto.getCategory_id())
+                .state(StatePostType.VALID)
+                .participant_num(1)
                 .build();
     }
 }

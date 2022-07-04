@@ -90,8 +90,8 @@ function SignInBasic() {
           setMessage('아이디를 입력해주세요.')
         }else if(isPw === false){
           setMessage('비밀번호를 입력해주세요.')
-        }else if(data.email !== undefined){
-            sessionStorage.setItem('user',data.email)
+        }else if(data.user_id !== undefined){
+            sessionStorage.setItem('user',data.user_id)
             document.location.href='/'
         }else{
             setMessage(data.errorMessage)

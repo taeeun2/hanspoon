@@ -22,7 +22,7 @@ public class PostController {
         return LocalDateTime.now();
     }
 
-    @GetMapping("/createPost")
+    @PostMapping("/createPost")
     public void createPost(@RequestBody PostRequestDto postRequestDto){
         postService.createPost(postRequestDto);
     }

@@ -52,12 +52,6 @@ const ageMenu = [
     { value: "OVER_SIXTY", name: "60대 이상" },
 ];
 
-const positionTypeMenu = [
-	{ value: "1", name: "선임" },
-	{ value: "2", name: "책임" },
-	{ value: "3", name: "수석" }
-];
-
 const companyMenu = [
 	{ value: "1", name: "한솔 인티큐브" },
 	{ value: "2", name: "한솔 PNS" },

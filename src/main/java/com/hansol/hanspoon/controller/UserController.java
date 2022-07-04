@@ -10,8 +10,6 @@ import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.service.EmailService;
 import com.hansol.hanspoon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
