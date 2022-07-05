@@ -55,4 +55,7 @@ public class Post {
         this.participant_num = participant_num;
     }
 
+    public void updateParticipantNum() {
+        this.participant_num++;
+    }
 }
