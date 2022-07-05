@@ -238,6 +238,15 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    @Override
+    @Transactional
+    public void deletePost(long post_id) {
+        Post post = postRepository.findById(post_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+
+        post.updateToDeleted();
+    }
+
     private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {
         return PostUser.builder()
                 .state(StatePostUserType.HOST)

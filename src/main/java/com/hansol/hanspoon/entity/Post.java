@@ -58,4 +58,8 @@ public class Post {
     public void updateParticipantNum() {
         this.participant_num++;
     }
+
+    public void updateToDeleted() {
+        this.state = StatePostType.DELETED;
+    }
 }
