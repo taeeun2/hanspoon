@@ -20,4 +20,7 @@ public interface PostUserRepository extends JpaRepository<PostUser, Long> {
 
     @Query("SELECT pu FROM PostUser pu WHERE pu.user_id = :id AND pu.state = 'HOST'")
     Optional<List<PostUser>> findHostByUserId(@Param("id") Long user_id);
+
+    @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :postId AND pu.user_id = :userId AND pu.state = 'GUEST'")
+    Optional<PostUser> findByPostAndUserId(@Param("postId") Long post_id, @Param("userId") Long user_id);
 }

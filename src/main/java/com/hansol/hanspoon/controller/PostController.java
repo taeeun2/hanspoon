@@ -47,4 +47,9 @@ public class PostController {
     public void  deletePost(@PathVariable long post_id){
         postService.deletePost(post_id);
     }
+
+    @GetMapping("cancelApply/{post_id}")
+    public void cancelApply(@PathVariable long post_id,@RequestParam(value = "user") long user_id){
+        postService.cancelApply(post_id, user_id);
+    }
 }

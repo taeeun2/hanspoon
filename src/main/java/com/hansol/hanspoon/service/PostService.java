@@ -23,4 +23,5 @@ public interface PostService {
     public void createPost(PostRequestDto postRequestDto);
     public void applyPost(PostApplyRequestDto postApplyRequestDto);
     public void deletePost(long post_id);
+    public void cancelApply(long post_id, long user_id);
 }

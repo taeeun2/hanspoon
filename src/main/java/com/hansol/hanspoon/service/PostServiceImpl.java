@@ -216,12 +216,13 @@ public class PostServiceImpl implements PostService {
        postUserRepository.save(createPostUserFromRequest(postRequestDto));
     }
 
+    // (상세 페이지) 모임 신청하기
     @Override
     @Transactional
     public void applyPost(PostApplyRequestDto postApplyRequestDto) {
         Post post = postRepository.findById(postApplyRequestDto.getPost_id())
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
-        post.updateParticipantNum();
+        post.increaseParticipantNum();
 
         PostUser postUser = PostUser.builder()
                 .state(StatePostUserType.GUEST)
@@ -238,6 +239,7 @@ public class PostServiceImpl implements PostService {
 
     }
 
+    // (상세 페이지) 모임 삭제하기
     @Override
     @Transactional
     public void deletePost(long post_id) {
@@ -245,6 +247,18 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
 
         post.updateToDeleted();
+    }
+
+    // (상세 페이지) 모임 신청 취소하기
+    @Override
+    @Transactional
+    public void cancelApply(long post_id, long user_id) {
+        PostUser postUser = postUserRepository.findByPostAndUserId(post_id, user_id).get();
+        long post_user_id = postUser.getPost_user_id();
+        postUserRepository.delete(postUser);
+
+        Post post = postRepository.findById(post_id).get();
+        post.decreaseParticipantNum();
     }
 
     private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {
