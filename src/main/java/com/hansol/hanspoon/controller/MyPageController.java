@@ -21,12 +21,12 @@ public class MyPageController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/mypage/user")
-    public ResponseEntity<Long> getUserId(@RequestParam(value = "email") String email){
-        return new ResponseEntity<>(userService.getUserIdByName(email), HttpStatus.OK);
-    }
+//    @GetMapping("/mypage/user")
+//    public ResponseEntity<Long> getUserId(@RequestParam(value = "email") String email){
+//        return new ResponseEntity<>(userService.getUserIdByName(email), HttpStatus.OK);
+//    }
 
-    @GetMapping("/mypost/{category_id}")
+    @GetMapping("/mypage/{category_id}")
     public ResponseEntity<List<PostResponseDto>> getMyPostList(@PathVariable long category_id
                                                 , @RequestParam(value = "user") long userId){
         if(category_id == 0){ // 신청 내역

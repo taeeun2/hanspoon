@@ -43,8 +43,8 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
 
@@ -59,8 +59,8 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
 
@@ -75,8 +75,8 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
         return retVal;
@@ -88,43 +88,77 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
         return retVal;
     }
 
-    //(마이페이지)신청 내역 게시글 리스트 가져오기 -> 데이터 없을 시, 예외 처리 필요
+    //(마이페이지0)신청 내역 게시글 리스트 가져오기 - 게시글 상태가 VALID이면서, postuser 테이블의 상태가 GUEST인 것
     @Override
     public List<PostResponseDto> getMyApplyPostList(long userId) {
         List<PostResponseDto> retVal = new ArrayList<>();
-        List<PostUser> postUserList = postUserRepository.findPostUserByUserId(userId).get();
+        List<PostUser> postUserList = postUserRepository.findGuestByUserId(userId).get();
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
-            Post post = postRepository.findValidPostByPostId(postId).get();
-            retVal.add( PostResponseDto.builder()
-                                        .post(post)
-                                        .category(categoryRepository.findById(post.getCategory_id()).get())
-                                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
-                                            .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                                        .build());
+            Post post = postRepository.getById(postId);
+            if(post.getState().toString().equals("VALID")){
+                retVal.add( PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
         }
         return retVal;
     }
 
-    //(마이페이지)지난 내역 게시글 리스트 가져오기
+    //(마이페이지1)지난 내역 게시글 리스트 가져오기 - 게시글 상태가 EXPIRED이면서, postuser테이블의 상태가 GUEST인 것
     @Override
     public List<PostResponseDto> getMyLastPostList(long userId) {
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<PostUser> postUserList = postUserRepository.findGuestByUserId(userId).get();
+        for(PostUser postUser: postUserList) {
+            long postId = postUser.getPost_id();
+            Post post = postRepository.getById(postId);
+            if(post.getState().toString().equals("EXPIRED")){
+                retVal.add(PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
 
-        return null;
-    }
+            System.out.println("findExpiredPostByPostId: " + post.toString());
 
-    //(마이페이지)작성 이력 게시글 리스트 가져오기
+        }
+        return retVal;
+}
+
+    //(마이페이지2)작성 이력 게시글 리스트 가져오기 - 게시글 상태가 VALID 또는 EXPIRED이면서, postuser테이블의 상태가 HOST인 것
     @Override
     public List<PostResponseDto> getMyRecruitPostList(long userId) {
-        return null;
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<PostUser> postUserList = postUserRepository.findHostByUserId(userId).get();
+        for (PostUser postUser: postUserList) {
+            long postId = postUser.getPost_id();
+            Post post = postRepository.getById(postId);
+            if(!post.getState().toString().equals("DELETED")){
+                retVal.add( PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
+        }
+        return retVal;
     }
 
 
