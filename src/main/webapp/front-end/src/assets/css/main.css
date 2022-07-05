@@ -1,4 +1,4 @@
-/* ================ 공통 ================ */
+/* ================ 공통/글꼴 ================ */
 .content_box {
 	margin: auto 34px;
 	padding: 80px 50px;
@@ -8,13 +8,29 @@
 .main_title {
 	color: #000;
 	font-size: 35px;
-	font-weight: 1000;
 	font-family: 'NanumSquareRound';
+	font-weight: bolder;
 }
 
-.rank .main_title {
+.blogs .main_title {
 	color: #fff;
 	font-family: 'NanumSquareRound';
+	font-weight: bolder;
+}
+
+.banner .banner_sub_title {
+	color: #ffe818;
+	font-family: 'NanumSquareRound';
+	font-weight: bolder;
+	font-size: 35px;
+	text-shadow: 2px 2px 2px gray;
+}
+
+.banner .banner_main_title {
+	color: #ffe818;
+	font-family: 'NanumSquare_bold';
+	font-weight: bolder;
+	text-shadow: 2px 2px 2px gray;
 }
 
 /* ================ 배너 ================ */
@@ -26,7 +42,19 @@
 	overflow: hidden;
 	height: 100%;
 	color: #fff;
-	background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), linear-gradient(to bottom, #0058dd, #0058dd), linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2));
+	z-index: 2;
+	background-color: rgba(0, 0, 255, 0.724);
+}
+
+#banner_box {
+	animation: changeBg 12s infinite;
+	background-size: cover;
+}
+
+@keyframes changeBg{
+	0%,100%  {background-image: url("assets/images/hanspoon/bg1.jpg");}
+	33% {background-image: url("assets/images/hanspoon/bg2.jpg");}
+	66% {background-image: url("assets/images/hanspoon/bg3.jpg");}
 }
 
 .banner .content_box {
@@ -34,13 +62,17 @@
 }
 
 .banner .title_box {
-	margin: 150px 200px;
+	margin: 150px 150px;
 	text-align: center;
 	max-width: 100%;
 }
 
-.banner .main_title {
-	font-size: 120px;
+.banner .sub_title_box {
+	margin: 40px auto;
+}
+
+.banner .banner_main_title {
+	font-size: 110px;
 }
 
 /* .banner .user_name {
@@ -76,6 +108,7 @@
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
+
 /* ================ 소개 ================ */
 .introduce {
 	background-color: #fff;
@@ -90,16 +123,20 @@
 }
 
 
-/* ================ 참여방법 ================ */
-.step {
+/* ================ 모임 생성 방법 ================ */
+.create_step {
 	background-color: #ffe818;
 	width: 100%;
-	min-height: 600px;
+	min-height: 1100px;
+}
+
+.create_step .title_box {
+	margin-bottom: 30px;
 }
 
 
-.step .step_box {
-	margin: 15px 40px;
+.create_step .step_box {
+	margin: 20px 20px;
     padding: 46px 30px 50px;
     background-color: #fff;
     border: 4px solid #000;
@@ -107,16 +144,118 @@
 	min-height: 350px;
 }
 
+/* ================ 모임 참여 방법 ================ */
+
+.apply_step {
+	background-color: #23daaf;
+	width: 100%;
+	min-height: 650px;
+}
+
+.apply_step .title_box {
+	margin-bottom: 30px;
+}
+
+.apply_step .step_box {
+	margin: 20px 20px;
+    padding: 46px 30px 50px;
+    background-color: #fff;
+    border: 4px solid #000;
+	border-radius: 20px;
+	min-height: 500px;
+}
+
 /* ================ 게시글 ================ */
 .blogs {
-	background-color: #23daaf;
+	background-color: #a143e8;
 	width: 100%;
 	min-height: 1140px;
 }
 
-/* ================ 인기순위 ================ */
+.blogs .title_box {
+	margin-bottom: 30px;
+}
+
+.blogs .title_box {
+	margin-bottom: 30px;
+}
+
+.blogs .step_box {
+	margin: 20px 20px;
+    background-color: #fff;
+    border: 4px solid #000;
+	border-radius: 20px;
+	min-height: 900px;
+
+}
+
+.blogs .blog_list_box {
+	padding: 35px;
+}
+
+/* ================ Component ================ */
+
+.blog_toggle {
+	padding-top: 20px;
+	padding-right: 30px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.selectTab.active {
+	background-color: #ffe818;
+	color: #fff;
+	border-radius: 10;
+  }
+
+/* ================ 인기순위(x) ================ */
 .rank {
 	background-color: #a143e8;
 	width: 100%;
 	min-height: 650px;
 }
+
+.rank .title_box {
+	margin-bottom: 30px;
+}
+
+/* ================ 고정 버튼 ================ */
+
+.static_button {
+	position: fixed;
+	bottom: 10px;
+	right: 20px;
+}
+
+.static_button_box {
+	margin-bottom: 20px;
+	height: 50px;
+}
+
+.static_button .static_button_create {
+	position: absolute;
+	bottom: 20px;
+	right: 50px;
+	margin-right:2px;
+	height: 50px;
+	width: 120px;
+	padding: 16px 20px 15px;
+	line-height: 1;
+	border-radius: 27px;
+	font-size: 17px;
+	font-weight: 800;
+	color: #000;
+	background-color: #ffe818;
+	border: 3px solid #000;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.static_button .static_button_up {
+	border-radius: 27px;
+    height: 45px;
+    width: 45px;
+	background-image: url('assets/images/Icons/upload.png');
+	background-size: cover;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+

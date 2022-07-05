@@ -17,7 +17,7 @@ function Toggle({ checked, setChecked }) {
   const toggleSwitch = () => setChecked(!checked);
 
   return (
-    <Grid item xs={12} lg={5}>
+    <Grid item xs={12} lg={12} className="blog_toggle">
       <Box sx={{ width: '100%', justifyContent: 'flex-end' }} >
         <Grid item xs={12} lg={4} sx={{ ml: "auto", mt: { xs: 3, lg: 0 } }}>
           <MKBox display="flex" justifyContent="flex-end" alignItems="center" >
@@ -29,6 +29,10 @@ function Toggle({ checked, setChecked }) {
               ml={1}
               sx={{ cursor: "pointer", userSelect: "none" }}
               onClick={toggleSwitch}
+              style={{
+                "fontFamily": 'NanumSquareRound',
+                "fontWeight" : 'bold',
+                "fontSize": '23px'}}
             >
               모집 중만 보기
             </MKTypography>

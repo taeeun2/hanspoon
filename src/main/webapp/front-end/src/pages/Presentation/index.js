@@ -14,6 +14,7 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 import Header from 'components/Header';
+import StaticBtn from 'components/StaticBtn';
 import React, { useEffect, useState } from 'react';
 import { Link } from "react-router-dom";
 // @mui material components
@@ -58,92 +59,21 @@ import Rank from 'containers/Rank';
 
 //css
 import "assets/css/main.css"
-import Step from 'containers/Step';
+import CreateStep from 'containers/CreateStep';
+import ApplyStep from 'containers/ApplyStep';
 
 function Presentation() {
 
-  const [categoryList, setCategoryList] = useState([]);
-  const [postList, setPostList] = useState([]);
-  const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "전체"});
-  const [toggleChecked, setToggleChecked] = useState(true);
-
-    //활성화된 Category ID 받아오기
-    const categoryCallback = (c) => {
-      setActiveCategory(categoryList[c]);
-    };
-
-    //토글 상태(전체보기/모집 중만 보기)에 따른 API 호출하기
-    const handlePostApi = () => {
-      if(toggleChecked){ //모집 중만 보기
-        getValidPostList(activeCategory.category_id);
-      }
-      else {
-        console.log(activeCategory);
-        getAllPostList(activeCategory.category_id); //전체 보기
-      }
-    }
-    /* ================= fetch ================= */
-
-    // 카테고리 리스트 조회 API
-    const getCategoryList = () => {
-      fetch('http://localhost:8080/category')
-        .then(res => {
-          return res.json()
-        })
-        .then(data => {
-          setCategoryList(data); 
-        })
-    }
-
-    // 카테고리별 전체 게시글 리스트 조회 API
-     const getAllPostList = (category_id) => {
-     fetch(`http://localhost:8080/post/all/${category_id}`)
-       .then(res => {
-         return res.json()
-       })
-       .then(data => {
-         setPostList(data);
-       })
-      }
-
-     // 카테고리별 모집중인 게시글 리스트 조회 API 
-     const getValidPostList = (category_id) => {
-      fetch(`http://localhost:8080/post/valid/${category_id}`)
-        .then(res => {
-            return res.json()
-          })
-        .then(data => {
-          setPostList(data);
-        })
-      }
-
-    /* ================= useEffect ================= */
-
-    // Mount 이벤트(카테고리 리스트 및 모집중인 전체 게시글 리스트 가져오기)
-    useEffect(() => {
-      getCategoryList();
-      getValidPostList(0);
-    }, []);
-
-    // 카테고리 탭 변경시 이벤트
-    useEffect(() => {
-      if(activeCategory != undefined){
-        handlePostApi();
-      } 
-      }, [activeCategory]);
-    
-    //토글 변경시 이벤트
-      useEffect(() => {
-        handlePostApi();
-      },[toggleChecked]);
 
   /* ================= RENDER ================= */
   return (
-    <>
+    <div>
       <Header />
+      <StaticBtn />
       <MKBox 
         height="960px"
-        width="100%">
+        width="100%"
+        id="banner_box">
           <Banner />
       </MKBox>
       <MKBox
@@ -153,9 +83,14 @@ function Presentation() {
           <Introduce />
       </MKBox>
       <MKBox
-        minHeight="600px"
+        minHeight="1100px"
         width="100%">
-          <Step />
+          <CreateStep />
+      </MKBox>
+      <MKBox
+        minHeight="650px"
+        width="100%">
+          <ApplyStep />
       </MKBox>
       <MKBox
         minHeight="1140px"
@@ -168,12 +103,7 @@ function Presentation() {
             checked = {toggleChecked}
             setChecked={setToggleChecked}
           /> */}
-          <Blogs category={activeCategory} post={postList}/>
-      </MKBox>
-      <MKBox
-        minHeight="650px"
-        width="100%">
-          <Rank />
+          <Blogs />
       </MKBox>
       
       {/* <Card
@@ -215,7 +145,7 @@ function Presentation() {
           <Footer />
         </MKBox>
       </Card> */}
-    </>
+    </div>
   );
 }
 

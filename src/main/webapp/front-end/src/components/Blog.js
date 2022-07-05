@@ -21,21 +21,32 @@ import MKTypography from "./MKTypography";
       <div onMouseOver={() => setIsHovering(1)}
             onMouseOut={() => setIsHovering(0)}
             className={`hoverBlog ${isHovering ? 'active' : ''}`}>
-        <Card className="blog text-center">
+        <Card className="blog text-center"> 
           <CardBody className="p-3">
-            <MKTypography variant="subtitle1" color="secondary" mt={3} mb={2}>
+            <MKTypography variant="subtitle1" color="secondary" mt={3} mb={2} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
               {props.category} | {props.date}
             </MKTypography>
-            <MKTypography variant="h4" mb={2}>
+            <MKTypography variant="h4" mb={2} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "fontWeight" : 'bold',
+                      "cursor": 'default'}}>
               {props.title}
             </MKTypography>
-            <MKTypography variant="body1" mb={2}>
+            <MKTypography variant="body1" mb={2} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
               {props.place}
             </MKTypography>
-            <MKTypography variant="body2" mb={2}>
+            <MKTypography variant="body2" mb={2} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
               🙋‍♂️ {props.participantNum} / {props.capacity}  
             </MKTypography>
-            <MKTypography variant="body2" mb={2}>
+            <MKTypography variant="body2" mb={2} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
               {props.host}  🥄{props.spoon}
             </MKTypography>
           </CardBody>

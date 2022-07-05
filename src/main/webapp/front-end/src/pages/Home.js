@@ -3,7 +3,7 @@ import Header from 'components/Header';
 import Spot from 'containers/Spot'
 import 'assets/css/main.css'
 import Introduce from 'containers/Introduce';
-import Step from 'containers/Step';
+import CreateStep from 'containers/CreateStep';
 import Posts from 'containers/Posts';
 import Rank from 'containers/Rank';
 import Bottom from 'containers/Bottom';
@@ -27,7 +27,7 @@ const Home = () => {
           <Spot />
           <div className='content'>
             <Introduce />
-            <Step />
+            <CreateStep />
             <Posts />
             <Rank />
           </div>
