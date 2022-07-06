@@ -10,11 +10,17 @@ import java.util.Optional;
 
 public interface PostUserRepository extends JpaRepository<PostUser, Long> {
     @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :id AND pu.state = 'HOST'")
-    PostUser findHostById(@Param("id") Long post_id);
+    PostUser findHostByPostId(@Param("id") Long post_id);
 
     @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :id AND pu.state = 'GUEST'")
-    Optional<List<PostUser>> findAllGuestById(@Param("id") Long post_id);
+    Optional<List<PostUser>> findGuestByPostId(@Param("id") Long post_id);
 
     @Query("SELECT pu FROM PostUser pu WHERE pu.user_id = :id AND pu.state = 'GUEST'")
-    Optional<List<PostUser>> findPostUserByUserId(@Param("id") Long user_id);
+    Optional<List<PostUser>> findGuestByUserId(@Param("id") Long user_id);
+
+    @Query("SELECT pu FROM PostUser pu WHERE pu.user_id = :id AND pu.state = 'HOST'")
+    Optional<List<PostUser>> findHostByUserId(@Param("id") Long user_id);
+
+    @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :postId AND pu.user_id = :userId AND pu.state = 'GUEST'")
+    Optional<PostUser> findByPostAndUserId(@Param("postId") Long post_id, @Param("userId") Long user_id);
 }

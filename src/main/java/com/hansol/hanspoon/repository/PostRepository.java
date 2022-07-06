@@ -18,7 +18,4 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("SELECT p FROM Post p WHERE p.category_id = :id")
     Optional<List<Post>> findAllPostByCategoryId(@Param("id") Long category_id);
-
-    @Query("SELECT p FROM Post p WHERE p.state = 'VALID' AND p.post_id = :id")
-    Optional<Post> findValidPostByPostId(@Param("id") Long post_id);
 }

@@ -38,11 +38,19 @@ function Introduce(props) {
                 </Grid>
                 <Grid item className='text_box'>
                     <p className="info_text" data-aos="fade-up">
-                        오늘 점심 뭐 먹지?<br />
-                        오늘 하루 가장 중요한 고민<br />
-                        어제 잠들기 전 밤부터 고민한 그 메뉴<br />
-                        아 근데 누구랑 먹지? 여기 2인분 이상 주문이던데..<br />
+                        나와 음식 취향이 같은,<br />
+                        나와 식단 관리를 함께 할,<br />
+                        2인 이상 주문 메뉴를 함께 먹을 동료를<br />
                         한스푼에서 찾아보는건 어떨까요?<br />
+                    </p>
+                    <p className="info_text" data-aos="fade-up">
+                        한스푼 모임에 참여하고, 숟가락을 모아 본인의 친화력을 보여주세요!<br />
+                    </p>
+                    <p className='info_link' data-aos="fade-up" style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "fontWeight" : 'bold',
+                      "color": 'blue'}}>
+                        한스푼 참여현황 보기 >
                     </p>
                 </Grid>
             </Box>

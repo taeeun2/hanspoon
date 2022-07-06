@@ -1,11 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from "@mui/material/Card";
 import AppBar from 'components/AppBar';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import DetailContent from './sections/DetailContent';
 const DetailPost = () => {
 
+    const [postData, setPostData] = useState(); //게시글 상세 정보
+
     const {clickedId} = useParams();// 링크의 파라메타 받기
+
+    useEffect(() => {
+        fetch(`http://localhost:8080/post/detail/${clickedId}`)
+        .then(res => {
+            return res.json()
+        })
+        .then(data => {
+            setPostData(data);
+        })
+    },[]);
 
     return (
         <div>
@@ -22,7 +34,7 @@ const DetailPost = () => {
                 }}
             >
             
-            <DetailContent clickedId = {clickedId}/>
+            <DetailContent clickedId = {clickedId} postData = {postData}/>
 
 
             </Card>

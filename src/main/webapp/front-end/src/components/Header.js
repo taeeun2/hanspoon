@@ -22,6 +22,19 @@ const Header = () => {
   //   setIsOpen(!isOpen);
   // };
 
+  //헤더 크기를 제외하고 페이지 내부 이동하기
+  const handleClick = (e) => {
+    e.preventDefault()
+    const target = e.target.parentElement.parentElement.getAttribute('href');
+    const location = document.querySelector(target).offsetTop;
+    console.log(location)
+
+    window.scrollTo({
+      left:0,
+      top:location - 60 //헤더의 크기만큼 빼준다.
+    })
+  }
+
 
   // ============ 추가 ==============
   const [isLogin, setIsLogin] = useState(false)
@@ -104,7 +117,7 @@ const Header = () => {
             </h1>
             <div className="gnb_box">
               <ul className="gnb_list">
-                <a href="#introduce">
+                <a href="#introduce" onClick={handleClick}>
                   <li className="gnb_item">
                     <span style={{
                       "fontFamily": 'NanumSquareRound',
@@ -112,27 +125,27 @@ const Header = () => {
                     </span>
                   </li>
                 </a>
-                <a  href="#step">
+                <a  href="#create_step"  onClick={handleClick}>
                   <li className="gnb_item">
                     <span style={{
                       "fontFamily": 'NanumSquareRound',
-                      "fontWeight" : 'bold'}}>참여방법
+                      "fontWeight" : 'bold'}}>모임 생성 방법
                     </span>
                   </li>
                 </a> 
-                <a href="#blogs">
+                <a href="#apply_step"  onClick={handleClick}>
                   <li className="gnb_item">
                     <span style={{
                       "fontFamily": 'NanumSquareRound',
-                      "fontWeight" : 'bold'}}>함께하는 한스푼
+                      "fontWeight" : 'bold'}}>모임 참여 방법
                     </span>
                   </li>
                 </a>
-                <a href="#rank">
+                <a href="#blogs"  onClick={handleClick}>
                   <li className="gnb_item">
                     <span style={{
                       "fontFamily": 'NanumSquareRound',
-                      "fontWeight" : 'bold'}}>인기순위
+                      "fontWeight" : 'bold'}}>모임 리스트
                     </span>
                   </li>
                 </a>

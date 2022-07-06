@@ -32,9 +32,9 @@ const Category = ({ categoryList, callback }) => {
   //   , []);
 
   return (      
-    <MKBox component="section" py={3} px={3}>
+    <MKBox component="section" className="category">
       <Grid container>
-        <Grid item xs={12} lg={7}>
+        <Grid item xs={12} lg={12}>
           <Box sx={{ width: '100%' }}>
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <AppBar position="static">
@@ -43,8 +43,13 @@ const Category = ({ categoryList, callback }) => {
                       <Tab 
                         key={list.category_id}
                         label={list.category_name}
-                        className={activeTab == list.category_id ? 'active' : ''} 
+                        className={`selectTab ${activeTab == list.category_id ? 'active' : ''}`} 
                         onClick={() => handleTabClick(list.category_id)}
+                        style={{
+                          "fontFamily": 'NanumSquareRound',
+                          "fontWeight" : 'bold',
+                          "fontSize": '25px'
+                          }}
                       />
                     ))}
                   </Tabs>

@@ -4,7 +4,7 @@ import MKBox from 'components/MKBox';
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-function Step(props) {
+function CreateStep(props) {
 
     useEffect(() => {
         AOS.init({
@@ -29,21 +29,31 @@ function Step(props) {
         //         </div>
         //     </div>
         // </div>
-        <Grid className='step' id='step'>
+        <Grid className='create_step' id='create_step'>
             <Box className='content_box'>
                 <Grid item className='title_box'>
-                    <h3 className='main_title' data-aos="fade-up">참여방법</h3>
+                    <h3 className='main_title' data-aos="fade-up">한스푼 모임 생성 방법</h3>
                 </Grid>
                 <MKBox component="section">
                     <Grid container  sx={{ justifyContent: 'center', height: '100%' }}>
                         <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={0}>
                             <div className='step_01'>
-                                <span className='step'>Step.1</span>
+                                <span className='create_step'>step.1</span>
                             </div>
                         </Grid>
                         <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={1}>
                             <div className='step_02'>
-                                <span className='step'>Step.2</span>
+                                <span className='create_step'>Step.2</span>
+                            </div>
+                        </Grid>
+                        <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={1}>
+                            <div className='step_02'>
+                                <span className='create_step'>Step.3</span>
+                            </div>
+                        </Grid>
+                        <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={1}>
+                            <div className='step_02'>
+                                <span className='create_step'>Step.4</span>
                             </div>
                         </Grid>
                     </Grid>
@@ -53,4 +63,4 @@ function Step(props) {
     );
 }
 
-export default Step;
+export default CreateStep;

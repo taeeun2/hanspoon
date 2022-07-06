@@ -55,4 +55,15 @@ public class Post {
         this.participant_num = participant_num;
     }
 
+    public void increaseParticipantNum() {
+        this.participant_num++;
+    }
+
+    public void decreaseParticipantNum() {
+        this.participant_num--;
+    }
+
+    public void updateToDeleted() {
+        this.state = StatePostType.DELETED;
+    }
 }

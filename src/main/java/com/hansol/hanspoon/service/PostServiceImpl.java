@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.PostApplyRequestDto;
 import com.hansol.hanspoon.dto.PostRequestDto;
 import com.hansol.hanspoon.dto.PostResponseDto;
 import com.hansol.hanspoon.entity.Post;
@@ -43,8 +44,8 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
 
@@ -59,8 +60,8 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
 
@@ -75,56 +76,108 @@ public class PostServiceImpl implements PostService {
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
         return retVal;
     }
 
     @Override
+    @Transactional
     public List<PostResponseDto> getValidPostListByCategory(long category_id) {
         List<PostResponseDto> retVal = postRepository.findValidPostByCategoryId(category_id).get().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
         return retVal;
     }
 
-    //(마이페이지)신청 내역 게시글 리스트 가져오기 -> 데이터 없을 시, 예외 처리 필요
+    //(마이페이지0)신청 내역 게시글 리스트 가져오기 - 게시글 상태가 VALID이면서, postuser 테이블의 상태가 GUEST인 것
     @Override
+    @Transactional
     public List<PostResponseDto> getMyApplyPostList(long userId) {
         List<PostResponseDto> retVal = new ArrayList<>();
-        List<PostUser> postUserList = postUserRepository.findPostUserByUserId(userId).get();
+        List<PostUser> postUserList = postUserRepository.findGuestByUserId(userId).get();
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
-            Post post = postRepository.findValidPostByPostId(postId).get();
-            retVal.add( PostResponseDto.builder()
-                                        .post(post)
-                                        .category(categoryRepository.findById(post.getCategory_id()).get())
-                                        .host(this.getUserOpenInfo(postUserRepository.findHostById(post.getPost_id())))
-                                        .guest(postUserRepository.findAllGuestById(post.getPost_id()).get().stream()
-                                            .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                                        .build());
+            Post post = postRepository.getById(postId);
+            if(post.getState().toString().equals("VALID")){
+                retVal.add( PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
         }
         return retVal;
     }
 
-    //(마이페이지)지난 내역 게시글 리스트 가져오기
+    //(마이페이지1)지난 내역 게시글 리스트 가져오기 - 게시글 상태가 EXPIRED이면서, postuser테이블의 상태가 GUEST인 것
     @Override
+    @Transactional
     public List<PostResponseDto> getMyLastPostList(long userId) {
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<PostUser> postUserList = postUserRepository.findGuestByUserId(userId).get();
+        for(PostUser postUser: postUserList) {
+            long postId = postUser.getPost_id();
+            Post post = postRepository.getById(postId);
+            if(post.getState().toString().equals("EXPIRED")){
+                retVal.add(PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
 
-        return null;
+            System.out.println("findExpiredPostByPostId: " + post.toString());
+
+        }
+        return retVal;
+}
+
+    //(마이페이지2)작성 이력 게시글 리스트 가져오기 - 게시글 상태가 VALID 또는 EXPIRED이면서, postuser테이블의 상태가 HOST인 것
+    @Override
+    @Transactional
+    public List<PostResponseDto> getMyRecruitPostList(long userId) {
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<PostUser> postUserList = postUserRepository.findHostByUserId(userId).get();
+        for (PostUser postUser: postUserList) {
+            long postId = postUser.getPost_id();
+            Post post = postRepository.getById(postId);
+            if(!post.getState().toString().equals("DELETED")){
+                retVal.add( PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                        .build());
+            }
+        }
+        return retVal;
     }
 
-    //(마이페이지)작성 이력 게시글 리스트 가져오기
+    // (상세 페이지) 게시글 상세 정보 가져오기
     @Override
-    public List<PostResponseDto> getMyRecruitPostList(long userId) {
-        return null;
+    @Transactional
+    public PostResponseDto getPostDetail(long post_id) {
+        Post post = postRepository.getById(post_id);
+        return PostResponseDto.builder()
+                .post(post)
+                .category(categoryRepository.findById(post.getCategory_id()).get())
+                .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                        .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                .build();
     }
 
 
@@ -161,6 +214,51 @@ public class PostServiceImpl implements PostService {
     @Transactional
     public void createPost(PostRequestDto postRequestDto) {
        postUserRepository.save(createPostUserFromRequest(postRequestDto));
+    }
+
+    // (상세 페이지) 모임 신청하기
+    @Override
+    @Transactional
+    public void applyPost(PostApplyRequestDto postApplyRequestDto) {
+        Post post = postRepository.findById(postApplyRequestDto.getPost_id())
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+        post.increaseParticipantNum();
+
+        PostUser postUser = PostUser.builder()
+                .state(StatePostUserType.GUEST)
+                .scope_age(postApplyRequestDto.isScope_age())
+                .scope_gender(postApplyRequestDto.isScope_gender())
+                .scope_company(postApplyRequestDto.isScope_company())
+                .scope_department(postApplyRequestDto.isScope_department())
+                .scope_name(postApplyRequestDto.isScope_name())
+                .scope_position(postApplyRequestDto.isScope_position_type())
+                .post_id(postApplyRequestDto.getPost_id())
+                .user_id(postApplyRequestDto.getUser_id())
+                .build();
+        postUserRepository.save(postUser);
+
+    }
+
+    // (상세 페이지) 모임 삭제하기
+    @Override
+    @Transactional
+    public void deletePost(long post_id) {
+        Post post = postRepository.findById(post_id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+
+        post.updateToDeleted();
+    }
+
+    // (상세 페이지) 모임 신청 취소하기
+    @Override
+    @Transactional
+    public void cancelApply(long post_id, long user_id) {
+        PostUser postUser = postUserRepository.findByPostAndUserId(post_id, user_id).get();
+        long post_user_id = postUser.getPost_user_id();
+        postUserRepository.delete(postUser);
+
+        Post post = postRepository.findById(post_id).get();
+        post.decreaseParticipantNum();
     }
 
     private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {
