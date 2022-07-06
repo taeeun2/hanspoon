@@ -249,7 +249,7 @@ const Header = () => {
                  "fontWeight" : 'bold'}} onClick = {onLogout}>로그아웃</button></li>
                  </>
                 :  <>
-                <Link to ="signup">
+                <Link to ="/signup">
                 <li className="gnb_item">
                   <span style={{
                     "fontFamily": 'NanumSquareRound',
@@ -257,7 +257,7 @@ const Header = () => {
                   </span>
                 </li>
                 </Link>
-                <Link to ="signin">
+                <Link to ="/signin">
                 <li className="gnb_item">
                   <span style={{
                     "fontFamily": 'NanumSquareRound',
