@@ -69,6 +69,12 @@ const SignInTest = () => {
       
       })
     }
+
+    const onKeyPress = (e) => {
+        if(e.key == 'Enter'){
+            onClickLogin()
+        }
+    }
   
   
     return (
@@ -84,14 +90,16 @@ const SignInTest = () => {
                            
                             <Grid container  sx={{ justifyContent: 'center' }}>
                                 <MKBox className="IDBox">
-                                    <div className="ID_icon"><input className = "inputID" value={inputId} onChange={handleInputId} placeholder="Email address"/></div>
+                                    <div className="ID_icon"><input className = "inputID" value={inputId} onChange={handleInputId} placeholder="Email address"
+                                        onKeyPress={onKeyPress}/></div>
                                 </MKBox>
-                                <MKBox  mb={2}className="IDBox">
-                                    <div className="PW_icon"><input className = "inputID" value={inputPw} onChange={handleInputPw}  type = "password" placeholder="Password"/></div>
+                                <MKBox  mb={1}className="IDBox">
+                                    <div className="PW_icon"><input className = "inputID" value={inputPw} onChange={handleInputPw}  type = "password" placeholder="Password"
+                                     onKeyPress={onKeyPress}/></div>
                                 </MKBox>
-                                <MKBox mb={2}>
+                                <Grid item mb = {1} style={{"width" : "100%"}}>
                                 <span className="login_message">{message}</span>
-                                </MKBox>
+                                </Grid>
                                 <button type="button" className='buttonLogin' onClick={onClickLogin}>
                                     Login
                                 </button>
