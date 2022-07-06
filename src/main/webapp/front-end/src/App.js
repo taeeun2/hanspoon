@@ -19,6 +19,9 @@ import routes from "routes";
 import Author from 'pages/LandingPages/Author';
 import Post from 'pages/LandingPages/Post';
 import DetailPost from 'pages/LandingPages/DetailPost';
+import SignInTest from 'pages/SignInTest';
+import SignUpTest from 'pages/SignUpTest';
+import CreatePostTest from 'pages/CreatePostTest';
 const App = () => {
     const { pathname } = useLocation();
     // Setting page scroll to 0 when changing the route
@@ -37,18 +40,6 @@ const App = () => {
         return null;
       });
   return (
-            // <BrowserRouter>
-            //  <Header />
-            //  <Routes>
-            //      <Route path="/" element={<Home/>}></Route>
-            //      <Route path="/mypage/*" element={<MyPage/>}></Route>
-            //      <Route path="/post/*" element={<Post/>}></Route>
-            //      <Route path="/signin/*" element={<SignIn />}></Route>
-            //      <Route path="/signup/*" element={<SignUp />}></Route>
-            //      <Route path="*" element={<NotFound />}></Route>
-            //  </Routes>
-            // </BrowserRouter>
-            
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <Routes>
@@ -56,9 +47,14 @@ const App = () => {
               <Route path="/" element={<Presentation />} />
               <Route path="/mypage/*" element={<AboutUs/>} />
               <Route path="/post/*" element={<Post/>} />
-              <Route path="/signin/*" element={<SignIn />} />
-              <Route path="/signup/*" element={<SignUp />} />
+              {/* <Route path="/signin/*" element={<SignIn />} />
+              <Route path="/signup/*" element={<SignUp />} /> */}
               <Route path="/detailPost/:clickedId" element={<DetailPost />} />
+              {/* TEST */}
+              <Route path="/signin/*" element={<SignInTest />} />
+              <Route path="/signup/*" element={<SignUpTest />} />
+              <Route path="/postTest/*" element={<CreatePostTest/>}/>
+
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </ThemeProvider>

@@ -88,7 +88,7 @@ function AboutUs() {
   }
 
   const getMyPostList = (category_id) => {
-    let userEmail = sessionStorage.getItem('user');
+    let userEmail = sessionStorage.getItem('user_id');
     fetch(`http://localhost:8080/mypost/${category_id}?user=${userId}`)
     .then(res => {
       return res.json();

@@ -142,19 +142,23 @@ const CreatePost = () => {
                     content : content,
                     restaurant_name : restaurantName,
                     meet_date : meet_date,
-                    user_id : sessionStorage.getItem('user'),
+                    // user_id : sessionStorage.getItem('user_id'),
+                    user_id : 6,
                     scope_name : scope_name,
                     scope_gender :scope_gender,
                     scope_company : scope_company,
-                    scope_position : scope_position_type,
+                    scope_position_type : scope_position_type,
                     scope_department :scope_department,
                     capacity : num+1,
                     category_id : category
                 })
             }).then(res=>{
-                console.log(res)
-                alert('모임이 생성되었습니다.')
-                document.location.href='/'
+                if(res.ok){
+                    alert('모임이 생성되었습니다.')
+                    document.location.href='/'
+                }else{
+                    alert('모임 생성에 실패하였습니다.')
+                }                
             })
 
         }

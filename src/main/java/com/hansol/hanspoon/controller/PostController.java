@@ -5,6 +5,8 @@ import com.hansol.hanspoon.repository.PostRepository;
 import com.hansol.hanspoon.service.PostService;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
@@ -23,7 +25,8 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public void createPost(@RequestBody PostRequestDto postRequestDto){
+    public ResponseEntity createPost(@RequestBody PostRequestDto postRequestDto){
         postService.createPost(postRequestDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

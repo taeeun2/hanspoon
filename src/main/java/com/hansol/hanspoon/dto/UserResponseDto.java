@@ -12,4 +12,5 @@ import lombok.Setter;
 public class UserResponseDto {
 
     private String email;
+    private String errorMessage;
 }

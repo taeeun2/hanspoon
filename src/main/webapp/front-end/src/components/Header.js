@@ -10,32 +10,37 @@ import {
   Button,
 } from "reactstrap";
 import { ReactComponent as LogoWhite } from "assets/images/logos/xtremelogowhite.svg";
-import styled from "styled-components";
+import styled, { ServerStyleSheet } from "styled-components";
 
 const Header = () => {
 
-  const [isOpen, setIsOpen] = React.useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [spoonNum, setSpoonNum] = useState(0);
 
-  const Handletoggle = () => {
-    setIsOpen(!isOpen);
-  };
+  // const Handletoggle = () => {
+  //   setIsOpen(!isOpen);
+  // };
 
 
   // ============ 추가 ==============
   const [isLogin, setIsLogin] = useState(false)
 
 	useEffect(()=>{
-		if(sessionStorage.getItem('user') === null){
+		if(sessionStorage.getItem('user_id') === null){
 			console.log('isLogin ?? :: ',isLogin)
 		} else{
 			setIsLogin(true)
+      setUserName(sessionStorage.getItem('user_name'))
+      setSpoonNum(sessionStorage.getItem('spoon_num'))
 			console.log('isLogin ?? :: ',isLogin)
 		}	
 	})
 
     const onLogout = () => {
-        console.log(isLogin);
-        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('user_id')
+        sessionStorage.removeItem('user_name')
+        sessionStorage.removeItem('spoon_num')
         setIsLogin(false)
         // document.location.href = '/'
     }
@@ -137,18 +142,33 @@ const Header = () => {
             {/* (태은님) 로그인, 회원가입 */}
             <div className="nav_box"> 
               <ul className="gnb_list">
+                {isLogin ? 
+               <> <li className="gnb_item">
+               <span style={{
+                 "fontFamily": 'NanumSquareRound',
+                 "fontWeight" : 'bold'}}>{userName} 님 환영합니다.(🥄{spoonNum})</span></li>
+                 <li className="gnb_item">
+               <button style={{
+                 "fontFamily": 'NanumSquareRound',
+                 "fontWeight" : 'bold'}} onClick = {onLogout}>로그아웃</button></li>
+                 </>
+                :  <>
+                <Link to ="signup">
                 <li className="gnb_item">
                   <span style={{
                     "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}}>회원가입
                   </span>
                 </li>
+                </Link>
+                <Link to ="signin">
                 <li className="gnb_item">
                   <span style={{
                     "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}}>로그인
                   </span>
                 </li>
+                </Link></>}
               </ul>
             </div>
           </div>

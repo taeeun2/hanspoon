@@ -65,11 +65,11 @@ public class UserServiceImpl implements UserService{
     @Override
     @Transactional
     public UserResponseDto signUp(UserRequestDto userRequestDto) {
-
+        UserResponseDto userResponseDto = new UserResponseDto();
         userRepository.findByEmail(userRequestDto.getEmail())
                 .ifPresent((user->{throw new HanspoonException(DUPLICATED_EMAIL);}));
         userRepository.save(createUserFromRequest(userRequestDto));
-        UserResponseDto userResponseDto = new UserResponseDto(userRequestDto.getEmail());
+        userResponseDto.setEmail(userRequestDto.getEmail());
         return userResponseDto;
     }
 

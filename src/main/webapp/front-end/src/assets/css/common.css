@@ -70,17 +70,16 @@ em {
 	font-style: normal;
 }
 
-input,
+/* input,
 select {
 	vertical-align: middle;
-}
+} */
 
-input[type=text]::-ms-clear {
+/* input[type=text]::-ms-clear {
 	display: none;
-}
+} */
 
-button,
-input {
+button{
 	padding: 0;
 	border: none;
 	border: 0;

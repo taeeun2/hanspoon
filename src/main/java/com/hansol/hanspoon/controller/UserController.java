@@ -31,7 +31,6 @@ public class UserController {
 
     @GetMapping("/sendEmail")
     public EmailResponseDto sendEmail(@RequestParam(value = "email", required = false) String email){
-        System.out.println(email);
         return emailService.sendEmail(email);
     }
 

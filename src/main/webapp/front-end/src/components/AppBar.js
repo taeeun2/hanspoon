@@ -34,8 +34,8 @@ const ResponsiveAppBar = () => {
   const [isLogin, setIsLogin] = React.useState('')
 
   React.useEffect(()=>{
-    console.log(sessionStorage.getItem('user'))
-    if(sessionStorage.getItem('user') !== null){
+    console.log(sessionStorage.getItem('user_id'))
+    if(sessionStorage.getItem('user_id') !== null){
       setIsLogin(true)
     }else{
       setIsLogin(false)
@@ -43,7 +43,7 @@ const ResponsiveAppBar = () => {
   },[])
   const onLogout = () => {
         console.log(isLogin);
-        sessionStorage.removeItem('user')
+        sessionStorage.removeItem('user_id')
         setIsLogin(false)
         document.location.href = '/'
     }

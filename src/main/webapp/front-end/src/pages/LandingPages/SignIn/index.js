@@ -91,7 +91,10 @@ function SignInBasic() {
         }else if(isPw === false){
           setMessage('비밀번호를 입력해주세요.')
         }else if(data.user_id !== undefined){
-            sessionStorage.setItem('user',data.user_id)
+            sessionStorage.setItem('user_id',data.user_id)
+            sessionStorage.setItem('user_email', data.email)
+            sessionStorage.setItem('user_name',data.user_name)
+            sessionStorage.setItem('spoon_num',data.spoon_num)
             document.location.href='/'
         }else{
             setMessage(data.errorMessage)

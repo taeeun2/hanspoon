@@ -1,6 +1,10 @@
 package com.hansol.hanspoon.service;
 
 import com.hansol.hanspoon.dto.EmailResponseDto;
+import com.hansol.hanspoon.entity.User;
+import com.hansol.hanspoon.exception.HanspoonException;
+import com.hansol.hanspoon.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Service;
@@ -9,8 +13,13 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
+
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.DUPLICATED_EMAIL;
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_EMAIL;
 
 
 @Service
@@ -22,16 +31,27 @@ public class EmailServiceImpl implements EmailService{
     @Value("${email.password}")
     private String password;
 
+    @Autowired
+    private UserRepository userRepository;
+
     public static final String ePw = createKey();
     @Override
     public EmailResponseDto sendEmail(String email){
+        EmailResponseDto emailResponseDto = new EmailResponseDto();
+
+        //증복된 이메일 존재하는지 확인
+        userRepository.findByEmail(email)
+                .ifPresent(
+                        (user->{
+                            new HanspoonException(DUPLICATED_EMAIL);
+                        }));
 
         //메일 관련 정보
         String host = "smtp.naver.com";
         int port=465;
 
         //메일 내용
-        String recipient = email+"@hansol.com"; // @hansol.com으로 바꿔야 함
+        String recipient = email;
         String subject = "Hanspoon 회원가입 이메일 인증";
         String body = "";
         body+= "<div style='margin:100px;'>";
@@ -73,12 +93,12 @@ public class EmailServiceImpl implements EmailService{
             Transport.send(mimeMessage);
 
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            throw new HanspoonException(NO_EMAIL);
+
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
 
-        EmailResponseDto emailResponseDto = new EmailResponseDto();
         emailResponseDto.setAuthCode(ePw);
         return emailResponseDto;
 
