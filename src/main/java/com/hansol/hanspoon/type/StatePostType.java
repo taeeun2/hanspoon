@@ -1,5 +1,5 @@
 package com.hansol.hanspoon.type;
 
 public enum StatePostType {
-    DELETED,EXPIRED,VALID
+    DELETED,EXPIRED,VALID, FULL
 }

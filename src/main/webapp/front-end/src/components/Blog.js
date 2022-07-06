@@ -18,10 +18,10 @@ import MKTypography from "./MKTypography";
     const [isHovering, setIsHovering] = useState(0);
 
     return (
-      <div onMouseOver={() => setIsHovering(1)}
+      <div  onMouseOver={() => setIsHovering(1)}
             onMouseOut={() => setIsHovering(0)}
             className={`hoverBlog ${isHovering ? 'active' : ''}`}>
-        <Card className="blog text-center"> 
+        <Card id="blog" className="blog text-center"> 
           <CardBody className="p-3">
             <MKTypography variant="subtitle1" color="secondary" mt={3} mb={2} style={{
                       "fontFamily": 'NanumSquareRound',

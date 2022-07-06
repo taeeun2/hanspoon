@@ -18,7 +18,7 @@ import { useNavigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
 const Blogs = () => {
- 
+    const [visible, setVisible] = useState(6);
     const [categoryList, setCategoryList] = useState([]);
     const [postList, setPostList] = useState([]);
     const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "전체"});
@@ -48,9 +48,10 @@ const Blogs = () => {
       navigate(`/detailPost/${clickedId}`)
     }
 
-    // useEffect(() => {
-    //   console.log(props.category);
-    // }, []);
+    //더보기 버튼 클릭 이벤트
+    const showMoreBlogs = () => {
+      setVisible((preValue) => preValue + 3)
+    }
 
     /* ================= fetch ================= */
 
@@ -139,7 +140,7 @@ const Blogs = () => {
                   setChecked={setToggleChecked}
                 />
                     <Grid container spacing={3} className="blog_list_box">
-                      {postList.map((post, index) => (
+                      {postList.slice(0,visible).map((post, index) => (
                           <Grid item xs={12} sm={6} lg={4} key={index}>
                             <div onClick={() => {handleClick(post.post_id)}}>
                               <Blog 
@@ -155,6 +156,14 @@ const Blogs = () => {
                             </div>
                           </Grid>
                       ))}
+                      {
+                        !(visible >= postList.length) &&
+                        <Grid item  xs={12} sm={12} lg={12}  justifyContent="center">
+                          <button type='button' className='btn_more' onClick={showMoreBlogs}>
+                            더보기
+                          </button>
+                        </Grid> 
+                      }
                 </Grid>
               </Grid>
             </Grid>

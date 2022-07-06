@@ -35,8 +35,8 @@ const DetailContent = ({clickedId, postData}) => {
                     'Content-Type' : 'application/json'
                 },
                 body: JSON.stringify({
-                    post_id : 18,
-                    user_id : 10,
+                    post_id : 18, // 임시
+                    user_id : 10, // 임시
                     scope_name : scope_name,
                     scope_gender :scope_gender,
                     scope_company : scope_company,

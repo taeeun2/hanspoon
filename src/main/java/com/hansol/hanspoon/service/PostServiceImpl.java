@@ -97,7 +97,7 @@ public class PostServiceImpl implements PostService {
         return retVal;
     }
 
-    //(마이페이지0)신청 내역 게시글 리스트 가져오기 - 게시글 상태가 VALID이면서, postuser 테이블의 상태가 GUEST인 것
+    //(마이페이지0)신청 내역 게시글 리스트 가져오기 - 게시글 상태가 VALID 또는 FULL이면서, postuser 테이블의 상태가 GUEST인 것
     @Override
     @Transactional
     public List<PostResponseDto> getMyApplyPostList(long userId) {
@@ -106,6 +106,8 @@ public class PostServiceImpl implements PostService {
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
             Post post = postRepository.getById(postId);
+//            DB 수정 후 변경
+//            if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
             if(post.getState().toString().equals("VALID")){
                 retVal.add( PostResponseDto.builder()
                         .post(post)

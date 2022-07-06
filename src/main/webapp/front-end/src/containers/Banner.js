@@ -8,6 +8,8 @@ import "aos/dist/aos.css";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
+import { Link } from 'react-router-dom';
+import AboutUs from 'pages/LandingPages/AboutUs';
 
 const Banner = () => {
 
@@ -47,9 +49,11 @@ const Banner = () => {
                         <button type="button" className='btn_join'  data-aos="fade-up">
                             한스푼 참여하기
                         </button>
-                        <button type="button" className='btn_join'  data-aos="fade-up">
-                            내 한스푼 현황
-                        </button>
+                        <Link to="/mypage">
+                            <button type="button" className='btn_join'  data-aos="fade-up">
+                                내 한스푼 현황
+                            </button>
+                        </Link>
                     </Grid>
                 </Box>
             {/* </Grid> */}

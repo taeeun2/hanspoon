@@ -23,16 +23,17 @@
 	font-family: 'NanumSquareRound';
 	font-weight: bolder;
 	font-size: 35px;
-	text-shadow: 2px 2px 2px gray;
+	text-shadow: 3px 3px 7px rgb(49, 49, 49);
 }
 
 .banner .banner_main_title {
 	color: #ffe818;
 	font-family: 'NanumSquare_bold';
 	font-weight: bolder;
-	text-shadow: 2px 2px 2px gray;
+	text-shadow: 3px 3px 7px rgb(49, 49, 49);
+	font-size: 110px;
 }
-
+/**/
 /* ================ 배너 ================ */
 .banner {
 	top: 0;
@@ -62,17 +63,13 @@
 }
 
 .banner .title_box {
-	margin: 150px 150px;
+	margin: 120px 150px;
 	text-align: center;
 	max-width: 100%;
 }
 
 .banner .sub_title_box {
 	margin: 40px auto;
-}
-
-.banner .banner_main_title {
-	font-size: 110px;
 }
 
 /* .banner .user_name {
@@ -104,7 +101,7 @@
 	font-weight: 800;
 	color: #000;
 	background-color: #ffe818;
-	border: 3px solid #000;
+	border: 3px solid #333333;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
@@ -117,10 +114,17 @@
 }
 
 .introduce .info_text {
-	margin-top: 28px;
-	font-size: 22px;
+	margin-top: 30px;
+	font-size: 20px;
     line-height: 34px;
 }
+
+.introduce .info_link {
+	margin-top: 28px;
+	font-size: 20px;
+    line-height: 34px;
+}
+
 
 
 /* ================ 모임 생성 방법 ================ */
@@ -144,6 +148,19 @@
 	min-height: 350px;
 }
 
+.create_step .section {
+	position: relative;
+}
+
+.create_step .step_title {
+	display: block;
+	margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 36px;
+    color: #ff5c00;
+}
+
 /* ================ 모임 참여 방법 ================ */
 
 .apply_step {
@@ -163,6 +180,24 @@
     border: 4px solid #000;
 	border-radius: 20px;
 	min-height: 500px;
+}
+
+.apply_step .step_title {
+	display: block;
+	margin-bottom: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    line-height: 36px;
+    color: #ff5c00;
+}
+
+/* 임시 */
+.apply_step .step_01 {
+	margin-bottom: 45px;
+}
+
+.apply_step .step_02 {
+	margin-bottom: 45px;
 }
 
 /* ================ 게시글 ================ */
@@ -192,6 +227,32 @@
 .blogs .blog_list_box {
 	padding: 35px;
 }
+
+.blogs .btn_more {
+	margin-left:10px;
+	margin-bottom: 20px;
+	padding: 0 52px;
+	height: 64px;
+	border-radius: 20px;
+	font-size: 22px;
+	font-weight: 800;
+	color: #000;
+	background-color: #ffe818;
+	border: 3px solid #000;
+	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hoverBlog.active {
+	transform: scale(1.05);
+	/* transform: perspective(999px) rotateX(7deg) translate3d(0px, -4px, 5px) */
+  }
+
+  #blog {
+	border-radius: 20px;
+	border: 4px solid #000;
+	border-width: 2px;
+	/* min-height: 480px; */
+  }
 
 /* ================ Component ================ */
 
@@ -236,10 +297,9 @@
 	position: absolute;
 	bottom: 20px;
 	right: 50px;
-	margin-right:2px;
+	margin-right:3px;
 	height: 50px;
 	width: 120px;
-	padding: 16px 20px 15px;
 	line-height: 1;
 	border-radius: 27px;
 	font-size: 17px;
@@ -251,9 +311,9 @@
 }
 
 .static_button .static_button_up {
-	border-radius: 27px;
-    height: 45px;
-    width: 45px;
+	border-radius: 25px;
+    height: 50px;
+    width: 50px;
 	background-image: url('assets/images/Icons/upload.png');
 	background-size: cover;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);

@@ -148,6 +148,7 @@ table caption {
 	right: 0;
 	z-index: 1000;
 	text-align: center;
+	background-color: #fff;
 	/* 스크롤 시 헤더 */
 	/* //스크롤 시 헤더 */
 	/* gnb */
