@@ -1,9 +1,6 @@
 package com.hansol.hanspoon.controller;
 
-import com.hansol.hanspoon.dto.EmailResponseDto;
-import com.hansol.hanspoon.dto.LoginRequestDto;
-import com.hansol.hanspoon.dto.UserRequestDto;
-import com.hansol.hanspoon.dto.UserResponseDto;
+import com.hansol.hanspoon.dto.*;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
@@ -19,10 +16,10 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    public UserService userService;
+    private UserService userService;
 
     @Autowired
-    public EmailService emailService;
+    private EmailService emailService;
 
     @PostMapping("/login")
     public User loginUser(@RequestBody LoginRequestDto requestDto){
@@ -50,6 +47,16 @@ public class UserController {
 
 
         return userService.signUp(userRequestDto);
+    }
+
+    @PostMapping("/findPw")
+    public FindPwResponseDto findPw(@RequestBody FindPwRequestDto findPwRequestDto){
+        return emailService.findPW(findPwRequestDto);
+    }
+
+    @PostMapping("/edit")
+    public void edit(@RequestBody UserRequestDto userRequestDto){
+        userService.edit(userRequestDto);
     }
 
    }

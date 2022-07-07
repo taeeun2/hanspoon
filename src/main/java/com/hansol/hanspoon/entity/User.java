@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.entity;
 
+import com.hansol.hanspoon.dto.UserRequestDto;
 import com.hansol.hanspoon.type.AgeGroup;
 import com.hansol.hanspoon.type.Gender;
 import com.hansol.hanspoon.type.StateUserType;
@@ -44,6 +45,20 @@ public class User{
         this.company_id = company_id;
     }
 
+    public void editUser(UserRequestDto requestDto){
+        this.password = requestDto.getPassword();
+        this.user_name = requestDto.getUser_name();
+        this.age = requestDto.getAge();
+        this.gender = requestDto.getGender();
+
+        this.department_id = requestDto.getDepartment_id();
+        this.position_type_id = requestDto.getPosition_type_id();
+        this.company_id = requestDto.getCompany_id();
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
     @Enumerated(EnumType.STRING)
     private AgeGroup age;
     @Enumerated(EnumType.STRING)

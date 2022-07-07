@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.FindPwRequestDto;
 import com.hansol.hanspoon.dto.UserRequestDto;
 import com.hansol.hanspoon.dto.UserResponseDto;
 import com.hansol.hanspoon.entity.Department;
@@ -24,11 +25,10 @@ import java.util.List;
 import java.util.Properties;
 import java.util.Random;
 
-import static com.hansol.hanspoon.exception.HanspoonErrorCode.DUPLICATED_EMAIL;
-import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_USER;
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.*;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements  UserService{
 
 
 
@@ -79,6 +79,17 @@ public class UserServiceImpl implements UserService{
         return userRepository.findByEmail(email).get().getUser_id();
     }
 
+    @Override
+    public UserResponseDto edit(UserRequestDto request) {
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(()-> new HanspoonException(NO_EMAIL));
+        user.editUser(request);
+        UserResponseDto responseDto = new UserResponseDto();
+        responseDto.setEmail(request.getEmail());
+        return responseDto;
+    }
+
+
+
     public static User createUserFromRequest(UserRequestDto request){
         return User.builder()
                 .email(request.getEmail())
@@ -92,6 +103,7 @@ public class UserServiceImpl implements UserService{
                 .state(StateUserType.VALID)
                 .build();
     }
+
 
 
 }

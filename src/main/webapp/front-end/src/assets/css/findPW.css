@@ -1,0 +1,30 @@
+.findPW_title{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-weight: bolder ;
+	font-family: 'NanumSquareRound';
+}
+
+.findPW_box{
+    padding: 20px 5px 38px;
+    background-color: #fff;
+    border: 3px solid #000;
+	border-radius: 20px;
+	min-height: 100%;
+	display: inline-block
+}
+
+.findPWinputID{
+    width: 100%;
+	font-size: 15px;
+	font-family: 'NanumSquareRound';
+	padding: 0;
+	border: none;
+	border: 0;
+	outline: none;
+	outline: 0;
+	background: none;
+	margin-left: 10px;
+}

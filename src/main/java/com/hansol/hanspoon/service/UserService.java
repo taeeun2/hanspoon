@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.FindPwRequestDto;
 import com.hansol.hanspoon.dto.UserRequestDto;
 import com.hansol.hanspoon.dto.UserResponseDto;
 import com.hansol.hanspoon.entity.Department;
@@ -21,5 +22,7 @@ public interface UserService {
 
     //마이페이지
     Long getUserIdByName(String email);
+
+    UserResponseDto edit(UserRequestDto request);
 
 }

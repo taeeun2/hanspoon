@@ -34,9 +34,7 @@ const SignUpTest= () => {
         .then(data =>{
             setPosition_typeMenu(data)
         })
-    },[])
 
-    useEffect(()=>{
         fetch(`http://localhost:8080/select/department/1`)
         .then(res=>{
             return res.json()
@@ -46,7 +44,6 @@ const SignUpTest= () => {
             
         })
     },[])
-
 
     const [email, setEmail] = useState('');
     const [emailMessage, setEmailMessage] = useState('');
@@ -164,16 +161,18 @@ const SignUpTest= () => {
     // 비밀번호 일치 여부 확인
     const handlePasswordConfirm = (e) => {
         setPasswordConfirm(e.target.value)
-        if(password === e.target.value){
-            setPasswordConfirmColor('green')
-            setPasswordConfirmMessage('비밀번호가 일치합니다.')
-            setIsPasswordConfirm(true)
-        }
-        else{
-            setPasswordConfirmColor('red')
-            setPasswordConfirmMessage('비밀번호가 일치하지 않습니다.')
-            setIsPasswordConfirm(false)
-        }
+        if(isPassword){
+            if(password === e.target.value){
+                setPasswordConfirmColor('green')
+                setPasswordConfirmMessage('비밀번호가 일치합니다.')
+                setIsPasswordConfirm(true)
+            }
+            else{
+                setPasswordConfirmColor('red')
+                setPasswordConfirmMessage('비밀번호가 일치하지 않습니다.')
+                setIsPasswordConfirm(false)
+            }
+    }
     }
 
     // 사용자 이름

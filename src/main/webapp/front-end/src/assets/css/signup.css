@@ -24,9 +24,15 @@
 	min-height: 100%;
 }
 
-
+/* input 기본 스타일 초기화 */
+input {
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+}
 .inputSignUp{
 	margin: auto;
+	padding: 0%;
     border-left-width:0; 
     border-right-width:0; 
     border-top-width:0; 

@@ -22,6 +22,7 @@ import DetailPost from 'pages/LandingPages/DetailPost';
 import SignInTest from 'pages/SignInTest';
 import SignUpTest from 'pages/SignUpTest';
 import CreatePostTest from 'pages/CreatePostTest';
+import FindPw from 'pages/FindPw';
 const App = () => {
     const { pathname } = useLocation();
     // Setting page scroll to 0 when changing the route
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/signup/*" element={<SignUp />} /> */}
               <Route path="/detailPost/:clickedId" element={<DetailPost />} />
               {/* TEST */}
+              <Route path='/findPW' element = {<FindPw/>}/>
               <Route path="/signin/*" element={<SignInTest />} />
               <Route path="/signup/*" element={<SignUpTest />} />
               <Route path="/postTest/*" element={<CreatePostTest/>}/>

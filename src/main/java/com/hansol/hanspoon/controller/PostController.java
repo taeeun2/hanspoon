@@ -21,7 +21,7 @@ import java.util.List;
 public class PostController {
 
     @Autowired
-    PostService postService;
+    private PostService postService;
 
     @GetMapping("/getCurrentTime")
     public LocalDateTime getCurrentTime(){

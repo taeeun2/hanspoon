@@ -212,6 +212,7 @@ public class PostServiceImpl implements PostService {
         return res;
     }
 
+    // 모임 생성하기
     @Override
     @Transactional
     public void createPost(PostRequestDto postRequestDto) {
@@ -226,6 +227,9 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
         post.increaseParticipantNum();
 
+        if(post.getCapacity() == post.getParticipant_num()){
+           post.setStatusFull();
+        }
         PostUser postUser = PostUser.builder()
                 .state(StatePostUserType.GUEST)
                 .scope_age(postApplyRequestDto.isScope_age())
@@ -261,6 +265,7 @@ public class PostServiceImpl implements PostService {
 
         Post post = postRepository.findById(post_id).get();
         post.decreaseParticipantNum();
+        post.setStatusValid();
     }
 
     private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {

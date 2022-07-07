@@ -1,6 +1,8 @@
 package com.hansol.hanspoon.service;
 
 import com.hansol.hanspoon.dto.EmailResponseDto;
+import com.hansol.hanspoon.dto.FindPwRequestDto;
+import com.hansol.hanspoon.dto.FindPwResponseDto;
 import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.exception.HanspoonException;
 import com.hansol.hanspoon.repository.UserRepository;
@@ -18,8 +20,7 @@ import java.util.Date;
 import java.util.Properties;
 import java.util.Random;
 
-import static com.hansol.hanspoon.exception.HanspoonErrorCode.DUPLICATED_EMAIL;
-import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_EMAIL;
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.*;
 
 
 @Service
@@ -43,12 +44,9 @@ public class EmailServiceImpl implements EmailService{
         userRepository.findByEmail(email)
                 .ifPresent(
                         (user->{
-                            new HanspoonException(DUPLICATED_EMAIL);
+                            throw new HanspoonException(DUPLICATED_EMAIL);
                         }));
 
-        //메일 관련 정보
-        String host = "smtp.naver.com";
-        int port=465;
 
         //메일 내용
         String recipient = email;
@@ -66,6 +64,19 @@ public class EmailServiceImpl implements EmailService{
         body+= ePw+"</strong><div>";
         body+= "</div>";
 
+
+        sendEmailtoUser(recipient, subject, body);
+
+        emailResponseDto.setAuthCode(ePw);
+        return emailResponseDto;
+
+
+    }
+
+    private void sendEmailtoUser(String recipient, String subject, String body) {
+        //메일 관련 정보
+        String host = "smtp.naver.com";
+        int port=465;
 
         Properties props = System.getProperties();
 
@@ -98,10 +109,40 @@ public class EmailServiceImpl implements EmailService{
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
+    }
 
-        emailResponseDto.setAuthCode(ePw);
-        return emailResponseDto;
+    @Override
+    public FindPwResponseDto findPW(FindPwRequestDto request) {
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(()->new HanspoonException(NO_USER_EMAIL));
+        if(!user.getUser_name().equals(request.getUser_name())){
+            throw new HanspoonException(NO_EMAIL_NAME);
+        }
 
+        String temp_password = getRamdomPassword(10);
+        user.setPassword(temp_password);
+        userRepository.save(user);
+
+        //메일 내용
+        String recipient = request.getEmail();
+        String subject = "Hanspoon 임시 비밀번호";
+        String body = "";
+        body+= "<div style='margin:100px;'>";
+        body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
+        body+= "<br>";
+        body+= "<p>"+request.getUser_name()+"님의 임시 비밀번호입니다. 비밀번호를 변경하여 사용하세요<p>";
+        body+= "<br>";
+        body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
+        body+= "<h3 style='color:blue;'>임시 비밀번호</h3>";
+        body+= "<div style='font-size:130%'>";
+        body+= "CODE : <strong>";
+        body+= temp_password+"</strong><div>";
+        body+= "</div>";
+
+        sendEmailtoUser(recipient, subject, body);
+        FindPwResponseDto  findPwResponseDto = new FindPwResponseDto();
+        findPwResponseDto.setEmail(request.getEmail());
+
+        return findPwResponseDto;
 
     }
 
@@ -133,6 +174,25 @@ public class EmailServiceImpl implements EmailService{
     }
 
 
+    public static String getRamdomPassword(int len) {
+        char[] charSet = new char[] { '0', '1', '2', '3', '4', '5', '6', '7',
+                '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
+                'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+                'U', 'V', 'W', 'X', 'Y', 'Z' };
 
+        int idx = 0;
+        StringBuffer sb = new StringBuffer();
+
+        System.out.println("charSet.length :::: "+charSet.length);
+
+        for (int i = 0; i < len; i++) {
+
+            idx = (int) (charSet.length * Math.random()); // 36 * 생성된 난수를  Int로 추출 (소숫점제거)
+            System.out.println("idx :::: "+idx);
+            sb.append(charSet[idx]);
+        }
+
+        return sb.toString();
+    }
 
 }

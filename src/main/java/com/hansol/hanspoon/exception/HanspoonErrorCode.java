@@ -12,6 +12,11 @@ public enum HanspoonErrorCode {
 
     NO_EMAIL("해당 이메일이 존재하지 않습니다."),
 
-    DUPLICATED_EMAIL("중복된 이메일이 존재합니다.");
+    NO_RESTAURANT("식당이 존재하지 않습니다."),
+    DUPLICATED_EMAIL("중복된 이메일이 존재합니다."),
+
+    NO_USER_EMAIL("해당 이메일을 가진 사용자가 존재하지 않습니다."),
+
+    NO_EMAIL_NAME("이메일 정보와 사용자 이름의 정보가 일치하지 않습니다.");
     private final String message;
 }

@@ -2,10 +2,7 @@ package com.hansol.hanspoon.entity;
 
 import com.hansol.hanspoon.type.StatePostType;
 import com.hansol.hanspoon.type.StateUserType;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
@@ -57,6 +54,14 @@ public class Post {
 
     public void increaseParticipantNum() {
         this.participant_num++;
+    }
+
+    public void setStatusFull(){
+        this.state = StatePostType.FULL;
+    }
+
+    public void setStatusValid(){
+        this.state = StatePostType.VALID;
     }
 
     public void decreaseParticipantNum() {

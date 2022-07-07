@@ -1,6 +1,7 @@
 package com.hansol.hanspoon.repository;
 
 import com.hansol.hanspoon.entity.Post;
+import com.hansol.hanspoon.type.StatePostType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -18,4 +19,6 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     @Query("SELECT p FROM Post p WHERE p.category_id = :id")
     Optional<List<Post>> findAllPostByCategoryId(@Param("id") Long category_id);
+
+    Optional<List<Post>> findByState(StatePostType statePostType);
 }
