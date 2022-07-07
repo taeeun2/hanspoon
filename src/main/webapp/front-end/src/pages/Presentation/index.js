@@ -64,6 +64,16 @@ import ApplyStep from 'containers/ApplyStep';
 
 function Presentation() {
 
+  const [isLogin, setIsLogin] = React.useState('')
+
+  React.useEffect(()=>{
+    console.log(sessionStorage.getItem('user_id'))
+    if(sessionStorage.getItem('user_id') !== null){
+      setIsLogin(true)
+    }else{
+      setIsLogin(false)
+    }
+  },[])
 
   /* ================= RENDER ================= */
   return (
@@ -74,7 +84,7 @@ function Presentation() {
         height="960px"
         width="100%"
         id="banner_box">
-          <Banner />
+          <Banner isLogin={isLogin}/>
       </MKBox>
       <MKBox
         bgColor="light"
@@ -104,6 +114,11 @@ function Presentation() {
             setChecked={setToggleChecked}
           /> */}
           <Blogs />
+      </MKBox>
+      <MKBox
+        minHeight="300px"
+        width="100%">
+          <Footer />
       </MKBox>
       
       {/* <Card

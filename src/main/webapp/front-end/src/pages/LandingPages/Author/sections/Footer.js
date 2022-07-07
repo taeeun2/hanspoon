@@ -36,8 +36,10 @@ function Footer() {
             mr="auto"
             mb={{ xs: 3, lg: 0 }}
           >
-            <MKTypography variant="h6" textTransform="uppercase" mb={{ xs: 2, lg: 3 }}>
-              Material Design
+            <MKTypography variant="h3" textTransform="uppercase" mb={{ xs: 2, lg: 3 }} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
+              Hanspoon
             </MKTypography>
             <Stack
               component="ul"
@@ -102,9 +104,11 @@ function Footer() {
                 </MKTypography>
               </MKBox>
             </Stack>
-            <MKTypography variant="button" opacity={0.8}>
-              Copyright © <script>document.write(new Date().getFullYear())</script>2021 Material
-              Design by Creative Tim.
+            <MKTypography variant="button" opacity={0.8} style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "cursor": 'default'}}>
+              Copyright © <script>document.write(new Date().getFullYear())</script>2022 
+              Hanspoon by HansolInticube.
             </MKTypography>
           </Grid>
           <Grid item xs={12} lg={6} ml="auto" textAlign={{ xs: "center", lg: "right" }}>

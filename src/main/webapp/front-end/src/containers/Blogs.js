@@ -111,7 +111,7 @@ const Blogs = () => {
     //AOS 설정값
     useEffect(() => {
       AOS.init({
-          duration : 3000
+          duration : 1500
       });
      });
 
@@ -125,7 +125,7 @@ const Blogs = () => {
           </Grid>
           <MKBox component="section" >
             <Grid container  sx={{ justifyContent: 'center', height: '100%' }}>
-              <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={10} key={0}>
+              <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={10}>
               {/* <Grid container item xs={12} lg={6}>
                 <MKTypography variant="h3" mb={6}>
                   Check my latest blogposts
@@ -158,7 +158,7 @@ const Blogs = () => {
                       ))}
                       {
                         !(visible >= postList.length) &&
-                        <Grid item  xs={12} sm={12} lg={12}  justifyContent="center">
+                        <Grid item  xs={12} sm={12} lg={12}  justifyContent="center"> 
                           <button type='button' className='btn_more' onClick={showMoreBlogs}>
                             더보기
                           </button>

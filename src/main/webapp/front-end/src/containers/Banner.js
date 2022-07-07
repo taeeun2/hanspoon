@@ -11,13 +11,29 @@ import MKBox from "components/MKBox";
 import { Link } from 'react-router-dom';
 import AboutUs from 'pages/LandingPages/AboutUs';
 
-const Banner = () => {
+const Banner = ({ isLogin }) => {
 
     useEffect(() => {
         AOS.init({
-            duration : 2000
+            duration : 1500
         });
     });
+
+      //헤더 크기를 제외하고 페이지 내부 이동하기
+    const handleClick = (e) => {
+        console.log(e)
+        console.log(e.target.parentElement)
+        e.preventDefault()
+        const target = e.target.parentElement.getAttribute('href');
+        console.log(target)
+        const location = document.querySelector(target).offsetTop;
+        console.log(location)
+
+        window.scrollTo({
+            left:0,
+            top:location - 60 //헤더의 크기만큼 빼준다.
+        })
+    } 
 
     return (
         <Grid className='banner'  id='banner'
@@ -46,9 +62,11 @@ const Banner = () => {
                         </Box>
                     </Grid>
                     <Grid className='btn_box'>
-                        <button type="button" className='btn_join'  data-aos="fade-up">
-                            한스푼 참여하기
-                        </button>
+                        <a href="#blogs" onClick={handleClick}>
+                            <button type="button" className='btn_join'  data-aos="fade-up">
+                                한스푼 참여하기
+                            </button>
+                        </a>
                         <Link to="/mypage">
                             <button type="button" className='btn_join'  data-aos="fade-up">
                                 내 한스푼 현황
