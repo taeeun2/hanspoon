@@ -100,6 +100,7 @@ const EditUser = (props) => {
 
         }
     },[gender])
+
     useEffect(()=>{
         
         fetch(`http://172.27.1.33:8080/select/department/${company}`)
@@ -109,8 +110,8 @@ const EditUser = (props) => {
         .then(data =>{
             setDepartmentMenu(data)
             
-                // setDepartment(department)
-                setDepartment('== 부서 선택 ==')
+                setDepartment(department)
+                // setDepartment('== 부서 선택 ==')
         })
 
     },[company])
