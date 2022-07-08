@@ -41,7 +41,7 @@ const FindPwComponent = () => {
     const onClickfindPW = () => {
 
 
-        fetch('http://localhost:8080/findPw',{
+        fetch('http://172.27.1.33:8080/findPw',{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'

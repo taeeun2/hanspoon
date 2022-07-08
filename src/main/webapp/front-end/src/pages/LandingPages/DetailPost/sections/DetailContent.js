@@ -29,7 +29,7 @@ const DetailContent = ({clickedId, postData}) => {
         if(num < 2){
             alert('공개 범위를 2개 이상 선택해주세요.')
         } else {
-            fetch('http://localhost:8080/applyPost', {
+            fetch('http://172.27.1.33:8080/applyPost', {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'

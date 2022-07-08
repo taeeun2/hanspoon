@@ -68,7 +68,7 @@ const Header = () => {
         sessionStorage.removeItem('user_name')
         sessionStorage.removeItem('spoon_num')
         setIsLogin(false)
-        // document.location.href = '/'
+        document.location.href = '/'
     }
   // ================================
 

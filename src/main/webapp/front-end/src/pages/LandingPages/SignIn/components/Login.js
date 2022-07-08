@@ -33,7 +33,7 @@ const Login = () => {
   
     const onClickLogin = () => {
   
-        fetch('http://localhost:8080/login',{
+        fetch('http://172.27.1.33:8080/login',{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
@@ -53,6 +53,7 @@ const Login = () => {
               setMessage('비밀번호를 입력해주세요.')
             }else if(data.user_id !== undefined){
                 sessionStorage.setItem('user_id',data.user_id)
+                sessionStorage.setItem('user_email',data.email)
                 sessionStorage.setItem('user_name',data.user_name)
                 sessionStorage.setItem('spoon_num',data.spoon_num)
                 document.location.href='/'

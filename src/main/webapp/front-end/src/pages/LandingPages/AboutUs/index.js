@@ -15,7 +15,7 @@ Coded by www.creative-tim.com
 */
 
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 // @mui material components
 import { Box } from '@mui/material';
@@ -113,7 +113,7 @@ function AboutUs() {
 
   const getMyPostList = (category_id) => {
     let user_id = sessionStorage.getItem('user_id');
-    fetch(`http://localhost:8080/mypage/${category_id}?user=${user_id}`)
+    fetch(`http://172.27.1.33:8080/mypage/${category_id}?user=${user_id}`)
     .then(res => {
       return res.json();
     })
@@ -133,11 +133,12 @@ function AboutUs() {
             <p className='user_info_sub'>한솔 인티큐브</p>
             <p className='user_info_sub'>IPCC1팀 책임</p>
             <p className='user_info_sub'>30대 남성</p>
-            <p className='info_link' style={{
+            <Link to = "/editUser"><p className='info_link' style={{
                       "fontFamily": 'NanumSquareRound',
                       "fontSize" : '18px',
-                      "color": '#217bff'}}>
-                        개인정보 수정하기 ></p>
+                      "color": '#217bff',
+                      "cursor": 'default'}}>
+                        개인정보 수정하기 ></p></Link>
           </Grid>
           <Grid item xs={12} lg={9}>
             <Grid container item direction="row" className="user_conunt_box">

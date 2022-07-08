@@ -25,4 +25,6 @@ public interface UserService {
 
     UserResponseDto edit(UserRequestDto request);
 
+    String getPassword(String email);
+
 }

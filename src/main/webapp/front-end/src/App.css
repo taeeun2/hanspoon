@@ -28,6 +28,14 @@
 	font-weight: 900;
 }
 
+
+@font-face {
+  font-family: 'Carter One', cursive;
+	src: url('https://fonts.googleapis.com/css2?family=Carter+One&display=swap');
+	/* src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.eot?#iefix") format("embedded-opentype"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.woff") format("woff"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.woff2") format("woff2"), url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareEB.ttf") format("truetype"); */
+	/* font-weight: 900; */
+}
+
 /* 웹폰트 */
 /* @font-face {
 	font-family: 'NanumMyeongjo';

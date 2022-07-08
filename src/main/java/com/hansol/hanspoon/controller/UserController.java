@@ -9,6 +9,7 @@ import com.hansol.hanspoon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -55,8 +56,15 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public void edit(@RequestBody UserRequestDto userRequestDto){
-        userService.edit(userRequestDto);
+    public UserResponseDto edit(@RequestBody UserRequestDto userRequestDto){
+        return userService.edit(userRequestDto);
     }
 
+   @GetMapping("/getPassword")
+    public HashMap<String, String> getPassword(@RequestParam(value = "email", required = false) String email){
+       System.out.println("password : "+userService.getPassword(email));
+       HashMap<String, String> map = new HashMap<>();
+       map.put("password", userService.getPassword(email));
+     return map;
    }
+}

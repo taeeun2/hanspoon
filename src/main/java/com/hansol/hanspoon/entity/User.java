@@ -54,6 +54,7 @@ public class User{
         this.department_id = requestDto.getDepartment_id();
         this.position_type_id = requestDto.getPosition_type_id();
         this.company_id = requestDto.getCompany_id();
+        this.update_date = new Timestamp(System.currentTimeMillis());
     }
 
     public void setPassword(String password){

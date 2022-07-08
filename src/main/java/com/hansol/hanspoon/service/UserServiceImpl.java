@@ -82,12 +82,22 @@ public class UserServiceImpl implements  UserService{
     @Override
     public UserResponseDto edit(UserRequestDto request) {
         User user = userRepository.findByEmail(request.getEmail()).orElseThrow(()-> new HanspoonException(NO_EMAIL));
+        if(request.getPassword().length() < 1){
+            request.setPassword(user.getPassword());
+        }
         user.editUser(request);
+        userRepository.save(user);
+
         UserResponseDto responseDto = new UserResponseDto();
         responseDto.setEmail(request.getEmail());
         return responseDto;
     }
 
+    @Override
+    public String getPassword(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(()-> new HanspoonException(NO_EMAIL));
+        return user.getPassword();
+    }
 
 
     public static User createUserFromRequest(UserRequestDto request){
