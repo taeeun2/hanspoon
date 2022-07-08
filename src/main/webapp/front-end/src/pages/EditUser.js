@@ -108,12 +108,9 @@ const EditUser = (props) => {
         })
         .then(data =>{
             setDepartmentMenu(data)
-            if(num === 0){
-                setDepartment(department)
-            }else{
+            
+                // setDepartment(department)
                 setDepartment('== 부서 선택 ==')
-            }
-            setNum(1)
         })
 
     },[company])
