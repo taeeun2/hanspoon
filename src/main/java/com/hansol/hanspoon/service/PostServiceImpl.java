@@ -106,9 +106,7 @@ public class PostServiceImpl implements PostService {
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
             Post post = postRepository.getById(postId);
-//            DB 수정 후 변경
-//            if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
-            if(post.getState().toString().equals("VALID")){
+            if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
                 retVal.add( PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -156,6 +154,7 @@ public class PostServiceImpl implements PostService {
             long postId = postUser.getPost_id();
             Post post = postRepository.getById(postId);
             if(!post.getState().toString().equals("DELETED")){
+                System.out.println(post.getState().toString());
                 retVal.add( PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
