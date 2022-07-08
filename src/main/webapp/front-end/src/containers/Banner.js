@@ -8,10 +8,12 @@ import "aos/dist/aos.css";
 
 // Material Kit 2 React components
 import MKBox from "components/MKBox";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AboutUs from 'pages/LandingPages/AboutUs';
 
 const Banner = ({ isLogin }) => {
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         AOS.init({
@@ -36,8 +38,8 @@ const Banner = ({ isLogin }) => {
     } 
 
     const handleIsLogin = () => {
-        if(isLogin) {
-            document.location.href = '/mypage'
+        if(isLogin) { 
+            navigate('/mypage')
         }
         else {
             alert('로그인 후 이용 가능합니다.')
