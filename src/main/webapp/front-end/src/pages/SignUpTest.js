@@ -7,6 +7,7 @@ import "assets/css/login.css"
 import { Form } from "react-bootstrap";
 import { Box } from "@mui/material";
 import MKBox from "components/MKBox";
+import { useNavigate } from 'react-router-dom';
 
 const ageMenu = [
     { value: "TWENTY", name: "20대" },
@@ -82,6 +83,7 @@ const SignUpTest= () => {
     const [isUserName, setIsUserName] = useState(false)
     const [isGender, setIsGender] = useState(false)
 
+    const navigate = useNavigate();
 
     // 체크 박스 하나만 선택
     const checkGender= (checkThis) => {
@@ -249,7 +251,7 @@ const SignUpTest= () => {
 
     // 인증 코드 확인
     const confirmAuthCode = () => {
-        if(authCode === inputAuthCode){
+        if(authCode === inputAuthCode && authCode != ''){
             setAuthCodeMessage('이메일 인증이 완료되었습니다.')
             setAuthCodeColor('green')
             setEmailMessage('')
@@ -312,7 +314,7 @@ const SignUpTest= () => {
           .then(data=>{
             if(data.email!== undefined){
               alert('회원가입이 완료되었습니다.')
-              document.location.href='/signin'
+              navigate('/signin')
             }else{
               setEmailMessage(data.errorMessage)
               setEmailColor('red')
@@ -360,34 +362,44 @@ const SignUpTest= () => {
                                         <Grid item md={5}>
                                             <Grid item mt ={1}>
                                             <input className="inputSignUp" placeholder="예) hanspoon12@hansol.com" 
-                                                value={email} onChange={handleInputEmail}/>
+                                                value={email} onChange={handleInputEmail} style={{"border-left-width":0,
+                                                    "border-right-width":0,
+                                                    "border-top-width":0 }}/>
                                             </Grid>
                                             <Grid item mb = {4} style={{"height" : "10px", "lineHeight" : "100%"}}>
                                                 <span className = "signupMessage" style={{"color" :emailColor}} >{emailMessage}</span>
                                             </Grid>
                                             <Grid item mb = {1}> 
-                                            <input className="inputSignUp" placeholder="인증번호 입력" 
+                                            <input className="inputSignUp" style={{"border-left-width":0,
+                                                    "border-right-width":0,
+                                                    "border-top-width":0 }}placeholder="인증번호 입력" 
                                                 value={inputAuthCode} onChange={handleInputAuthCode}/>
                                             </Grid>
                                             <Grid item mb = {4} style={{"height" : "10px"}}>
                                                 <span className = "signupMessage" style={{"color" :authCodeColor}} >{authCodeMessage}</span>
                                             </Grid>
                                             <Grid item mb = {1}> 
-                                            <input className="inputSignUp" type = "password" placeholder="비밀번호 입력" 
+                                            <input className="inputSignUp" style={{"border-left-width":0,
+                                                    "border-right-width":0,
+                                                    "border-top-width":0 }} type = "password" placeholder="비밀번호 입력" 
                                                 value = {password} onChange={handlePassword}/>
                                             </Grid>
                                             <Grid item mb = {4}  style={{"height" : "15px", "lineHeight" : "100%"}}>
                                                 <span className = "signupMessage" style={{"color" :passwordColor}} >{passwordMessage}</span>
                                             </Grid>
                                             <Grid item mb = {1}> 
-                                            <input className="inputSignUp" type = "password"placeholder="비밀번호 확인"  
+                                            <input className="inputSignUp" style={{"border-left-width":0,
+                                                    "border-right-width":0,
+                                                    "border-top-width":0 }} type = "password"placeholder="비밀번호 확인"  
                                                 value = {passwordConfirm} onChange = {handlePasswordConfirm} />
                                             </Grid>
                                             <Grid item mb = {4} style={{"height" : "10px"}}>
                                                 <span className = "signupMessage" style={{"color" :passwordConfirmColor}} >{passwordConfirmMessage}</span>
                                             </Grid>
                                             <Grid item mb = {1}> 
-                                            <input className="inputSignUp" placeholder="실명을 입력하세요"
+                                            <input className="inputSignUp"  style={{"border-left-width":0,
+                                                    "border-right-width":0,
+                                                    "border-top-width":0 }} placeholder="실명을 입력하세요"
                                                  value = {userName} onChange = {handleUserName}/>
                                             </Grid>
                                             <Grid item mb = {4} style={{"height" : "10px"}}>

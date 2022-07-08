@@ -54,6 +54,8 @@ const Login = () => {
             }else if(data.user_id !== undefined){
                 sessionStorage.setItem('user_id',data.user_id)
                 sessionStorage.setItem('user_email',data.email)
+                sessionStorage.setItem('user_company_id',data.company_id)
+                sessionStorage.setItem('user_department_id',data.department_id)
                 sessionStorage.setItem('user_name',data.user_name)
                 sessionStorage.setItem('spoon_num',data.spoon_num)
                 document.location.href='/'

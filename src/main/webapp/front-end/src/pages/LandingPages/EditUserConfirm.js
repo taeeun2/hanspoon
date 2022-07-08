@@ -5,6 +5,7 @@ import PageHeader from 'components/PageHeader';
 import EditUser from 'pages/EditUser';
 import React, { useEffect, useState } from 'react';
 import dangerIcon from 'assets/images/Icons/danger_icon.png'
+import { useNavigate } from 'react-router-dom';
 
 const EditUserConfirm = () => {
 
@@ -19,10 +20,12 @@ const EditUserConfirm = () => {
         setInputPW(e.target.value)
     }
 
+    const navigate = useNavigate();
+
     //비밀번호 확인
     const onClickConfirm = () => {
         if(email == null){
-            document.location.href = '/signin'
+            navigate('/signin')
         }
         else{
                 fetch(`http://172.27.1.33:8080/getPassword?email=${email}`)

@@ -33,9 +33,7 @@ input {
 .inputSignUp{
 	margin: auto;
 	padding: 0%;
-    border-left-width:0; 
-    border-right-width:0; 
-    border-top-width:0; 
+    
     border-bottom-width:5;
     width: 180px;
 	font-size: 13px;

@@ -29,7 +29,7 @@ const pages = [
 const ResponsiveAppBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  
   // 로그인 여부로 헤더 다르게 보여주기
   const [isLogin, setIsLogin] = React.useState('')
 

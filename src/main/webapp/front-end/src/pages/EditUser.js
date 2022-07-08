@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import "assets/css/editUser.css"
 import MKBox from 'components/MKBox';
 import { Form } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 const ageMenu = [
     { value: "TWENTY", name: "20대" },
@@ -13,8 +14,8 @@ const ageMenu = [
 ];
 
 const companyMenu = [
-	{ value: "1", name: "한솔 인티큐브" },
-	{ value: "2", name: "한솔 PNS" },
+	{ company_id: "1", company_name: "한솔 인티큐브" },
+	{ company_id: "2", company_name: "한솔 PNS" },
 ];
 
 const EditUser = (props) => {
@@ -22,10 +23,10 @@ const EditUser = (props) => {
     const [position_typeMenu, setPosition_typeMenu] = useState([]);
     const [departmentMenu, setDepartmentMenu] = useState([]);
     const [age, setAge] = useState('')
-    const [department, setDepartment] = useState('');
+    const [department, setDepartment] = useState(sessionStorage.getItem('user_department_id'));
     const [departmentMessage, setDepartmentMessage] = useState('')
     const [position_type, setPosition_type] = useState('')
-    const [company, setCompany] = useState('')
+    const [company, setCompany] = useState(sessionStorage.getItem('user_company_id'))
 
     const [email, setEmail] = useState(props.email)
 
@@ -51,7 +52,7 @@ const EditUser = (props) => {
     const [isPasswordConfirm, setIsPasswordConfirm] = useState(true)
     const [isUserName, setIsUserName] = useState(true)
 
-    const [num, setNum] = useState(0)
+    const navigate = useNavigate();
     useEffect(()=>{
 
         fetch('http://172.27.1.33:8080/select-all/position_type')
@@ -80,10 +81,10 @@ const EditUser = (props) => {
             setUserName(data.user_name)
             setGender(data.gender)
             setAge(data.age)
-            setDepartment(data.department_id)
-            setCompany(data.company_id)
+            // setDepartment(data.department_id)
+            // setCompany(data.company_id)
             setPosition_type(data.position_type_id)
-           
+            setDepartment(department)
         })
 
     },[])
@@ -100,21 +101,23 @@ const EditUser = (props) => {
 
         }
     },[gender])
-
+    
     useEffect(()=>{
         
+        console.log(company)
+        console.log(department)
         fetch(`http://172.27.1.33:8080/select/department/${company}`)
         .then(res=>{
             return res.json()
         })
         .then(data =>{
             setDepartmentMenu(data)
-            
-                setDepartment(department)
-                // setDepartment('== 부서 선택 ==')
+            setDepartment(department)
         })
 
-    },[company])
+        
+
+    },[])
    
     //체크 박스 하나만 선택
     const checkGender= (checkThis) => {
@@ -144,16 +147,26 @@ const EditUser = (props) => {
     // 해당 회사의 부서 데이터 가져오기
     const handleCompany = (e) => {
         setCompany(e.target.value)
+        fetch(`http://172.27.1.33:8080/select/department/${e.target.value}`)
+        .then(res=>{
+            return res.json()
+        })
+        .then(data =>{
+
+            setDepartmentMenu(data)
+            setDepartment('')
+
+        })
     }
     
     // 부서 
     const handleDepartment = (e) => {
         setDepartment(e.target.value)
-        if(e.target.value !== "== 부서 선택 =="){
-          setDepartmentMessage('')
-        }else{
-          setDepartmentMessage('부서를 선택해주세요.')
-        }
+        // if(e.target.value !== "== 부서 선택 =="){
+        //   setDepartmentMessage('')
+        // }else{
+        //   setDepartmentMessage('부서를 선택해주세요.')
+        // }
     }
 
     // 직급
@@ -221,7 +234,6 @@ const EditUser = (props) => {
 
     //회원 정보 수정 api
     const editUser = () => {
-        console.log(department)
         if(!isPassword){
             setPasswordMessage('숫자+영문자+특수문자조합으로 8자리 이상 입력')
             setPasswordColor('red')
@@ -258,7 +270,7 @@ const EditUser = (props) => {
             }).then(data=>{
                 if(data.email!== undefined){
                     alert('회원 정보 수정이 완료되었습니다.')
-                    document.location.href='/signin'
+                    navigate('/signin')
                 }else{
                     alert('회원 정보 수정에 실패하였습니다.')
                 }
@@ -384,7 +396,7 @@ const EditUser = (props) => {
                                 
                                                     <Grid item mb = {7}>
                                                         <Form.Select  className="selectValue" value = {company} onChange = {handleCompany}>
-                                                            {companyMenu.map(menu =>(<option key={menu.value} value={menu.value}>{menu.name}</option>))}
+                                                            {companyMenu.map(menu =>(<option key={menu.company_id} value={menu.company_id}>{menu.company_name}</option>))}
                                                         </Form.Select>
                                                     </Grid>
                                                     <Grid item mb = {1}>
