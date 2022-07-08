@@ -51,7 +51,7 @@ import DefaultCounterCard from 'examples/Cards/CounterCards/DefaultCounterCard';
 
 function AboutUs() {
 
-  const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "신청내역", "msg": "현재 신청중인 내역이 없습니다."});
+  const [activeCategory, setActiveCategory] = useState({"category_id": 0, "category_name": "신청내역"});
   const [postList, setPostList] = useState([]);
   const [visible, setVisible] = useState(8);
   const [userId, setUserId] = useState();
@@ -64,15 +64,12 @@ function AboutUs() {
   const CategoryType = [{
         category_id: 0,
         category_name: "신청내역",
-        msg: "현재 신청중인 내역이 없습니다."
     }, {
         category_id: 1,
         category_name: "지난모임",
-        msg: "아직까지 참여한 모임이 없습니다."
     }, {
         category_id: 2,
         category_name: "작성이력",
-        msg: "아직까지 모임을 작성한 이력이 없습니다."
     },
   ];
   
@@ -111,6 +108,7 @@ function AboutUs() {
 
   useEffect(() => {
     setUserName(sessionStorage.getItem('user_name'))
+    console.log(postList[0])
   },[])
 
   const getMyPostList = (category_id) => {
@@ -135,6 +133,11 @@ function AboutUs() {
             <p className='user_info_sub'>한솔 인티큐브</p>
             <p className='user_info_sub'>IPCC1팀 책임</p>
             <p className='user_info_sub'>30대 남성</p>
+            <p className='info_link' style={{
+                      "fontFamily": 'NanumSquareRound',
+                      "fontSize" : '18px',
+                      "color": '#217bff'}}>
+                        개인정보 수정하기 ></p>
           </Grid>
           <Grid item xs={12} lg={9}>
             <Grid container item direction="row" className="user_conunt_box">
@@ -169,7 +172,7 @@ function AboutUs() {
       <MKBox minHeight="900px" component="section" width="100%" px={7}>
         <Grid container item justifyContent="center" alignItems="center" className='section_box'>
           <Grid container item className='tab_box' direction="row"
-                xs={10} sm={8} lg={7}
+                xs={10} sm={8} lg={8}
                 justifyContent="center" alignItems="center">
             {CategoryType.map((list) => (
               <Grid item xs={12} sm={12} lg={3} className='tab_box'>
@@ -183,7 +186,7 @@ function AboutUs() {
           </Grid>
           <Grid container item spacing={3} className="blog_list_box">
               {
-                !(postList.length === 0) ?
+                !(postList[0] === undefined) ?
                     postList.slice(0,visible).map((post, index) => (
                       <Grid item xs={12} sm={6} lg={3} key={index}>
                         <div onClick={() => {handleClick(post.post_id)}} className='blog_box'>
@@ -200,22 +203,23 @@ function AboutUs() {
                         </div>
                       </Grid>               
                     ))
-                    : <Grid item xs={12} sm={12} lg={12} >
-                        <h1>{CategoryType.msg}</h1>
+                    : <Grid item xs={12} sm={12} lg={12} className='notice_text_box' >
+                        <h3 className='notice_text'>해당 내역이 존재하지 않습니다.</h3>
                       </Grid>
               }
 
-            </Grid>
+           
               {
                 !(visible >= postList.length) &&
                 <Grid item  xs={12} sm={12} lg={12}>
-                  <Box display="flex" justifyContent="center" alignItems="center">
+                  <Box display="flex" justifyContent="center">
                     <button type='button' className='btn_more' onClick={showMoreBlogs}>
                       더보기
                     </button>
                   </Box>
                 </Grid> 
-              }             
+              }
+            </Grid>             
         </Grid>
       </MKBox>
       <Footer />

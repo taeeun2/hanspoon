@@ -58,12 +58,12 @@
 .my_page .user_info_title {
 	font-size: 44px;
 	font-weight:bolder;
-	margin-bottom: 15px;
+	margin-bottom: 20px;
 }
 
 .my_page .user_info_sub {
 	font-size: 24px;
-	margin-bottom: 15px;
+	margin-bottom: 7px;
 }
 
 .my_page .count_title {
@@ -150,4 +150,9 @@
 	background-color: #ffe818;
 	border: 3px solid #333333;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.my_page .notice_text_box {
+	margin-top: 200px;
+	text-align: center;
 }

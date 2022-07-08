@@ -49,7 +49,7 @@ function Introduce(props) {
                     <p className='info_link' style={{
                       "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold',
-                      "color": 'blue'}}>
+                      "color": '#217bff'}}>
                         한스푼 참여현황 보기 >
                     </p>
                 </Grid>

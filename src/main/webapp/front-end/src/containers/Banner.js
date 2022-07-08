@@ -35,6 +35,15 @@ const Banner = ({ isLogin }) => {
         })
     } 
 
+    const handleIsLogin = () => {
+        if(isLogin) {
+            document.location.href = '/mypage'
+        }
+        else {
+            alert('로그인 후 이용 가능합니다.')
+        }
+    }
+
     return (
         <Grid className='banner'  id='banner'
                 sx={{ py: 20, }}>
@@ -67,11 +76,10 @@ const Banner = ({ isLogin }) => {
                                 한스푼 참여하기
                             </button>
                         </a>
-                        <Link to="/mypage">
-                            <button type="button" className='btn_join'  data-aos="fade-up">
+                            <button type="button" className='btn_join' data-aos="fade-up"
+                                    onClick={handleIsLogin}>
                                 내 한스푼 현황
                             </button>
-                        </Link>
                     </Grid>
                 </Box>
             {/* </Grid> */}

@@ -48,7 +48,7 @@ function PageHeader(props) {
                     <> <Grid item className="gnb_item">
                     <span style={{
                     "fontFamily": 'NanumSquareRound',
-                    "fontWeight" : 'bold'}}>{userName} 님 환영합니다.(🥄{spoonNum})</span></Grid>
+                    "fontWeight" : 'bold'}}>{userName} 님 (🥄{spoonNum})</span></Grid>
                     <Grid item className="gnb_item">
                     <button style={{
                     "fontFamily": 'NanumSquareRound',
