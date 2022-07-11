@@ -5,6 +5,7 @@ import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import MKButton from 'components/MKButton';
 import RestaurantLocation from './RestaurantLocation';
+import { useNavigate } from 'react-router-dom';
 
 
 const DetailContent = ({clickedId, postData}) => {
@@ -16,6 +17,7 @@ const DetailContent = ({clickedId, postData}) => {
     const [scope_department, setScope_department] = useState(false);
     const [userId, setUserId] = useState(sessionStorage.getItem('user_id'));
    
+    const navigate = useNavigate();
     const isGuest = postData.guestInfo.map(guest => {
         if(parseInt(guest.id) === parseInt(userId)){
             return true;
@@ -59,7 +61,22 @@ const DetailContent = ({clickedId, postData}) => {
         }
     }
 
-    
+
+    function onClickCancel(){
+        fetch(`http://localhost:8080/cancelApply/${clickedId}?user=${userId}`)
+        .then(res =>{
+            alert('모임신청이 취소되었습니다.')
+            window.location.replace(`/detailPost/${clickedId}`)
+        })
+    }
+
+    function onClickDelete(){
+        fetch(`http://localhost:8080/deletePost/${clickedId}`)
+        .then(res =>{
+            alert('모임이 삭제되었습니다.');
+            navigate('/mypage');
+    })
+    }
 
     return (
         <div>
@@ -195,7 +212,7 @@ const DetailContent = ({clickedId, postData}) => {
                                             }}>
                                              수정하기
                                             </MKButton>
-                                            <MKButton type="submit" variant="gradient" color="info">
+                                            <MKButton type="submit" variant="gradient" color="info" onClick={onClickDelete}>
                                              삭제하기
                                            </MKButton>
                                            </>
@@ -203,7 +220,7 @@ const DetailContent = ({clickedId, postData}) => {
                                            :
                                             <>
                                            {isGuest[0] === true ?
-                                            <MKButton type="submit" variant="gradient" color="info" fullWidth>
+                                            <MKButton type="submit" variant="gradient" color="info" fullWidth onClick={onClickCancel}>
                                             취소하기
                                             </MKButton>
                                             :
