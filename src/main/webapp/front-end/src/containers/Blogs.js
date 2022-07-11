@@ -57,7 +57,7 @@ const Blogs = () => {
 
     // 카테고리 리스트 조회 API
     const getCategoryList = () => {
-      fetch('http://172.27.1.33:8080/category')
+      fetch('http://localhost:8080/category')
         .then(res => {
           return res.json()
         })
@@ -68,7 +68,7 @@ const Blogs = () => {
 
     // 카테고리별 전체 게시글 리스트 조회 API
      const getAllPostList = (category_id) => {
-     fetch(`http://172.27.1.33:8080/post/all/${category_id}`)
+     fetch(`http://localhost:8080/post/all/${category_id}`)
        .then(res => {
          return res.json()
        })
@@ -79,7 +79,7 @@ const Blogs = () => {
 
      // 카테고리별 모집중인 게시글 리스트 조회 API 
      const getValidPostList = (category_id) => {
-      fetch(`http://172.27.1.33:8080/post/valid/${category_id}`)
+      fetch(`http://localhost:8080/post/valid/${category_id}`)
         .then(res => {
             return res.json()
           })

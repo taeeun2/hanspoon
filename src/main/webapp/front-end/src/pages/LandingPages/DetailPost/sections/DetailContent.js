@@ -6,6 +6,7 @@ import Container from "@mui/material/Container";
 import MKButton from 'components/MKButton';
 import RestaurantLocation from './RestaurantLocation';
 
+
 const DetailContent = ({clickedId, postData}) => {
     const [scope_name, setScope_name] = useState(false);
     const [scope_age, setScope_age] = useState(false);
@@ -13,6 +14,14 @@ const DetailContent = ({clickedId, postData}) => {
     const [scope_position_type, setScope_position_type] = useState(false);
     const [scope_gender, setScope_gender] = useState(false);
     const [scope_department, setScope_department] = useState(false);
+    const [userId, setUserId] = useState(sessionStorage.getItem('user_id'));
+   
+    const isGuest = postData.guestInfo.map(guest => {
+        if(parseInt(guest.id) === parseInt(userId)){
+            return true;
+        }
+    })
+
 
     /* 테스트 필요 */
     const [num, setNum] = useState(0) //선택된 공개범위 개수
@@ -20,23 +29,22 @@ const DetailContent = ({clickedId, postData}) => {
     // const [userId, setUserID] = useState(sessionStorage.getItem('user'))
     // const [restNum, setRestNum] = useState(postData.capacity - postData.participant_num) //신청 가능한 인원수
 
-    useEffect(() => {
-        console.log(postData);
-    },[])
-
     /* 신청 API */
     function onClickApply() {
-        if(num < 2){
+        if(sessionStorage.getItem('user_id') == null){
+            alert('로그인 후 이용 가능합니다.')
+        }
+        else if(num < 2){
             alert('공개 범위를 2개 이상 선택해주세요.')
         } else {
-            fetch('http://172.27.1.33:8080/applyPost', {
+            fetch('http://localhost:8080/applyPost', {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'
                 },
                 body: JSON.stringify({
-                    post_id : 18, // 임시
-                    user_id : 10, // 임시
+                    post_id : clickedId, 
+                    user_id : sessionStorage.getItem('user_id'), 
                     scope_name : scope_name,
                     scope_gender :scope_gender,
                     scope_company : scope_company,
@@ -46,24 +54,31 @@ const DetailContent = ({clickedId, postData}) => {
                 })
             }).then(res => {
                 alert('모임 신청이 완료되었습니다.')
-                document.location.href='/'
+                window.location.replace(`/detailPost/${clickedId}`)
             })
         }
     }
+
+    
 
     return (
         <div>
              <MKBox component="section" py={2}>
             <Container>
+
                     <Grid container item xs={12} lg={6} mx="auto" mb={2} >
                         <MKTypography variant="h2">
-                            나랑 밥먹을 사람{clickedId}
+                            {postData.title}
                         </MKTypography >
                        
                     </Grid>
                     <Grid container item xs={12} lg={6} mx="auto" >
-                        <MKTypography variant="h6" mr = {8}>익명🥄3</MKTypography>
-                        <MKTypography variant="h6">한솔 인티큐브 | 선임</MKTypography>
+                        <MKTypography variant="h6" mr = {8}>{postData.hostInfo.name}🥄{postData.hostInfo.spoon_num}</MKTypography>
+                        {postData.hostInfo.company && <MKTypography variant="h6" mr={3}>{postData.hostInfo.company}</MKTypography>}
+                        {postData.hostInfo.position && <MKTypography variant="h6"  mr={3}>{postData.hostInfo.position}</MKTypography>}
+                        {postData.hostInfo.department && <MKTypography variant="h6"  mr={3}>{postData.hostInfo.department}</MKTypography>}
+                        {postData.hostInfo.gender && <MKTypography variant="h6"  mr={3}>{postData.hostInfo.gender}</MKTypography>}
+                        {postData.hostInfo.age && <MKTypography variant="h6" >{postData.hostInfo.age}</MKTypography>}
                     </Grid>
 
                     <Grid container item xs={12} lg={6} mx="auto" >
@@ -75,7 +90,7 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>2022.06.29</MKTypography>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>{postData.meet_date} {postData.meet_time}</MKTypography>
                                     </Grid>
 
                                     
@@ -84,7 +99,19 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>🙋‍♂️2/4</MKTypography>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>🙋‍♂️{postData.participant_num}/{postData.capacity}</MKTypography>
+                                        
+                                        {postData.guestInfo && <>{postData.guestInfo.map((guest, index)=>(
+                                            <div style={{"border" : "1px solid gray","margin" : "3px"}}>
+                                            <span style={{"fontSize" : "13px","marginRight" : "10px"}} key={index}>{guest.name}🥄{guest.spoon_num}</span>
+                                            {guest.company && <span style={{"fontSize" : "13px","marginRight" : "10px"}}>{guest.company}</span>}
+                                            {guest.position && <span  style={{"fontSize" : "13px","marginRight" : "10px"}}>{guest.position}</span>}
+                                            {guest.department && <span  style={{"fontSize" : "13px","marginRight" : "10px"}}>{guest.department}</span>}
+                                            {guest.gender && <span  style={{"fontSize" : "13px","marginRight" : "10px"}}>{guest.gender}</span>}
+                                            {guest.age && <span  style={{"fontSize" : "13px","marginRight" : "10px"}}>{guest.age}</span>}
+                                            </div>
+                                            ))}</>}
+                                        
                                     </Grid>
 
                                     <Grid item xs={12} md={3} mt={3}>
@@ -92,7 +119,7 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>한식</MKTypography>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>{postData.category.category_name}</MKTypography>
                                     </Grid>
 
                                     <Grid item xs={12} md={3} mt={3}>
@@ -100,7 +127,7 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>고씨네 카레 상암 DMC점</MKTypography>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>{postData.restaurant_name}</MKTypography>
                                     </Grid>
 
                                     <Grid item xs={12} md={3} mt={3}>
@@ -108,15 +135,24 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <RestaurantLocation restaurant = {'고씨네 카레 상암 DMC점'}></RestaurantLocation>
+                                        <RestaurantLocation restaurant =   {postData.restaurant_address + postData.restaurant_name} restaurant_name = {postData.restaurant_name}></RestaurantLocation>
                                     </Grid>
+
+                                    <Grid item xs={12} md={3} mt={3}>
+                                        <MKTypography variant="h6">주소</MKTypography>
+                                    </Grid>
+                                    
+                                    <Grid item xs={12} md={8} mt={3}>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>{postData.restaurant_address}</MKTypography>
+                                    </Grid>
+
 
                                     <Grid item xs={12} md={3} mt={3}>
                                         <MKTypography variant="h6">한마디</MKTypography>
                                     </Grid>
 
                                     <Grid item xs={12} md={8} mt={3}>
-                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>함께 식사해요!</MKTypography>
+                                        <MKTypography variant="h6" style={{"fontWeight" : "lighter"}}>{postData.content}</MKTypography>
                                     </Grid>
 
                                     <Grid item xs={12} md={3} mt={3} >
@@ -150,9 +186,33 @@ const DetailContent = ({clickedId, postData}) => {
                                     
                                     {/* restNum이 1이상일 때만 버튼 활성화 */}
                                     <Grid container item justifyContent="center" xs={12} my={2} mt = {5}>
-                                        <MKButton type="submit" variant="gradient" color="info" fullWidth  onClick={onClickApply}>
-                                        참여하기
-                                        </MKButton>
+
+
+                                        {parseInt(postData.hostInfo.id) === parseInt(userId) ?
+                                            <>
+                                            <MKButton type="submit" variant="gradient" color="info"  style={{
+                                                "marginRight" : "15px"  
+                                            }}>
+                                             수정하기
+                                            </MKButton>
+                                            <MKButton type="submit" variant="gradient" color="info">
+                                             삭제하기
+                                           </MKButton>
+                                           </>
+
+                                           :
+                                            <>
+                                           {isGuest[0] === true ?
+                                            <MKButton type="submit" variant="gradient" color="info" fullWidth>
+                                            취소하기
+                                            </MKButton>
+                                            :
+                                            <MKButton type="submit" variant="gradient" color="info" fullWidth onClick={onClickApply}>
+                                            참여하기
+                                            </MKButton>
+                                            }    
+                                            </> 
+                                        }
                                     </Grid>
 
                             </Grid>

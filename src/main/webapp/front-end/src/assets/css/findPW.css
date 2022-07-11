@@ -26,5 +26,18 @@
 	outline: none;
 	outline: 0;
 	background: none;
-	margin-left: 10px;
+	margin-left: 5px;
+}
+
+.findPWinputBox{
+	margin: 0px 0px;
+    padding: 7px 20px 7px;
+    background-color: #fff;
+	border-top: 0;
+	border-left: 0;
+	border-right: 0;
+    border-bottom: 2px solid #000;
+	/* border-radius: 15px; */
+	min-height: 100%;
+	width: 68%;
 }

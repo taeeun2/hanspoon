@@ -12,6 +12,7 @@ public class PostRequestDto {
     private String title;
     private String content;
     private String restaurant_name;
+    private String restaurant_address;
     private LocalDateTime meet_date;
     private long user_id;
 

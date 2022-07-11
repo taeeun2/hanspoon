@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.CreatePostResponseDto;
 import com.hansol.hanspoon.dto.PostApplyRequestDto;
 import com.hansol.hanspoon.dto.PostRequestDto;
 import com.hansol.hanspoon.dto.PostResponseDto;
@@ -20,7 +21,7 @@ public interface PostService {
 
     /* 상세페이지 */
     public PostResponseDto getPostDetail(long post_id);
-    public void createPost(PostRequestDto postRequestDto);
+    public CreatePostResponseDto createPost(PostRequestDto postRequestDto);
     public void applyPost(PostApplyRequestDto postApplyRequestDto);
     public void deletePost(long post_id);
     public void cancelApply(long post_id, long user_id);

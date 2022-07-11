@@ -1,5 +1,6 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.CreatePostResponseDto;
 import com.hansol.hanspoon.dto.PostApplyRequestDto;
 import com.hansol.hanspoon.dto.PostRequestDto;
 import com.hansol.hanspoon.dto.PostResponseDto;
@@ -271,6 +272,7 @@ public class PostServiceImpl implements PostService {
     private HashMap<String,Object> getUserOpenInfo(PostUser postUser){
         HashMap<String,Object> res = new HashMap<>();
         User user = userRepository.getById(postUser.getUser_id());
+        res.put("id",user.getUser_id());
         if (postUser.isScope_name()){
             res.put("name", user.getUser_name());
         } else {
@@ -299,8 +301,11 @@ public class PostServiceImpl implements PostService {
     // 모임 생성하기
     @Override
     @Transactional
-    public void createPost(PostRequestDto postRequestDto) {
-       postUserRepository.save(createPostUserFromRequest(postRequestDto));
+    public CreatePostResponseDto createPost(PostRequestDto postRequestDto) {
+       PostUser postUser = postUserRepository.save(createPostUserFromRequest(postRequestDto));
+       CreatePostResponseDto createPostResponse = new CreatePostResponseDto();
+       createPostResponse.setPost_id(postUser.getPost_id());
+       return createPostResponse;
     }
 
     // (상세 페이지) 모임 신청하기
@@ -398,6 +403,7 @@ public class PostServiceImpl implements PostService {
                 .title(postRequestDto.getTitle())
                 .content(postRequestDto.getContent())
                 .restaurant_name(postRequestDto.getRestaurant_name())
+                .restaurant_address(postRequestDto.getRestaurant_address())
                 .meet_date( Timestamp.valueOf(postRequestDto.getMeet_date()))
                 .capacity(postRequestDto.getCapacity())
                 .category_id(postRequestDto.getCategory_id())

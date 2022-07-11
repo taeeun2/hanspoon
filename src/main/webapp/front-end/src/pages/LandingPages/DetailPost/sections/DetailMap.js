@@ -5,7 +5,7 @@ import MKTypography from 'components/MKTypography'
 const { kakao } = window
 
 
-const KaKaoMap = ({searchPlace}) => {
+const KaKaoMap = ({searchPlace, restaurant_name}) => {
     
   // 검색결과 배열에 담아줌
   const [Places, setPlaces] = useState([])
@@ -51,9 +51,9 @@ const KaKaoMap = ({searchPlace}) => {
          })
 
       // kakao.maps.event.addListener(marker, 'click', function () {
-      //   infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + 
-      //   '<br><a href ="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='+place.place_name+'>링크</a></div>');
-      //   infowindow.open(map, marker)
+        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name );
+        // '<br><a href ="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query='+place.place_name+'>링크</a></div>');
+        infowindow.open(map, marker)
       // })
     }
 
@@ -70,7 +70,7 @@ const KaKaoMap = ({searchPlace}) => {
         }}
       ></div>
             <div style={{"textAlign" : "center"}}>
-                <button style={{"border" : 0, "outline" : 0, "color" : "blue","fontSize" : "15px", "backgroundColor" : "white"}} onClick={() => window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${searchPlace}`, '_blank')}>[네이버 검색 링크]</button>
+                <button style={{"border" : 0, "outline" : 0, "color" : "blue","fontSize" : "15px", "backgroundColor" : "white"}} onClick={() => window.open(`https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=${restaurant_name}`, '_blank')}>[네이버 검색 링크]</button>
                 </div>
         </div>
     );

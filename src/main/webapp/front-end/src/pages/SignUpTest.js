@@ -27,7 +27,7 @@ const SignUpTest= () => {
     const [departmentMenu, setDepartmentMenu] = useState([]);
 
     useEffect(()=>{
-        fetch('http://172.27.1.33:8080/select-all/position_type')
+        fetch('http://localhost:8080/select-all/position_type')
         .then(res=>{
             return res.json()
             
@@ -36,7 +36,7 @@ const SignUpTest= () => {
             setPosition_typeMenu(data)
         })
 
-        fetch(`http://172.27.1.33:8080/select/department/1`)
+        fetch(`http://localhost:8080/select/department/1`)
         .then(res=>{
             return res.json()
         })
@@ -198,7 +198,7 @@ const SignUpTest= () => {
     const handleCompany = (e) => {
         setCompany(e.target.value)
         
-        fetch(`http://172.27.1.33:8080/select/department/${e.target.value}`)
+        fetch(`http://localhost:8080/select/department/${e.target.value}`)
         .then(res=>{
             return res.json()
         })
@@ -227,7 +227,7 @@ const SignUpTest= () => {
     // 이메일 전송 api
     const sendEmail = () => {
         if(isEmail){
-            fetch(`http://172.27.1.33:8080/sendEmail?email=${email}`)
+            fetch(`http://localhost:8080/sendEmail?email=${email}`)
             .then(res => {
                 return res.json()
             })
@@ -292,7 +292,7 @@ const SignUpTest= () => {
             
             // var email_ID = email.split('@')
       
-          fetch('http://172.27.1.33:8080/signUp',{
+          fetch('http://localhost:8080/signUp',{
             method : 'POST',
             headers : {
               'Content-Type' : 'application/json'
@@ -331,7 +331,7 @@ const SignUpTest= () => {
         <>
          <Grid className='signUpBackground'>
             <Box className='signup_content_box'>
-                <Grid item className='title_box' style={{"marginTop" : "40px" ,"textAlign": "center"}}>
+                <Grid item className='title_box' style={{"marginTop" : "40px" ,"textAlign": "center"}} mb={3}>
                  <button className='login_title' onClick={()=>tomain()}>Hanspoon</button>
                 </Grid>
 

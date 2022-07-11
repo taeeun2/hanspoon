@@ -55,7 +55,7 @@ const EditUser = (props) => {
     const navigate = useNavigate();
     useEffect(()=>{
 
-        fetch('http://172.27.1.33:8080/select-all/position_type')
+        fetch('http://localhost:8080/select-all/position_type')
         .then(res=>{
             return res.json()
             
@@ -66,7 +66,7 @@ const EditUser = (props) => {
 
         
         // 사용자 정보 가져오기
-        fetch('http://172.27.1.33:8080/login',{
+        fetch('http://localhost:8080/login',{
             method : 'POST',
             headers : {
                 'Content-Type' : 'application/json'
@@ -106,7 +106,7 @@ const EditUser = (props) => {
         
         console.log(company)
         console.log(department)
-        fetch(`http://172.27.1.33:8080/select/department/${company}`)
+        fetch(`http://localhost:8080/select/department/${company}`)
         .then(res=>{
             return res.json()
         })
@@ -147,7 +147,7 @@ const EditUser = (props) => {
     // 해당 회사의 부서 데이터 가져오기
     const handleCompany = (e) => {
         setCompany(e.target.value)
-        fetch(`http://172.27.1.33:8080/select/department/${e.target.value}`)
+        fetch(`http://localhost:8080/select/department/${e.target.value}`)
         .then(res=>{
             return res.json()
         })
@@ -249,7 +249,7 @@ const EditUser = (props) => {
             setDepartmentMessage('부서를 선택해주세요.')
         }else{
            
-            fetch('http://172.27.1.33:8080/edit',{
+            fetch('http://localhost:8080/edit',{
                 method : 'POST',
                 headers : {
                   'Content-Type' : 'application/json'
@@ -270,7 +270,7 @@ const EditUser = (props) => {
             }).then(data=>{
                 if(data.email!== undefined){
                     alert('회원 정보 수정이 완료되었습니다.')
-                    navigate('/signin')
+                    navigate('/mypage')
                 }else{
                     alert('회원 정보 수정에 실패하였습니다.')
                 }

@@ -41,7 +41,7 @@ const FindPwComponent = () => {
     const onClickfindPW = () => {
 
 
-        fetch('http://172.27.1.33:8080/findPw',{
+        fetch('http://localhost:8080/findPw',{
                     method : 'POST',
                     headers : {
                         'Content-Type' : 'application/json'
@@ -68,12 +68,12 @@ const FindPwComponent = () => {
                <Grid container  sx={{ justifyContent: 'center' }}>
 
                                 <span className="findPW_title">비밀번호 찾기</span>
-                                <MKBox className="IDBox">
-                                    <input className = "findPWinputID" value={inputId} onChange={handleInputId} placeholder="Email address"
+                                <MKBox className="findPWinputBox">
+                                    <input className = "findPWinputID" value={inputId} onChange={handleInputId} placeholder="아이디(이메일) 입력"
                                         onKeyPress={onKeyPress}/>
                                 </MKBox>
-                                <MKBox  mb={1}className="IDBox">
-                                    <input className = "findPWinputID" value={inputName} onChange={handleInputName} placeholder="Name"
+                                <MKBox  mb={1}className="findPWinputBox">
+                                    <input className = "findPWinputID" value={inputName} onChange={handleInputName} placeholder="사용자 이름 입력"
                                         onKeyPress={onKeyPress}/>
                                 </MKBox>
                                 <Grid item mb = {1} style={{"width" : "100%", "textAlign" : "center"}}>
