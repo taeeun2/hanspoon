@@ -6,21 +6,28 @@ import com.hansol.hanspoon.dto.PostResponseDto;
 import com.hansol.hanspoon.entity.Post;
 import com.hansol.hanspoon.entity.PostUser;
 import com.hansol.hanspoon.entity.User;
+import com.hansol.hanspoon.exception.HanspoonException;
 import com.hansol.hanspoon.repository.*;
 import com.hansol.hanspoon.type.StatePostType;
 import com.hansol.hanspoon.type.StatePostUserType;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-import java.util.ArrayList;
+import javax.mail.*;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 import java.sql.Timestamp;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_EMAIL;
 
 @RequiredArgsConstructor
 @Service
@@ -34,13 +41,30 @@ public class PostServiceImpl implements PostService {
     private final PositionTypeRepository positionTypeRepository;
     private final DepartmentRepository departmentRepository;
 
+    @Value("${email.username}")
+    private String username;
+
+    @Value("${email.password}")
+    private String password;
+
 
 
     //(메인화면)전체 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostList() {
-        List<PostResponseDto> retVal = postRepository.findAll().stream()
+        List<Post> postList = postRepository.findAllByOrderByPostIdDesc().get();
+        postList.stream().forEach(post -> {
+                    if(post.getMeet_date().before(new Date())
+                            && (post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL"))){
+                        post.setStatusExpired();
+                        List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+                        for (PostUser pu: postUsers) {
+                            User user = userRepository.getById(pu.getUser_id());
+                            user.increaseSpoonNum();
+                        }
+                    }});
+        List<PostResponseDto> retVal = postList.stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -48,7 +72,6 @@ public class PostServiceImpl implements PostService {
                         .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
-
         return retVal;
     }
 
@@ -56,7 +79,18 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostListByCategory(long category_id) {
-        List<PostResponseDto> retVal = postRepository.findAllPostByCategoryId(category_id).get().stream()
+        List<Post> postList = postRepository.findAllPostByCategoryId(category_id).get();
+        postList.stream().forEach(post -> {
+            if(post.getMeet_date().before(new Date())
+                    && (post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL"))){
+                post.setStatusExpired();
+                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+                for (PostUser pu: postUsers) {
+                    User user = userRepository.getById(pu.getUser_id());
+                    user.increaseSpoonNum();
+                }
+            }});
+        List<PostResponseDto> retVal = postList.stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -65,35 +99,78 @@ public class PostServiceImpl implements PostService {
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
                         .build()).collect(Collectors.toList());
 
+        return retVal;
+    }
+
+    //(메인화면)유효한 게시글 리스트 가져오기
+    @Override
+    @Transactional
+    public List<PostResponseDto> getValidPostList() {
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<Post> postList = postRepository.findValidPost().get();
+
+        postList.stream().forEach(post -> {
+        if(post.getMeet_date().before(new Date())){
+            post.setStatusExpired();
+            List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+            for (PostUser pu: postUsers) {
+                User user = userRepository.getById(pu.getUser_id());
+                user.increaseSpoonNum();
+            }
+        } else {
+            retVal.add(PostResponseDto.builder()
+                    .post(post)
+                    .category(categoryRepository.findById(post.getCategory_id()).get())
+                    .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                    .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                            .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                    .build());
+        }
+        });
+//        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
+//                .map(post -> PostResponseDto.builder()
+//                        .post(post)
+//                        .category(categoryRepository.findById(post.getCategory_id()).get())
+//                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+//                            .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+//                                    .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+//                            .build()).collect(Collectors.toList());
         return retVal;
     }
 
     //(메인화면)카테고리별 유효한 게시글 리스트 가져오기
     @Override
     @Transactional
-    public List<PostResponseDto> getValidPostList() {
-        List<PostResponseDto> retVal = postRepository.findValidPost().get().stream()
-                .map(post -> PostResponseDto.builder()
-                        .post(post)
-                        .category(categoryRepository.findById(post.getCategory_id()).get())
-                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
-                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
-                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                        .build()).collect(Collectors.toList());
-        return retVal;
-    }
-
-    @Override
-    @Transactional
     public List<PostResponseDto> getValidPostListByCategory(long category_id) {
-        List<PostResponseDto> retVal = postRepository.findValidPostByCategoryId(category_id).get().stream()
-                .map(post -> PostResponseDto.builder()
+        List<PostResponseDto> retVal = new ArrayList<>();
+        List<Post> postList = postRepository.findValidPostByCategoryId(category_id).get();
+
+        postList.stream().forEach(post -> {
+            if(post.getMeet_date().before(new Date())){
+                post.setStatusExpired();
+                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+                for (PostUser pu: postUsers) {
+                    User user = userRepository.getById(pu.getUser_id());
+                    user.increaseSpoonNum();
+                }
+            } else {
+                retVal.add(PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
                         .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
                         .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                        .build()).collect(Collectors.toList());
+                        .build());
+            }
+        });
+//        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
+//                .map(post -> PostResponseDto.builder()
+//                        .post(post)
+//                        .category(categoryRepository.findById(post.getCategory_id()).get())
+//                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+//                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+//                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+//                        .build()).collect(Collectors.toList());
         return retVal;
     }
 
@@ -106,7 +183,15 @@ public class PostServiceImpl implements PostService {
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
             Post post = postRepository.getById(postId);
-            if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
+            if(post.getMeet_date().before(new Date())) {
+                post.setStatusExpired();
+                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+                for (PostUser pu: postUsers) {
+                    User user = userRepository.getById(pu.getUser_id());
+                    user.increaseSpoonNum();
+                }
+            }
+            else if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
                 retVal.add( PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -252,6 +337,33 @@ public class PostServiceImpl implements PostService {
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
 
         post.updateToDeleted();
+
+        //신청자 전원에 모임 삭제 메일 전송하기
+        java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy.MM.dd HH시 mm분");
+        String meet_date = dateTimeFormat.format(post.getMeet_date());
+
+        String subject = "Hanspoon 모임 취소 안내";
+        String body = "";
+        body+= "<div style='margin:100px;'>";
+        body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
+        body+= "<br>";
+        body+= "<p><strong>" + post.getTitle() + "</strong> 모임이 취소되었음을 안내드립니다.<p>";
+        body+= "<br>";
+        body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
+        body+= "<h3 style='color:blue;'>취소된 모임 정보</h3>";
+        body+= "<div style='font-size:130%'>";
+        body+= "모임 일정 : " + meet_date + "<br>";
+        body+= "모임 장소 : " + post.getRestaurant_name() + "<br>";
+        body+= "<div>";
+        body+= "</div>";
+
+        List<Long> userIds= postUserRepository.findByPostId(post_id).get()
+                .stream().map(postUser -> postUser.getUser_id()).collect(Collectors.toList());
+        for(long userId: userIds){
+           String recipient = userRepository.findById(userId).get().getEmail();
+           sendEmailToUser(recipient, subject, body);
+        }
+
     }
 
     // (상세 페이지) 모임 신청 취소하기
@@ -292,5 +404,43 @@ public class PostServiceImpl implements PostService {
                 .state(StatePostType.VALID)
                 .participant_num(1)
                 .build();
+    }
+
+    private void sendEmailToUser(String recipient, String subject, String body) {
+
+        String host = "smtp.naver.com";
+        int port=465;
+
+        Properties props = System.getProperties();
+
+        props.put("mail.smtp.host",host);
+        props.put("mail.smtp.port",port);
+        props.put("mail.smtp.auth","true");
+        props.put("mail.smtp.ssl.enable","true");
+        props.put("mail.smtp.ssl.trust",host);
+
+        Session session = Session.getDefaultInstance(props, new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(username,password);
+            }
+        });
+
+        session.setDebug(true);
+
+        Message mimeMessage = new MimeMessage(session);
+        try {
+            mimeMessage.setFrom(new InternetAddress("kte2461@naver.com","Hanspoon"));
+            mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
+            mimeMessage.setSubject(subject);
+            mimeMessage.setContent(body, "text/html;charset=euc-kr");
+            Transport.send(mimeMessage);
+
+        } catch (MessagingException e) {
+            throw new HanspoonException(NO_EMAIL);
+
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

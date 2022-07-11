@@ -9,6 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostUserRepository extends JpaRepository<PostUser, Long> {
+
+    @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :id")
+    Optional<List<PostUser>> findByPostId(@Param("id") Long post_id);
+
     @Query("SELECT pu FROM PostUser pu WHERE pu.post_id = :id AND pu.state = 'HOST'")
     PostUser findHostByPostId(@Param("id") Long post_id);
 

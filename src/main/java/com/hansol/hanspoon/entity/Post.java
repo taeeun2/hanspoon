@@ -64,6 +64,8 @@ public class Post {
         this.state = StatePostType.VALID;
     }
 
+    public void setStatusExpired() { this.state = StatePostType.EXPIRED; }
+
     public void decreaseParticipantNum() {
         this.participant_num--;
     }

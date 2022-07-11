@@ -77,5 +77,5 @@ public class User{
     private long position_type_id;
     private long company_id;
 
-
+    public void increaseSpoonNum() { this.spoon_num++; }
 }
