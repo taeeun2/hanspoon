@@ -19,6 +19,7 @@ public class PostResponseDto {
     private String title;
     private String content;
     private String restaurant_name;
+    private String restaurant_address;
     private String meet_date;
     private String meet_time;
     private long capacity;
@@ -35,6 +36,7 @@ public class PostResponseDto {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.restaurant_name = post.getRestaurant_name();
+        this.restaurant_address = post.getRestaurant_address();
 
         java.text.SimpleDateFormat dateFormat = new java.text.SimpleDateFormat("yyyy.MM.dd");
         java.text.SimpleDateFormat timeFormat = new java.text.SimpleDateFormat("HH시 mm분");

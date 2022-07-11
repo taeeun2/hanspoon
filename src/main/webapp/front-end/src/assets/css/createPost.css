@@ -1,0 +1,156 @@
+.create_post{
+    font-family: 'NanumSquareRound';
+
+}
+
+.create_post .banner{
+    top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	height: 100%;
+	background: url("assets/images/hanspoon/createPost/bg_cp.jpg") no-repeat center;
+	background-size: contain;
+	background-color: #FF91B3;
+    text-align: center;
+    display:table;
+}
+
+.create_post .title{
+    font-size: 50px;
+    /* font-family: 'Carter One'; */
+    display:table-cell;
+    vertical-align:middle;
+    color: white;
+    border: 900;
+   
+}
+
+.cp_label{
+    font-size: 15px;
+    color : black;
+   
+}
+
+
+.cp_input_box{
+    /* margin: 5px 5px; */
+    padding: 5px 5px ;
+    background-color: #fff;
+    border: 1.5px solid #bbbbbb;
+    border-radius: 5px;
+	min-height: 100%;
+	width: 100%;
+}
+
+.cp_input_box_content{
+    border: 1.5px solid #bbbbbb;
+    border-radius: 5px;
+    padding: 5px 5px ;
+}
+
+.cp_input{
+    height: 100%;
+    width: 100%;
+	font-size: 15px;
+	font-family: 'NanumSquareRound';
+	padding: 0;
+	border: none;
+	outline: none;
+	background: none;
+	margin-left: 10px;
+}
+
+.cp_input:focus::-webkit-input-placeholder {
+    color: transparent;
+  }
+
+
+.cp_message{
+    font-size: 13px;
+    color: #FF91B3;
+}
+
+.cp_button{
+    outline: 0;
+    color : #ff6999;
+    align-items: center;
+    background: 0 0;
+    border: 1.5px solid #FF91B3;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 16px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 40px;
+    text-decoration: none;
+}
+
+.cp_button:hover{
+    background-color: #FF91B3;
+    color : white;
+}
+
+.cp_button_modal{
+    outline: 0;
+    color : #ff6999;
+    align-items: center;
+    background: 0 0;
+    border: 1.5px solid #FF91B3;
+    border-radius: 30px;
+    cursor: pointer;
+    display: inline-flex;
+    font-size: 13px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 10px 20px;
+    text-decoration: none;
+}
+
+.cp_button_modal:hover{
+    background-color: #FF91B3;
+    color : white;
+}
+
+.cp_input_box_modal{
+    padding: 10px 5px ;
+    background-color: #fff;
+    border: 1.5px solid #bbbbbb;
+    border-radius: 5px;
+	min-height: 100%;
+	width: 100px;
+    margin-right: 10px;
+}
+
+.cp_modal{
+    font-family: 'NanumSquareRound';
+}
+
+.modal_title{
+    border: 900;
+    color: black;
+}
+
+.cp_modal_num{
+    font-family: 'Carter One', cursive;
+    font-family: 'Limelight', cursive;
+}
+
+.cp_select{
+    padding: 12px 5px ;
+    background-color: #fff;
+    border: 1.5px solid #bbbbbb;
+    border-radius: 5px;
+	min-height: 100%;
+	width: 100%;
+    font-size: 15px;
+}
+
+.cp_create_button{
+    background-color: #FF91B3;
+    width: 100%;
+    height: 50px;
+    color : white;
+}

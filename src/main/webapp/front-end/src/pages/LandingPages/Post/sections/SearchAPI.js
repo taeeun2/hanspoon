@@ -30,8 +30,7 @@ const SearchAPI = ({show, searchRestaurant, setOnText}) => {
       }
     return (
         <div>
-            {/* <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }}  style={{"overflow" : "scroll"}}> */}
-            <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }} >
+            <Modal open={show} onClose={searchRestaurant} sx={{ display: "grid", placeItems: "center" }} className="cp_modal" >
 
                 <Slide direction="down" in={show} timeout={500}>
                     <MKBox
@@ -44,27 +43,23 @@ const SearchAPI = ({show, searchRestaurant, setOnText}) => {
                     shadow="xl"
                     >
                     <MKBox display="flex" alginItems="center" justifyContent="space-between" p={2}>
-                        <MKTypography variant="h5">상암동 식당 검색</MKTypography>
+                        <span className='modal_title' >상암동 식당 검색</span>
                         <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={searchRestaurant} />
                     </MKBox>
                     <Divider sx={{ my: 0 }} />
                     <MKBox p={2}>
                         <form className="inputForm" onSubmit={handleSubmit}>
-                            <MKInput label="Select a restaurant" style ={{"width" : "300px", "marginRight" : 5}} onChange={onChange} value={InputText} />
-                            <MKButton variant="gradient" color="dark" type="submit" style ={{"width" : "100px"}}>
+                            <span className='cp_input_box_modal'>
+                            <input className='cp_input' placeholder="select a restaurant" style ={{"width" : "300px", "marginRight" : 5}} onChange={onChange} value={InputText} />
+                            </span>
+                            <button className="cp_button_modal" type="submit" style ={{"width" : "100px"}}>
                                 검색
-                            </MKButton>
+                            </button>
                         </form><br/>
                         <MapContainer searchPlace={Place} searchRestaurant={searchRestaurant} setOnText={setOnText}/>
                     </MKBox>
                     <Divider sx={{ my: 0 }} />
                     <MKBox display="flex" justifyContent="space-between" p={1.5}>
-                        {/* <MKButton variant="gradient" color="dark" onClick={searchRestaurant}>
-                        close
-                        </MKButton>
-                        <MKButton variant="gradient" color="info">
-                        save changes
-                        </MKButton> */}
                     </MKBox>
                     </MKBox>
                 </Slide>

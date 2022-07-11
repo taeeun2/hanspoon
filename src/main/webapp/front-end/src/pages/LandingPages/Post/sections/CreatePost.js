@@ -13,14 +13,16 @@ import MKButton from "components/MKButton";
 
 import { Form } from "react-bootstrap";
 import SearchAPI from './SearchAPI';
-
+import "assets/css/createPost.css?after"
+import plusIcon from "assets/images/hanspoon/createPost/icon_cp_plus.png"
+import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
 
     const [categorylist, setCategroyList] = useState([])
     // 카테고리 리스트 가져오기
     useEffect(() => {
-        fetch('http://172.27.1.33:8080/category')
+        fetch('http://localhost:8080/category')
         .then(res => {
           return res.json()
         })
@@ -28,7 +30,7 @@ const CreatePost = () => {
             setCategroyList(data)
         })
       }, []);
-    const [category, setCategroy] = useState(1)
+    const [category, setCategroy] = useState('')
     const [number, setNumber] = useState(1);
     const [show, setShow] = useState(false);
 
@@ -49,9 +51,13 @@ const CreatePost = () => {
 
     const [content, setContent] = useState('')
     const [contentMessage, setContentMessage] = useState('')
+    
+    const [categoryMessage, setCategoryMessage] = useState('')
+    const [restaurantNameMessage, setRestaurantNameMessage] = useState('')
+    const navigate = useNavigate();
 
     useEffect(()=>{
-        fetch('http://172.27.1.33:8080/getCurrentTime')
+        fetch('http://localhost:8080/getCurrentTime')
         .then(res=>{
             return res.json()
             
@@ -105,6 +111,7 @@ const CreatePost = () => {
 
     const handleMeetDate = (e) => {
         setMeetDate(e.target.value)
+        
     }
 
     const handleContent = (e) => {
@@ -118,12 +125,17 @@ const CreatePost = () => {
 
     const handleCategory = (e) => {
         setCategroy(e.target.value)
+        setCategoryMessage('')
     }
 
     function onClickCreate(){
         
         if(title.length <= 1){
             setTitleMessage('제목을 입력해주세요.')
+        }else if(category === '카테고리 선택' || category === ''){
+            
+            setCategoryMessage('카테고리를 선택해주세요.')
+        
         }else if(num < 2){
             setScopeMessage('공개 범위를 2개 이상 선택해주세요.')
         }else if(content.length < 10){
@@ -132,7 +144,7 @@ const CreatePost = () => {
         }else{
 
            console.log(meet_date)
-            fetch('http://172.27.1.33:8080/createPost',{
+            fetch('http://localhost:8080/createPost',{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'
@@ -141,24 +153,32 @@ const CreatePost = () => {
                     title : title,
                     content : content,
                     restaurant_name : restaurantName,
+                    restaurant_address : localStorage.getItem('restaurant_address'),
                     meet_date : meet_date,
-                    // user_id : sessionStorage.getItem('user_id'),
-                    user_id : 6,
+                    user_id : sessionStorage.getItem('user_id'),
                     scope_name : scope_name,
                     scope_gender :scope_gender,
                     scope_company : scope_company,
                     scope_position_type : scope_position_type,
                     scope_department :scope_department,
+                    scope_age : scope_age,
                     capacity : num+1,
                     category_id : category
                 })
             }).then(res=>{
-                if(res.ok){
+                return res.json()
+                            
+            }).then(data=>{
+                if(data.post_id != null){
+                    console.log(localStorage.getItem('restaurant_address'))
+                    localStorage.removeItem('restaurant_address')
+                    
                     alert('모임이 생성되었습니다.')
-                    document.location.href='/'
+                    navigate(`/detailPost/${data.post_id}`)
                 }else{
                     alert('모임 생성에 실패하였습니다.')
-                }                
+                    alert(data.errorMessage)
+                }    
             })
 
         }
@@ -166,47 +186,48 @@ const CreatePost = () => {
     }
    
     return (
-        <div>
-            <MKBox component="section" py={2}>
+        <>
             <Container>
-                    <Grid container item justifyContent="center" xs={12} lg={5} mx="auto" textAlign="center">
-                    <MKTypography variant="h3" mb={1}>
-                        모임 생성
-                    </MKTypography>
-                    </Grid>
-                    <Grid container item xs={12} lg={5} sx={{ mx: "auto" }}>
-                    <MKBox width="100%">
-                        
-                        <MKBox p={3}>
+                    <Grid container item  xs={12} lg={5} sx={{ mx: "auto" }}>
+                    <MKBox width="100%" mt = {7}>
                         <Grid container spacing={3}>
                             
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
-                                <MKTypography variant="h6"
-                                    fontWeight="regular"
-                                    color="dark" value = {title} >제목</MKTypography>
-                                
+                            <Grid item xs={12} md={3.5}>
+                                <span style={{"marginLeft" : "15px"}} className = "cp_label" value = {title} >제목</span>
                             </Grid>
 
-                            <Grid item xs={12} md={9.5}>
-                                <MKInput label="Title" fullWidth onChange={handleTitle}/>
-                                <MKTypography variant="button" style={{"color" :"red"}} >{titleMessage}</MKTypography>
+                            <Grid item xs={12} md={8.5}>
+                                <Grid>
+                                <div className="cp_input_box">
+                                    <input className = "cp_input"  onChange={handleTitle} placeholder="Title"/>
+                                </div>
+                                </Grid>
+                                <Grid>
+                                <span className='cp_message' >{titleMessage}</span>
+                                </Grid>
                             </Grid>
+                          
+                               
                             
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
-                            
-                            <MKTypography variant="h6"
-                                fontWeight="regular"
-                                color="dark">식당 선택</MKTypography>
+                            <Grid item xs={12} md={3.5}  textAlign="left">
+                                <span className = "cp_label">식당 선택</span>
                             </Grid>
 
-                            <Grid item xs={12} md={7}>
-                                <MKInput label="Select a restaurant" fullWidth value = {restaurantName} disabled/>
+                            <Grid item xs={12} md={5.5}>
+                                <Grid>
+                                <div className="cp_input_box">
+                                <input className = "cp_input"  placeholder="select a restaurant" value = {restaurantName} disabled/>
+                                </div>
+                                </Grid>
+                                <Grid>
+                                <span className='cp_message' >{restaurantNameMessage}</span>
+                                </Grid>
                             </Grid>
 
-                            <Grid item xs={12} md={2.5}>
-                                <MKButton variant="gradient" color="dark" onClick = {searchRestaurant} fullWidth>
+                            <Grid item xs={12} md={3}>
+                                <button className='cp_button' onClick = {searchRestaurant}>
                                검색
-                                </MKButton>
+                                </button>
                             </Grid>
 
                             {/* 모달 */}
@@ -215,95 +236,111 @@ const CreatePost = () => {
 
 
 
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
-                                <MKTypography variant="h6"
-                                    fontWeight="regular"
-                                    color="dark">식사 일시</MKTypography>
+                            <Grid item xs={12} md={3.5} textAlign="left">
+                                <span className = "cp_label">식사 일시</span>
                             </Grid>
 
-                            <Grid item xs={12} md={9.5}>
-                                <input type="datetime-local" id="meeting-time"
+                            <Grid item xs={12} md={8.5}>
+                                <div className='cp_input_box'>
+                                <input className ="cp_input" type="datetime-local" id="meeting-time"
                                         name="meeting-time" value={meet_date} onChange={handleMeetDate}
-                                        min={meet_date} style={{"fontSize" : "15px", "width" : "100%", "height" : "40px", "textAlign" : "center"}}></input>
+                                        min={meet_date} style={{"textAlign" : "left", "width" : "95%", "fontSize" : "14px"}}></input>
+                                </div>
                             </Grid>
 
                             
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">   
-                                <MKTypography variant="h6"
-                                    fontWeight="regular"
-                                    color="dark">카테고리</MKTypography>
+                            <Grid item xs={12} md={3.5} textAlign="left">   
+                                <span className = "cp_label">카테고리</span>
                             </Grid>
                             
-                            <Grid item xs={12} md={9.5}>
-                                <Form.Select value = {category} onChange = {handleCategory}>
-                                    {categorylist.map(menu =>(menu.category_id!== 0 && <option key={menu.category_id} value={menu.category_id} >{menu.category_name}</option>))}
-                                </Form.Select>
+                            <Grid item xs={12} md={8.5}>
+                                <Grid>
+                                <select className='cp_select' value = {category} onChange = {handleCategory} >
+                                    <option>카테고리 선택</option>
+                                    {categorylist.map(menu =>(menu.category_id!== 0 && <option key={menu.category_id} value={menu.category_id}  >{menu.category_name}</option>))}
+                                </select>
+                                </Grid>
+                                <Grid>
+                                <span className='cp_message' >{categoryMessage}</span>
+                                </Grid>
                             </Grid>
 
-                            <Grid item xs={12} md={2.5} mt={1}textAlign="center" >   
-                                <MKTypography variant="h6"
-                                    fontWeight="regular"
-                                    color="dark">모집 인원</MKTypography>
+                            <Grid item xs={12} md={3.5} textAlign="left" >   
+                                <span className = "cp_label">모집 인원</span>
                             </Grid>
 
-                            <Grid item xs={12} md={9.5}>
-                                <MKButton style={{"width" : "1px"}} color="secondary" onClick = {decreaseNumber}>-</MKButton>
-                                <MKInput value = {number} label = "Number" style={{"width" : "80px"}} onChange = {handleNumber} />
-                                <MKButton style={{"width" : "1px"}} color="secondary" onClick = {increaseNumber}>+</MKButton>
+                            <Grid item xs={12} md={8.5}>
+                                <button style={{"width" : "1px"}} color="secondary" onClick = {decreaseNumber}><img src={plusIcon}></img></button>
+                                <input className='cp_input'value = {number} label = "Number" style={{"width" : "80px","textAlign" : "center"}} onChange = {handleNumber} />
+                                <button style={{"width" : "1px"}} color="secondary" onClick = {increaseNumber}><img src={plusIcon}></img></button>
                             </Grid>
 
                             
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
-                                <MKTypography variant="h6"
-                                    fontWeight="regular"
-                                    color="dark">공개 범위</MKTypography>
-                                <MKTypography variant="caption"
-                                    color="info">최소 2개 <br/> 이상 선택</MKTypography>
+                            <Grid item xs={12} md={3.5} textAlign="left">
+                                <span className = "cp_label">공개 범위</span><br/>
+                                <span style={{"color" : "#FF91B3", "fontSize" : "12px", "marginRight" : "20px"}}>최소 2개 이상 선택</span>
                             </Grid>
-                            <Grid item xs={12} md={3}>
-                                <MKButton  onClick={() => {setScope_name(!scope_name); if(!scope_name){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_name?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                            <Grid item xs={12} md={2.5}>
+                                <label  className="chk_box">
+                                    <input type="checkbox" id="name" name="scope" onChange={() => {setScope_name(!scope_name); if(!scope_name){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     이름
-                                </MKButton>
-                                <MKButton onClick={() => {setScope_position_type(!scope_position_type);if(!scope_position_type){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_position_type?'light':'dark'} fullWidth>
+                                </label>
+                                
+                                <label  className="chk_box">
+                                    <input type="checkbox" id="postion_type" name="scope" onChange={() => {setScope_position_type(!scope_position_type);if(!scope_position_type){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     직급
-                                </MKButton>
+                                </label>
 
                             </Grid>
-                            <Grid item xs={12} md={3}>
-                                <MKButton onClick={() => {setScope_age(!scope_age); if(!scope_age){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_age?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                            <Grid item xs={12} md={2.5}>
+                                <label  className="chk_box">
+                                    <input type="checkbox" id="age" name="scope" onChange={() => {setScope_age(!scope_age); if(!scope_age){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     연령대
-                                </MKButton>
-                                <MKButton onClick={() => {setScope_gender(!scope_gender);if(!scope_gender){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_gender?'light':'dark'} fullWidth>
+                                </label>
+                                <label  className="chk_box">
+                                    <input type="checkbox" id="gender" name="scope" onChange={() =>  {setScope_gender(!scope_gender);if(!scope_gender){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     성별
-                                </MKButton>
+                                </label>
                             </Grid>
-                            <Grid item xs={12} md={3}>
-                                <MKButton onClick={() =>{setScope_company(!scope_company);if(!scope_company){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_company?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                            <Grid item xs={12} md={3.5}>
+                                 <label  className="chk_box">
+                                    <input type="checkbox" id="company" name="scope" onChange={() =>  {setScope_company(!scope_company);if(!scope_company){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     소속회사
-                                </MKButton>
-                                <MKButton onClick={() => {setScope_department(!scope_department); if(!scope_department){ setNum(num+1)} else{setNum(num-1)}}} variant="gradient" color={scope_department?'light':'dark'} fullWidth>
+                                </label>
+
+                                <label  className="chk_box">
+                                    <input type="checkbox" id="department" name="scope" onChange={() =>  {setScope_department(!scope_department);if(!scope_department){ setNum(num+1)} else{setNum(num-1)}}} />
+                                    <span className="on"></span>
                                     부서명
-                                </MKButton>
+                                </label>
                             </Grid>
 
 
 
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
+                            <Grid item xs={12} md={3.5} textAlign="left">
                                 
                             </Grid>
-                            <Grid item xs={12} md={9.5} textAlign="center">
-                                <MKTypography variant="button" style={{"color" :"red"}} >{scopeMessage}</MKTypography>
+                            <Grid item xs={12} md={8.5} textAlign="left">
+                                <span className='cp_message' >{scopeMessage}</span>
                             </Grid>
 
-                            <Grid item xs={12} md={2.5} mt={1} textAlign="center">
+                            <Grid item xs={12} md={3.5}  textAlign="left">
 
-                            <MKTypography variant="h6"
-                                fontWeight="regular"
-                                color="dark" >한마디</MKTypography>
+                            <span className = "cp_label" >한마디</span>
                             </Grid>
-                            <Grid item xs={12} md={9.5} >
-                                <MKInput variant="standard" label="Your Message" value ={content} onChange = {handleContent}  multiline fullWidth rows={4} />
-                                <MKTypography variant="button" style={{"color" :"red"}} >{contentMessage}</MKTypography>
+                            <Grid item xs={12} md={8.5} mb={5}>
+                                <div className='cp_input_box_content'>
+                                <textarea className="cp_input" rows="3" style={{"resize" : "none"}} placeholder="your Message" value ={content} onChange = {handleContent}/>
+                                </div>
+                                <span className = "cp_message" >{contentMessage}</span>
+
+                                <br/>
+                                <button className='cp_create_button'onClick={onClickCreate}>생성하기</button> 
                             </Grid>
 
 
@@ -313,20 +350,19 @@ const CreatePost = () => {
 
 
 
-                            <Grid container item justifyContent="center" xs={12} my={2}>
+                            {/* <Grid container item justifyContent="center" xs={12} my={2}>
                                 <MKButton  variant="gradient" color="dark" fullWidth onClick={onClickCreate}>
                                 Create
                                 </MKButton>
-                            </Grid>
+                            </Grid> */}
 
 
 
                         </MKBox>
-                    </MKBox>
+                    
                     </Grid>
                 </Container>
-            </MKBox>
-        </div>
+        </>
     );
 };
 

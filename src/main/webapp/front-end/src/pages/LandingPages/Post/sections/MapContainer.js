@@ -20,6 +20,9 @@ const MapContainer = ({ searchPlace, searchRestaurant, setOnText}) => {
     searchRestaurant(name)
   }
 
+  const setPlaceAddress = (address) => {
+    localStorage.setItem('restaurant_address', address)
+  }
   
   useEffect(() => {
     var infowindow = new kakao.maps.InfoWindow({ zIndex: 1 })
@@ -84,12 +87,12 @@ const MapContainer = ({ searchPlace, searchRestaurant, setOnText}) => {
   }, [searchPlace])
 
   return (
-    <div>
+    <div >
       <div
         id="myMap"
         style={{
           width: '450px',
-          height: '400px',
+          height: '400px'
         }}
       ></div>
 { Places.length >= 1 &&
@@ -100,18 +103,23 @@ const MapContainer = ({ searchPlace, searchRestaurant, setOnText}) => {
         "overflow": "auto"}}>
         {Places.map((item, i) => (
            <div key={i} style={{ marginTop: '20px' }}>
-              <PlaceList 
-                key={i}
-                index = {i}
-                place_name = {item.place_name}
-                road_address_name = {item.road_address_name}
-                phone = {item.phone}
-                />
-                
-                 <Grid item textAlign = "center" style={{"marginTop" : "10px"}}>
-                <MKButton variant="gradient" color="dark" onClick = {() =>setPlaceName(item.place_name)}> 선택</MKButton>
+              <Grid container spacing={3} p={2}>
+                <Grid md={4} mt={3} style={{ "textAlign" : "center"}} >
+                  <span className='cp_modal_num'>{i+1}</span>
                 </Grid>
-             
+                <Grid md={5} mt={2}>
+                  <PlaceList 
+                  key={i}
+                  index = {i}
+                  place_name = {item.place_name}
+                  road_address_name = {item.road_address_name}
+                  phone = {item.phone}
+                  />
+                </Grid>
+                <Grid md={3}  mt={2}>
+                <button className='cp_button_modal' onClick = {() =>{setPlaceName(item.place_name); setPlaceAddress(item.road_address_name)}}> 선택</button>
+                </Grid>
+              </Grid>
                 <hr/>
           
             </div>

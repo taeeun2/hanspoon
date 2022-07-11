@@ -25,6 +25,7 @@ public class Post {
     private String content;
     private String restaurant_name;
 
+    private String restaurant_address;
     private Timestamp meet_date;
 
     private long capacity;
@@ -41,10 +42,11 @@ public class Post {
     private long category_id;
 
     @Builder
-    public Post(String title, String content, String restaurant_name, Timestamp meet_date, long capacity, long category_id, StatePostType state, long participant_num){
+    public Post(String title, String content, String restaurant_name, String restaurant_address, Timestamp meet_date, long capacity, long category_id, StatePostType state, long participant_num){
         this.title = title;
         this.content = content;
         this.restaurant_name = restaurant_name;
+        this.restaurant_address = restaurant_address;
         this.meet_date = meet_date;
         this.capacity = capacity;
         this.category_id = category_id;
