@@ -139,3 +139,18 @@
   right: 3% !important;
   z-index: 1;
 }
+
+.valid {
+  font-family: 'NanumSquare_bold';
+  color: #333333;
+}
+
+.expired {
+  font-family: 'NanumSquare';
+  color: #808080;
+}
+
+.full {
+  font-family: 'NanumSquare';
+  color: #808080;
+}

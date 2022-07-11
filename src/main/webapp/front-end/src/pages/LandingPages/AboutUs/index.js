@@ -192,6 +192,7 @@ function AboutUs() {
                       <Grid item xs={12} sm={6} lg={3} key={index}>
                         <div onClick={() => {handleClick(post.post_id)}} className='blog_box'>
                           <Blog 
+                            state = {post.state}
                             category={post.category.category_name}
                             date={post.meet_date}
                             title={post.title}
