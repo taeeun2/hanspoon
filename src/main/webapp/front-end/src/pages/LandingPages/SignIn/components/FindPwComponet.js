@@ -67,7 +67,7 @@ const FindPwComponent = () => {
                
                <Grid container  sx={{ justifyContent: 'center' }}>
 
-                                <span className="findPW_title">비밀번호 찾기</span>
+                                <span className="findPW_title"></span>
                                 <MKBox className="findPWinputBox">
                                     <input className = "findPWinputID" value={inputId} onChange={handleInputId} placeholder="아이디(이메일) 입력"
                                         onKeyPress={onKeyPress}/>
@@ -79,9 +79,9 @@ const FindPwComponent = () => {
                                 <Grid item mb = {1} style={{"width" : "100%", "textAlign" : "center"}}>
                                     <span className="login_message" >{message}</span>
                                 </Grid>
-                                <Grid item mb = {1} style={{"width" : "100%", "textAlign" : "center"}}>
+                                <Grid item mb = {1} style={{"width" : "80%", "textAlign" : "center"}}>
                                 <button type="button" className='buttonLogin' onClick={onClickfindPW}>
-                                    Find
+                                비밀번호 찾기
                                 </button>
                                 <Grid item mb = {1} style={{"width" : "100%", "textAlign" : "center"}}>
                                     <Link to="/signin"><span className="findPw_message" >로그인</span></Link>
