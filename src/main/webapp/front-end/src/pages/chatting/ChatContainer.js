@@ -7,7 +7,7 @@ import Stomp from 'stompjs';
 import ChatPresenter from "./ChatPresenter";
 import { useParams } from "react-router-dom";
 
-let sockJS = new SockJS("http://localhost:8080/webSocket");
+let sockJS = new SockJS("http://172.27.1.33:8080/webSocket");
 let stompClient = Stomp.over(sockJS);
 stompClient.debug= () => {};
 
