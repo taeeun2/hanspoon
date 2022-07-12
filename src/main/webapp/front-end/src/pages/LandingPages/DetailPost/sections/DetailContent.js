@@ -16,14 +16,21 @@ const DetailContent = ({clickedId, postData}) => {
     const [scope_gender, setScope_gender] = useState(false);
     const [scope_department, setScope_department] = useState(false);
     const [userId, setUserId] = useState(sessionStorage.getItem('user_id'));
-   
-    const navigate = useNavigate();
-    const isGuest = postData.guestInfo.map(guest => {
-        if(parseInt(guest.id) === parseInt(userId)){
-            return true;
-        }
-    })
+    const [isGuest, setIsGuest] = useState(false)
 
+    const navigate = useNavigate();
+   
+
+    useEffect(()=>{
+        postData.guestInfo.map(guest => {
+            if(parseInt(guest.id) === parseInt(userId)){
+                setIsGuest(true)
+            }
+        })
+    },[])
+    //     // console.log(isGuest[0])
+    //     // console.log(sessionStorage.getItem('user_id'))
+    // },[])
 
     /* 테스트 필요 */
     const [num, setNum] = useState(0) //선택된 공개범위 개수
@@ -87,7 +94,7 @@ const DetailContent = ({clickedId, postData}) => {
                         <MKTypography variant="h2">
                             {postData.title}
                         </MKTypography >
-                       
+                        
                     </Grid>
                     <Grid container item xs={12} lg={6} mx="auto" >
                         <MKTypography variant="h6" mr = {8}>{postData.hostInfo.name}🥄{postData.hostInfo.spoon_num}</MKTypography>
@@ -176,35 +183,70 @@ const DetailContent = ({clickedId, postData}) => {
                                         <MKTypography variant="h6">공개 범위</MKTypography>
                                     </Grid>
                                     <Grid item xs={12} md={2}  mt={3} mr ={1}>
-                                        <MKButton  onClick={() => {setScope_name(!scope_name); if(!scope_name) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_name?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                                        {/* <MKButton  onClick={() => {setScope_name(!scope_name); if(!scope_name) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_name?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                             이름
                                         </MKButton>
                                         <MKButton onClick={() => {setScope_position_type(!scope_position_type); if(!scope_position_type) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_position_type?'light':'dark'} fullWidth>
                                             직급
-                                        </MKButton>
+                                        </MKButton> */}
+
+                                        <label  className="chk_box">
+                                            <input type="checkbox" id="name" name="scope" onChange={() => {setScope_name(!scope_name); if(!scope_name){ setNum(num+1)} else{setNum(num-1)}}} />
+                                            <span className="on"></span>
+                                            이름
+                                        </label>
+                                        
+                                        <label  className="chk_box">
+                                            <input type="checkbox" id="postion_type" name="scope" onChange={() => {setScope_position_type(!scope_position_type);if(!scope_position_type){ setNum(num+1)} else{setNum(num-1)}}} />
+                                            <span className="on"></span>
+                                            직급
+                                        </label>
 
                                     </Grid>
                                     <Grid item xs={12} md={2} mt={3} mr ={1}>
-                                        <MKButton onClick={() => {setScope_age(!scope_age); if(!scope_age) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_age?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+
+                                    <label  className="chk_box">
+                                        <input type="checkbox" id="age" name="scope" onChange={() => {setScope_age(!scope_age); if(!scope_age){ setNum(num+1)} else{setNum(num-1)}}} />
+                                        <span className="on"></span>
+                                        연령대
+                                    </label>
+                                    <label  className="chk_box">
+                                        <input type="checkbox" id="gender" name="scope" onChange={() =>  {setScope_gender(!scope_gender);if(!scope_gender){ setNum(num+1)} else{setNum(num-1)}}} />
+                                        <span className="on"></span>
+                                        성별
+                                    </label>
+                                        {/* <MKButton onClick={() => {setScope_age(!scope_age); if(!scope_age) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_age?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                             연령대
                                         </MKButton>
                                         <MKButton onClick={() => {setScope_gender(!scope_gender); if(!scope_gender) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_gender?'light':'dark'} fullWidth>
                                             성별
-                                        </MKButton>
+                                        </MKButton> */}
                                     </Grid>
                                     <Grid item xs={12} md={2} mt={3} mr ={1}>
-                                        <MKButton onClick={() => {setScope_company(!scope_company); if(!scope_company) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_company?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
+                                        {/* <MKButton onClick={() => {setScope_company(!scope_company); if(!scope_company) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_company?'light':'dark'} fullWidth style = {{"marginBottom" : "10px"}}>
                                             소속회사
                                         </MKButton>
                                         <MKButton onClick={() => {setScope_department(!scope_department); if(!scope_department) setNum(num+1); else{setNum(num-1)}}} variant="gradient" color={scope_department?'light':'dark'} fullWidth>
                                             부서명
-                                        </MKButton>
+                                        </MKButton> */}
+
+                                        <label  className="chk_box">
+                                            <input type="checkbox" id="company" name="scope" onChange={() =>  {setScope_company(!scope_company);if(!scope_company){ setNum(num+1)} else{setNum(num-1)}}} />
+                                            <span className="on"></span>
+                                            소속회사
+                                        </label>
+
+                                        <label  className="chk_box">
+                                            <input type="checkbox" id="department" name="scope" onChange={() =>  {setScope_department(!scope_department);if(!scope_department){ setNum(num+1)} else{setNum(num-1)}}} />
+                                            <span className="on"></span>
+                                            부서명
+                                        </label>
                                     </Grid>
                                     
                                     {/* restNum이 1이상일 때만 버튼 활성화 */}
                                     <Grid container item justifyContent="center" xs={12} my={2} mt = {5}>
 
-
+                                    {postData.state !== 'EXPIRED' && <>
                                         {parseInt(postData.hostInfo.id) === parseInt(userId) ?
                                             <>
                                             <MKButton type="submit" variant="gradient" color="info"  style={{
@@ -219,17 +261,20 @@ const DetailContent = ({clickedId, postData}) => {
 
                                            :
                                             <>
-                                           {isGuest[0] === true ?
+                                           {isGuest ?
                                             <MKButton type="submit" variant="gradient" color="info" fullWidth onClick={onClickCancel}>
                                             취소하기
                                             </MKButton>
-                                            :
+                                            : <>{postData.state !=='FULL' && 
                                             <MKButton type="submit" variant="gradient" color="info" fullWidth onClick={onClickApply}>
                                             참여하기
                                             </MKButton>
-                                            }    
+                                            } </>
+                                        }
                                             </> 
                                         }
+                                        </>
+                                    }
                                     </Grid>
 
                             </Grid>
