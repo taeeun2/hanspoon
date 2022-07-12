@@ -50,7 +50,7 @@ const Blogs = () => {
 
     //더보기 버튼 클릭 이벤트
     const showMoreBlogs = () => {
-      setVisible((preValue) => preValue + 3)
+      setVisible((preValue) => preValue + 6)
     }
 
     /* ================= fetch ================= */

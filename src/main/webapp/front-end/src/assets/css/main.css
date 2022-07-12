@@ -210,6 +210,27 @@
     color: #ff5c00;
 }
 
+
+.step_01 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/createStep1.png');
+	min-height: 150px;
+	width: 300px;
+	margin:auto;
+	margin-top: 20px;
+	margin-bottom: 0px;
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+/* .step_02 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/createStep2.png');
+	min-height: 150px;
+	width: 300px;
+	margin:auto;
+	background-repeat: no-repeat;
+	background-size: contain;
+} */
+
 /* ================ 모임 참여 방법 ================ */
 
 .apply_step {
