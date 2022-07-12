@@ -25,8 +25,7 @@ import CreatePostTest from 'pages/CreatePostTest';
 import FindPw from 'pages/FindPw';
 import EditUser from 'pages/EditUser';
 import EditUserConfirm from 'pages/LandingPages/EditUserConfirm';
-import ChatPresenter from 'pages/chatting/ChatPresenter';
-import ChatContainer from 'pages/chatting/ChatContainer';
+
 const App = () => {
     const { pathname } = useLocation();
     // Setting page scroll to 0 when changing the route
@@ -60,7 +59,7 @@ const App = () => {
                {/* TEST */}
               <Route path="/editUser/*" element={<EditUserConfirm/>}/>
               <Route path="/postTest/*" element={<CreatePostTest/>}/>
-              <Route path="/chatting/:room" element={<ChatContainer/>}/>
+            
 
 
               <Route path="*" element={<Navigate to="/" />} />
