@@ -11,6 +11,9 @@ import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
 
+    @Query(value = "SELECT * FROM Post p WHERE p.state = 'VALID' OR p.state = 'FULL'", nativeQuery = true)
+    Optional<List<Post>> findVaildAndFullPost();
+
     @Query("SELECT p FROM Post p WHERE NOT p.state = 'DELETED' ORDER BY p.post_id desc")
     Optional<List<Post>> findAllByOrderByPostIdDesc();
 

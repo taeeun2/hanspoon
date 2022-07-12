@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -25,6 +26,10 @@ public class MyPageController {
 //    public ResponseEntity<Long> getUserId(@RequestParam(value = "email") String email){
 //        return new ResponseEntity<>(userService.getUserIdByName(email), HttpStatus.OK);
 //    }
+    @GetMapping("/mypage/userInfo")
+    public ResponseEntity<HashMap<String,Object>> getUserInfo(@RequestParam(value = "user") long userId){
+        return new ResponseEntity<>(userService.getUserInfo(userId), HttpStatus.OK);
+    }
 
     @GetMapping("/mypage/{category_id}")
     public ResponseEntity<List<PostResponseDto>> getMyPostList(@PathVariable long category_id

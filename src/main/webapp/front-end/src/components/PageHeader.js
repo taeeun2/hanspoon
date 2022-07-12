@@ -6,8 +6,8 @@ import "assets/css/mypage.css"
 
 function PageHeader(props) {
 
-    const [userName, setUserName] = useState('');
-    const [spoonNum, setSpoonNum] = useState(0);
+    // const [userName, setUserName] = useState(sessionStorage.getItem('user_name'));
+    // const [spoonNum, setSpoonNum] = useState(sessionStorage.getItem('spoon_num'));
 
     // ============ 추가 ==============
     const [isLogin, setIsLogin] = useState(false)
@@ -17,8 +17,6 @@ function PageHeader(props) {
           // console.log('isLogin ?? :: ',isLogin)
       } else{
           setIsLogin(true)
-    setUserName(sessionStorage.getItem('user_name'))
-    setSpoonNum(sessionStorage.getItem('spoon_num'))
           // console.log('isLogin ?? :: ',isLogin)
       }	
     })
@@ -48,7 +46,7 @@ function PageHeader(props) {
                     <> <Grid item className="gnb_item">
                     <span style={{
                     "fontFamily": 'NanumSquareRound',
-                    "fontWeight" : 'bold'}}>{userName} 님 (🥄{spoonNum})</span></Grid>
+                    "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님 (🥄{sessionStorage.getItem('spoon_num')})</span></Grid>
                     <Grid item className="gnb_item">
                     <button style={{
                     "fontFamily": 'NanumSquareRound',

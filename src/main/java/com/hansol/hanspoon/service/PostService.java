@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface PostService {
     /* 메인 화면 */
+    public void updatePostAndSpoon();
     public List<PostResponseDto> getAllPostList();
     public List<PostResponseDto> getAllPostListByCategory(long category_id);
     public List<PostResponseDto> getValidPostList();

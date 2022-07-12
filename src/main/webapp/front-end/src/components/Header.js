@@ -16,8 +16,8 @@ import { Box } from "@mui/system";
 
 const Header = () => {
 
-  const [userName, setUserName] = useState('');
-  const [spoonNum, setSpoonNum] = useState(0);
+  // const [userName, setUserName] = useState(sessionStorage.getItem('user_name'));
+  // const [spoonNum, setSpoonNum] = useState(sessionStorage.getItem('spoon_num'));
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const updateScroll = () => {
@@ -57,8 +57,6 @@ const Header = () => {
 			// console.log('isLogin ?? :: ',isLogin)
 		} else{
 			setIsLogin(true)
-      setUserName(sessionStorage.getItem('user_name'))
-      setSpoonNum(sessionStorage.getItem('spoon_num'))
 			// console.log('isLogin ?? :: ',isLogin)
 		}	
 	})
@@ -123,7 +121,7 @@ const Header = () => {
                <> <Grid item className="gnb_item">
                <span style={{
                  "fontFamily": 'NanumSquareRound',
-                 "fontWeight" : 'bold'}}>{userName} 님 (🥄{spoonNum})</span></Grid>
+                 "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님 (🥄{sessionStorage.getItem('spoon_num')})</span></Grid>
                  <Grid item className="gnb_item">
                <span style={{
                  "fontFamily": 'NanumSquareRound',

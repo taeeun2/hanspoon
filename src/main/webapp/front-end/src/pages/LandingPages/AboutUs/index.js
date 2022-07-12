@@ -60,6 +60,14 @@ function AboutUs() {
   const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
   const [activeTab, setActiveTab] = React.useState(0);
+  const [spoonNum, setSpoonNum] = useState();
+  const [spoonRank, setSpoonRank] = useState();
+  const [gender, setGender] = useState();
+  const [companyName, setCompanyName] = useState();
+  const [department, setDepartment] = useState();
+  const [position, setPosition] = useState();
+  const [age, setAge] = useState();
+  const [joinDuration, setJoinDuration] = useState();
 
   const CategoryType = [{
         category_id: 0,
@@ -108,6 +116,7 @@ function AboutUs() {
 
   useEffect(() => {
     setUserName(sessionStorage.getItem('user_name'))
+    getUserInfo();
     console.log(postList[0])
   },[])
 
@@ -122,6 +131,24 @@ function AboutUs() {
     })
   }
 
+  const getUserInfo = () => {
+    let user_id = sessionStorage.getItem('user_id');
+    fetch(`http://localhost:8080/mypage/userInfo?user=${user_id}`)
+    .then(res => {
+      return res.json();
+    })
+    .then(data => {
+      setAge(data.age);
+      setCompanyName(data.company_name);
+      setDepartment(data.department_name);
+      setGender(data.gender);
+      setSpoonNum(data.spoon_num);
+      setSpoonRank(data.spoon_rank);
+      setJoinDuration(data.join_duration);
+    })
+  }
+
+
   return (
     <div className='my_page'>
       <PageHeader />
@@ -130,9 +157,9 @@ function AboutUs() {
         <Grid container item direction="row" className='user_info_box'>
           <Grid item xs={12} lg={3} className="user_info">
             <h2 className='user_info_title'>{userName} 님</h2>
-            <p className='user_info_sub'>한솔 인티큐브</p>
-            <p className='user_info_sub'>IPCC1팀 책임</p>
-            <p className='user_info_sub'>30대 남성</p>
+            <p className='user_info_sub'>{companyName}</p>
+            <p className='user_info_sub'>{department} {position}</p>
+            <p className='user_info_sub'>{age} {gender}</p>
             <Link to = "/editUser"><p className='info_link' style={{
                       "fontFamily": 'NanumSquareRound',
                       "fontSize" : '18px',
@@ -147,7 +174,7 @@ function AboutUs() {
                   숟가락 개수
                 </div></div>
                 <div className='count_num'>
-                  <CountUp end={10} duration={1} />
+                  <CountUp end={spoonNum} duration={1} />
                 </div>
               </Grid>
               <Grid item xs={4} lg={4} className="user_conunt">
@@ -155,7 +182,7 @@ function AboutUs() {
                   숟가락 랭킹
                 </div></div>
                 <div className='count_num'>
-                  <CountUp end={5} duration={1} />
+                  <CountUp end={spoonRank} duration={1} />
                 </div>
               </Grid>
               <Grid item xs={4} lg={4} className="user_conunt">
@@ -163,7 +190,7 @@ function AboutUs() {
                   한스푼과 함께 한 날
                 </div></div>
                 <div className='count_num'>
-                  <CountUp end={20} duration={1} />
+                  <CountUp end={joinDuration} duration={1} />
                 </div>
               </Grid>
             </Grid>

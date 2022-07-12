@@ -49,23 +49,33 @@ public class PostServiceImpl implements PostService {
     private String password;
 
 
+    //(메인화면)게시글 상태 및 스푼 수 업데이트
+    @Override
+    @Transactional
+    public void updatePostAndSpoon() {
+        List<Post> posts = postRepository.findVaildAndFullPost().get(); //상태가 VALID 혹은 FULL인 게시글 중에서
+        System.out.println("================ updatePostAndSpoon 시작 ===============");
+        posts.stream().forEach(post -> {
+            if(post.getMeet_date().before(new Date())){ //meet_date가 현재시간보다 이전일 경우, 상태를 EXPIRED로 변경
+                post.setStatusExpired();
+                System.out.println("================ updatePostAndSpoon EXPIRED 변경 ===============");
+                if(post.getParticipant_num() > 1){ //EXPIRED 게시글의 참가자 수가 1 초과이면 참가자 전원의 스푼수를 1씩 증가
+                    List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
+                    System.out.println("================ updatePostAndSpoon 스푼수 증가 ===============");
+                    for (PostUser pu: postUsers) {
+                        User user = userRepository.getById(pu.getUser_id());
+                        user.increaseSpoonNum();
+                    }
+                }
+            }
+        });
+    }
 
     //(메인화면)전체 게시글 리스트 가져오기
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostList() {
-        List<Post> postList = postRepository.findAllByOrderByPostIdDesc().get();
-        postList.stream().forEach(post -> {
-                    if(post.getMeet_date().before(new Date())
-                            && (post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL"))){
-                        post.setStatusExpired();
-                        List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
-                        for (PostUser pu: postUsers) {
-                            User user = userRepository.getById(pu.getUser_id());
-                            user.increaseSpoonNum();
-                        }
-                    }});
-        List<PostResponseDto> retVal = postList.stream()
+        List<PostResponseDto> retVal = postRepository.findAllByOrderByPostIdDesc().get().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -80,18 +90,7 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public List<PostResponseDto> getAllPostListByCategory(long category_id) {
-        List<Post> postList = postRepository.findAllPostByCategoryId(category_id).get();
-        postList.stream().forEach(post -> {
-            if(post.getMeet_date().before(new Date())
-                    && (post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL"))){
-                post.setStatusExpired();
-                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
-                for (PostUser pu: postUsers) {
-                    User user = userRepository.getById(pu.getUser_id());
-                    user.increaseSpoonNum();
-                }
-            }});
-        List<PostResponseDto> retVal = postList.stream()
+        List<PostResponseDto> retVal = postRepository.findAllPostByCategoryId(category_id).get().stream()
                 .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -107,35 +106,15 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public List<PostResponseDto> getValidPostList() {
-        List<PostResponseDto> retVal = new ArrayList<>();
         List<Post> postList = postRepository.findValidPost().get();
-
-        postList.stream().forEach(post -> {
-        if(post.getMeet_date().before(new Date())){
-            post.setStatusExpired();
-            List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
-            for (PostUser pu: postUsers) {
-                User user = userRepository.getById(pu.getUser_id());
-                user.increaseSpoonNum();
-            }
-        } else {
-            retVal.add(PostResponseDto.builder()
-                    .post(post)
-                    .category(categoryRepository.findById(post.getCategory_id()).get())
-                    .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
-                    .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
-                            .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                    .build());
-        }
-        });
-//        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
-//                .map(post -> PostResponseDto.builder()
-//                        .post(post)
-//                        .category(categoryRepository.findById(post.getCategory_id()).get())
-//                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
-//                            .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
-//                                    .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-//                            .build()).collect(Collectors.toList());
+        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
+                .map(post -> PostResponseDto.builder()
+                        .post(post)
+                        .category(categoryRepository.findById(post.getCategory_id()).get())
+                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
+                            .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
+                                    .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
+                            .build()).collect(Collectors.toList());
         return retVal;
     }
 
@@ -143,35 +122,16 @@ public class PostServiceImpl implements PostService {
     @Override
     @Transactional
     public List<PostResponseDto> getValidPostListByCategory(long category_id) {
-        List<PostResponseDto> retVal = new ArrayList<>();
         List<Post> postList = postRepository.findValidPostByCategoryId(category_id).get();
 
-        postList.stream().forEach(post -> {
-            if(post.getMeet_date().before(new Date())){
-                post.setStatusExpired();
-                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
-                for (PostUser pu: postUsers) {
-                    User user = userRepository.getById(pu.getUser_id());
-                    user.increaseSpoonNum();
-                }
-            } else {
-                retVal.add(PostResponseDto.builder()
+        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
+                .map(post -> PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
                         .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
                         .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
                                 .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-                        .build());
-            }
-        });
-//        List<PostResponseDto> retVal = postList.stream().filter(post -> post.getState().toString().equals("VALID"))
-//                .map(post -> PostResponseDto.builder()
-//                        .post(post)
-//                        .category(categoryRepository.findById(post.getCategory_id()).get())
-//                        .host(this.getUserOpenInfo(postUserRepository.findHostByPostId(post.getPost_id())))
-//                        .guest(postUserRepository.findGuestByPostId(post.getPost_id()).get().stream()
-//                                .map(guest -> this.getUserOpenInfo(guest)).collect(Collectors.toList()))
-//                        .build()).collect(Collectors.toList());
+                        .build()).collect(Collectors.toList());
         return retVal;
     }
 
@@ -184,15 +144,7 @@ public class PostServiceImpl implements PostService {
         for(PostUser postUser: postUserList){
             long postId = postUser.getPost_id();
             Post post = postRepository.getById(postId);
-            if(post.getMeet_date().before(new Date())) {
-                post.setStatusExpired();
-                List<PostUser> postUsers = postUserRepository.findByPostId(post.getPost_id()).get();
-                for (PostUser pu: postUsers) {
-                    User user = userRepository.getById(pu.getUser_id());
-                    user.increaseSpoonNum();
-                }
-            }
-            else if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
+            if(post.getState().toString().equals("VALID") || post.getState().toString().equals("FULL") ){
                 retVal.add( PostResponseDto.builder()
                         .post(post)
                         .category(categoryRepository.findById(post.getCategory_id()).get())
@@ -344,7 +296,7 @@ public class PostServiceImpl implements PostService {
         post.updateToDeleted();
 
         //신청자 전원에 모임 삭제 메일 전송하기
-        java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy.MM.dd HH시 mm분");
+        java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
         String meet_date = dateTimeFormat.format(post.getMeet_date());
 
         String subject = "Hanspoon 모임 취소 안내";
@@ -352,13 +304,13 @@ public class PostServiceImpl implements PostService {
         body+= "<div style='margin:100px;'>";
         body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
         body+= "<br>";
-        body+= "<p><strong>" + post.getTitle() + "</strong> 모임이 취소되었음을 안내드립니다.<p>";
+        body+= "<strong style='color:blue;'> \"" + post.getTitle() + " \"</strong> 모임이 취소되었음을 안내드립니다.";
         body+= "<br>";
         body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
-        body+= "<h3 style='color:blue;'>취소된 모임 정보</h3>";
+        body+= "<h2>취소된 모임 정보</h2>";
         body+= "<div style='font-size:130%'>";
-        body+= "모임 일정 : " + meet_date + "<br>";
-        body+= "모임 장소 : " + post.getRestaurant_name() + "<br>";
+        body+= "- 모임 일정 : " + meet_date + "<br>";
+        body+= "- 모임 장소 : " + post.getRestaurant_name() + "<br>";
         body+= "<div>";
         body+= "</div>";
 

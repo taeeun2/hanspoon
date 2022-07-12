@@ -33,7 +33,7 @@ import MKTypography from "./MKTypography";
         setStateTitle('인원 마감');
         setTitleClass('full');
       }
-    },[])
+    })
 
     return (
       <div  onMouseOver={() => setIsHovering(1)}

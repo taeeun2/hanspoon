@@ -23,10 +23,10 @@ public class MainController {
     @Autowired
     private PostService postService;
 
-//    @GetMapping("/")
-//    public ResponseEntity<List<Category>> main(){
-//        return new ResponseEntity<>(categoryService.getCategoryList(), HttpStatus.OK);
-//    }
+    @GetMapping("/update")
+    public void updatePostAndSpoon(){
+        postService.updatePostAndSpoon();
+    }
 
     @GetMapping("/category")
     public ResponseEntity<List<Category>> getCategoryList(){

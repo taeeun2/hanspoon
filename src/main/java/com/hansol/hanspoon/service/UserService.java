@@ -9,6 +9,7 @@ import com.hansol.hanspoon.entity.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -21,6 +22,8 @@ public interface UserService {
     UserResponseDto signUp(UserRequestDto userRequestDto);
 
     //마이페이지
+    HashMap<String,Object> getUserInfo(long user_id);
+
     Long getUserIdByName(String email);
 
     UserResponseDto edit(UserRequestDto request);

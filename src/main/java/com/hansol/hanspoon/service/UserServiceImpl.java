@@ -7,6 +7,7 @@ import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
 import com.hansol.hanspoon.exception.HanspoonException;
+import com.hansol.hanspoon.repository.CompanyRepository;
 import com.hansol.hanspoon.repository.DepartmentRepository;
 import com.hansol.hanspoon.repository.PositionTypeRepository;
 import com.hansol.hanspoon.repository.UserRepository;
@@ -21,6 +22,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 import java.util.Random;
@@ -40,6 +42,9 @@ public class UserServiceImpl implements  UserService{
 
     @Autowired
     private DepartmentRepository departmentRepository;
+
+    @Autowired
+    private CompanyRepository companyRepository;
 
     @Override
     @Transactional
@@ -71,6 +76,22 @@ public class UserServiceImpl implements  UserService{
         userRepository.save(createUserFromRequest(userRequestDto));
         userResponseDto.setEmail(userRequestDto.getEmail());
         return userResponseDto;
+    }
+
+    @Override
+    @Transactional
+    public HashMap<String, Object> getUserInfo(long user_id) {
+        HashMap<String,Object> res = new HashMap<>();
+        User user = userRepository.getById(user_id);
+        res.put("company_name", companyRepository.findById(user.getCompany_id()).get().getCompany_name());
+        res.put("department_name", departmentRepository.findById(user.getDepartment_id()).get().getName());
+        res.put("position_type", positionTypeRepository.findById(user.getPosition_type_id()).get().getPosition_type_name());
+        res.put("gender", user.getGender().getDescription());
+        res.put("age", user.getAge().getDescription());
+        res.put("spoon_num", user.getSpoon_num());
+        res.put("spoon_rank", userRepository.findUserSpoonRank(user_id));
+        res.put("join_duration", userRepository.findJoinDuration(user_id));
+        return res;
     }
 
     //마이페이지
