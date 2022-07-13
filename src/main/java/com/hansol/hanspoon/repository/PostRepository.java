@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -27,4 +28,15 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     Optional<List<Post>> findAllPostByCategoryId(@Param("id") Long category_id);
 
     Optional<List<Post>> findByState(StatePostType statePostType);
+
+    @Query("SELECT restaurant_name " +
+            "FROM Post WHERE state = 'EXPIRED' AND participant_num != 1 " +
+            "GROUP BY restaurant_name " +
+            "ORDER BY COUNT(restaurant_name) DESC")
+    List<String> findPopularRestaurantRankings();
+
+    @Query("SELECT COUNT(*) FROM Post WHERE state = 'EXPIRED' AND participant_num != 1")
+    int findNumberOfMeetings();
+
+
 }

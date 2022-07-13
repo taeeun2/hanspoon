@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Repository
@@ -23,4 +24,20 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     @Query(value = "SELECT DATEDIFF(NOW(), u.create_date) + 1 duration FROM user u WHERE u.user_id = :id", nativeQuery = true)
     long findJoinDuration(@Param("id") Long user_id );
+
+    @Query("SELECT MAX(spoon_num) FROM User")
+    int findMaxSpoonNum();
+
+    @Query("SELECT company_id " +
+            "FROM User " +
+            "GROUP BY company_id " +
+            "ORDER BY sum(spoon_num) DESC ")
+    List<Long> findMostSpoonCompany();
+
+    @Query("SELECT age " +
+            "FROM User " +
+            "GROUP BY age " +
+            "ORDER BY sum(spoon_num) DESC")
+    List<String> findMostSpoonAge();
+
 }

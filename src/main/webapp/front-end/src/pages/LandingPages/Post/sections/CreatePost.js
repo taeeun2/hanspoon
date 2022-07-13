@@ -15,6 +15,7 @@ import { Form } from "react-bootstrap";
 import SearchAPI from './SearchAPI';
 import "assets/css/createPost.css?after"
 import plusIcon from "assets/images/hanspoon/createPost/icon_cp_plus.png"
+import minusIcon from "assets/images/hanspoon/createPost/icon_cp_minus.png"
 import { useNavigate } from 'react-router-dom';
 
 const CreatePost = () => {
@@ -268,9 +269,9 @@ const CreatePost = () => {
                             <Grid item xs={12} md={3.5} textAlign="left" >   
                                 <span className = "cp_label">모집 인원</span>
                             </Grid>
-
+        
                             <Grid item xs={12} md={8.5}>
-                                <button style={{"width" : "1px"}} color="secondary" onClick = {decreaseNumber}><img src={plusIcon}></img></button>
+                                <button style={{"width" : "1px"}} color="secondary" onClick = {decreaseNumber}><img src={minusIcon}></img></button>
                                 <input className='cp_input'value = {number} label = "Number" style={{"width" : "80px","textAlign" : "center"}} onChange = {handleNumber} />
                                 <button style={{"width" : "1px"}} color="secondary" onClick = {increaseNumber}><img src={plusIcon}></img></button>
                             </Grid>

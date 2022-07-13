@@ -28,6 +28,12 @@ public interface UserService {
 
     UserResponseDto edit(UserRequestDto request);
 
+    //비밀번호 찾기
     String getPassword(String email);
+
+    //순위 페이지
+    int maxSpoonNum();
+    List<Long> mostSpoonCompany();
+    List<String> mostSpoonAge();
 
 }

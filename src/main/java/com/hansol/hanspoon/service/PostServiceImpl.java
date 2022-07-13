@@ -1,9 +1,6 @@
 package com.hansol.hanspoon.service;
 
-import com.hansol.hanspoon.dto.CreatePostResponseDto;
-import com.hansol.hanspoon.dto.PostApplyRequestDto;
-import com.hansol.hanspoon.dto.PostRequestDto;
-import com.hansol.hanspoon.dto.PostResponseDto;
+import com.hansol.hanspoon.dto.*;
 import com.hansol.hanspoon.entity.Post;
 import com.hansol.hanspoon.entity.PostUser;
 import com.hansol.hanspoon.entity.User;
@@ -29,6 +26,7 @@ import java.sql.Timestamp;
 import java.util.stream.Collectors;
 
 import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_EMAIL;
+import static com.hansol.hanspoon.exception.HanspoonErrorCode.NO_RESTAURANT;
 
 @RequiredArgsConstructor
 @Service
@@ -260,6 +258,15 @@ public class PostServiceImpl implements PostService {
        return createPostResponse;
     }
 
+    // 모임 정보 수정하기
+    @Override
+    public void editPost(EditPostRequestDto requestDto) {
+        Post post = postRepository.findById(requestDto.getPost_id())
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
+        post.editPost(requestDto.getTitle(), requestDto.getContent());
+        postRepository.save(post);
+
+    }
     // (상세 페이지) 모임 신청하기
     @Override
     @Transactional
@@ -336,6 +343,8 @@ public class PostServiceImpl implements PostService {
         post.setStatusValid();
     }
 
+
+
     private PostUser createPostUserFromRequest(PostRequestDto postRequestDto) {
         return PostUser.builder()
                 .state(StatePostUserType.HOST)
@@ -401,4 +410,18 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException(e);
         }
     }
+
+    //인기 있는 식당 순위
+    @Override
+    public List<String> popularRestaurantRankings(){
+        return postRepository.findPopularRestaurantRankings();
+    }
+
+    //한스푼에서 성사된 모임 수
+    @Override
+    public int numberOfMeetings(){
+        return postRepository.findNumberOfMeetings();
+    }
+
+
 }

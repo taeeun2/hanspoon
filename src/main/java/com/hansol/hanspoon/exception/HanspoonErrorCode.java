@@ -18,5 +18,6 @@ public enum HanspoonErrorCode {
     NO_USER_EMAIL("해당 이메일을 가진 사용자가 존재하지 않습니다."),
 
     NO_EMAIL_NAME("이메일 정보와 사용자 이름의 정보가 일치하지 않습니다.");
+
     private final String message;
 }

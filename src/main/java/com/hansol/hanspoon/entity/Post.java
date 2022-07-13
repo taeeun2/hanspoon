@@ -75,4 +75,9 @@ public class Post {
     public void updateToDeleted() {
         this.state = StatePostType.DELETED;
     }
+
+    public void editPost(String title, String content){
+        this.title = title;
+        this.content = content;
+    }
 }

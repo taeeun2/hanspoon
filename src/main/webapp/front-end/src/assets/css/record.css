@@ -1,0 +1,80 @@
+.recordPage{
+    font-family: 'NanumSquareRound';
+    color : black
+}
+.recordImg{
+    width: 350px;
+    height: 300px;
+}
+.record_count_rabel{
+    font-size: 23px;
+}
+.record_count_num{
+    font-size: 110px;
+	color: #333333;
+	padding-left: 25px;
+    border: 0;
+}
+
+.record_highlight{
+    font-size: 50px;
+    width: 0;
+    height: 10x;
+    background: #D9FCDB;
+}
+
+.record_count_font{
+    font-size: 80px;
+}
+
+.mainModal .content_box {
+    height: 630px;
+    width: 783px;
+    margin-left: 0px;
+}
+
+.restaurantImg{
+    width: 270px;
+    height: 270px;
+}
+.companyImg{
+    width: 330px;
+    height: 330px;
+}
+.record_highlight_res{
+    font-size: 10px;
+    width: 0;
+    height: 5x;
+    background: #fcfcd9;
+    margin-left : 10px;
+}
+.record_highlight_company{
+    font-size: 20px;
+    width: 0;
+    height: 5x;
+    background: #fcd9f4;
+    margin-left : 10px;
+}
+.record_count_num_res{ 
+    font-size: 25px;
+	color: #333333;
+	/* padding-left: 25px; */
+    border: 0;
+    /* font-family: 'NanumSquare_bold'; */
+}
+
+.spoonImage{
+    width: 210px;
+    height: 360px;
+}
+
+.company_font{
+    font-size: 60px;
+}
+
+.record_highlight_spoon{
+    font-size: 50px;
+    width: 0;
+    height: 10x;
+    background: #d9f6fc;
+}

@@ -1,11 +1,9 @@
 package com.hansol.hanspoon.service;
 
-import com.hansol.hanspoon.dto.CreatePostResponseDto;
-import com.hansol.hanspoon.dto.PostApplyRequestDto;
-import com.hansol.hanspoon.dto.PostRequestDto;
-import com.hansol.hanspoon.dto.PostResponseDto;
+import com.hansol.hanspoon.dto.*;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PostService {
     /* 메인 화면 */
@@ -26,4 +24,9 @@ public interface PostService {
     public void applyPost(PostApplyRequestDto postApplyRequestDto);
     public void deletePost(long post_id);
     public void cancelApply(long post_id, long user_id);
+    public void editPost(EditPostRequestDto requestDto);
+
+    /* 순위 페이지 */
+    public List<String> popularRestaurantRankings();
+    public int numberOfMeetings();
 }

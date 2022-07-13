@@ -121,6 +121,25 @@ public class UserServiceImpl implements  UserService{
     }
 
 
+    //가장 많은 숟가락 개수
+    @Override
+    public int maxSpoonNum() {
+        return userRepository.findMaxSpoonNum();
+    }
+
+    //가장 많은 숟가락을 모은 회사(리스트)
+    @Override
+    public List<Long> mostSpoonCompany() {
+        return userRepository.findMostSpoonCompany();
+    }
+
+    //가장 많은 숟가락을 모은 연령대(리스트)
+    @Override
+    public List<String> mostSpoonAge() {
+        return userRepository.findMostSpoonAge();
+    }
+
+
     public static User createUserFromRequest(UserRequestDto request){
         return User.builder()
                 .email(request.getEmail())

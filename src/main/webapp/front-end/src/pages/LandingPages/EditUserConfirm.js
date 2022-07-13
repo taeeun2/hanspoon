@@ -60,7 +60,8 @@ const EditUserConfirm = () => {
                         
                         <Grid item className='edit_box' xs={12} sm={12} lg={4} key={0}> 
                             <Grid container spacing={2}>
-                                <Grid md={5}><Grid container  sx={{ justifyContent: 'center' }}><img src={dangerIcon} style={{
+                                <Grid md={5}><Grid container  sx={{ justifyContent: 'center' }}>
+                                <img src={dangerIcon} style={{
                                     "width" : "70px",
                                     "height" : "70px",
                                     "marginTop" : "20px"

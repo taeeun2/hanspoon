@@ -1,9 +1,6 @@
 package com.hansol.hanspoon.controller;
 
-import com.hansol.hanspoon.dto.CreatePostResponseDto;
-import com.hansol.hanspoon.dto.PostApplyRequestDto;
-import com.hansol.hanspoon.dto.PostRequestDto;
-import com.hansol.hanspoon.dto.PostResponseDto;
+import com.hansol.hanspoon.dto.*;
 import com.hansol.hanspoon.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -47,5 +44,10 @@ public class PostController {
     @GetMapping("cancelApply/{post_id}")
     public void cancelApply(@PathVariable long post_id,@RequestParam(value = "user") long user_id){
         postService.cancelApply(post_id, user_id);
+    }
+
+    @PostMapping("/editPost")
+    public void editPost(@RequestBody EditPostRequestDto requestDto){
+        postService.editPost(requestDto);
     }
 }
