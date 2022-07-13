@@ -152,12 +152,37 @@
   color: #333333;
 }
 
-.expired {
-  font-family: 'NanumSquare';
-  color: #808080;
+.valid .cardHeader {
+  background-color: #ffffff00;
 }
 
+.expired {
+  font-family: 'NanumSquare_bold';
+  color: #333333;
+  border-radius: 20px;
+  background-color: #eaeaea;
+}
+
+.expired .cardHeader {
+  background-color: #ffffff00;
+}
+
+.expired .cardText {
+  color: #707070;
+}
+
+
 .full {
-  font-family: 'NanumSquare';
-  color: #808080;
+  font-family: 'NanumSquare_bold';
+  color: #333333;
+  border-radius: 20px;
+  background-color: #eaeaea;
+}
+
+.full .cardHeader {
+  background-color: #ffffff00;
+}
+
+.full .cardText {
+  color: #707070;
 }

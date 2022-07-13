@@ -112,12 +112,12 @@
 	padding-bottom: 10px;
 }
 
-.tab {
+.my_page .tab {
 	border-bottom: 4px solid #DCDDDD;
 	cursor: default;
 }
 
-.tab.active {
+.my_page .tab.active {
 	border-bottom: 4px solid #00CFCB ;
 	cursor: default;
 }
@@ -155,5 +155,9 @@
 
 .my_page .notice_text_box {
 	margin-top: 200px;
+	text-align: center;
+}
+
+#blog {
 	text-align: center;
 }

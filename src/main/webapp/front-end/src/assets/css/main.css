@@ -15,7 +15,7 @@
 
 .blogs .main_title {
 	color: #fff;
-	font-family: 'Carter One';
+	font-family: 'NanumSquareRound';
 	font-weight: bolder;
 }
 
@@ -93,18 +93,19 @@
 	height: 100%;
 	color: #fff;
 	z-index: 2;
-	background-color: rgba(0, 0, 255, 0.724);
+	/* background-color: rgba(0, 0, 255, 0.724); */
 }
 
 #banner_box {
-	animation: changeBg 12s infinite;
+	animation: changeBg 15s infinite;
 	background-size: cover;
 }
 
 @keyframes changeBg{
-	0%,100%  {background-image: url("assets/images/hanspoon/bg1.jpg");}
-	33% {background-image: url("assets/images/hanspoon/bg2.jpg");}
-	66% {background-image: url("assets/images/hanspoon/bg3.jpg");}
+	0%,100%  {background-image: url("assets/images/hanspoon/mainPage/bg_1.jpg");}
+	25% {background-image: url("assets/images/hanspoon/mainPage/bg_2.jpg");}
+	50% {background-image: url("assets/images/hanspoon/mainPage/bg_3.jpg");}
+	75% {background-image: url("assets/images/hanspoon/mainPage/bg_4.jpg");}
 }
 
 .banner .content_box {
@@ -141,7 +142,7 @@
 }
 
 .banner .btn_join {
-	margin-left:10px;
+	margin-left:20px;
 	margin-bottom: 20px;
 	padding: 0 52px;
 	height: 64px;
@@ -174,6 +175,27 @@
     line-height: 34px;
 }
 
+.mainModal {
+	border: none;
+}
+
+.mainModal .tab_box {
+	text-align: center;
+	font-size: 24px;
+	font-weight:bolder;
+	margin: 0px 30px;
+	padding-bottom: 10px;
+}
+
+.mainModal .tab {
+	border-bottom: 4px solid #DCDDDD;
+	cursor: default;
+}
+
+.mainModal .tab.active {
+	border-bottom: 4px solid #217bff ;
+	cursor: default;
+}
 
 
 /* ================ 모임 생성 방법 ================ */
@@ -204,32 +226,63 @@
 .create_step .step_title {
 	display: block;
 	margin-bottom: 20px;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
     line-height: 36px;
     color: #ff5c00;
 }
 
+.create_step .step_sub_title {
+	font-size: 22px;
+	font-family: 'NanumSquareRound';
+}
+
+.create_step .info_text {
+	margin-top: 15px;
+	font-size: 18px;
+	font-family: 'NanumSquareRound';
+}
+
 
 .step_01 .img_box {
 	background-image: url('assets/images/hanspoon/mainPage/createStep1.png');
-	min-height: 150px;
+	min-height: 140px;
 	width: 300px;
-	margin:auto;
-	margin-top: 20px;
-	margin-bottom: 0px;
+	margin:0px auto;
 	background-repeat: no-repeat;
 	background-size: contain;
 }
 
-/* .step_02 .img_box {
-	background-image: url('assets/images/hanspoon/mainPage/createStep2.png');
-	min-height: 150px;
-	width: 300px;
-	margin:auto;
+.step_02 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/createStep2.PNG');
+	min-height: 100px;
+	width: 320px;
+	margin:25px auto 30px;
 	background-repeat: no-repeat;
 	background-size: contain;
-} */
+	border: 1px solid #838383;
+}
+
+.step_03 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/createStep3.PNG');
+	min-height: 170px;
+	width: 300px;
+	margin:20px auto 0px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 1px solid #838383;
+}
+
+.step_04 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/createStep4.PNG');
+	min-height: 60px;
+	width: 350px;
+	margin:28px auto 30px;
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 1px solid #838383;
+}
+
 
 /* ================ 모임 참여 방법 ================ */
 
@@ -255,7 +308,7 @@
 .apply_step .step_title {
 	display: block;
 	margin-bottom: 20px;
-    font-size: 25px;
+    font-size: 28px;
     font-weight: bold;
     line-height: 36px;
     color: #ff5c00;

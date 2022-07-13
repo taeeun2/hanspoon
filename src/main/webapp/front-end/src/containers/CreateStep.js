@@ -40,26 +40,30 @@ function CreateStep(props) {
                             <div className='step_01'>
                                 <span className='step_title'>Step.1</span>
                                 <strong className='step_sub_title'>
-                                    우측 하단의 '모임 생성' 버튼을 클릭!
+                                    우측 하단의 '모임 생성' 버튼을 눌러<br />
+                                    모임 생성 화면으로 이동해주세요
                                 </strong>
                                 <div className='img_box'></div>
-                                <p className='info_text'></p>
+                                <p className='info_text'>모임 생성은 로그인 후 가능합니다</p>
                             </div>
                         </Grid>
                         <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={1}>
                             <div className='step_02'>
                                 <span className='step_title'>Step.2</span>
                                 <strong className='step_sub_title'>
-                                    검색 버튼을 클릭하여 상암동 식당 검색 후, 선택
+                                    식당 선택 버튼을 클릭하여<br />
+                                    상암동 식당을 검색하고 선택해주세요
                                 </strong>
                                 <div className='img_box'></div>
+                                <p className='info_text'>맛집, 메뉴 이름과 같은 키워드로도 검색 가능합니다</p>
                             </div>
                         </Grid>
                         <Grid item className='step_box' data-aos="fade-up" xs={12} sm={12} lg={4} key={1}>
                             <div className='step_03'>
                                 <span className='step_title'>Step.3</span>
                                 <strong className='step_sub_title'>
-                                    모임 정보 입력
+                                    모임에 관한 정보를 입력해주세요<br />
+                                    (제목, 식사 일시, 카테고리, 모입 입원, 한마디)
                                 </strong>
                                 <div className='img_box'></div>
                             </div>
@@ -68,9 +72,14 @@ function CreateStep(props) {
                             <div className='step_04'>
                                 <span className='step_title'>Step.4</span>
                                 <strong className='step_sub_title'>
-                                게시글에 공개할 정보 2개 이상 선택
+                                    게시글에 공개할 작성자 정보를<br />
+                                    2개 이상 선택해주세요
                                 </strong>
                                 <div className='img_box'></div>
+                                <p className='info_text'>
+                                    다른 사용자들이 모임 조회시<br />
+                                    확인 가능한 정보입니다 
+                                </p>
                             </div>
                         </Grid>
                     </Grid>
