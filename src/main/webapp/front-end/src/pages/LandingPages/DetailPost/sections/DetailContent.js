@@ -426,7 +426,7 @@ const DetailContent = ({clickedId, postData}) => {
                                         <>
                                     {isGuest ?
                                         // 참가자 일 경우 취소 버튼
-                                        <button className='buttonDesign' onClick={onClickCancel}>
+                                        <button className='buttonDesign' style={{"backgroundColor" : "rgb(185, 8, 8)"}} onClick={onClickCancel}>
                                         취소하기
                                         </button>
                                         // 참가자가 아니면서 인원 마감이 안됐을 경우 참여하기 버튼
