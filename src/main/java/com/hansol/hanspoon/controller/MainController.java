@@ -1,10 +1,12 @@
 package com.hansol.hanspoon.controller;
 
+import com.hansol.hanspoon.dto.ChartDataDto;
 import com.hansol.hanspoon.dto.PostResponseDto;
 import com.hansol.hanspoon.entity.Category;
-import com.hansol.hanspoon.entity.Post;
+import com.hansol.hanspoon.entity.ChartDataInterface;
 import com.hansol.hanspoon.service.CategoryService;
 import com.hansol.hanspoon.service.PostService;
+import com.hansol.hanspoon.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,9 @@ public class MainController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/update")
     public void updatePostAndSpoon(){
@@ -53,4 +58,8 @@ public class MainController {
         }
     }
 
+    @GetMapping("/chart/{tab_id}")
+    public ResponseEntity<List<ChartDataDto>> getChartData(@PathVariable long tab_id) {
+        return new ResponseEntity<>(userService.getChartData(tab_id), HttpStatus.OK);
+    }
 }

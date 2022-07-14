@@ -15,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
+import Chart from './Chart';
 import RecordPage from 'pages/RecordPage';
 
 function MainModal({ show, toggleModal }) {
@@ -24,6 +25,14 @@ function MainModal({ show, toggleModal }) {
     const handleTabClick = (tab_id) => {
         setActiveTab(tab_id);
       }
+
+    let content;
+    if(activeTab === 1){
+        content = <Chart />     
+    }
+    else {
+        content = <RecordPage />
+    }
     
 
     return (
@@ -32,8 +41,8 @@ function MainModal({ show, toggleModal }) {
             <MKBox
                 className="mainModal"
                 position="relative"
-                width="800px"
-                height="800px"
+                width="700px"
+                height="700px"
                 display="flex"
                 flexDirection="column"
                 borderRadius="xl"
@@ -41,10 +50,10 @@ function MainModal({ show, toggleModal }) {
                 shadow="xl"
             >
                 <MKBox display="flex" alginItems="center" justifyContent="flex-end" p={2}>
-                <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={toggleModal} />
+                    <CloseIcon fontSize="medium" sx={{ cursor: "pointer" }} onClick={toggleModal} />
                 </MKBox>
                 {/* <Divider sx={{ my: 0 }} /> */}
-                <MKBox p={2}>
+                <MKBox p={2} pt={0} >
                     <Grid container item justifyContent="center" alignItems="center">
                         <Grid container item className='tab_box' direction="row"
                                 xs={10} sm={8} lg={8}
@@ -61,8 +70,8 @@ function MainModal({ show, toggleModal }) {
                             </Grid>            
                         </Grid>
                     </Grid>
-                    <Grid container item spacing={3} className="content_box" style={{"overflow-x":"hidden"}}>
-                        <RecordPage/>
+                    <Grid container item className="modal_content_box" >
+                        {content}
                     </Grid>
                 {/* <MKTypography variant="body2" color="secondary" fontWeight="regular">
                     Society has put up so many boundaries, so many limitations on what&apos;s right

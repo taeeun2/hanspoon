@@ -45,20 +45,20 @@ const RecordPage = () => {
 
     },[])
     return (
-        <div>
-            <Grid container className="recordPage">
-                <Grid md={7} mb={4}>
+        <div className='content'  style={{"overflow-x":"hidden"}}>
+            <Grid container className="recordPage" >
+                <Grid md={6} mb={4} ml={4}>
                     <img src={meeting} className="recordImg"></img>
                 </Grid>
-                <Grid md={5}  mt={7}>
+                <Grid md={5}  mt={7}  ml={1} justifyContent="center">
                     <span className='record_count_rabel'>한스푼에서 성사된 모임 수</span>
                     <span className='record_highlight'>
                         <span className='record_count_num'>
                         <CountUp end={meetingNum} duration={1} />
-                        </span><span className ='record_count_font'>개</span>
+                        </span><span className ='record_count_font'>회</span>
                     </span>
                 </Grid>
-                <Grid md={7} mt={10} style={{"textAlign" : "left"}}>
+                <Grid md={6} mt={10} ml={4} style={{"textAlign" : "left"}}>
                 <span className='record_count_rabel' style={{"marginLeft" : "20px"}}>한스푼에서 가장 인기있는 식당</span>
                     <Grid mt={5}  ml={3}>
                         {restaurantList.map((res,index) =><>
@@ -80,13 +80,13 @@ const RecordPage = () => {
                         </span> */}
                     </Grid>
                 </Grid>
-                <Grid md={4} mt={5}>
+                <Grid md={4} mt={5} ml={2}>
                     <img src={restarant} className="restaurantImg"></img>
                 </Grid>
-                <Grid md={6} mb={4} mt={7}>
+                <Grid md={5} mb={4} mt={7} ml={3}>
                     <img src={company} className="companyImg"></img>
                 </Grid>
-                <Grid md={6}  mt={15}>
+                <Grid md={6}  mt={15}  ml={2}>
                     <Grid mb={3}><span className='record_count_rabel'>가장 많은 숟가락을 모은 회사</span></Grid>
                     <span className='record_highlight_company'>
                         <span className='company_font'>
@@ -95,17 +95,20 @@ const RecordPage = () => {
                     </span>
                 </Grid>
 
-                <Grid md={7} mt={10}>
-                <div><span className='record_count_rabel'>가장 많은 숟가락을 모은 사람의</span></div>
-                <div><span className='record_count_rabel'>숟가락 개수</span></div>
-                        
-                    <span className='record_highlight_spoon'>
-                            <span className='record_count_num'>
-                            <CountUp end={spoonNum} duration={1} />
-                            </span><span className ='record_count_font'>개</span>
-                    </span>
+                <Grid md={6} mt={10} ml={6}  style={{"textAlign" : "center"}}>
+                    <Grid>
+                        <div><span className='record_count_rabel'>가장 많은 숟가락을 모은 사람의</span></div>
+                        <div><span className='record_count_rabel'>숟가락 개수</span></div>
+                    </Grid>
+                    <Grid>
+                        <span className='record_highlight_spoon'>
+                                <span className='record_count_num'>
+                                <CountUp end={spoonNum} duration={1} />
+                                </span><span className ='record_count_font'>개</span>
+                        </span>
+                    </Grid>
                 </Grid>
-                <Grid md={4}>
+                <Grid md={4} ml={3}>
                     <img src={spoon} className="spoonImage"></img>
                 </Grid>
 

@@ -23,16 +23,16 @@
 	color: #ffe818;
 	font-family: 'NanumSquareRound';
 	font-weight: bolder;
-	font-size: 35px;
+	font-size: 45px;
 	text-shadow: 3px 3px 7px rgb(49, 49, 49);
 }
 
 .banner .banner_main_title {
 	color: #ffe818;
-	font-family: 'NanumSquare_bold';
+	font-family: 'Carter One';
 	font-weight: bolder;
 	text-shadow: 3px 3px 7px rgb(49, 49, 49);
-	font-size: 110px;
+	font-size: 115px;
 }
 /* ================ 헤더 ================ */
 
@@ -175,10 +175,6 @@
     line-height: 34px;
 }
 
-.mainModal {
-	border: none;
-}
-
 .mainModal .tab_box {
 	text-align: center;
 	font-size: 24px;
@@ -188,15 +184,144 @@
 }
 
 .mainModal .tab {
+	font-family: 'NanumSquareRound';
 	border-bottom: 4px solid #DCDDDD;
 	cursor: default;
 }
 
 .mainModal .tab.active {
-	border-bottom: 4px solid #217bff ;
+	font-family: 'NanumSquareRound';
+	border-bottom: 6px solid #217bff ;
 	cursor: default;
 }
 
+.mainModal .modal_content_box {
+	margin: auto;
+}
+
+.mainModal .chart_box {
+	width: 100%;
+	height: 450px;
+}
+
+.mainModal .chart_tab {
+	padding: auto;
+	margin: auto;
+}
+
+.mainModal .pieChart {
+	width: 300px;
+	padding-top: 55px;
+}
+
+.mainModal .tab_button {
+	
+	padding: auto;
+	padding-left: 25px;
+	font-family: 'NanumSquareRound';
+	font-size: 22px;
+	cursor: default;
+	/* color: #217bff;
+	border-radius: 10px;
+	font-weight: 800;
+	border: 3px solid #217bff; */
+	/* box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1); */
+}
+
+.chartList {
+	padding-left: 45px;
+	margin: 25px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.chartList.active .hightlight2 {
+	background-color: #217bff;
+	width: 100px;
+	padding: 10px 25px;
+	border-radius: 5px;
+	color: #FFFFFF;
+}
+
+.chartList.active .hightlight3 {
+	background-color: #217bff;
+	width: 100px;
+	padding: 10px 15px;
+	border-radius: 5px;
+	color: #FFFFFF;
+}
+
+.chartList.active .hightlight4 {
+	background-color: #217bff;
+	width: 100px;
+	padding: 10px 5px;
+	border-radius: 5px;
+	color: #FFFFFF;
+}
+
+
+.mainModal .content {
+	margin: 20px auto 10px;
+	height: 520px;
+    width: 700px;
+	border-radius: 10px;
+	/* border: 2px solid #707070; */
+}
+
+.content .chart_title_box {
+	text-align: center;
+}
+
+.chart_title_box .highlight {
+    font-size: 18px;
+    width: 0;
+    height: 10x;
+    background: #d9ecfc;
+}
+
+.chart_title_box .chart_title {
+	font-size: 35px;
+	font-family: 'NanumSquareRound';
+	font-weight: bolder;
+}
+
+.chart_tab .tab_button {
+	margin: auto;
+	margin-top: 45px;
+}
+
+.chart_tab .chart_box {
+	margin: auto;
+	padding: auto;
+}
+
+.tab_button .rank_icon1 {
+	height: 45px;
+	background-image: url('assets/images/hanspoon/mainPage/gender.png');
+	background-repeat: no-repeat;
+	background-size: 45px;
+}
+
+.tab_button .rank_icon2 {
+	height: 45px;
+	background-image: url('assets/images/hanspoon/mainPage/company.png');
+	background-repeat: no-repeat;
+	background-size: 45px;
+}
+
+.tab_button .rank_icon3 {
+	height: 45px;
+	background-image: url('assets/images/hanspoon/mainPage/age.png');
+	background-repeat: no-repeat;
+	background-size: 45px;
+}
+
+.tab_button .rank_icon4 {
+	height: 45px;
+	background-image: url('assets/images/hanspoon/mainPage/position.png');
+	background-repeat: no-repeat;
+	background-size: 45px;
+}
 
 /* ================ 모임 생성 방법 ================ */
 .create_step {
@@ -230,6 +355,7 @@
     font-weight: bold;
     line-height: 36px;
     color: #ff5c00;
+	font-family: 'NanumSquare_bold';
 }
 
 .create_step .step_sub_title {
@@ -244,7 +370,7 @@
 }
 
 
-.step_01 .img_box {
+.create_step .step_01 .img_box {
 	background-image: url('assets/images/hanspoon/mainPage/createStep1.png');
 	min-height: 140px;
 	width: 300px;
@@ -253,7 +379,7 @@
 	background-size: contain;
 }
 
-.step_02 .img_box {
+.create_step .step_02 .img_box {
 	background-image: url('assets/images/hanspoon/mainPage/createStep2.PNG');
 	min-height: 100px;
 	width: 320px;
@@ -263,7 +389,7 @@
 	border: 1px solid #838383;
 }
 
-.step_03 .img_box {
+.create_step .step_03 .img_box {
 	background-image: url('assets/images/hanspoon/mainPage/createStep3.PNG');
 	min-height: 170px;
 	width: 300px;
@@ -273,7 +399,7 @@
 	border: 1px solid #838383;
 }
 
-.step_04 .img_box {
+.create_step .step_04 .img_box {
 	background-image: url('assets/images/hanspoon/mainPage/createStep4.PNG');
 	min-height: 60px;
 	width: 350px;
@@ -298,30 +424,66 @@
 
 .apply_step .step_box {
 	margin: 20px 20px;
-    padding: 46px 30px 50px;
+    padding: 45px 30px 10px;
     background-color: #fff;
     border: 4px solid #333333;
 	border-radius: 20px;
 	min-height: 500px;
+	font-family: 'NanumSquareRound';
 }
 
 .apply_step .step_title {
 	display: block;
-	margin-bottom: 20px;
+	margin-bottom: 30px;
     font-size: 28px;
-    font-weight: bold;
+    font-weight: bolder;
     line-height: 36px;
     color: #ff5c00;
+	font-family: 'NanumSquare_bold';
 }
 
-/* 임시 */
-.apply_step .step_01 {
-	margin-bottom: 45px;
+.apply_step .step_sub_title {
+	font-size: 22px;
+	margin-bottom: 20px;
 }
 
-.apply_step .step_02 {
-	margin-bottom: 45px;
+.apply_step .step_01 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/applyStep1.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	min-height: 250px;
+	width: 350px;
+	margin-top: 20px;
 }
+
+.apply_step .step_02 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/applyStep2_2.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	border: 1px solid #838383;
+	/* min-height: 100px;
+	width: 320px; */
+	min-height: 250px;
+	width: 220px;
+	margin-top: 20px;
+	margin-left: 50px;
+}
+
+
+.apply_step .step_03 .img_box {
+	background-image: url('assets/images/hanspoon/mainPage/applyStep3.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	min-height: 100px;
+	width: 300px;
+	margin-top: 40px;
+}
+
+.apply_step .step_03 .info_text {
+	margin-top: 30px;
+	font-size: 18px;
+}
+
 
 /* ================ 게시글 ================ */
 .blogs {
