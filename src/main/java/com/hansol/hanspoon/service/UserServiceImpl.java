@@ -1,11 +1,7 @@
 package com.hansol.hanspoon.service;
 
-import com.hansol.hanspoon.dto.FindPwRequestDto;
-import com.hansol.hanspoon.dto.UserRequestDto;
-import com.hansol.hanspoon.dto.UserResponseDto;
-import com.hansol.hanspoon.entity.Department;
-import com.hansol.hanspoon.entity.PositionType;
-import com.hansol.hanspoon.entity.User;
+import com.hansol.hanspoon.dto.*;
+import com.hansol.hanspoon.entity.*;
 import com.hansol.hanspoon.exception.HanspoonException;
 import com.hansol.hanspoon.repository.CompanyRepository;
 import com.hansol.hanspoon.repository.DepartmentRepository;
@@ -22,10 +18,7 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.transaction.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 import static com.hansol.hanspoon.exception.HanspoonErrorCode.*;
 
@@ -137,6 +130,38 @@ public class UserServiceImpl implements  UserService{
     @Override
     public List<String> mostSpoonAge() {
         return userRepository.findMostSpoonAge();
+    }
+
+    @Override
+    public List<ChartDataDto> getChartData(long tab_id) {
+        List<ChartDataDto> res = new ArrayList<>();
+
+        if(tab_id == 1) { //성별
+            List<ChartDataInterfaceGender> chartData = userRepository.findGenderCount();
+            for (ChartDataInterfaceGender i: chartData){
+                res.add(new ChartDataDto(i));
+            }
+
+        } else if (tab_id == 2) { //소속회사
+            List<ChartDataInterface> chartData = userRepository.findCompanyCount();
+            for (ChartDataInterface i: chartData){
+                res.add(new ChartDataDto(i));
+            }
+
+        } else if (tab_id == 3) { //연령대
+            List<ChartDataInterfaceAge> chartData = userRepository.findAgeData();
+            for (ChartDataInterfaceAge i: chartData){
+                res.add(new ChartDataDto(i));
+            }
+
+        } else if (tab_id == 4) { //직급
+            List<ChartDataInterface> chartData = userRepository.findPositionData();
+            for (ChartDataInterface i: chartData){
+                res.add(new ChartDataDto(i));
+            }
+        }
+
+        return res;
     }
 
 

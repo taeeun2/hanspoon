@@ -1,8 +1,10 @@
 package com.hansol.hanspoon.service;
 
+import com.hansol.hanspoon.dto.ChartDataDto;
 import com.hansol.hanspoon.dto.FindPwRequestDto;
 import com.hansol.hanspoon.dto.UserRequestDto;
 import com.hansol.hanspoon.dto.UserResponseDto;
+import com.hansol.hanspoon.entity.ChartDataInterface;
 import com.hansol.hanspoon.entity.Department;
 import com.hansol.hanspoon.entity.PositionType;
 import com.hansol.hanspoon.entity.User;
@@ -35,5 +37,8 @@ public interface UserService {
     int maxSpoonNum();
     List<Long> mostSpoonCompany();
     List<String> mostSpoonAge();
+
+    //메인화면 모달
+    List<ChartDataDto> getChartData(long tab_id);
 
 }
