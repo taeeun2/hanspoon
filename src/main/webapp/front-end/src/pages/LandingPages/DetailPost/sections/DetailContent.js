@@ -202,13 +202,43 @@ const DetailContent = ({clickedId, postData}) => {
                                     <Grid item xs={12} md={8} mt={3}>
                                         <span className='content'>🙋‍♂️{postData.participant_num}/{postData.capacity}</span>
                                         
-                                        {/* 모집된 인원 정보 */}
-                                        {postData.guestInfo.length >= 1 && <><Grid mt={2} className='guest_box'>{postData.guestInfo.map((guest, index)=>(
-                                            <div>
+                                        <Grid className='guest_box'mt={2}>
+                                        
+                                        <Grid container>
+                                        <Grid md = {1.8}><span style={{"fontSize" : "17px", "marginLeft": "5px","fontWeight" : "bolder"}}>주최자</span></Grid>
+                                            <Grid md ={10}>
                                                 <Grid container>
-                                                <Grid md={1.2}><span style={{"fontSize" : "16px"}}>{guest.name}</span></Grid>
-                                                <Grid md={1.5}><span style={{"fontSize" : "16px","marginRight" : "10px"}}>🥄{guest.spoon_num}</span>|</Grid>
-                                                <Grid md={9}>
+                                                    
+                                                    <Grid md={1.7}><span  style={{"fontSize" : "16px"}}>{postData.hostInfo.name}</span></Grid>
+                                                    <Grid md={1.25}><span  style={{"fontSize" : "16px"}}>🥄{postData.hostInfo.spoon_num}</span></Grid>
+                                                    <Grid md={0.5}><span  style={{"fontSize" : "16px"}}>|</span></Grid>
+                                                    <Grid md={8}>
+                                                    {postData.hostInfo.company && <span  style={{"fontSize" : "16px","marginRight" : "10px"}} >{postData.hostInfo.company}</span>}
+                                                    {postData.hostInfo.position && <span  style={{"fontSize" : "16px","marginRight" : "10px"}}>{postData.hostInfo.position}</span>}
+                                                    {postData.hostInfo.department && <span  style={{"fontSize" : "16px","marginRight" : "10px"}}>{postData.hostInfo.department}</span>}
+                                                    {postData.hostInfo.gender && <span style={{"fontSize" : "16px","marginRight" : "10px"}}>{postData.hostInfo.gender}</span>}
+                                                    {postData.hostInfo.age && <span  style={{"fontSize" : "16px","marginRight" : "10px"}}>{postData.hostInfo.age}</span>}
+                                                    </Grid>
+                                                </Grid>
+                                            </Grid>
+                                        </Grid>
+
+                                        {/* 모집된 인원 정보 */}
+                                        {postData.guestInfo.length >= 1 && <>
+                                            {/* <hr/> */}
+                                            <Grid container>
+                                            <Grid  mt ={2} md={1.8} >
+                                            <span style={{"fontSize" : "17px", "marginLeft": "5px","fontWeight" : "bolder" }}>참여자</span>
+                                            </Grid>
+                                            <Grid  mt ={2} md={10} >
+                                                
+                                                {postData.guestInfo.map((guest, index)=>(
+                                            <>
+                                                <Grid container>
+                                                <Grid md={1.7}><span style={{"fontSize" : "16px"}}>{guest.name}</span></Grid>
+                                                <Grid md={1.25}><span style={{"fontSize" : "16px"}}>🥄{guest.spoon_num}</span></Grid>
+                                                <Grid md={0.5}><span  style={{"fontSize" : "16px"}}>|</span></Grid>
+                                                <Grid md={8}>
                                                 {guest.company && <span style={{"fontSize" : "16px","marginRight" : "10px"}}>{guest.company}</span>}
                                                 {guest.position && <span  style={{"fontSize" : "16px","marginRight" : "10px"}}>{guest.position}</span>}
                                                 {guest.department && <span  style={{"fontSize" : "16px","marginRight" : "10px"}}>{guest.department}</span>}
@@ -217,8 +247,10 @@ const DetailContent = ({clickedId, postData}) => {
                                                 </Grid>
                                                 </Grid>
                                           
-                                            </div>
-                                            ))} </Grid></>}
+                                            </>
+                                            ))} </Grid>
+                                            </Grid></>}
+                                            </Grid>
                                             </Grid>
                                    
                                     
@@ -271,52 +303,52 @@ const DetailContent = ({clickedId, postData}) => {
                                     </Grid>
                                     <Grid item xs={12} md={2}  mt={3} mr ={1}>
 
-                                        <label  className="chk_box">
+                                        <label  className="chk_box" style={{ "fontSize" : "16px"}} >
                                             <input type="checkbox" id="name" name="scope" onChange={() => {setScope_name(!scope_name); if(!scope_name){ setNum(num+1)} else{setNum(num-1)}}} />
-                                            <span className="on"></span>
-                                            이름
+                                            <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                            <span style={{"marginLeft" : "10px"}}>이름</span>
                                         </label>
                                         
                                         <br/><br/>
 
-                                        <label  className="chk_box">
+                                        <label  className="chk_box" style={{ "fontSize" : "16px"}}>
                                             <input type="checkbox" id="postion_type" name="scope" onChange={() => {setScope_position_type(!scope_position_type);if(!scope_position_type){ setNum(num+1)} else{setNum(num-1)}}} />
-                                            <span className="on"></span>
-                                            직급
+                                            <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                            <span style={{"marginLeft" : "10px"}}>직급</span>
                                         </label>
 
                                     </Grid>
                                     <Grid item xs={12} md={2} mt={3} mr ={1}>
 
-                                    <label  className="chk_box">
+                                    <label  className="chk_box" style={{ "fontSize" : "16px"}}>
                                         <input type="checkbox" id="age" name="scope" onChange={() => {setScope_age(!scope_age); if(!scope_age){ setNum(num+1)} else{setNum(num-1)}}} />
-                                        <span className="on"></span>
-                                        연령대
+                                        <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                        <span style={{"marginLeft" : "10px"}}>연령대</span>
                                     </label>
 
                                     <br/><br/>
 
-                                    <label  className="chk_box">
+                                    <label  className="chk_box" style={{ "fontSize" : "16px"}}>
                                         <input type="checkbox" id="gender" name="scope" onChange={() =>  {setScope_gender(!scope_gender);if(!scope_gender){ setNum(num+1)} else{setNum(num-1)}}} />
-                                        <span className="on"></span>
-                                        성별
+                                        <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                        <span style={{"marginLeft" : "10px"}}>성별</span>
                                     </label>
                                     
                                     </Grid>
                                     <Grid item xs={12} md={2} mt={3} mr ={1}>
 
-                                        <label  className="chk_box">
+                                        <label  className="chk_box" style={{ "fontSize" : "16px"}}> 
                                             <input type="checkbox" id="company" name="scope" onChange={() =>  {setScope_company(!scope_company);if(!scope_company){ setNum(num+1)} else{setNum(num-1)}}} />
-                                            <span className="on"></span>
-                                            소속회사
+                                            <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                            <span style={{"marginLeft" : "10px"}}>소속회사</span>
                                         </label>
 
                                         <br/><br/>
 
-                                        <label  className="chk_box">
+                                        <label  className="chk_box" style={{ "fontSize" : "16px"}}>
                                             <input type="checkbox" id="department" name="scope" onChange={() =>  {setScope_department(!scope_department);if(!scope_department){ setNum(num+1)} else{setNum(num-1)}}} />
-                                            <span className="on"></span>
-                                            부서명
+                                            <span className="on" style={{"width" : "25px", "height" : "25px", "marginTop" : "3px"}}></span>
+                                            <span style={{"marginLeft" : "10px"}}>부서명</span>
                                         </label>
                                     </Grid>
                                 

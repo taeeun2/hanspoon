@@ -124,6 +124,7 @@ input {
 
 /* 선택된 체크박스 스타일 꾸미기 */
 .chk_box input[type="checkbox"]:checked + .on { background: #FF91B3; }
+.detailContent .chk_box input[type="checkbox"]:checked + .on { background: rgb(3, 120, 230); }
 .on:after { content: ""; position: absolute; display: none; }
 .chk_box input[type="checkbox"]:checked + .on:after { display: block; }
 .on:after { width: 6px; height: 10px; border: solid rgb(255, 255, 255); border-width: 0 2px 2px 0; -webkit-transform: rotate(45deg); -ms-transform: rotate(45deg); transform: rotate(45deg); position: absolute; left: 6px; top: 2px; }
