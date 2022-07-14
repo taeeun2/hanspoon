@@ -15,6 +15,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import MKBox from "components/MKBox";
 import MKButton from "components/MKButton";
 import MKTypography from "components/MKTypography";
+import RecordPage from 'pages/RecordPage';
 
 function MainModal({ show, toggleModal }) {
 
@@ -60,8 +61,8 @@ function MainModal({ show, toggleModal }) {
                             </Grid>            
                         </Grid>
                     </Grid>
-                    <Grid container item spacing={3} className="content_box">
-                        
+                    <Grid container item spacing={3} className="content_box" style={{"overflow-x":"hidden"}}>
+                        <RecordPage/>
                     </Grid>
                 {/* <MKTypography variant="body2" color="secondary" fontWeight="regular">
                     Society has put up so many boundaries, so many limitations on what&apos;s right

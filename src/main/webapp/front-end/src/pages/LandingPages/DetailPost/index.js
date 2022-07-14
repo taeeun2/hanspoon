@@ -31,7 +31,7 @@ const DetailPost = () => {
             <Grid style={{"backgroundColor" : "white", "font-family": 'NanumSquareRound'}}>
             {postData &&  <DetailContent clickedId = {clickedId} postData = {postData}/>}
             </Grid>
-            <Footer />
+            
             {/* </Card> */}
         </div>
     );

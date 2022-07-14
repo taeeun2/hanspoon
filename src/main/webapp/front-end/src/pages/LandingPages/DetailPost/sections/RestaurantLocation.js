@@ -1,10 +1,10 @@
 import React from 'react';
 import KaKaoMap from './DetailMap';
 
-const RestaurantLocation = ({restaurant, restaurant_name}) => {
+const RestaurantLocation = ({restaurant}) => {
     return (
         <div>
-             <KaKaoMap  searchPlace={restaurant} restaurant_name = {restaurant_name}/>
+             <KaKaoMap  searchPlace={restaurant}/>
         </div>
     );
 };

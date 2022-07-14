@@ -53,7 +53,7 @@ function PageHeader(props) {
                     "fontWeight" : 'bold'}} onClick = {onLogout}>로그아웃</button></Grid>
                     </>
                     :  <>
-                    <Link to ="signup">
+                    <Link to ="/signup">
                     <Grid item className="gnb_item">
                         <span style={{
                         "fontFamily": 'NanumSquareRound',
@@ -61,7 +61,7 @@ function PageHeader(props) {
                         </span>
                     </Grid>
                     </Link>
-                    <Link to ="signin">
+                    <Link to ="/signin">
                     <Grid item className="gnb_item">
                         <span style={{
                         "fontFamily": 'NanumSquareRound',

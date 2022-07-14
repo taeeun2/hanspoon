@@ -144,7 +144,7 @@ const CreatePost = () => {
             setContentMessage('최소 10자 이상 입력해주세요.')
         }else{
 
-           console.log(meet_date)
+          
             fetch('http://localhost:8080/createPost',{
                 method : 'POST',
                 headers : {
