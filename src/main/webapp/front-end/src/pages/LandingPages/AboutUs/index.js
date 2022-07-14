@@ -122,7 +122,7 @@ function AboutUs() {
 
   const getMyPostList = (category_id) => {
     let user_id = sessionStorage.getItem('user_id');
-    fetch(`http://localhost:8080/mypage/${category_id}?user=${user_id}`)
+    fetch(`http://172.27.1.33:8080/mypage/${category_id}?user=${user_id}`)
     .then(res => {
       return res.json();
     })
@@ -133,7 +133,7 @@ function AboutUs() {
 
   const getUserInfo = () => {
     let user_id = sessionStorage.getItem('user_id');
-    fetch(`http://localhost:8080/mypage/userInfo?user=${user_id}`)
+    fetch(`http://172.27.1.33:8080/mypage/userInfo?user=${user_id}`)
     .then(res => {
       return res.json();
     })
