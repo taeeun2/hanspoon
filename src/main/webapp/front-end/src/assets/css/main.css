@@ -525,7 +525,8 @@
 	font-size: 22px;
 	font-weight: 800;
 	color: #000;
-	background-color: #ffe818;
+	background-color: #f0c9ff;
+	font-family: 'NanumSquareRound';
 	border: 3px solid #333333;
 	box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
