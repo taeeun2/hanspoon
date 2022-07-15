@@ -311,11 +311,12 @@ public class PostServiceImpl implements PostService {
         body+= "<div style='margin:100px;'>";
         body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
         body+= "<br>";
-        body+= "<strong style='color:blue;'> \"" + post.getTitle() + " \"</strong> 모임이 취소되었음을 안내드립니다.";
+        body+= "<h3><strong style='color:blue;'> \"" + post.getTitle() + " \"</strong> 모임이 취소되었음을 안내드립니다.</h3>";
         body+= "<br>";
         body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
         body+= "<h2>취소된 모임 정보</h2>";
         body+= "<div style='font-size:130%'>";
+        body+= "- 모임 제목 : " + post.getTitle()  + "<br>";
         body+= "- 모임 일정 : " + meet_date + "<br>";
         body+= "- 모임 장소 : " + post.getRestaurant_name() + "<br>";
         body+= "<div>";
