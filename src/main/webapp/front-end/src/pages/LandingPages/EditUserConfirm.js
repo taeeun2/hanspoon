@@ -6,6 +6,7 @@ import EditUser from 'pages/EditUser';
 import React, { useEffect, useState } from 'react';
 import dangerIcon from 'assets/images/Icons/danger_icon.png'
 import { useNavigate } from 'react-router-dom';
+import Footer from './Author/sections/Footer';
 
 const EditUserConfirm = () => {
 
@@ -53,10 +54,12 @@ const EditUserConfirm = () => {
     return (
         <div>
                 <PageHeader/>
-                    <Grid container  sx={{ justifyContent: 'center' }} mt={15}>
+                    {/* <Grid sx={{backgroundColor : "#00CFCB",display: "grid"}} > */}
+                    <Grid container  sx={{ justifyContent: 'center'}} mt={15} mb={15}>
                         {isConfirm ?
-
-                        <EditUser email={email} inputPW ={inputPW}/> :
+                        
+                            <EditUser email={email} inputPW ={inputPW}/>
+                       :
                         
                         <Grid item className='edit_box' xs={12} sm={12} lg={4} key={0}> 
                             <Grid container spacing={2}>
@@ -78,8 +81,9 @@ const EditUserConfirm = () => {
                         
                         }
 
+                    {/* </Grid> */}
                     </Grid>
-                
+                {/* <Footer /> */}
         </div>
     );
 };

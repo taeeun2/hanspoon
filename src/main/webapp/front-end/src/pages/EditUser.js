@@ -162,11 +162,11 @@ const EditUser = (props) => {
     // 부서 
     const handleDepartment = (e) => {
         setDepartment(e.target.value)
-        // if(e.target.value !== "== 부서 선택 =="){
-        //   setDepartmentMessage('')
-        // }else{
-        //   setDepartmentMessage('부서를 선택해주세요.')
-        // }
+        if(e.target.value !== "== 부서 선택 =="){
+          setDepartmentMessage('')
+        }else{
+          setDepartmentMessage('부서를 선택해주세요.')
+        }
     }
 
     // 직급
@@ -238,14 +238,18 @@ const EditUser = (props) => {
             setPasswordMessage('숫자+영문자+특수문자조합으로 8자리 이상 입력')
             setPasswordColor('red')
         }else if(!isPasswordConfirm){
+            alert('비밀번호를 확인해주세요.')
             setPasswordConfirmMessage('비밀번호를 확인해주세요.')
             setPasswordConfirmColor('red')
         }else if(!isUserName){
+            alert('이름을 입력해주세요.')
             setUserNameMessage('이름을 입력해주세요.')
         
         }else if(!isGender){
+            alert('성별을 선택해주세요')
             setGenderMessage('성별을 선택해주세요.')
         }else if(department === "== 부서 선택 ==" || department.length < 1){
+            alert('부서를 선택해주세요.')
             setDepartmentMessage('부서를 선택해주세요.')
         }else{
            

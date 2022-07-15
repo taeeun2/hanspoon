@@ -35,7 +35,7 @@ public class EmailServiceImpl implements EmailService{
     @Autowired
     private UserRepository userRepository;
 
-    public static final String ePw = createKey();
+    public static final String ePw = getRamdomPassword(8);
     @Override
     public EmailResponseDto sendEmail(String email){
         EmailResponseDto emailResponseDto = new EmailResponseDto();

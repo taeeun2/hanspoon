@@ -33,6 +33,7 @@ const DetailContent = ({clickedId, postData}) => {
                 setIsGuest(true)
             }
         })
+
     },[])
 
     
@@ -116,6 +117,7 @@ const DetailContent = ({clickedId, postData}) => {
         setIsEdit(false)
     }
 
+
     // 수정 api
     function onClickCompleteEdit(){
         if(title.length < 1){
@@ -123,6 +125,7 @@ const DetailContent = ({clickedId, postData}) => {
         }else if(content.length < 10){
             alert('한마디를 최소 10자 이상 입력해주세요.')
         }else{
+
 
             fetch('http://localhost:8080/editPost',{
                 method : 'POST',
@@ -281,8 +284,16 @@ const DetailContent = ({clickedId, postData}) => {
                                     
                                     <Grid item xs={12} md={8} mt={3}>
                                         {!isEdit ? 
-                                        
-                                            <span className='content'>{postData.content}</span>
+
+                                            // 줄바꿈 저장
+                                            <div className='content'>{postData.content.split("\n").map((line) => { 
+                                                return (
+                                                  <span>
+                                                    {line}
+                                                    <br />
+                                                  </span>
+                                                );
+                                              })}</div>
                                             
                                         :   <>
                                             <div className='cp_input_box_content'>

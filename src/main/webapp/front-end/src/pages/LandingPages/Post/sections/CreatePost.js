@@ -87,6 +87,7 @@ const CreatePost = () => {
     function decreaseNumber(){
         if(parseInt(number)-1 >= 1){
             setNumber(parseInt(number)-1)
+            
         }else{
             setNumber(1)
         }
@@ -94,21 +95,13 @@ const CreatePost = () => {
 
     function increaseNumber(){
         setNumber(parseInt(number)+1)
+        
     }
     const handleTitle = (e) => {
         setTitleMessage('')
         setTitle(e.target.value)
     }
 
-    const handleNumber = (e) => {
-        if(e.target.value <= 1){
-            setNumber(1)
-        }
-
-        else{
-            setNumber(e.target.value)
-        }
-    }
 
     const handleMeetDate = (e) => {
         setMeetDate(e.target.value)
@@ -163,7 +156,7 @@ const CreatePost = () => {
                     scope_position_type : scope_position_type,
                     scope_department :scope_department,
                     scope_age : scope_age,
-                    capacity : num+1,
+                    capacity : parseInt(number+1),
                     category_id : category
                 })
             }).then(res=>{
@@ -272,7 +265,7 @@ const CreatePost = () => {
         
                             <Grid item xs={12} md={8.5}>
                                 <button style={{"width" : "1px"}} color="secondary" onClick = {decreaseNumber}><img src={minusIcon}></img></button>
-                                <input className='cp_input'value = {number} label = "Number" style={{"width" : "80px","textAlign" : "center"}} onChange = {handleNumber} />
+                                <span  style={{ "marginLeft" : "30px", "marginRight" : "20px", "fontSize" : "15px","textAlign" : "center"}} > {number}</span>
                                 <button style={{"width" : "1px"}} color="secondary" onClick = {increaseNumber}><img src={plusIcon}></img></button>
                             </Grid>
 
