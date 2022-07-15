@@ -310,7 +310,9 @@ const DetailContent = ({clickedId, postData}) => {
                                     {postData.state === 'VALID' && <> {parseInt(postData.hostInfo.id) !== parseInt(userId) && <>{!isGuest &&
                                     <>
                                     <Grid item xs={12} md={3} mt={3} >
-                                        <span className='content_label'>공개 범위</span>
+                                        <span className='content_label'>공개 범위</span><br/>
+                                        <span style={{"color" : "rgb(3, 120, 230)", "fontSize" : "15px", "marginRight" : "20px"}}>최소 2개 이상 선택</span>
+
                                     </Grid>
                                     <Grid item xs={12} md={2}  mt={3} mr ={1}>
 
