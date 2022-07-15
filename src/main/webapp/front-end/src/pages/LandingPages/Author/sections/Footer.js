@@ -48,7 +48,7 @@ function Footer() {
               spacing={3}
               justifyContent={{ xs: "center", lg: "flex-start" }}
               pl={0}
-              mb={3}
+              mb={6}
               sx={{ listStyle: "none" }}
             >
               <MKBox component="li">
@@ -57,11 +57,9 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  // href="https://www.creative-tim.com"
-                  target="_blank"
-                  rel="noreferrer"
+                  style={{"textWeight": 'bolder', "color":"#333333"}}
                 >
-                  Home
+                  Image Source
                 </MKTypography>
               </MKBox>
               <MKBox component="li">
@@ -70,11 +68,12 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  // href="https://www.creative-tim.com/presentation"
+                  href="https://unsplash.com/"
                   target="_blank"
                   rel="noreferrer"
+                  style={{"textDecoration": "underline", "color":"blue"}}
                 >
-                  About
+                  unsplash
                 </MKTypography>
               </MKBox>
               <MKBox component="li">
@@ -83,11 +82,12 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  // href="https://www.creative-tim.com/blog"
+                  href="https://www.pexels.com/ko-kr/"
                   target="_blank"
                   rel="noreferrer"
+                  style={{"textDecoration": "underline", "color":"blue"}}
                 >
-                  Blog
+                  pexels
                 </MKTypography>
               </MKBox>
               <MKBox component="li">
@@ -96,11 +96,12 @@ function Footer() {
                   fontWeight="regular"
                   opacity={0.8}
                   component={Link}
-                  // href="https://www.creative-tim.com"
+                  href="https://www.hansolinticube.com/home/"
                   target="_blank"
                   rel="noreferrer"
+                  style={{"textDecoration": "underline", "color":"blue"}}
                 >
-                  Services
+                  Han Seong Ah
                 </MKTypography>
               </MKBox>
             </Stack>
