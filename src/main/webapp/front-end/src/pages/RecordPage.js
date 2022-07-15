@@ -58,9 +58,9 @@ const RecordPage = () => {
                         </span><span className ='record_count_font'>회</span>
                     </span>
                 </Grid>
-                <Grid md={6} mt={10} ml={4} style={{"textAlign" : "left"}}>
+                <Grid md={6} mt={10} ml={3} style={{"textAlign" : "left"}}>
                 <span className='record_count_rabel' style={{"marginLeft" : "20px"}}>한스푼에서 가장 인기있는 식당</span>
-                    <Grid mt={5}  ml={3}>
+                    <Grid mt={4}  ml={1.5}>
                         {restaurantList.map((res,index) =><>
                             <span className='record_count_num_res'>
                                     {index+1}등
