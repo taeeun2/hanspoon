@@ -1,7 +1,7 @@
 # HanSpoon
 
 > 한솔 임직원을 위한 함께 식사할 멤버를 구하는 웹 서비스  
-> 배포 url: http://172.27.1.33:8080/ 
+> ( 배포 주소: http://172.27.1.33:8080/ )
   
 ## 📌프로젝트 배경
 
@@ -26,12 +26,11 @@
 - React 18.0.0
 - React Router 6
 - Bootstrap
-- node-sass 6.0.1
+- Material UI
 
 ### [Back-end]
 - Spring boot 2.6.8 / Tomcat
     - Spring Data JPA
-    - Spring Security
 - MariaDB 10.6.8
 - Java 11
 - Gradle
@@ -42,41 +41,42 @@
 
 - Kakao Map API
 - Java Mail API
+- Chart.js
 
 ## 📌구현 기능
 
-1. 회원 가입/로그인
-2. 게시판 CRUD
-3. 인원 만료 또는 식사일 지나면 게시글 상태 변경
-4. 모임 참여 신청/취소
-5. 이메일 전송
-    - 신청 시 - 신청자, 주최자에게 전송
-    - 취소 시 - 모든 신청자에게 전송
+1. 회원 가입/로그인/비밀번호 찾기
+2. 회원 정보 수정
+3. 게시판 CRUD
+4. 인원 만료 또는 식사일 지나면 게시글 상태 변경
+5. 모임 참여 신청/취소/ 삭제
+6. 모임 삭제
+    - 모임 삭제 시 - 모든 신청자에게 메일 전송
+7. 참여 현황 및 랭킹 확인
 
 ## 📌구현 화면
 
 - 로그인/회원가입 화면 *@김태은*
 - 메인 화면(전체 목록) *@이현지*
-- 상세 페이지 (모달) *@김태은 @이현지*
+- 상세 페이지 *@김태은 @이현지*
 - 마이 페이지 *@이현지*
 - 등록/수정 페이지 *@김태은 @이현지*
+- 참여현황 및 랭킹 화면(모달) *@김태은 @이현지*
 
 ## 📌자료
 
-### 프로토타입
- - [한스푼 프로토타입 바로가기 - 카카오 오븐](https://ovenapp.io/view/Zz27B6TVt18BNWpqnJi0XR4NfvJogMnE/)
- 
-### WBS
-- [한스푼 WBS 바로가기 - 스프레드시트](https://docs.google.com/spreadsheets/d/1X0EKgVEjBqoFMm54vrsC8frt5eyryRRWc9dAod6J7Fw/edit#gid=0)
+- [프로젝트 세부 정보 (notion)](https://www.notion.so/4d9088a8da414d4ab8f6225d3e55be18)
 
-### notion
-- [한스푼 notion(메인) 바로가기](https://www.notion.so/4d9088a8da414d4ab8f6225d3e55be18)
+- [프로토타입 (카카오 오븐)](https://ovenapp.io/view/Zz27B6TVt18BNWpqnJi0XR4NfvJogMnE/)
 
-### 업무 일지
-- [한스푼 업무 일지 바로가기 - 노션](https://www.notion.so/2aec221978074d85bc03653127fa03aa)
+- [WBS (스프레드시트)](https://docs.google.com/spreadsheets/d/1X0EKgVEjBqoFMm54vrsC8frt5eyryRRWc9dAod6J7Fw/edit#gid=0)
 
-### Commit Message Convention
-- [한스푼 Git Commit Message Convention 바로가기 - 노션](https://www.notion.so/Git-Commit-Message-Convention-c77bb14faec64aae9b3d20d14868c651)
+- [API 명세 (스프레드시트)](https://docs.google.com/spreadsheets/d/1bzWlAYT6EyjsIeQWLID8JLNtD7tm5I674uS4Ry2QLEE/edit#gid=1591557038)
 
-### ERD
+- [업무 일지(노션)](https://www.notion.so/2aec221978074d85bc03653127fa03aa)
+
+- [Git Commit Message Convention (노션)](https://www.notion.so/Git-Commit-Message-Convention-c77bb14faec64aae9b3d20d14868c651)
+
+-  ERD
+
 ![erd3](/uploads/17804c9ed7fcfb91aa367024ceb03a37/erd3.PNG)
