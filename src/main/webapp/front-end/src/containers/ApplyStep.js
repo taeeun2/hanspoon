@@ -15,8 +15,10 @@ function ApplyStep(props) {
     return (
         <Grid className='apply_step' id='apply_step'>
             <Box className='content_box'>
-                <Grid item className='title_box'>
-                    <h3 className='main_title' data-aos="fade-up">한스푼 모임 참여 방법</h3>
+                <Grid container item className='title_box'  justifyContent="center">
+                    <Grid item className='main_title_box'>
+                        <h3 className='main_title' data-aos="fade-up">한스푼 모임 참여 방법</h3>
+                    </Grid>
                 </Grid>
                 <MKBox component="section">
                     <Grid container  sx={{ justifyContent: 'center', height: '100%' }}>

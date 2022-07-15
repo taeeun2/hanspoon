@@ -17,7 +17,6 @@ import { Box } from "@mui/system";
 const Header = () => {
 
   // const [userName, setUserName] = useState(sessionStorage.getItem('user_name'));
-  // const [spoonNum, setSpoonNum] = useState(sessionStorage.getItem('spoon_num'));
   const [scrollPosition, setScrollPosition] = useState(0);
 
   const updateScroll = () => {
@@ -34,7 +33,6 @@ const Header = () => {
       top:0 
     })
   }
-
 
   //헤더 크기를 제외하고 페이지 내부 이동하기
   const handleClick = (e) => {
@@ -121,7 +119,7 @@ const Header = () => {
                <> <Grid item className="gnb_item">
                <span style={{
                  "fontFamily": 'NanumSquareRound',
-                 "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님 (🥄{sessionStorage.getItem('spoon_num')})</span></Grid>
+                 "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님</span></Grid>
                  <Grid item className="gnb_item">
                <span style={{
                  "fontFamily": 'NanumSquareRound',

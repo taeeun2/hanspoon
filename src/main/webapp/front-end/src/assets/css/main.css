@@ -8,7 +8,7 @@
 
 .main_title {
 	color: #000;
-	font-size: 35px;
+	font-size: 43px;
 	font-family: 'NanumSquareRound';
 	font-weight: bolder;
 }
@@ -161,6 +161,13 @@
 	background-color: #fff;
 	width: 100%;
 	min-height: 400px;
+}
+
+.introduce .main_title_box {
+	background-image: url('assets/images/hanspoon/mainPage/underline.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding: 0px 50px;
 }
 
 .introduce .info_text {
@@ -496,10 +503,6 @@
 	margin-bottom: 30px;
 }
 
-.blogs .title_box {
-	margin-bottom: 30px;
-}
-
 .blogs .step_box {
 	margin: 20px 20px;
     background-color: #fff;
@@ -550,7 +553,7 @@
 }
 
 .selectTab.active {
-	background-color: #ffe818;
+	background-color: #f0c9ff;
 	color: #fff;
 	border-radius: 10;
   }
