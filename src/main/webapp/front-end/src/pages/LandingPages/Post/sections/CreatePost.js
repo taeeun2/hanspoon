@@ -23,7 +23,7 @@ const CreatePost = () => {
     const [categorylist, setCategroyList] = useState([])
     // 카테고리 리스트 가져오기
     useEffect(() => {
-        fetch('http://localhost:8080/category')
+        fetch('http://172.27.1.33:8080/category')
         .then(res => {
           return res.json()
         })
@@ -58,7 +58,7 @@ const CreatePost = () => {
     const navigate = useNavigate();
 
     useEffect(()=>{
-        fetch('http://localhost:8080/getCurrentTime')
+        fetch('http://172.27.1.33:8080/getCurrentTime')
         .then(res=>{
             return res.json()
             
@@ -138,7 +138,7 @@ const CreatePost = () => {
         }else{
 
           
-            fetch('http://localhost:8080/createPost',{
+            fetch('http://172.27.1.33:8080/createPost',{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'

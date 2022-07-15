@@ -20,8 +20,12 @@ function Introduce(props) {
     return (
         <Grid className='introduce' id='introduce'>
             <Box className='content_box'>
-                <Grid item className='title_box' data-aos="fade-up">
-                    <h2 className='main_title'>한스푼이란?</h2>
+                <Grid container item className='title_box' data-aos="fade-up"  justifyContent="center" >
+                    <Grid item className='main_title_box'>
+                        <h2 className='main_title'>
+                            한스푼이란?
+                        </h2>
+                    </Grid>
                 </Grid>
                 <Grid item className='text_box' data-aos="fade-up">
                     <p className="info_text">

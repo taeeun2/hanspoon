@@ -15,12 +15,12 @@ const RecordPage = () => {
     const [spoonNum, setSpoonNum] = useState(0)
     useEffect(()=>{
         //모임 수
-        fetch('http://localhost:8080/rank/numberOfMeetings')
+        fetch('http://172.27.1.33:8080/rank/numberOfMeetings')
         .then(res=> res.json())
         .then(data=> setMeetingNum(data))
 
         //인기 식당(top 3)
-        fetch('http://localhost:8080/rank/popularRestaurant')
+        fetch('http://172.27.1.33:8080/rank/popularRestaurant')
         .then(res=>res.json())
         .then(data=> {
             //top3 만 순서대로 가져오기
@@ -28,14 +28,14 @@ const RecordPage = () => {
             setRestaurantList(list);
         })
         //가장 많은 숟가락을 모은 회사
-        fetch('http://localhost:8080/rank/mostSpoonCompany')
+        fetch('http://172.27.1.33:8080/rank/mostSpoonCompany')
         .then(res=>res.json())
         .then(data=> {
             setCompanyName(data[0])
         })
 
         //최대 숟가락 개수
-        fetch('http://localhost:8080/rank/maxSpoonNum')
+        fetch('http://172.27.1.33:8080/rank/maxSpoonNum')
         .then(res=>res.json())
         .then(data=> {
             setSpoonNum(data)

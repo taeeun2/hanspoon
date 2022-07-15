@@ -46,7 +46,7 @@ function PageHeader(props) {
                     <> <Grid item className="gnb_item">
                     <span style={{
                     "fontFamily": 'NanumSquareRound',
-                    "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님 (🥄{sessionStorage.getItem('spoon_num')})</span></Grid>
+                    "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님</span></Grid>
                     <Grid item className="gnb_item">
                     <button style={{
                     "fontFamily": 'NanumSquareRound',

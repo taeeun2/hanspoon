@@ -15,7 +15,7 @@ const DetailPost = () => {
     const {clickedId} = useParams();// 링크의 파라메타 받기
 
     useEffect(() => {
-        fetch(`http://localhost:8080/post/detail/${clickedId}`)
+        fetch(`http://172.27.1.33:8080/post/detail/${clickedId}`)
         .then(res => {
             return res.json()
         })

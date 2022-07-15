@@ -52,7 +52,7 @@ const DetailContent = ({clickedId, postData}) => {
         else if(num < 2){
             alert('공개 범위를 2개 이상 선택해주세요.')
         } else {
-            fetch('http://localhost:8080/applyPost', {
+            fetch('http://172.27.1.33:8080/applyPost', {
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json'
@@ -77,7 +77,7 @@ const DetailContent = ({clickedId, postData}) => {
 
     // 모임 취소 api
     function onClickCancel(){
-        fetch(`http://localhost:8080/cancelApply/${clickedId}?user=${userId}`)
+        fetch(`http://172.27.1.33:8080/cancelApply/${clickedId}?user=${userId}`)
         .then(res =>{
             alert('모임신청이 취소되었습니다.')
             window.location.replace(`/detailPost/${clickedId}`)
@@ -87,7 +87,7 @@ const DetailContent = ({clickedId, postData}) => {
     //모임 삭제 api
     function onClickDelete(){
         if (window.confirm("삭제하시겠습니까?")){
-                fetch(`http://localhost:8080/deletePost/${clickedId}`)
+                fetch(`http://172.27.1.33:8080/deletePost/${clickedId}`)
                 .then(res =>{
                     alert('모임이 삭제되었습니다.');
                     navigate('/mypage');
@@ -126,8 +126,8 @@ const DetailContent = ({clickedId, postData}) => {
             alert('한마디를 최소 10자 이상 입력해주세요.')
         }else{
 
+            fetch('http://172.27.1.33:8080/editPost',{
 
-            fetch('http://localhost:8080/editPost',{
                 method : 'POST',
                 headers : {
                     'Content-Type' : 'application/json'

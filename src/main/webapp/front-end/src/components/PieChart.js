@@ -13,7 +13,7 @@ function PieChart({ activeChart }) {
     },[])  
 
     useEffect(() => {
-        fetch(`http://localhost:8080/chart/${activeChart}`)
+        fetch(`http://172.27.1.33:8080/chart/${activeChart}`)
         .then(res => {
             return res.json();
         })
