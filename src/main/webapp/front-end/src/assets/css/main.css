@@ -29,10 +29,10 @@
 
 .banner .banner_main_title {
 	color: #ffe818;
-	font-family: 'Carter One';
+	font-family: 'Signika Negative';
 	font-weight: bolder;
 	text-shadow: 3px 3px 7px rgb(49, 49, 49);
-	font-size: 115px;
+	font-size: 130px;
 }
 /* ================ 헤더 ================ */
 
@@ -518,7 +518,7 @@
 
 .blogs .btn_more {
 	margin-left:10px;
-	margin-bottom: 20px;
+	margin-bottom: 0px;
 	padding: 0 52px;
 	height: 64px;
 	border-radius: 20px;

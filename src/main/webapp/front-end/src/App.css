@@ -1,5 +1,8 @@
 @charset "UTF-8";
 /* 웹폰트 */
+
+@import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@700&display=swap');
+
 @font-face {
 	font-family: 'NanumSquare';
 	src: url("https://campaign-cdn.pstatic.net/0/campaign/2022/05/weeklydiary/font/NanumSquare/NanumSquareR.eot");
