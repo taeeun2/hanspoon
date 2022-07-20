@@ -104,6 +104,20 @@ function Footer() {
                   Han Seong Ah
                 </MKTypography>
               </MKBox>
+              <MKBox component="li">
+                <MKTypography
+                  variant="button"
+                  fontWeight="regular"
+                  opacity={0.8}
+                  component={Link}
+                  href="https://www.flaticon.com"
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{"textDecoration": "underline", "color":"blue"}}
+                >
+                  Freepik
+                </MKTypography>
+              </MKBox>
             </Stack>
             <MKTypography variant="button" opacity={0.8} style={{
                       "fontFamily": 'NanumSquareRound',
