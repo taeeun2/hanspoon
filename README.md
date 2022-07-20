@@ -21,27 +21,7 @@
 
 ## 📌기술 스택
 
-### [Front-end]
-- Node.js 16.15.0
-- React 18.0.0
-- React Router 6
-- Bootstrap
-- Material UI
-
-### [Back-end]
-- Spring boot 2.6.8 / Tomcat
-    - Spring Data JPA
-- MariaDB 10.6.8
-- Java 11
-- Gradle
-- jar
-- CentOS 7
-
-### [API]
-
-- Kakao Map API
-- Java Mail API
-- Chart.js
+![기술_스택](/uploads/cbfa053382616cbcaa0ac4f1d29316dc/기술_스택.PNG)
 
 ## 📌구현 기능
 
