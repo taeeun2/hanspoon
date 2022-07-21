@@ -48,6 +48,7 @@ const DetailContent = ({clickedId, postData}) => {
     function onClickApply() {
         if(sessionStorage.getItem('user_id') == null){
             alert('로그인 후 이용 가능합니다.')
+            navigate('/signin')
         }
         else if(num < 2){
             alert('공개 범위를 2개 이상 선택해주세요.')

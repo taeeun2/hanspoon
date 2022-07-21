@@ -2,7 +2,10 @@ import { Box } from '@mui/system';
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import { Link, useNavigate } from 'react-router-dom';
-
+import Swal from 'sweetalert2';
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+import 'assets/css/createPost.css'
 function StaticBtn(props) {
     const navigate = useNavigate();
 
@@ -10,7 +13,11 @@ function StaticBtn(props) {
         if(sessionStorage.getItem('user_id') != null){
             navigate('/post')
         }else{
-            alert("로그인 후 이용 가능합니다.")
+            // alert("로그인 후 이용 가능합니다.")
+            // Swal.fire('로그인 후 이용 가능합니다.')
+            
+            alertify.alert('Hanspoon<hr>', '로그인 후 이용 가능합니다.', function(){   navigate('/signin'); });
+          
         }
     }
 

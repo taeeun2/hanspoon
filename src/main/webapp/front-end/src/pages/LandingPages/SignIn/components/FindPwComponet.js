@@ -54,7 +54,7 @@ const FindPwComponent = () => {
                     return res.json();
                 }).then(data=>{
                     if(data.errorMessage == undefined){
-                     alert('임시 비밀번호가 발급되었습니다.')
+                     alert('이메일로 임시 비밀번호가 발급되었습니다.')
                     }else{
                         setMessage(data.errorMessage)
                     }
