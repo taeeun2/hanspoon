@@ -48,6 +48,12 @@ function PageHeader(props) {
                     "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}}>{sessionStorage.getItem('user_name')} 님</span></Grid>
                     <Grid item className="gnb_item">
+                    <Link to = "/mypage">
+                    <span style={{
+                    "fontFamily": 'NanumSquareRound',
+                    "fontWeight" : 'bold',
+                    "color": 'black'}}>마이페이지</span></Link></Grid>
+                    <Grid item className="gnb_item">
                     <button style={{
                     "fontFamily": 'NanumSquareRound',
                     "fontWeight" : 'bold'}} onClick = {onLogout}>로그아웃</button></Grid>

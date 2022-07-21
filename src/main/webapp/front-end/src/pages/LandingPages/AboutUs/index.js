@@ -164,7 +164,7 @@ function AboutUs() {
                       "fontFamily": 'NanumSquareRound',
                       "fontSize" : '18px',
                       "color": '#217bff',
-                      "cursor": 'default'}}>
+                      "cursor": 'pointer'}}>
                         개인정보 수정하기 ></p></Link>
           </Grid>
           <Grid item xs={12} lg={9}>

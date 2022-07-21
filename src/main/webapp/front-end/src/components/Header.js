@@ -124,7 +124,7 @@ const Header = () => {
                <span style={{
                  "fontFamily": 'NanumSquareRound',
                  "fontWeight" : 'bold',
-                 "cursor": 'default'}} onClick = {onLogout}>로그아웃</span></Grid>
+                 "cursor": 'pointer'}} onClick = {onLogout}>로그아웃</span></Grid>
                  </>
                 :  <>
                 <Link to ="signup">

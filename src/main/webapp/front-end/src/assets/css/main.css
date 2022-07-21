@@ -193,13 +193,13 @@
 .mainModal .tab {
 	font-family: 'NanumSquareRound';
 	border-bottom: 4px solid #DCDDDD;
-	cursor: default;
+	cursor: pointer;
 }
 
 .mainModal .tab.active {
 	font-family: 'NanumSquareRound';
 	border-bottom: 6px solid #217bff ;
-	cursor: default;
+	cursor: pointer;
 }
 
 .mainModal .modal_content_box {
@@ -227,7 +227,7 @@
 	padding-left: 25px;
 	font-family: 'NanumSquareRound';
 	font-size: 22px;
-	cursor: default;
+	cursor: pointer;
 	/* color: #217bff;
 	border-radius: 10px;
 	font-weight: 800;

@@ -41,7 +41,7 @@ function Introduce(props) {
                       "fontFamily": 'NanumSquareRound',
                       "fontWeight" : 'bold',
                       "color": '#217bff',
-                      "cursor": 'default'}}
+                      "cursor": 'pointer'}}
                       onClick={toggleModal}>
                         한스푼 참여현황 보기 >
                     </p>

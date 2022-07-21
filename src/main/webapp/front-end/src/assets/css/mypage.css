@@ -114,12 +114,12 @@
 
 .my_page .tab {
 	border-bottom: 4px solid #DCDDDD;
-	cursor: default;
+	cursor: pointer;
 }
 
 .my_page .tab.active {
 	border-bottom: 4px solid #00CFCB ;
-	cursor: default;
+	cursor: pointer;
 }
 
 /* ================ 게시글 ================ */
