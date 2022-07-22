@@ -72,9 +72,10 @@
 
 .login_title{
     color: #000;
-	font-size: 45px;
-	font-weight: 900 ;
-	font-family: 'Carter One';
+	font-size: 40px;
+	/* font-weight: 900 ; */
+	/* font-family: 'Signika Negative'; */
+	font-family: 'Mochiy Pop One', sans-serif;
 }
 
 .login_message{

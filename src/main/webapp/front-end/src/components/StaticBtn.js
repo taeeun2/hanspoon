@@ -12,10 +12,7 @@ function StaticBtn(props) {
         if(sessionStorage.getItem('user_id') != null){
             navigate('/post')
         }else{
-            // alert("로그인 후 이용 가능합니다.")
-            // Swal.fire('로그인 후 이용 가능합니다.')
-            
-            alertify.alert('Hanspoon<hr>', '로그인 후 이용 가능합니다.', function(){   navigate('/signin'); });
+            alertify.alert('<span style="">Hanspoon</span><hr>', '로그인 후 이용 가능합니다.', function(){   navigate('/signin'); });
           
         }
     }

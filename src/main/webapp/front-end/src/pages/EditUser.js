@@ -4,6 +4,7 @@ import "assets/css/editUser.css"
 import MKBox from 'components/MKBox';
 import { Form } from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
+import alertify from 'alertifyjs';
 
 const ageMenu = [
     { value: "TWENTY", name: "20대" },
@@ -238,18 +239,18 @@ const EditUser = (props) => {
             setPasswordMessage('숫자+영문자+특수문자조합으로 8자리 이상 입력')
             setPasswordColor('red')
         }else if(!isPasswordConfirm){
-            alert('비밀번호를 확인해주세요.')
+            alertify.alert('Hanspoon<hr>', '비밀번호를 확인해주세요.', function(){    navigate('/editUser');});
             setPasswordConfirmMessage('비밀번호를 확인해주세요.')
             setPasswordConfirmColor('red')
         }else if(!isUserName){
-            alert('이름을 입력해주세요.')
+            alertify.alert('Hanspoon<hr>', '이름을 입력해주세요.', function(){    navigate('/editUser');});
             setUserNameMessage('이름을 입력해주세요.')
         
         }else if(!isGender){
-            alert('성별을 선택해주세요')
+            alertify.alert('Hanspoon<hr>', '성별을 선택해주세요.', function(){    navigate('/editUser');});
             setGenderMessage('성별을 선택해주세요.')
         }else if(department === "== 부서 선택 ==" || department.length < 1){
-            alert('부서를 선택해주세요.')
+            alertify.alert('Hanspoon<hr>', '부서를 선택해주세요.', function(){    navigate('/editUser');});
             setDepartmentMessage('부서를 선택해주세요.')
         }else{
            
@@ -273,10 +274,9 @@ const EditUser = (props) => {
                 return res.json();
             }).then(data=>{
                 if(data.email!== undefined){
-                    alert('회원 정보 수정이 완료되었습니다.')
-                    navigate('/mypage')
+                    alertify.alert('Hanspoon<hr>', '회원 정보 수정이 완료되었습니다.', function(){    navigate('/mypage'); });
                 }else{
-                    alert('회원 정보 수정에 실패하였습니다.')
+                    alertify.alert('Hanspoon<hr>', '회원 정보 수정에 실패하였습니다.', function(){    navigate('/editUser');});
                 }
             })
            

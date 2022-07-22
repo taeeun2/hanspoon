@@ -4,6 +4,7 @@ import MKBox from "components/MKBox";
 import "assets/css/login.css"
 import "assets/css/findPW.css"
 import { Link } from "react-router-dom";
+import alertify from "alertifyjs";
 const FindPwComponent = () => {
     const [inputId, setInputId] = useState('')
     const [inputName, setInputName] = useState('')
@@ -54,7 +55,7 @@ const FindPwComponent = () => {
                     return res.json();
                 }).then(data=>{
                     if(data.errorMessage == undefined){
-                     alert('이메일로 임시 비밀번호가 발급되었습니다.')
+                     alertify.alert('Hanspoon<hr>', '이메일로 임시 비밀번호가 발급되었습니다.');
                     }else{
                         setMessage(data.errorMessage)
                     }

@@ -10,6 +10,7 @@ import "aos/dist/aos.css";
 import MKBox from "components/MKBox";
 import { Link, useNavigate } from 'react-router-dom';
 import AboutUs from 'pages/LandingPages/AboutUs';
+import alertify from 'alertifyjs';
 
 const Banner = ({ isLogin }) => {
 
@@ -42,8 +43,7 @@ const Banner = ({ isLogin }) => {
             navigate('/mypage')
         }
         else {
-            alert('로그인 후 이용 가능합니다.')
-            navigate('/signin')
+            alertify.alert('<span style="">Hanspoon</span><hr>', '로그인 후 이용 가능합니다.', function(){   navigate('/signin'); });
         }
     }
 

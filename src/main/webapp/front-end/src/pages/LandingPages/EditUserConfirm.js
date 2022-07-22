@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react';
 import dangerIcon from 'assets/images/Icons/danger_icon.png'
 import { useNavigate } from 'react-router-dom';
 import Footer from './Author/sections/Footer';
+import alertify from 'alertifyjs';
 
 const EditUserConfirm = () => {
 
@@ -36,7 +37,7 @@ const EditUserConfirm = () => {
                     if(data.password === inputPW){
                         setIsConfirm(true)
                     }else{
-                        alert('비밀번호가 일치하지 않습니다.');
+                        alertify.alert('Hanspoon<hr>', '비밀번호가 일치하지 않습니다.');
                         setInputPW('');
                     }
                 })

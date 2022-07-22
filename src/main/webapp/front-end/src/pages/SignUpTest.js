@@ -8,6 +8,7 @@ import { Form } from "react-bootstrap";
 import { Box } from "@mui/material";
 import MKBox from "components/MKBox";
 import { useNavigate } from 'react-router-dom';
+import alertify from 'alertifyjs';
 
 const ageMenu = [
     { value: "TWENTY", name: "20대" },
@@ -237,7 +238,7 @@ const SignUpTest= () => {
                     setEmailColor('red')
                     setEmailMessage(data.errorMessage)
                 }else{
-                    alert('인증번호가 전송되었습니다.')
+                    alertify.alert('Hanspoon<hr>', '인증번호가 전송되었습니다.');
                     setAuthCode(data.authCode)
                     console.log(data.authCode)
                     setIsEmail(true)
@@ -313,8 +314,7 @@ const SignUpTest= () => {
           })
           .then(data=>{
             if(data.email!== undefined){
-              alert('회원가입이 완료되었습니다.')
-              navigate('/signin')
+              alertify.alert('Hanspoon<hr>', '회원가입이 완료되었습니다.', function(){    navigate('/signin');});
             }else{
               setEmailMessage(data.errorMessage)
               setEmailColor('red')
@@ -337,9 +337,9 @@ const SignUpTest= () => {
 
                 <MKBox component="section">
                     <Grid container  sx={{ justifyContent: 'center' }}>
-                        <Grid item className='signup_box' xs={12} sm={12} lg={7} key={0}>
+                        <Grid item className='signup_box' xs={12} sm={12} lg={8.5} key={0} px={10}>
                             <Grid container spacing={2}>
-                                <Grid item md={7}>
+                                <Grid item md={6.5}>
                                     <Grid container spacing={3}>
                                         <Grid sx={{ textAlign : 'right' }}> 
                                                 <Grid item mb = {6} mt ={4}>
@@ -406,7 +406,7 @@ const SignUpTest= () => {
                                                 <span className = "signupMessage" style={{"color" :"red"}} >{userNameMessage}</span>
                                             </Grid>
                                         </Grid>
-                                        <Grid item md={4}>
+                                        <Grid item md={4} ml={1}>
                                             <Grid item mt ={1} mb = {1}>
                                             <button className="emailButton" onClick={sendEmail}>인증번호 발송</button><br/><br/>
                                             </Grid>
@@ -415,9 +415,9 @@ const SignUpTest= () => {
                                     </Grid>
                                 </Grid> 
 
-                                <Grid item md={5}>
+                                <Grid item md={5.5}>
                                     <Grid container spacing={2}>
-                                        <Grid item mb={2} md={3}>
+                                        <Grid item mb={2} md={2}>
                                             <Grid item mb = {6} mt ={1}>
                                                 <span className="signUpLabel">성별 </span><br/>
                                             </Grid>
