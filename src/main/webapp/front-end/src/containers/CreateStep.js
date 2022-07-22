@@ -63,7 +63,7 @@ function CreateStep(props) {
                                 <span className='step_title'>Step.3</span>
                                 <strong className='step_sub_title'>
                                     모임에 관한 정보를 입력해주세요<br />
-                                    (제목, 식사 일시, 카테고리, 모입 입원, 한마디)
+                                    (제목, 식사 일시, 카테고리, 모집 인원, 한마디)
                                 </strong>
                                 <div className='img_box'></div>
                             </div>
