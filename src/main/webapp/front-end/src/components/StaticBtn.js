@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import React from 'react';
 import Grid from "@mui/material/Grid";
 import { Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import alertify from 'alertifyjs';
 import 'alertifyjs/build/css/alertify.css';
 import 'assets/css/createPost.css'

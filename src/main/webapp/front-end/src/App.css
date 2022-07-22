@@ -189,3 +189,20 @@
 .full .cardText {
   color: #707070;
 }
+
+/* alert 디자인 */
+
+.ajs-header {
+  font-family: 'NanumSquare_bold';
+  color: #333333;
+
+}
+
+.ajs-content {
+  font-family: 'NanumSquare';
+}
+
+.ajs-button {
+  font-family: 'NanumSquare_bold';
+  color: #333333;
+}

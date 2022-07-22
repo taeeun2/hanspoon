@@ -18,6 +18,10 @@ import plusIcon from "assets/images/hanspoon/createPost/icon_cp_plus.png"
 import minusIcon from "assets/images/hanspoon/createPost/icon_cp_minus.png"
 import { useNavigate } from 'react-router-dom';
 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+import 'assets/css/createPost.css'
+
 const CreatePost = () => {
 
     const [categorylist, setCategroyList] = useState([])
@@ -167,11 +171,13 @@ const CreatePost = () => {
                     console.log(localStorage.getItem('restaurant_address'))
                     localStorage.removeItem('restaurant_address')
                     
-                    alert('모임이 생성되었습니다.')
-                    navigate(`/detailPost/${data.post_id}`)
+                    alertify.alert('Hanspoon<hr>', '모임이 생성되었습니다.',
+                            function(){navigate(`/detailPost/${data.post_id}`)});
                 }else{
-                    alert('모임 생성에 실패하였습니다.')
-                    alert(data.errorMessage)
+                    alertify.alert('Hanspoon<hr>', '모임 생성에 실패하였습니다.',function(){});
+
+                    // alert('모임 생성에 실패하였습니다.')
+                    // alert(data.errorMessage)
                 }    
             })
 

@@ -7,6 +7,10 @@ import React, { useEffect, useState } from 'react';
 import MapContainer from './MapContainer';
 import CloseIcon from "@mui/icons-material/Close";
 
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+import 'assets/css/createPost.css'
+
 
 const SearchAPI = ({show, searchRestaurant, setOnText}) => {
     const [InputText, setInputText] = useState('')
@@ -22,7 +26,7 @@ const SearchAPI = ({show, searchRestaurant, setOnText}) => {
       const handleSubmit = (e) => {
         e.preventDefault()
         if(InputText.length < 1){
-            alert('검색어를 입력하세요.')
+            alertify.alert('Hanspoon<hr>', '검색어를 입력해주세요.',function(){});
         }else{
             setPlace("상암동"+InputText) // 지역 상암동으로 제한
             setInputText('')

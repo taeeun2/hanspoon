@@ -9,6 +9,9 @@ import { useNavigate } from 'react-router-dom';
 import date from "assets/images/hanspoon/detailPost/icon_date.png"
 import map from "assets/images/hanspoon/detailPost/icon_map.png"
 import link from "assets/images/hanspoon/detailPost/icon_link.png"
+import alertify from 'alertifyjs';
+import 'alertifyjs/build/css/alertify.css';
+import 'assets/css/createPost.css'
 
 import "assets/css/detailPost.css"
 import { Divider } from '@mui/material';
@@ -47,11 +50,10 @@ const DetailContent = ({clickedId, postData}) => {
     /* 신청 API */
     function onClickApply() {
         if(sessionStorage.getItem('user_id') == null){
-            alert('로그인 후 이용 가능합니다.')
-            navigate('/signin')
+            alertify.alert('Hanspoon<hr>', '로그인 후 이용 가능합니다.', function(){   navigate('/signin'); });
         }
         else if(num < 2){
-            alert('공개 범위를 2개 이상 선택해주세요.')
+            alertify.alert('Hanspoon<hr>', '공개 범위를 2개 이상 선택해주세요.',function(){});
         } else {
             fetch('http://172.27.1.33:8080/applyPost', {
                 method: 'POST',
@@ -69,8 +71,8 @@ const DetailContent = ({clickedId, postData}) => {
                     scope_age : scope_age
                 })
             }).then(res => {
-                alert('모임 신청이 완료되었습니다.')
-                window.location.replace(`/detailPost/${clickedId}`)
+                alertify.alert('Hanspoon<hr>', '모임 신청이 완료되었습니다.', 
+                                function(){window.location.replace(`/detailPost/${clickedId}`)});
             })
         }
     }
@@ -80,21 +82,28 @@ const DetailContent = ({clickedId, postData}) => {
     function onClickCancel(){
         fetch(`http://172.27.1.33:8080/cancelApply/${clickedId}?user=${userId}`)
         .then(res =>{
-            alert('모임신청이 취소되었습니다.')
-            window.location.replace(`/detailPost/${clickedId}`)
+            alertify.alert('Hanspoon<hr>', '모임신청이 취소되었습니다.',
+                            function(){window.location.replace(`/detailPost/${clickedId}`)});
         })
     }
 
     //모임 삭제 api
     function onClickDelete(){
-        if (window.confirm("삭제하시겠습니까?")){
-                fetch(`http://172.27.1.33:8080/deletePost/${clickedId}`)
-                .then(res =>{
-                    alert('모임이 삭제되었습니다.');
-                    navigate('/mypage');
-                    
-            })
-        }
+        alertify.confirm('Hanspoon<hr>', '삭제하시겠습니까?',
+                function(){ fetch(`http://172.27.1.33:8080/deletePost/${clickedId}`)
+                                .then(res => {
+                                    alertify.alert('Hanspoon<hr>', '모임이 삭제되었습니다.',
+                                    function(){ navigate('/mypage'); });
+                                }) },
+                function(){ window.location.replace(`/detailPost/${clickedId}`)}
+                );
+        // if (window.confirm("삭제하시겠습니까?")){
+        //         fetch(`http://172.27.1.33:8080/deletePost/${clickedId}`)
+        //         .then(res =>{
+        //             alertify.alert('Hanspoon<hr>', '모임이 삭제되었습니다.',
+        //                     function(){ navigate('/mypage'); });
+        //     })
+        // }
     }
 
     const handleTitle = (e) => {
@@ -110,7 +119,7 @@ const DetailContent = ({clickedId, postData}) => {
         }
     }
     function onClickEdit(){
-        alert('제목과 한마디만 수정이 가능합니다.')
+        alertify.alert('Hanspoon<hr>', '제목과 한마디만 수정이 가능합니다.',function(){});
         setIsEdit(true)
     }
 
@@ -122,9 +131,9 @@ const DetailContent = ({clickedId, postData}) => {
     // 수정 api
     function onClickCompleteEdit(){
         if(title.length < 1){
-            alert('제목을 입력해주세요.')
+            alertify.alert('Hanspoon<hr>', '제목을 입력해주세요.',function(){});
         }else if(content.length < 10){
-            alert('한마디를 최소 10자 이상 입력해주세요.')
+            alertify.alert('Hanspoon<hr>', '한마디를 최소 10자 이상 입력해주세요.',function(){});
         }else{
 
             fetch('http://172.27.1.33:8080/editPost',{
@@ -139,8 +148,8 @@ const DetailContent = ({clickedId, postData}) => {
                     content : content
                 })
             }).then(res =>{
-                alert('모임 정보가 수정되었습니다.')
-                window.location.replace(`/detailPost/${clickedId}`)
+                alertify.alert('Hanspoon<hr>', '모임 정보가 수정되었습니다.',
+                            function(){window.location.replace(`/detailPost/${clickedId}`)});
             })
 
         }
