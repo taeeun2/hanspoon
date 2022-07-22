@@ -300,35 +300,38 @@ public class PostServiceImpl implements PostService {
         Post post = postRepository.findById(post_id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다."));
 
+        String preState = post.getState().toString();
         post.updateToDeleted();
 
         //신청자 전원에 모임 삭제 메일 전송하기
-        java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
-        String meet_date = dateTimeFormat.format(post.getMeet_date());
+        if(preState.equals("VALID")) {
 
-        String subject = "Hanspoon 모임 취소 안내";
-        String body = "";
-        body+= "<div style='margin:100px;'>";
-        body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
-        body+= "<br>";
-        body+= "<h3><strong style='color:blue;'> \"" + post.getTitle() + " \"</strong> 모임이 취소되었음을 안내드립니다.</h3>";
-        body+= "<br>";
-        body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
-        body+= "<h2>취소된 모임 정보</h2>";
-        body+= "<div style='font-size:130%'>";
-        body+= "- 모임 제목 : " + post.getTitle()  + "<br>";
-        body+= "- 모임 일정 : " + meet_date + "<br>";
-        body+= "- 모임 장소 : " + post.getRestaurant_name() + "<br>";
-        body+= "<div>";
-        body+= "</div>";
+            java.text.SimpleDateFormat dateTimeFormat = new java.text.SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분");
+            String meet_date = dateTimeFormat.format(post.getMeet_date());
 
-        List<Long> userIds= postUserRepository.findByPostId(post_id).get()
-                .stream().map(postUser -> postUser.getUser_id()).collect(Collectors.toList());
-        for(long userId: userIds){
-           String recipient = userRepository.findById(userId).get().getEmail();
-           sendEmailToUser(recipient, subject, body);
+            String subject = "Hanspoon 모임 취소 안내";
+            String body = "";
+            body+= "<div style='margin:100px;'>";
+            body+= "<h2>안녕하세요 Hanspoon입니다. </h2>";
+            body+= "<br>";
+            body+= "<h3><strong style='color:blue;'> \"" + post.getTitle() + " \"</strong> 모임이 취소되었음을 안내드립니다.</h3>";
+            body+= "<br>";
+            body+= "<div align='center' style='border:1px solid black; font-family:verdana';>";
+            body+= "<h2>취소된 모임 정보</h2>";
+            body+= "<div style='font-size:130%'>";
+            body+= "- 모임 제목 : " + post.getTitle()  + "<br>";
+            body+= "- 모임 일정 : " + meet_date + "<br>";
+            body+= "- 모임 장소 : " + post.getRestaurant_name() + "<br>";
+            body+= "<div>";
+            body+= "</div>";
+
+            List<Long> userIds= postUserRepository.findByPostId(post_id).get()
+                    .stream().map(postUser -> postUser.getUser_id()).collect(Collectors.toList());
+            for(long userId: userIds){
+                String recipient = userRepository.findById(userId).get().getEmail();
+                sendEmailToUser(recipient, subject, body);
+            }
         }
-
     }
 
     // (상세 페이지) 모임 신청 취소하기
