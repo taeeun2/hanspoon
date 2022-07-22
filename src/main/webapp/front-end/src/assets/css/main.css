@@ -46,9 +46,9 @@
 
 .top_header  .logo_text{
 	color: white;
-	font-family: 'Mochiy Pop One', sans-serif;
+	font-family: 'Sen', sans-serif;
 	font-weight:bolder;
-	font-size: 30px;
+	
 }
 
 .top_header .gnb_item{
@@ -63,9 +63,8 @@
 
 .change_header .logo_text {
 	color: black;
-	font-family: 'Mochiy Pop One', sans-serif;
+	font-family: 'Sen', sans-serif;
 	font-weight:bolder;
-	font-size: 30px;
 }
 
 .change_header .gnb_item {
