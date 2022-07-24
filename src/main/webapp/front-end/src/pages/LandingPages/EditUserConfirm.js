@@ -37,7 +37,7 @@ const EditUserConfirm = () => {
                     if(data.password === inputPW){
                         setIsConfirm(true)
                     }else{
-                        alertify.alert('Hanspoon<hr>', '비밀번호가 일치하지 않습니다.');
+                        alertify.alert('Hanspoon<hr>', '비밀번호가 일치하지 않습니다.',function(){});
                         setInputPW('');
                     }
                 })

@@ -238,7 +238,7 @@ const SignUpTest= () => {
                     setEmailColor('red')
                     setEmailMessage(data.errorMessage)
                 }else{
-                    alertify.alert('Hanspoon<hr>', '인증번호가 전송되었습니다.');
+                    alertify.alert('Hanspoon<hr>', '인증번호가 전송되었습니다.',function(){});
                     setAuthCode(data.authCode)
                     console.log(data.authCode)
                     setIsEmail(true)
