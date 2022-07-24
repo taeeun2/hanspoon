@@ -141,6 +141,7 @@ function AboutUs() {
       setAge(data.age);
       setCompanyName(data.company_name);
       setDepartment(data.department_name);
+      setPosition(data.position_type);
       setGender(data.gender);
       setSpoonNum(data.spoon_num);
       setSpoonRank(data.spoon_rank);

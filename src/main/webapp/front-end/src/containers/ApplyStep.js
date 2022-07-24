@@ -47,7 +47,7 @@ function ApplyStep(props) {
                                     상세 페이지 하단의<br /> '참여하기' 버튼 클릭!
                                 </strong>
                                 <div className='img_box'></div>
-                                <p className='info_text'>주체자가 모임을 삭제할 경우,<br />
+                                <p className='info_text'>주최자가 모임을 삭제할 경우,<br />
                                                             모임 취소 안내 메일이 발송됩니다</p>
                             </div>
                         </Grid>
