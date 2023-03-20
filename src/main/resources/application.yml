@@ -21,5 +21,5 @@ spring:
         format_sql: true
         use_sql_comments: true
 email:
-  username: kte2461
-  password : eun!4132
+  username: test_email
+  password : test_password
